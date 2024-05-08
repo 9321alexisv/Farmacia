@@ -1,22 +1,14 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\elabr\\Desktop\\Alexis\\PROGRAMACION\\C#\\WinForms\\VistasFarmacia\\",
+  "WorkspaceRootPath": "D:\\Cristofer\\Escritorio\\Test\\csharp\\repos\\Farmacia\\VistasFarmacia\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{95D03BA0-2F23-4188-BACA-A96084FA99C8}|VistasFarmacia.csproj|c:\\users\\elabr\\desktop\\alexis\\programacion\\c#\\winforms\\vistasfarmacia\\forms\\formnuevoproducto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{95D03BA0-2F23-4188-BACA-A96084FA99C8}|VistasFarmacia.csproj|solutionrelative:forms\\formnuevoproducto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{95D03BA0-2F23-4188-BACA-A96084FA99C8}|VistasFarmacia.csproj|d:\\cristofer\\escritorio\\test\\csharp\\repos\\farmacia\\vistasfarmacia\\forminicio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{95D03BA0-2F23-4188-BACA-A96084FA99C8}|VistasFarmacia.csproj|solutionrelative:forminicio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{95D03BA0-2F23-4188-BACA-A96084FA99C8}|VistasFarmacia.csproj|c:\\users\\elabr\\desktop\\alexis\\programacion\\c#\\winforms\\vistasfarmacia\\forms\\formnuevoproducto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{95D03BA0-2F23-4188-BACA-A96084FA99C8}|VistasFarmacia.csproj|solutionrelative:forms\\formnuevoproducto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{95D03BA0-2F23-4188-BACA-A96084FA99C8}|VistasFarmacia.csproj|c:\\users\\elabr\\desktop\\alexis\\programacion\\c#\\winforms\\vistasfarmacia\\forms\\formclientes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{95D03BA0-2F23-4188-BACA-A96084FA99C8}|VistasFarmacia.csproj|solutionrelative:forms\\formclientes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{95D03BA0-2F23-4188-BACA-A96084FA99C8}|VistasFarmacia.csproj|c:\\users\\elabr\\desktop\\alexis\\programacion\\c#\\winforms\\vistasfarmacia\\forms\\formclientes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{95D03BA0-2F23-4188-BACA-A96084FA99C8}|VistasFarmacia.csproj|solutionrelative:forms\\formclientes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{95D03BA0-2F23-4188-BACA-A96084FA99C8}|VistasFarmacia.csproj|D:\\Cristofer\\Escritorio\\Test\\csharp\\repos\\Farmacia\\VistasFarmacia\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{95D03BA0-2F23-4188-BACA-A96084FA99C8}|VistasFarmacia.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,57 +18,39 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "FormClientes.cs",
-              "DocumentMoniker": "C:\\Users\\elabr\\Desktop\\Alexis\\PROGRAMACION\\C#\\WinForms\\VistasFarmacia\\Forms\\FormClientes.cs",
-              "RelativeDocumentMoniker": "Forms\\FormClientes.cs",
-              "ToolTip": "C:\\Users\\elabr\\Desktop\\Alexis\\PROGRAMACION\\C#\\WinForms\\VistasFarmacia\\Forms\\FormClientes.cs",
-              "RelativeToolTip": "Forms\\FormClientes.cs",
-              "ViewState": "AQIAABAAAAAAAAAAAAAgwAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-08T06:19:10.839Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "FormNuevoProducto.cs",
-              "DocumentMoniker": "C:\\Users\\elabr\\Desktop\\Alexis\\PROGRAMACION\\C#\\WinForms\\VistasFarmacia\\Forms\\FormNuevoProducto.cs",
-              "RelativeDocumentMoniker": "Forms\\FormNuevoProducto.cs",
-              "ToolTip": "C:\\Users\\elabr\\Desktop\\Alexis\\PROGRAMACION\\C#\\WinForms\\VistasFarmacia\\Forms\\FormNuevoProducto.cs",
-              "RelativeToolTip": "Forms\\FormNuevoProducto.cs",
-              "ViewState": "AQIAAB0AAAAAAAAAAAAowCYAAABIAAAA",
+              "Title": "FormInicio.cs [Dise\u00F1o]",
+              "DocumentMoniker": "D:\\Cristofer\\Escritorio\\Test\\csharp\\repos\\Farmacia\\VistasFarmacia\\FormInicio.cs",
+              "RelativeDocumentMoniker": "FormInicio.cs",
+              "ToolTip": "D:\\Cristofer\\Escritorio\\Test\\csharp\\repos\\Farmacia\\VistasFarmacia\\FormInicio.cs [Dise\u00F1o]",
+              "RelativeToolTip": "FormInicio.cs [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-08T06:19:05.831Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "FormClientes.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\elabr\\Desktop\\Alexis\\PROGRAMACION\\C#\\WinForms\\VistasFarmacia\\Forms\\FormClientes.cs",
-              "RelativeDocumentMoniker": "Forms\\FormClientes.cs",
-              "ToolTip": "C:\\Users\\elabr\\Desktop\\Alexis\\PROGRAMACION\\C#\\WinForms\\VistasFarmacia\\Forms\\FormClientes.cs [Design]",
-              "RelativeToolTip": "Forms\\FormClientes.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-08T06:08:10.264Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2024-05-08T15:56:12.774Z",
+              "EditorCaption": " [Dise\u00F1o]"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "FormNuevoProducto.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\elabr\\Desktop\\Alexis\\PROGRAMACION\\C#\\WinForms\\VistasFarmacia\\Forms\\FormNuevoProducto.cs",
-              "RelativeDocumentMoniker": "Forms\\FormNuevoProducto.cs",
-              "ToolTip": "C:\\Users\\elabr\\Desktop\\Alexis\\PROGRAMACION\\C#\\WinForms\\VistasFarmacia\\Forms\\FormNuevoProducto.cs [Design]",
-              "RelativeToolTip": "Forms\\FormNuevoProducto.cs [Design]",
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Cristofer\\Escritorio\\Test\\csharp\\repos\\Farmacia\\VistasFarmacia\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\Cristofer\\Escritorio\\Test\\csharp\\repos\\Farmacia\\VistasFarmacia\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-08T06:08:08.004Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2024-05-08T15:56:09.843Z"
             }
           ]
         }

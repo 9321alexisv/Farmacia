@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\elabr\\Desktop\\Alexis\\PROGRAMACION\\C#\\WinForms\\VistasFarmacia\\VistasFarmacia.csproj": {}
+    "D:\\Cristofer\\Escritorio\\Test\\csharp\\repos\\Farmacia\\VistasFarmacia\\VistasFarmacia.csproj": {}
   },
   "projects": {
-    "C:\\Users\\elabr\\Desktop\\Alexis\\PROGRAMACION\\C#\\WinForms\\VistasFarmacia\\VistasFarmacia.csproj": {
+    "D:\\Cristofer\\Escritorio\\Test\\csharp\\repos\\Farmacia\\VistasFarmacia\\VistasFarmacia.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\elabr\\Desktop\\Alexis\\PROGRAMACION\\C#\\WinForms\\VistasFarmacia\\VistasFarmacia.csproj",
+        "projectUniqueName": "D:\\Cristofer\\Escritorio\\Test\\csharp\\repos\\Farmacia\\VistasFarmacia\\VistasFarmacia.csproj",
         "projectName": "VistasFarmacia",
-        "projectPath": "C:\\Users\\elabr\\Desktop\\Alexis\\PROGRAMACION\\C#\\WinForms\\VistasFarmacia\\VistasFarmacia.csproj",
-        "packagesPath": "C:\\Users\\elabr\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\elabr\\Desktop\\Alexis\\PROGRAMACION\\C#\\WinForms\\VistasFarmacia\\obj\\",
+        "projectPath": "D:\\Cristofer\\Escritorio\\Test\\csharp\\repos\\Farmacia\\VistasFarmacia\\VistasFarmacia.csproj",
+        "packagesPath": "C:\\Users\\Cristofer\\.nuget\\packages\\",
+        "outputPath": "D:\\Cristofer\\Escritorio\\Test\\csharp\\repos\\Farmacia\\VistasFarmacia\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\elabr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Cristofer\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
