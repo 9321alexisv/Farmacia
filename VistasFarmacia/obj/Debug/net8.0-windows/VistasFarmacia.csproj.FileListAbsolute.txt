@@ -23,3 +23,4 @@ C:\Users\elabr\Desktop\Alexis\PROGRAMACION\C#\WinForms\VistasFarmacia\obj\Debug\
 C:\Users\elabr\Desktop\Alexis\PROGRAMACION\C#\WinForms\VistasFarmacia\obj\Debug\net8.0-windows\VistasFarmacia.Forms.FormClientes.resources
 C:\Users\elabr\Desktop\Alexis\PROGRAMACION\C#\WinForms\VistasFarmacia\obj\Debug\net8.0-windows\VistasFarmacia.Forms.FormProveedores.resources
 C:\Users\elabr\Desktop\Alexis\PROGRAMACION\C#\WinForms\VistasFarmacia\obj\Debug\net8.0-windows\VistasFarmacia.Forms.FormNuevoProducto.resources
+C:\Users\elabr\Desktop\Alexis\PROGRAMACION\C#\WinForms\VistasFarmacia\obj\Debug\net8.0-windows\VistasFarmacia.sourcelink.json

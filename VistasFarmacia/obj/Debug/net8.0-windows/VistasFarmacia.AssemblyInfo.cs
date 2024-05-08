@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("VistasFarmacia")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+92c0e8e72b24dbfe1d4647d6ad0c46e3e6a8f02b")]
 [assembly: System.Reflection.AssemblyProductAttribute("VistasFarmacia")]
 [assembly: System.Reflection.AssemblyTitleAttribute("VistasFarmacia")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
