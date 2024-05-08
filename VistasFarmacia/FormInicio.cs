@@ -1,6 +1,6 @@
 namespace VistasFarmacia
 {
-    public partial class Form1 : Form
+    public partial class FormInicio : Form
     {
         //Fields
         private Button currentButton;
@@ -9,7 +9,7 @@ namespace VistasFarmacia
         private Form activeForm;
 
         //Constructor
-        public Form1()
+        public FormInicio()
         {
             InitializeComponent();
             random = new Random();
