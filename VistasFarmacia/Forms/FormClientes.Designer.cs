@@ -28,12 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             labelClientes = new Label();
-            dataGridViewClientes = new DataGridView();
-            Column1 = new DataGridViewTextBoxColumn();
-            Column2 = new DataGridViewTextBoxColumn();
-            Column3 = new DataGridViewTextBoxColumn();
+            dgvClientes = new DataGridView();
             labelId = new Label();
             textBoxID = new TextBox();
             textBoxNombre = new TextBox();
@@ -41,7 +38,7 @@
             textBoxNIT = new TextBox();
             labelNit = new Label();
             buttonSaveClient = new Button();
-            ((System.ComponentModel.ISupportInitialize)dataGridViewClientes).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvClientes).BeginInit();
             SuspendLayout();
             // 
             // labelClientes
@@ -49,75 +46,65 @@
             labelClientes.AutoSize = true;
             labelClientes.Font = new Font("Segoe UI", 20F, FontStyle.Bold | FontStyle.Italic);
             labelClientes.ForeColor = SystemColors.ControlLightLight;
-            labelClientes.Location = new Point(68, 9);
+            labelClientes.Location = new Point(78, 12);
             labelClientes.Name = "labelClientes";
-            labelClientes.Size = new Size(125, 37);
+            labelClientes.Size = new Size(157, 46);
             labelClientes.TabIndex = 0;
             labelClientes.Text = "Clientes:";
             // 
-            // dataGridViewClientes
+            // dgvClientes
             // 
-            dataGridViewClientes.BackgroundColor = Color.FromArgb(49, 49, 68);
-            dataGridViewClientes.BorderStyle = BorderStyle.None;
-            dataGridViewClientes.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewClientes.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3 });
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(49, 49, 68);
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = Color.SteelBlue;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            dataGridViewClientes.DefaultCellStyle = dataGridViewCellStyle2;
-            dataGridViewClientes.EnableHeadersVisualStyles = false;
-            dataGridViewClientes.GridColor = Color.FromArgb(49, 49, 68);
-            dataGridViewClientes.Location = new Point(75, 106);
-            dataGridViewClientes.Name = "dataGridViewClientes";
-            dataGridViewClientes.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewClientes.Size = new Size(672, 365);
-            dataGridViewClientes.TabIndex = 1;
-            // 
-            // Column1
-            // 
-            Column1.HeaderText = "ID";
-            Column1.Name = "Column1";
-            Column1.Width = 30;
-            // 
-            // Column2
-            // 
-            Column2.HeaderText = "Nombre";
-            Column2.Name = "Column2";
-            Column2.Width = 500;
-            // 
-            // Column3
-            // 
-            Column3.HeaderText = "NIT";
-            Column3.Name = "Column3";
+            dgvClientes.AllowUserToAddRows = false;
+            dgvClientes.AllowUserToDeleteRows = false;
+            dgvClientes.AllowUserToOrderColumns = true;
+            dgvClientes.BackgroundColor = Color.FromArgb(49, 49, 68);
+            dgvClientes.BorderStyle = BorderStyle.None;
+            dgvClientes.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dgvClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(49, 49, 68);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = Color.SteelBlue;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            dgvClientes.DefaultCellStyle = dataGridViewCellStyle1;
+            dgvClientes.EnableHeadersVisualStyles = false;
+            dgvClientes.GridColor = Color.FromArgb(49, 49, 68);
+            dgvClientes.Location = new Point(86, 141);
+            dgvClientes.Margin = new Padding(3, 4, 3, 4);
+            dgvClientes.Name = "dgvClientes";
+            dgvClientes.ReadOnly = true;
+            dgvClientes.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dgvClientes.RowHeadersWidth = 51;
+            dgvClientes.Size = new Size(768, 487);
+            dgvClientes.TabIndex = 1;
             // 
             // labelId
             // 
             labelId.AutoSize = true;
             labelId.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             labelId.ForeColor = Color.White;
-            labelId.Location = new Point(75, 69);
+            labelId.Location = new Point(86, 92);
             labelId.Name = "labelId";
-            labelId.Size = new Size(31, 21);
+            labelId.Size = new Size(38, 28);
             labelId.TabIndex = 2;
             labelId.Text = "ID:";
             // 
             // textBoxID
             // 
-            textBoxID.Location = new Point(112, 67);
+            textBoxID.Location = new Point(128, 89);
+            textBoxID.Margin = new Padding(3, 4, 3, 4);
             textBoxID.Name = "textBoxID";
-            textBoxID.Size = new Size(59, 23);
+            textBoxID.Size = new Size(67, 27);
             textBoxID.TabIndex = 3;
             // 
             // textBoxNombre
             // 
-            textBoxNombre.Location = new Point(260, 67);
+            textBoxNombre.Location = new Point(297, 89);
+            textBoxNombre.Margin = new Padding(3, 4, 3, 4);
             textBoxNombre.Name = "textBoxNombre";
-            textBoxNombre.Size = new Size(218, 23);
+            textBoxNombre.Size = new Size(249, 27);
             textBoxNombre.TabIndex = 5;
             // 
             // labelNombre
@@ -125,17 +112,18 @@
             labelNombre.AutoSize = true;
             labelNombre.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             labelNombre.ForeColor = Color.White;
-            labelNombre.Location = new Point(177, 68);
+            labelNombre.Location = new Point(202, 91);
             labelNombre.Name = "labelNombre";
-            labelNombre.Size = new Size(77, 21);
+            labelNombre.Size = new Size(94, 28);
             labelNombre.TabIndex = 4;
             labelNombre.Text = "Nombre:";
             // 
             // textBoxNIT
             // 
-            textBoxNIT.Location = new Point(531, 67);
+            textBoxNIT.Location = new Point(607, 89);
+            textBoxNIT.Margin = new Padding(3, 4, 3, 4);
             textBoxNIT.Name = "textBoxNIT";
-            textBoxNIT.Size = new Size(70, 23);
+            textBoxNIT.Size = new Size(79, 27);
             textBoxNIT.TabIndex = 7;
             // 
             // labelNit
@@ -143,9 +131,9 @@
             labelNit.AutoSize = true;
             labelNit.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             labelNit.ForeColor = Color.White;
-            labelNit.Location = new Point(484, 64);
+            labelNit.Location = new Point(553, 85);
             labelNit.Name = "labelNit";
-            labelNit.Size = new Size(41, 21);
+            labelNit.Size = new Size(51, 28);
             labelNit.TabIndex = 6;
             labelNit.Text = "NIT:";
             // 
@@ -153,9 +141,10 @@
             // 
             buttonSaveClient.FlatStyle = FlatStyle.Flat;
             buttonSaveClient.Image = Properties.Resources.ADD;
-            buttonSaveClient.Location = new Point(607, 43);
+            buttonSaveClient.Location = new Point(694, 57);
+            buttonSaveClient.Margin = new Padding(3, 4, 3, 4);
             buttonSaveClient.Name = "buttonSaveClient";
-            buttonSaveClient.Size = new Size(141, 54);
+            buttonSaveClient.Size = new Size(161, 72);
             buttonSaveClient.TabIndex = 13;
             buttonSaveClient.Text = "Guardar Cliente";
             buttonSaveClient.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -163,10 +152,10 @@
             // 
             // FormClientes
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(39, 39, 58);
-            ClientSize = new Size(800, 492);
+            ClientSize = new Size(914, 656);
             Controls.Add(buttonSaveClient);
             Controls.Add(textBoxNIT);
             Controls.Add(labelNit);
@@ -174,12 +163,13 @@
             Controls.Add(labelNombre);
             Controls.Add(textBoxID);
             Controls.Add(labelId);
-            Controls.Add(dataGridViewClientes);
+            Controls.Add(dgvClientes);
             Controls.Add(labelClientes);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "FormClientes";
             Text = "FormClientes";
             Load += FormClientes_Load_1;
-            ((System.ComponentModel.ISupportInitialize)dataGridViewClientes).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvClientes).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -187,16 +177,13 @@
         #endregion
 
         private Label labelClientes;
-        private DataGridView dataGridViewClientes;
+        private DataGridView dgvClientes;
         private Label labelId;
         private TextBox textBoxID;
         private TextBox textBoxNombre;
         private Label labelNombre;
         private TextBox textBoxNIT;
         private Label labelNit;
-        private DataGridViewTextBoxColumn Column1;
-        private DataGridViewTextBoxColumn Column2;
-        private DataGridViewTextBoxColumn Column3;
         private Button buttonSaveClient;
     }
 }
