@@ -6,7 +6,20 @@ namespace VistasFarmacia.Datos
 {
     public class ConexionDB
     {
-        private NpgsqlConnection Conexion = new NpgsqlConnection("Server=localhost;Port=5433;User Id=postgres;Password=;Database=farmacia_candelaria_dev;");
+        private string servidor = "localhost";
+        private string baseDatos = "farmacia_candelaria_dev";
+        private int puerto = 5433;
+        private string usuario = "postgres";
+        private string contrasena = "";
+
+        private NpgsqlConnection Conexion;
+
+        public ConexionDB()
+        {
+            string cadenaConexion = $"Server={servidor};Port={puerto};User Id={usuario};Password={contrasena};Database={baseDatos};";
+
+            Conexion = new NpgsqlConnection(cadenaConexion);
+        }
 
         public NpgsqlConnection AbrirConexion()
         {
