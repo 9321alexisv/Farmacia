@@ -30,17 +30,17 @@
         {
             labelIngresoProductos = new Label();
             labelProveedor = new Label();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
+            txtProveedor = new TextBox();
+            txtNombre = new TextBox();
             labelNombre = new Label();
-            textBox3 = new TextBox();
+            txtPrecioCompra = new TextBox();
             labelPrecioCompra = new Label();
-            textBox4 = new TextBox();
+            txtPrecioVenta = new TextBox();
             labelPrecioVenta = new Label();
-            textBox5 = new TextBox();
+            txtStock = new TextBox();
             labelStock = new Label();
-            buttonSaveClient = new Button();
-            button1 = new Button();
+            btnGuardar = new Button();
+            btnLimpiar = new Button();
             SuspendLayout();
             // 
             // labelIngresoProductos
@@ -48,147 +48,155 @@
             labelIngresoProductos.AutoSize = true;
             labelIngresoProductos.Font = new Font("Segoe UI", 18F, FontStyle.Bold | FontStyle.Italic);
             labelIngresoProductos.ForeColor = Color.White;
-            labelIngresoProductos.Location = new Point(68, 25);
+            labelIngresoProductos.Location = new Point(88, 31);
             labelIngresoProductos.Name = "labelIngresoProductos";
-            labelIngresoProductos.Size = new Size(249, 32);
+            labelIngresoProductos.Size = new Size(243, 41);
             labelIngresoProductos.TabIndex = 1;
-            labelIngresoProductos.Text = "Ingreso de Productos";
+            labelIngresoProductos.Text = "Nuevo Producto";
             // 
             // labelProveedor
             // 
             labelProveedor.AutoSize = true;
             labelProveedor.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             labelProveedor.ForeColor = Color.White;
-            labelProveedor.Location = new Point(77, 82);
+            labelProveedor.Location = new Point(88, 109);
             labelProveedor.Name = "labelProveedor";
-            labelProveedor.Size = new Size(137, 25);
+            labelProveedor.Size = new Size(133, 32);
             labelProveedor.TabIndex = 2;
-            labelProveedor.Text = "ID Proveedor:";
+            labelProveedor.Text = "Proveedor";
             // 
-            // textBox1
+            // txtProveedor
             // 
-            textBox1.Location = new Point(264, 84);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(53, 23);
-            textBox1.TabIndex = 3;
+            txtProveedor.Location = new Point(337, 115);
+            txtProveedor.Margin = new Padding(3, 4, 3, 4);
+            txtProveedor.Name = "txtProveedor";
+            txtProveedor.Size = new Size(286, 27);
+            txtProveedor.TabIndex = 3;
             // 
-            // textBox2
+            // txtNombre
             // 
-            textBox2.Location = new Point(264, 140);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(251, 23);
-            textBox2.TabIndex = 5;
+            txtNombre.Location = new Point(337, 187);
+            txtNombre.Margin = new Padding(3, 4, 3, 4);
+            txtNombre.Name = "txtNombre";
+            txtNombre.Size = new Size(286, 27);
+            txtNombre.TabIndex = 5;
             // 
             // labelNombre
             // 
             labelNombre.AutoSize = true;
             labelNombre.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             labelNombre.ForeColor = Color.White;
-            labelNombre.Location = new Point(77, 138);
+            labelNombre.Location = new Point(88, 184);
             labelNombre.Name = "labelNombre";
-            labelNombre.Size = new Size(180, 25);
+            labelNombre.Size = new Size(228, 32);
             labelNombre.TabIndex = 4;
             labelNombre.Text = "Nombre Producto:";
             // 
-            // textBox3
+            // txtPrecioCompra
             // 
-            textBox3.Location = new Point(264, 196);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(100, 23);
-            textBox3.TabIndex = 7;
+            txtPrecioCompra.Location = new Point(337, 261);
+            txtPrecioCompra.Margin = new Padding(3, 4, 3, 4);
+            txtPrecioCompra.Name = "txtPrecioCompra";
+            txtPrecioCompra.Size = new Size(114, 27);
+            txtPrecioCompra.TabIndex = 7;
             // 
             // labelPrecioCompra
             // 
             labelPrecioCompra.AutoSize = true;
             labelPrecioCompra.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             labelPrecioCompra.ForeColor = Color.White;
-            labelPrecioCompra.Location = new Point(77, 191);
+            labelPrecioCompra.Location = new Point(88, 255);
             labelPrecioCompra.Name = "labelPrecioCompra";
-            labelPrecioCompra.Size = new Size(149, 25);
+            labelPrecioCompra.Size = new Size(190, 32);
             labelPrecioCompra.TabIndex = 6;
             labelPrecioCompra.Text = "Precio Compra:";
             // 
-            // textBox4
+            // txtPrecioVenta
             // 
-            textBox4.Location = new Point(264, 245);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(100, 23);
-            textBox4.TabIndex = 9;
+            txtPrecioVenta.Location = new Point(337, 327);
+            txtPrecioVenta.Margin = new Padding(3, 4, 3, 4);
+            txtPrecioVenta.Name = "txtPrecioVenta";
+            txtPrecioVenta.Size = new Size(114, 27);
+            txtPrecioVenta.TabIndex = 9;
             // 
             // labelPrecioVenta
             // 
             labelPrecioVenta.AutoSize = true;
             labelPrecioVenta.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             labelPrecioVenta.ForeColor = Color.White;
-            labelPrecioVenta.Location = new Point(77, 245);
+            labelPrecioVenta.Location = new Point(88, 327);
             labelPrecioVenta.Name = "labelPrecioVenta";
-            labelPrecioVenta.Size = new Size(129, 25);
+            labelPrecioVenta.Size = new Size(164, 32);
             labelPrecioVenta.TabIndex = 8;
             labelPrecioVenta.Text = "Precio Venta:";
             // 
-            // textBox5
+            // txtStock
             // 
-            textBox5.Location = new Point(264, 301);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(53, 23);
-            textBox5.TabIndex = 11;
+            txtStock.Location = new Point(337, 401);
+            txtStock.Margin = new Padding(3, 4, 3, 4);
+            txtStock.Name = "txtStock";
+            txtStock.Size = new Size(114, 27);
+            txtStock.TabIndex = 11;
             // 
             // labelStock
             // 
             labelStock.AutoSize = true;
             labelStock.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             labelStock.ForeColor = Color.White;
-            labelStock.Location = new Point(77, 299);
+            labelStock.Location = new Point(88, 399);
             labelStock.Name = "labelStock";
-            labelStock.Size = new Size(68, 25);
+            labelStock.Size = new Size(83, 32);
             labelStock.TabIndex = 10;
             labelStock.Text = "Stock:";
             // 
-            // buttonSaveClient
+            // btnGuardar
             // 
-            buttonSaveClient.FlatStyle = FlatStyle.Flat;
-            buttonSaveClient.Image = Properties.Resources.ADD;
-            buttonSaveClient.Location = new Point(404, 283);
-            buttonSaveClient.Name = "buttonSaveClient";
-            buttonSaveClient.Size = new Size(149, 62);
-            buttonSaveClient.TabIndex = 14;
-            buttonSaveClient.Text = "Guardar Producto";
-            buttonSaveClient.TextImageRelation = TextImageRelation.ImageBeforeText;
-            buttonSaveClient.UseVisualStyleBackColor = true;
+            btnGuardar.FlatStyle = FlatStyle.Flat;
+            btnGuardar.Image = Farmacia.Properties.Resources.ADD;
+            btnGuardar.Location = new Point(212, 488);
+            btnGuardar.Margin = new Padding(3, 4, 3, 4);
+            btnGuardar.Name = "btnGuardar";
+            btnGuardar.Size = new Size(170, 83);
+            btnGuardar.TabIndex = 14;
+            btnGuardar.Text = "Guardar Producto";
+            btnGuardar.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnGuardar.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // btnLimpiar
             // 
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Image = Properties.Resources.cleaner;
-            button1.Location = new Point(570, 283);
-            button1.Name = "button1";
-            button1.Size = new Size(111, 62);
-            button1.TabIndex = 15;
-            button1.Text = "Limpiar";
-            button1.TextImageRelation = TextImageRelation.ImageBeforeText;
-            button1.UseVisualStyleBackColor = true;
+            btnLimpiar.FlatStyle = FlatStyle.Flat;
+            btnLimpiar.Image = Farmacia.Properties.Resources.cleaner;
+            btnLimpiar.Location = new Point(438, 488);
+            btnLimpiar.Margin = new Padding(3, 4, 3, 4);
+            btnLimpiar.Name = "btnLimpiar";
+            btnLimpiar.Size = new Size(127, 83);
+            btnLimpiar.TabIndex = 15;
+            btnLimpiar.Text = "Limpiar";
+            btnLimpiar.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnLimpiar.UseVisualStyleBackColor = true;
             // 
             // FormNuevoProducto
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(39, 39, 58);
-            ClientSize = new Size(800, 450);
-            Controls.Add(button1);
-            Controls.Add(buttonSaveClient);
-            Controls.Add(textBox5);
+            ClientSize = new Size(914, 600);
+            Controls.Add(btnLimpiar);
+            Controls.Add(btnGuardar);
+            Controls.Add(txtStock);
             Controls.Add(labelStock);
-            Controls.Add(textBox4);
+            Controls.Add(txtPrecioVenta);
             Controls.Add(labelPrecioVenta);
-            Controls.Add(textBox3);
+            Controls.Add(txtPrecioCompra);
             Controls.Add(labelPrecioCompra);
-            Controls.Add(textBox2);
+            Controls.Add(txtNombre);
             Controls.Add(labelNombre);
-            Controls.Add(textBox1);
+            Controls.Add(txtProveedor);
             Controls.Add(labelProveedor);
             Controls.Add(labelIngresoProductos);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "FormNuevoProducto";
-            Text = "NUEVO PRODUCTO";
+            Text = "Nuevo Producto";
             Load += FormNuevoProducto_Load;
             ResumeLayout(false);
             PerformLayout();
@@ -197,16 +205,16 @@
         #endregion
         private Label labelIngresoProductos;
         private Label labelProveedor;
-        private TextBox textBox1;
-        private TextBox textBox2;
+        private TextBox txtProveedor;
+        private TextBox txtNombre;
         private Label labelNombre;
-        private TextBox textBox3;
+        private TextBox txtPrecioCompra;
         private Label labelPrecioCompra;
-        private TextBox textBox4;
+        private TextBox txtPrecioVenta;
         private Label labelPrecioVenta;
-        private TextBox textBox5;
+        private TextBox txtStock;
         private Label labelStock;
-        private Button buttonSaveClient;
-        private Button button1;
+        private Button btnGuardar;
+        private Button btnLimpiar;
     }
 }

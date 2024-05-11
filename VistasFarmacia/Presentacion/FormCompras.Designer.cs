@@ -76,67 +76,80 @@
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dataGridViewCompras.DefaultCellStyle = dataGridViewCellStyle2;
             dataGridViewCompras.EnableHeadersVisualStyles = false;
-            dataGridViewCompras.Location = new Point(103, 101);
+            dataGridViewCompras.Location = new Point(118, 135);
+            dataGridViewCompras.Margin = new Padding(3, 4, 3, 4);
             dataGridViewCompras.Name = "dataGridViewCompras";
             dataGridViewCompras.RowHeadersWidth = 20;
-            dataGridViewCompras.Size = new Size(892, 401);
+            dataGridViewCompras.Size = new Size(1019, 535);
             dataGridViewCompras.TabIndex = 0;
             // 
             // Codigo
             // 
             Codigo.HeaderText = "Codigo";
+            Codigo.MinimumWidth = 6;
             Codigo.Name = "Codigo";
             Codigo.Width = 60;
             // 
             // cantidad
             // 
             cantidad.HeaderText = "Cantidad";
+            cantidad.MinimumWidth = 6;
             cantidad.Name = "cantidad";
             cantidad.Width = 60;
             // 
             // Descripcion
             // 
             Descripcion.HeaderText = "Descripcion";
+            Descripcion.MinimumWidth = 6;
             Descripcion.Name = "Descripcion";
             Descripcion.Width = 350;
             // 
             // precio
             // 
             precio.HeaderText = "Precio";
+            precio.MinimumWidth = 6;
             precio.Name = "precio";
+            precio.Width = 125;
             // 
             // total
             // 
             total.HeaderText = "Total";
+            total.MinimumWidth = 6;
             total.Name = "total";
+            total.Width = 125;
             // 
             // acumulado
             // 
             acumulado.HeaderText = "Acumulado";
+            acumulado.MinimumWidth = 6;
             acumulado.Name = "acumulado";
+            acumulado.Width = 125;
             // 
             // fecha
             // 
             fecha.HeaderText = "Fecha";
+            fecha.MinimumWidth = 6;
             fecha.Name = "fecha";
+            fecha.Width = 125;
             // 
             // labelTablaCompras
             // 
             labelTablaCompras.AutoSize = true;
             labelTablaCompras.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            labelTablaCompras.Location = new Point(103, 32);
+            labelTablaCompras.Location = new Point(118, 43);
             labelTablaCompras.Name = "labelTablaCompras";
-            labelTablaCompras.Size = new Size(363, 32);
+            labelTablaCompras.Size = new Size(314, 41);
             labelTablaCompras.TabIndex = 1;
-            labelTablaCompras.Text = "Registro Historico de Compras";
+            labelTablaCompras.Text = "Historial de Compras";
             // 
             // btnLimpiarCompras
             // 
             btnLimpiarCompras.FlatStyle = FlatStyle.Flat;
-            btnLimpiarCompras.Image = Properties.Resources.cleaner;
-            btnLimpiarCompras.Location = new Point(856, 522);
+            btnLimpiarCompras.Image = Farmacia.Properties.Resources.cleaner;
+            btnLimpiarCompras.Location = new Point(978, 696);
+            btnLimpiarCompras.Margin = new Padding(3, 4, 3, 4);
             btnLimpiarCompras.Name = "btnLimpiarCompras";
-            btnLimpiarCompras.Size = new Size(139, 70);
+            btnLimpiarCompras.Size = new Size(159, 93);
             btnLimpiarCompras.TabIndex = 2;
             btnLimpiarCompras.Text = "Limpiar";
             btnLimpiarCompras.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -148,9 +161,10 @@
             panel1.Controls.Add(label3);
             panel1.Controls.Add(panel2);
             panel1.Controls.Add(label2);
-            panel1.Location = new Point(829, 12);
+            panel1.Location = new Point(947, 16);
+            panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(166, 72);
+            panel1.Size = new Size(190, 96);
             panel1.TabIndex = 16;
             // 
             // label3
@@ -158,9 +172,9 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 18F, FontStyle.Bold | FontStyle.Italic);
             label3.ForeColor = Color.LightGreen;
-            label3.Location = new Point(-1, 26);
+            label3.Location = new Point(-1, 35);
             label3.Name = "label3";
-            label3.Size = new Size(32, 32);
+            label3.Size = new Size(41, 41);
             label3.TabIndex = 2;
             label3.Text = "Q";
             // 
@@ -168,8 +182,9 @@
             // 
             panel2.Controls.Add(labelAcumulado);
             panel2.Location = new Point(0, 0);
+            panel2.Margin = new Padding(3, 4, 3, 4);
             panel2.Name = "panel2";
-            panel2.Size = new Size(167, 26);
+            panel2.Size = new Size(191, 35);
             panel2.TabIndex = 17;
             // 
             // labelAcumulado
@@ -177,9 +192,9 @@
             labelAcumulado.AutoSize = true;
             labelAcumulado.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             labelAcumulado.ForeColor = Color.White;
-            labelAcumulado.Location = new Point(42, 6);
+            labelAcumulado.Location = new Point(48, 8);
             labelAcumulado.Name = "labelAcumulado";
-            labelAcumulado.Size = new Size(86, 15);
+            labelAcumulado.Size = new Size(110, 20);
             labelAcumulado.TabIndex = 13;
             labelAcumulado.Text = "ACUMULADO:";
             // 
@@ -188,19 +203,20 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 18F, FontStyle.Bold | FontStyle.Italic);
             label2.ForeColor = Color.LightGreen;
-            label2.Location = new Point(57, 29);
+            label2.Location = new Point(65, 39);
             label2.Name = "label2";
-            label2.Size = new Size(112, 32);
+            label2.Size = new Size(136, 41);
             label2.TabIndex = 1;
             label2.Text = "1,000.00";
             // 
             // buttonReporte
             // 
             buttonReporte.FlatStyle = FlatStyle.Flat;
-            buttonReporte.Image = Properties.Resources.reportes;
-            buttonReporte.Location = new Point(691, 522);
+            buttonReporte.Image = Farmacia.Properties.Resources.reportes;
+            buttonReporte.Location = new Point(790, 696);
+            buttonReporte.Margin = new Padding(3, 4, 3, 4);
             buttonReporte.Name = "buttonReporte";
-            buttonReporte.Size = new Size(139, 70);
+            buttonReporte.Size = new Size(159, 93);
             buttonReporte.TabIndex = 17;
             buttonReporte.Text = "Reportes";
             buttonReporte.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -208,17 +224,18 @@
             // 
             // FormCompras
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(39, 39, 58);
-            ClientSize = new Size(1112, 625);
+            ClientSize = new Size(1271, 833);
             Controls.Add(buttonReporte);
             Controls.Add(panel1);
             Controls.Add(btnLimpiarCompras);
             Controls.Add(labelTablaCompras);
             Controls.Add(dataGridViewCompras);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "FormCompras";
-            Text = "COMPRAS";
+            Text = "Historial Compras";
             TransparencyKey = Color.Transparent;
             Load += FormCompras_Load_1;
             ((System.ComponentModel.ISupportInitialize)dataGridViewCompras).EndInit();

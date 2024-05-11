@@ -7,17 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Farmacia.Presentacion;
 
 namespace VistasFarmacia.Forms
 {
-    public partial class FormCompras : Form
+    public partial class FormNuevoProducto : Form
     {
-        public FormCompras()
+        public FormNuevoProducto()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.MaximizeBox = false;
         }
 
-        private void FormCompras_Load_1(object sender, EventArgs e)
+        private void FormNuevoProducto_Load(object sender, EventArgs e)
         {
             LoadTheme();
         }
@@ -34,12 +37,12 @@ namespace VistasFarmacia.Forms
                     btn.FlatAppearance.BorderColor = ThemeColor.SecondaryColor;
                 }
             }
-            labelTablaCompras.ForeColor = ThemeColor.SecondaryColor;
-            dataGridViewCompras.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dataGridViewCompras.ColumnHeadersDefaultCellStyle.BackColor = ThemeColor.SecondaryColor;
-            dataGridViewCompras.RowHeadersDefaultCellStyle.ForeColor = Color.White;
-            dataGridViewCompras.RowHeadersDefaultCellStyle.BackColor = ThemeColor.PrimaryColor;
-            panel2.BackColor = ThemeColor.SecondaryColor;
+            labelIngresoProductos.ForeColor = ThemeColor.SecondaryColor;
+            labelProveedor.ForeColor = ThemeColor.SecondaryColor;
+            labelNombre.ForeColor = ThemeColor.SecondaryColor;
+            labelPrecioCompra.ForeColor = ThemeColor.SecondaryColor;
+            labelPrecioVenta.ForeColor = ThemeColor.SecondaryColor;
+            labelStock.ForeColor = ThemeColor.SecondaryColor;   
         }
 
     }

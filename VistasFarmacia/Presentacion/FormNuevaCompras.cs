@@ -7,12 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Farmacia.Presentacion;
 
 namespace VistasFarmacia.Forms
 {
-    public partial class FormIngresoCompras : Form
+    public partial class FormNuevaCompras : Form
     {
-        public FormIngresoCompras()
+        public FormNuevaCompras()
         {
             InitializeComponent();
         }

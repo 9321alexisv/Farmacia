@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿
+using Farmacia.Presentacion;
+using VistasFarmacia.Datos;
 
 namespace VistasFarmacia.Forms
 {
-    public partial class FormProveedores : Form
+    public partial class FormClientes : Form
     {
-        public FormProveedores()
+        public FormClientes()
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -22,6 +16,7 @@ namespace VistasFarmacia.Forms
         private void FormClientes_Load_1(object sender, EventArgs e)
         {
             LoadTheme();
+            MostrarClientes();
         }
 
         private void LoadTheme()
@@ -40,11 +35,27 @@ namespace VistasFarmacia.Forms
             labelId.ForeColor = ThemeColor.SecondaryColor;
             labelNombre.ForeColor = ThemeColor.SecondaryColor;
             labelNit.ForeColor = ThemeColor.SecondaryColor;
-            dataGridViewClientes.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dataGridViewClientes.ColumnHeadersDefaultCellStyle.BackColor = ThemeColor.SecondaryColor;
-            dataGridViewClientes.RowHeadersDefaultCellStyle.ForeColor = Color.White;
-            dataGridViewClientes.RowHeadersDefaultCellStyle.BackColor = ThemeColor.PrimaryColor;
+            dgvClientes.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvClientes.ColumnHeadersDefaultCellStyle.BackColor = ThemeColor.SecondaryColor;
+            dgvClientes.RowHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvClientes.RowHeadersDefaultCellStyle.BackColor = ThemeColor.PrimaryColor;
         }
+
+        #region "Datos"
+        private void MostrarClientes()
+        {
+            try
+            {
+                D_Clientes datos = new D_Clientes();
+                dgvClientes.DataSource = datos.Listar();
+            }
+            catch (Exception ex)
+            {
+                
+                MessageBox.Show("Error al mostrar datos. " + ex.Message, "Error de visualización", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        #endregion
 
     }
 }

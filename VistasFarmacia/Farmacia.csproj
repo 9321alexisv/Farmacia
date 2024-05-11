@@ -13,22 +13,22 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Forms\FormProveedores.cs">
+    <Compile Update="Presentacion\FormProveedores.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\FormNuevoProducto.cs">
+    <Compile Update="Presentacion\FormNuevoProducto.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\FormIngresoVentas.cs">
+    <Compile Update="Presentacion\FormNuevaVenta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\FormIngresoCompras.cs">
+    <Compile Update="Presentacion\FormNuevaCompras.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\FormInventario.cs">
+    <Compile Update="Presentacion\FormInventario.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\FormCompras.cs">
+    <Compile Update="Presentacion\FormCompras.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Properties\Resources.Designer.cs">

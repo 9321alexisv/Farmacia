@@ -1,3 +1,5 @@
+using Farmacia.Presentacion;
+
 namespace VistasFarmacia
 {
     public partial class FormInicio : Form
@@ -88,7 +90,7 @@ namespace VistasFarmacia
 
         private void btnIngresoVentas_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new Forms.FormIngresoVentas(), sender);
+            OpenChildForm(new Forms.FormNuevaVenta(), sender);
         }
 
         private void btnCompras_Click(object sender, EventArgs e)
@@ -98,7 +100,7 @@ namespace VistasFarmacia
 
         private void btnIngresoCompras_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new Forms.FormIngresoCompras(), sender);
+            OpenChildForm(new Forms.FormNuevaCompras(), sender);
         }
 
         private void btnInventario_Click(object sender, EventArgs e)
@@ -120,7 +122,17 @@ namespace VistasFarmacia
             panelTitleBar.BackColor = Color.FromArgb(51, 51, 76);
             panelLogo.BackColor = Color.FromArgb(39, 39, 58);
             currentButton = null;
-            btnHome.Visible = false;    
+            btnHome.Visible = false;
+        }
+
+        private void btnClientes_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.FormClientes(), sender);
+        }
+
+        private void btnProveedores_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.FormProveedores(), sender);
         }
     }
 }
