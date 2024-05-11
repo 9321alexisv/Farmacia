@@ -30,10 +30,7 @@
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             labelClientes = new Label();
-            dataGridViewClientes = new DataGridView();
-            Column1 = new DataGridViewTextBoxColumn();
-            Column2 = new DataGridViewTextBoxColumn();
-            Column3 = new DataGridViewTextBoxColumn();
+            dgvProveedores = new DataGridView();
             labelId = new Label();
             txtId = new TextBox();
             txtProveedor = new TextBox();
@@ -45,7 +42,7 @@
             label1 = new Label();
             txtRepresentante = new TextBox();
             label2 = new Label();
-            ((System.ComponentModel.ISupportInitialize)dataGridViewClientes).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvProveedores).BeginInit();
             SuspendLayout();
             // 
             // labelClientes
@@ -59,13 +56,13 @@
             labelClientes.TabIndex = 0;
             labelClientes.Text = "Proveedores";
             // 
-            // dataGridViewClientes
+            // dgvProveedores
             // 
-            dataGridViewClientes.BackgroundColor = Color.FromArgb(49, 49, 68);
-            dataGridViewClientes.BorderStyle = BorderStyle.None;
-            dataGridViewClientes.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewClientes.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3 });
+            dgvProveedores.AllowUserToAddRows = false;
+            dgvProveedores.BackgroundColor = Color.FromArgb(49, 49, 68);
+            dgvProveedores.BorderStyle = BorderStyle.None;
+            dgvProveedores.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dgvProveedores.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = Color.FromArgb(49, 49, 68);
             dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
@@ -73,37 +70,17 @@
             dataGridViewCellStyle1.SelectionBackColor = Color.SteelBlue;
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
-            dataGridViewClientes.DefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewClientes.EnableHeadersVisualStyles = false;
-            dataGridViewClientes.GridColor = Color.FromArgb(49, 49, 68);
-            dataGridViewClientes.Location = new Point(49, 124);
-            dataGridViewClientes.Margin = new Padding(3, 4, 3, 4);
-            dataGridViewClientes.Name = "dataGridViewClientes";
-            dataGridViewClientes.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewClientes.RowHeadersWidth = 51;
-            dataGridViewClientes.Size = new Size(694, 541);
-            dataGridViewClientes.TabIndex = 1;
-            // 
-            // Column1
-            // 
-            Column1.HeaderText = "ID";
-            Column1.MinimumWidth = 6;
-            Column1.Name = "Column1";
-            Column1.Width = 30;
-            // 
-            // Column2
-            // 
-            Column2.HeaderText = "Empresa";
-            Column2.MinimumWidth = 6;
-            Column2.Name = "Column2";
-            Column2.Width = 500;
-            // 
-            // Column3
-            // 
-            Column3.HeaderText = "NIT";
-            Column3.MinimumWidth = 6;
-            Column3.Name = "Column3";
-            Column3.Width = 125;
+            dgvProveedores.DefaultCellStyle = dataGridViewCellStyle1;
+            dgvProveedores.EnableHeadersVisualStyles = false;
+            dgvProveedores.GridColor = Color.FromArgb(49, 49, 68);
+            dgvProveedores.Location = new Point(49, 124);
+            dgvProveedores.Margin = new Padding(3, 4, 3, 4);
+            dgvProveedores.Name = "dgvProveedores";
+            dgvProveedores.ReadOnly = true;
+            dgvProveedores.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dgvProveedores.RowHeadersWidth = 51;
+            dgvProveedores.Size = new Size(694, 541);
+            dgvProveedores.TabIndex = 1;
             // 
             // labelId
             // 
@@ -174,6 +151,7 @@
             buttonSaveClient.Text = "Guardar Proveedor";
             buttonSaveClient.TextImageRelation = TextImageRelation.ImageBeforeText;
             buttonSaveClient.UseVisualStyleBackColor = true;
+            buttonSaveClient.Click += buttonSaveClient_Click;
             // 
             // txtTelefono
             // 
@@ -230,13 +208,13 @@
             Controls.Add(labelNombre);
             Controls.Add(txtId);
             Controls.Add(labelId);
-            Controls.Add(dataGridViewClientes);
+            Controls.Add(dgvProveedores);
             Controls.Add(labelClientes);
             Margin = new Padding(3, 4, 3, 4);
             Name = "FormProveedores";
             Text = "Proveedores";
             Load += FormClientes_Load_1;
-            ((System.ComponentModel.ISupportInitialize)dataGridViewClientes).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvProveedores).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -244,7 +222,7 @@
         #endregion
 
         private Label labelClientes;
-        private DataGridView dataGridViewClientes;
+        private DataGridView dgvProveedores;
         private Label labelId;
         private TextBox txtId;
         private TextBox txtProveedor;
@@ -252,9 +230,6 @@
         private TextBox txtNit;
         private Label labelNit;
         private Button buttonSaveClient;
-        private DataGridViewTextBoxColumn Column1;
-        private DataGridViewTextBoxColumn Column2;
-        private DataGridViewTextBoxColumn Column3;
         private TextBox txtTelefono;
         private Label label1;
         private TextBox txtRepresentante;

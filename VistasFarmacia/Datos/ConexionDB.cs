@@ -29,7 +29,7 @@ namespace VistasFarmacia.Datos
                 return Conexion;
             } catch (Exception ex)
             {
-                MessageBox.Show("Error al conectarse a la base de datos.", "Error de Base de Datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error al conectarse a la base de datos." + ex.Message, "Error de Base de Datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
 
@@ -37,6 +37,8 @@ namespace VistasFarmacia.Datos
 
         public NpgsqlConnection CerrarConexion()
         {
+            //if (Conexion != null && Conexion.State == ConnectionState.Open) Conexion.Close();
+
             if (Conexion.State == ConnectionState.Open) Conexion.Close();
             return Conexion;
         }

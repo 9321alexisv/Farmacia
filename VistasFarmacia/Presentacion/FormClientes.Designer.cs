@@ -132,6 +132,7 @@
             buttonSaveClient.Text = "Guardar Cliente";
             buttonSaveClient.TextImageRelation = TextImageRelation.ImageBeforeText;
             buttonSaveClient.UseVisualStyleBackColor = true;
+            buttonSaveClient.Click += buttonSaveClient_Click;
             // 
             // txtTelefono
             // 

@@ -42,20 +42,40 @@ namespace VistasFarmacia.Forms
         }
 
         #region "Datos"
+        D_Clientes clientes = new D_Clientes();
+
         private void MostrarClientes()
         {
             try
             {
-                D_Clientes datos = new D_Clientes();
-                dgvClientes.DataSource = datos.Listar();
+                dgvClientes.DataSource = clientes.Listar();
             }
             catch (Exception ex)
             {
-                
+
                 MessageBox.Show("Error al mostrar datos. " + ex.Message, "Error de visualización", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
 
+        private void buttonSaveClient_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                clientes.Insertar(
+                    txtNit.Text,
+                    txtNombre.Text,
+                    txtTelefono.Text
+                 );
+
+                MessageBox.Show("Se guardó correctamente");
+                //LimpiarCampos();
+                MostrarClientes();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error al guardar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

@@ -7,7 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Farmacia.Datos;
 using Farmacia.Presentacion;
+using VistasFarmacia.Datos;
 
 namespace VistasFarmacia.Forms
 {
@@ -23,6 +25,7 @@ namespace VistasFarmacia.Forms
         private void FormClientes_Load_1(object sender, EventArgs e)
         {
             LoadTheme();
+            CargarProveedores();
         }
 
         private void LoadTheme()
@@ -41,11 +44,47 @@ namespace VistasFarmacia.Forms
             labelId.ForeColor = ThemeColor.SecondaryColor;
             labelNombre.ForeColor = ThemeColor.SecondaryColor;
             labelNit.ForeColor = ThemeColor.SecondaryColor;
-            dataGridViewClientes.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dataGridViewClientes.ColumnHeadersDefaultCellStyle.BackColor = ThemeColor.SecondaryColor;
-            dataGridViewClientes.RowHeadersDefaultCellStyle.ForeColor = Color.White;
-            dataGridViewClientes.RowHeadersDefaultCellStyle.BackColor = ThemeColor.PrimaryColor;
+            dgvProveedores.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvProveedores.ColumnHeadersDefaultCellStyle.BackColor = ThemeColor.SecondaryColor;
+            dgvProveedores.RowHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvProveedores.RowHeadersDefaultCellStyle.BackColor = ThemeColor.PrimaryColor;
         }
 
+        #region "Datos"
+        D_Proveedores proveedores = new D_Proveedores();
+        private void buttonSaveClient_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                proveedores.Insertar(
+                    txtNit.Text,
+                    txtProveedor.Text,
+                    txtTelefono.Text,
+                    txtRepresentante.Text
+                 );
+
+                MessageBox.Show("Se guardó correctamente");
+                //LimpiarCampos();
+                CargarProveedores();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error al guardar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void CargarProveedores()
+        {
+            try
+            {
+                dgvProveedores.DataSource = proveedores.Listar();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Error al mostrar datos. " + ex.Message, "Error de visualización", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        #endregion
     }
 }
