@@ -11,6 +11,7 @@ CREATE TABLE proveedor (
     proveedor VARCHAR(100) NOT NULL,
     telefono VARCHAR(15),
     representante VARCHAR(100),
+    estado BOOLEAN DEFAULT TRUE,
     CONSTRAINT pk_proveedor PRIMARY KEY (id_proveedor)
 );
 
@@ -20,6 +21,7 @@ CREATE TABLE cliente (
     nit VARCHAR(20) UNIQUE,
     nombre VARCHAR(100) NOT NULL,
     telefono VARCHAR(15),
+    estado BOOLEAN DEFAULT TRUE,
     CONSTRAINT pk_cliente PRIMARY KEY (id_cliente)
 );
 
@@ -31,6 +33,7 @@ CREATE TABLE producto (
     precio_compra NUMERIC(10, 2) NOT NULL,
     precio_venta NUMERIC(10, 2) NOT NULL,
     stock INT NOT NULL,
+    estado BOOLEAN DEFAULT TRUE,
     CONSTRAINT pk_producto PRIMARY KEY (id_producto),
     CONSTRAINT fk_producto_proveedor FOREIGN KEY (id_proveedor) REFERENCES proveedor(id_proveedor)
 );
@@ -39,6 +42,7 @@ CREATE TABLE producto (
 CREATE TABLE compra (
     id_compra SERIAL,
     fecha DATE DEFAULT CURRENT_DATE NOT NULL,
+    estado BOOLEAN DEFAULT TRUE,
     CONSTRAINT pk_compra PRIMARY KEY (id_compra)
 );
 
@@ -60,6 +64,7 @@ CREATE TABLE venta (
     id_venta SERIAL,
     id_cliente INT NOT NULL,
     fecha DATE DEFAULT CURRENT_DATE NOT NULL,
+    estado BOOLEAN DEFAULT TRUE,
     CONSTRAINT pk_venta PRIMARY KEY (id_venta),
     CONSTRAINT fk_venta_cliente FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente)
 );

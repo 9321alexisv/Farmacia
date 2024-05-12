@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿
+using Farmacia.Datos;
 using Farmacia.Presentacion;
 
 namespace VistasFarmacia.Forms
@@ -16,12 +9,12 @@ namespace VistasFarmacia.Forms
         public FormInventario()
         {
             InitializeComponent();
-
         }
 
         private void FormInventario_Load(object sender, EventArgs e)
         {
             LoadTheme();
+            ListarProductos();
         }
         private void LoadTheme()
         {
@@ -36,13 +29,28 @@ namespace VistasFarmacia.Forms
                 }
             }
             labelTablaInventario.ForeColor = ThemeColor.SecondaryColor;
-            dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = ThemeColor.SecondaryColor;
-            dataGridView1.RowHeadersDefaultCellStyle.ForeColor = Color.White;
-            dataGridView1.RowHeadersDefaultCellStyle.BackColor = ThemeColor.PrimaryColor;
+            dgvProductos.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvProductos.ColumnHeadersDefaultCellStyle.BackColor = ThemeColor.SecondaryColor;
+            dgvProductos.RowHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvProductos.RowHeadersDefaultCellStyle.BackColor = ThemeColor.PrimaryColor;
             //dataGridView1.GridColor = ThemeColor.SecondaryColor;
             panel2.BackColor = ThemeColor.SecondaryColor;
-            panel4.BackColor = ThemeColor.SecondaryColor;
+        }
+
+        #region "Datos"
+        readonly D_Productos productos = new();
+
+        public void ListarProductos()
+        {
+            try
+            {
+                dgvProductos.DataSource = productos.Listar();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Error al mostrar datos. " + ex.Message, "Error de visualización", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -50,5 +58,48 @@ namespace VistasFarmacia.Forms
             FormNuevoProducto formNuevoProducto = new FormNuevoProducto();
             formNuevoProducto.Show();
         }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            // Verificar seleccion de producto
+            if (dgvProductos.SelectedRows.Count < 0)
+            {
+                MessageBox.Show("Ningún producto seleccionado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // TODO: Editar producto
+
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            // Verificar seleccion de producto
+            if (dgvProductos.SelectedRows.Count < 0)
+            {
+                MessageBox.Show("Ningún producto seleccionado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Consultar si eliminar o no
+            DialogResult consulta = MessageBox.Show(
+                "Borrar el producto: " + dgvProductos.CurrentRow.Cells["nombre"].Value,
+                "Confirmar Eliminación",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (consulta != DialogResult.Yes) return;
+
+            // Si se confirma la eliminacion
+            int productoSeleccionado = Convert.ToInt32(dgvProductos.CurrentRow.Cells["id_producto"].Value);
+            bool resultado = productos.Eliminar(productoSeleccionado);
+            if (resultado)
+            {
+                MessageBox.Show("Eliminado correctamente", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ListarProductos();
+            }
+        }
     }
+    #endregion
+
 }

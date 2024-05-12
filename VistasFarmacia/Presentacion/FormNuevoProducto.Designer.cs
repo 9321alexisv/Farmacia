@@ -30,7 +30,6 @@
         {
             labelIngresoProductos = new Label();
             labelProveedor = new Label();
-            txtProveedor = new TextBox();
             txtNombre = new TextBox();
             labelNombre = new Label();
             txtPrecioCompra = new TextBox();
@@ -41,6 +40,7 @@
             labelStock = new Label();
             btnGuardar = new Button();
             btnLimpiar = new Button();
+            cmbProveedor = new ComboBox();
             SuspendLayout();
             // 
             // labelIngresoProductos
@@ -64,14 +64,6 @@
             labelProveedor.Size = new Size(133, 32);
             labelProveedor.TabIndex = 2;
             labelProveedor.Text = "Proveedor";
-            // 
-            // txtProveedor
-            // 
-            txtProveedor.Location = new Point(337, 115);
-            txtProveedor.Margin = new Padding(3, 4, 3, 4);
-            txtProveedor.Name = "txtProveedor";
-            txtProveedor.Size = new Size(286, 27);
-            txtProveedor.TabIndex = 3;
             // 
             // txtNombre
             // 
@@ -161,6 +153,7 @@
             btnGuardar.Text = "Guardar Producto";
             btnGuardar.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.Click += btnGuardar_Click;
             // 
             // btnLimpiar
             // 
@@ -174,6 +167,16 @@
             btnLimpiar.Text = "Limpiar";
             btnLimpiar.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnLimpiar.UseVisualStyleBackColor = true;
+            btnLimpiar.Click += btnLimpiar_Click;
+            // 
+            // cmbProveedor
+            // 
+            cmbProveedor.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbProveedor.FormattingEnabled = true;
+            cmbProveedor.Location = new Point(337, 113);
+            cmbProveedor.Name = "cmbProveedor";
+            cmbProveedor.Size = new Size(286, 28);
+            cmbProveedor.TabIndex = 16;
             // 
             // FormNuevoProducto
             // 
@@ -181,6 +184,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(39, 39, 58);
             ClientSize = new Size(914, 600);
+            Controls.Add(cmbProveedor);
             Controls.Add(btnLimpiar);
             Controls.Add(btnGuardar);
             Controls.Add(txtStock);
@@ -191,7 +195,6 @@
             Controls.Add(labelPrecioCompra);
             Controls.Add(txtNombre);
             Controls.Add(labelNombre);
-            Controls.Add(txtProveedor);
             Controls.Add(labelProveedor);
             Controls.Add(labelIngresoProductos);
             Margin = new Padding(3, 4, 3, 4);
@@ -205,7 +208,6 @@
         #endregion
         private Label labelIngresoProductos;
         private Label labelProveedor;
-        private TextBox txtProveedor;
         private TextBox txtNombre;
         private Label labelNombre;
         private TextBox txtPrecioCompra;
@@ -216,5 +218,6 @@
         private Label labelStock;
         private Button btnGuardar;
         private Button btnLimpiar;
+        private ComboBox cmbProveedor;
     }
 }
