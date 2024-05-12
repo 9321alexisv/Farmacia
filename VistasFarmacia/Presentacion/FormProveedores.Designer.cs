@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             labelClientes = new Label();
             dgvProveedores = new DataGridView();
             labelId = new Label();
@@ -37,7 +37,7 @@
             labelNombre = new Label();
             txtNit = new TextBox();
             labelNit = new Label();
-            buttonSaveClient = new Button();
+            btnGuardar = new Button();
             txtTelefono = new TextBox();
             label1 = new Label();
             txtRepresentante = new TextBox();
@@ -63,14 +63,14 @@
             dgvProveedores.BorderStyle = BorderStyle.None;
             dgvProveedores.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dgvProveedores.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(49, 49, 68);
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = Color.SteelBlue;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
-            dgvProveedores.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(49, 49, 68);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = Color.SteelBlue;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dgvProveedores.DefaultCellStyle = dataGridViewCellStyle2;
             dgvProveedores.EnableHeadersVisualStyles = false;
             dgvProveedores.GridColor = Color.FromArgb(49, 49, 68);
             dgvProveedores.Location = new Point(49, 124);
@@ -95,6 +95,7 @@
             // 
             // txtId
             // 
+            txtId.Enabled = false;
             txtId.Location = new Point(899, 124);
             txtId.Margin = new Padding(3, 4, 3, 4);
             txtId.Name = "txtId";
@@ -139,19 +140,19 @@
             labelNit.TabIndex = 6;
             labelNit.Text = "NIT:";
             // 
-            // buttonSaveClient
+            // btnGuardar
             // 
-            buttonSaveClient.FlatStyle = FlatStyle.Flat;
-            buttonSaveClient.Image = Farmacia.Properties.Resources.ADD;
-            buttonSaveClient.Location = new Point(899, 523);
-            buttonSaveClient.Margin = new Padding(3, 4, 3, 4);
-            buttonSaveClient.Name = "buttonSaveClient";
-            buttonSaveClient.Size = new Size(147, 79);
-            buttonSaveClient.TabIndex = 13;
-            buttonSaveClient.Text = "Guardar Proveedor";
-            buttonSaveClient.TextImageRelation = TextImageRelation.ImageBeforeText;
-            buttonSaveClient.UseVisualStyleBackColor = true;
-            buttonSaveClient.Click += buttonSaveClient_Click;
+            btnGuardar.FlatStyle = FlatStyle.Flat;
+            btnGuardar.Image = Farmacia.Properties.Resources.ADD;
+            btnGuardar.Location = new Point(899, 523);
+            btnGuardar.Margin = new Padding(3, 4, 3, 4);
+            btnGuardar.Name = "btnGuardar";
+            btnGuardar.Size = new Size(147, 79);
+            btnGuardar.TabIndex = 13;
+            btnGuardar.Text = "Guardar Proveedor";
+            btnGuardar.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.Click += buttonSaveClient_Click;
             // 
             // txtTelefono
             // 
@@ -201,7 +202,7 @@
             Controls.Add(label2);
             Controls.Add(txtTelefono);
             Controls.Add(label1);
-            Controls.Add(buttonSaveClient);
+            Controls.Add(btnGuardar);
             Controls.Add(txtNit);
             Controls.Add(labelNit);
             Controls.Add(txtProveedor);
@@ -229,7 +230,7 @@
         private Label labelNombre;
         private TextBox txtNit;
         private Label labelNit;
-        private Button buttonSaveClient;
+        private Button btnGuardar;
         private TextBox txtTelefono;
         private Label label1;
         private TextBox txtRepresentante;

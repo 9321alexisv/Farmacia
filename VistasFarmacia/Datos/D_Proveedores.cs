@@ -29,17 +29,17 @@ namespace Farmacia.Datos
             }
         }
 
-        public void Insertar(string nit, string empresa, string telefono, string representante)
+        public void Insertar(string nit, string proveedor, string telefono, string representante)
         {
             ConexionDB conexion = new ConexionDB();
 
             try
             {
                 using (NpgsqlConnection conn = conexion.AbrirConexion())
-                using (NpgsqlCommand cmd = new NpgsqlCommand("INSERT INTO proveedor (nit, empresa, telefono, representante) VALUES (@nit, @empresa, @telefono, @representante)", conn))
+                using (NpgsqlCommand cmd = new NpgsqlCommand("INSERT INTO proveedor (nit, proveedor, telefono, representante) VALUES (@nit, @proveedor, @telefono, @representante)", conn))
                 {
                     cmd.Parameters.AddWithValue("@nit", nit);
-                    cmd.Parameters.AddWithValue("@empresa", empresa);
+                    cmd.Parameters.AddWithValue("@proveedor", proveedor);
                     cmd.Parameters.AddWithValue("@telefono", telefono);
                     cmd.Parameters.AddWithValue("@representante", representante);
 

@@ -1,15 +1,15 @@
--- Crear la base de datos "farmacia_candelaria_dev"
---CREATE DATABASE farmacia;
+-- Crear la base de datos "dev_farmacia_candelaria"
+--CREATE DATABASE dev_farmacia_candelaria;
 
 -- Usar la base de datos "farmacia"
---\c farmacia_candelaria_dev;
+--\c dev_farmacia_candelaria;
 
 -- Crear tabla Proveedor
 CREATE TABLE proveedor (
     id_proveedor SERIAL,
-    empresa VARCHAR(100) NOT NULL,
-    telefono VARCHAR(15),
     nit VARCHAR(20) UNIQUE,
+    proveedor VARCHAR(100) NOT NULL,
+    telefono VARCHAR(15),
     representante VARCHAR(100),
     CONSTRAINT pk_proveedor PRIMARY KEY (id_proveedor)
 );
@@ -17,9 +17,9 @@ CREATE TABLE proveedor (
 -- Crear tabla Cliente
 CREATE TABLE cliente (
     id_cliente SERIAL,
+    nit VARCHAR(20) UNIQUE,
     nombre VARCHAR(100) NOT NULL,
     telefono VARCHAR(15),
-    nit VARCHAR(20) UNIQUE,
     CONSTRAINT pk_cliente PRIMARY KEY (id_cliente)
 );
 
@@ -38,8 +38,8 @@ CREATE TABLE producto (
 -- Crear tabla Compra
 CREATE TABLE compra (
     id_compra SERIAL,
-    fecha DATE NOT NULL,
-    CONSTRAINT pk_compra PRIMARY KEY (id_compra),
+    fecha DATE DEFAULT CURRENT_DATE NOT NULL,
+    CONSTRAINT pk_compra PRIMARY KEY (id_compra)
 );
 
 -- Crear tabla Detalle Compra
@@ -59,7 +59,7 @@ CREATE TABLE detalle_compra (
 CREATE TABLE venta (
     id_venta SERIAL,
     id_cliente INT NOT NULL,
-    fecha DATE NOT NULL,
+    fecha DATE DEFAULT CURRENT_DATE NOT NULL,
     CONSTRAINT pk_venta PRIMARY KEY (id_venta),
     CONSTRAINT fk_venta_cliente FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente)
 );
