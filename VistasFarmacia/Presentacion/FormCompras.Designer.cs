@@ -30,33 +30,30 @@
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            dataGridViewCompras = new DataGridView();
-            Codigo = new DataGridViewTextBoxColumn();
-            cantidad = new DataGridViewTextBoxColumn();
-            Descripcion = new DataGridViewTextBoxColumn();
-            precio = new DataGridViewTextBoxColumn();
-            total = new DataGridViewTextBoxColumn();
-            acumulado = new DataGridViewTextBoxColumn();
-            fecha = new DataGridViewTextBoxColumn();
+            dgvCompras = new DataGridView();
+            Producto = new DataGridViewTextBoxColumn();
+            Cantidad = new DataGridViewTextBoxColumn();
+            Precio = new DataGridViewTextBoxColumn();
+            Subtotal = new DataGridViewTextBoxColumn();
             labelTablaCompras = new Label();
-            btnLimpiarCompras = new Button();
             panel1 = new Panel();
             label3 = new Label();
             panel2 = new Panel();
             labelAcumulado = new Label();
-            label2 = new Label();
+            lblCompras = new Label();
             buttonReporte = new Button();
-            ((System.ComponentModel.ISupportInitialize)dataGridViewCompras).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvCompras).BeginInit();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             SuspendLayout();
             // 
-            // dataGridViewCompras
+            // dgvCompras
             // 
-            dataGridViewCompras.BackgroundColor = Color.FromArgb(49, 49, 68);
-            dataGridViewCompras.BorderStyle = BorderStyle.None;
-            dataGridViewCompras.CellBorderStyle = DataGridViewCellBorderStyle.None;
-            dataGridViewCompras.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dgvCompras.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvCompras.BackgroundColor = Color.FromArgb(49, 49, 68);
+            dgvCompras.BorderStyle = BorderStyle.None;
+            dgvCompras.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            dgvCompras.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = Color.FromArgb(49, 49, 68);
             dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
@@ -64,9 +61,9 @@
             dataGridViewCellStyle1.SelectionBackColor = Color.SteelBlue;
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dataGridViewCompras.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewCompras.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCompras.Columns.AddRange(new DataGridViewColumn[] { Codigo, cantidad, Descripcion, precio, total, acumulado, fecha });
+            dgvCompras.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dgvCompras.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvCompras.Columns.AddRange(new DataGridViewColumn[] { Producto, Cantidad, Precio, Subtotal });
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(49, 49, 68);
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
@@ -74,63 +71,40 @@
             dataGridViewCellStyle2.SelectionBackColor = Color.SteelBlue;
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            dataGridViewCompras.DefaultCellStyle = dataGridViewCellStyle2;
-            dataGridViewCompras.EnableHeadersVisualStyles = false;
-            dataGridViewCompras.Location = new Point(118, 135);
-            dataGridViewCompras.Margin = new Padding(3, 4, 3, 4);
-            dataGridViewCompras.Name = "dataGridViewCompras";
-            dataGridViewCompras.RowHeadersWidth = 20;
-            dataGridViewCompras.Size = new Size(1019, 535);
-            dataGridViewCompras.TabIndex = 0;
+            dgvCompras.DefaultCellStyle = dataGridViewCellStyle2;
+            dgvCompras.EnableHeadersVisualStyles = false;
+            dgvCompras.Location = new Point(118, 135);
+            dgvCompras.Margin = new Padding(3, 4, 3, 4);
+            dgvCompras.Name = "dgvCompras";
+            dgvCompras.RowHeadersVisible = false;
+            dgvCompras.RowHeadersWidth = 20;
+            dgvCompras.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvCompras.Size = new Size(1019, 535);
+            dgvCompras.TabIndex = 0;
             // 
-            // Codigo
+            // Producto
             // 
-            Codigo.HeaderText = "Codigo";
-            Codigo.MinimumWidth = 6;
-            Codigo.Name = "Codigo";
-            Codigo.Width = 60;
+            Producto.HeaderText = "Producto";
+            Producto.MinimumWidth = 6;
+            Producto.Name = "Producto";
             // 
-            // cantidad
+            // Cantidad
             // 
-            cantidad.HeaderText = "Cantidad";
-            cantidad.MinimumWidth = 6;
-            cantidad.Name = "cantidad";
-            cantidad.Width = 60;
+            Cantidad.HeaderText = "Cantidad";
+            Cantidad.MinimumWidth = 6;
+            Cantidad.Name = "Cantidad";
             // 
-            // Descripcion
+            // Precio
             // 
-            Descripcion.HeaderText = "Descripcion";
-            Descripcion.MinimumWidth = 6;
-            Descripcion.Name = "Descripcion";
-            Descripcion.Width = 350;
+            Precio.HeaderText = "Precio";
+            Precio.MinimumWidth = 6;
+            Precio.Name = "Precio";
             // 
-            // precio
+            // Subtotal
             // 
-            precio.HeaderText = "Precio";
-            precio.MinimumWidth = 6;
-            precio.Name = "precio";
-            precio.Width = 125;
-            // 
-            // total
-            // 
-            total.HeaderText = "Total";
-            total.MinimumWidth = 6;
-            total.Name = "total";
-            total.Width = 125;
-            // 
-            // acumulado
-            // 
-            acumulado.HeaderText = "Acumulado";
-            acumulado.MinimumWidth = 6;
-            acumulado.Name = "acumulado";
-            acumulado.Width = 125;
-            // 
-            // fecha
-            // 
-            fecha.HeaderText = "Fecha";
-            fecha.MinimumWidth = 6;
-            fecha.Name = "fecha";
-            fecha.Width = 125;
+            Subtotal.HeaderText = "Subtotal";
+            Subtotal.MinimumWidth = 6;
+            Subtotal.Name = "Subtotal";
             // 
             // labelTablaCompras
             // 
@@ -142,25 +116,12 @@
             labelTablaCompras.TabIndex = 1;
             labelTablaCompras.Text = "Historial de Compras";
             // 
-            // btnLimpiarCompras
-            // 
-            btnLimpiarCompras.FlatStyle = FlatStyle.Flat;
-            btnLimpiarCompras.Image = Farmacia.Properties.Resources.cleaner;
-            btnLimpiarCompras.Location = new Point(978, 696);
-            btnLimpiarCompras.Margin = new Padding(3, 4, 3, 4);
-            btnLimpiarCompras.Name = "btnLimpiarCompras";
-            btnLimpiarCompras.Size = new Size(159, 93);
-            btnLimpiarCompras.TabIndex = 2;
-            btnLimpiarCompras.Text = "Limpiar";
-            btnLimpiarCompras.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnLimpiarCompras.UseVisualStyleBackColor = true;
-            // 
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(49, 49, 68);
             panel1.Controls.Add(label3);
             panel1.Controls.Add(panel2);
-            panel1.Controls.Add(label2);
+            panel1.Controls.Add(lblCompras);
             panel1.Location = new Point(947, 16);
             panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
@@ -198,22 +159,22 @@
             labelAcumulado.TabIndex = 13;
             labelAcumulado.Text = "ACUMULADO:";
             // 
-            // label2
+            // lblCompras
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 18F, FontStyle.Bold | FontStyle.Italic);
-            label2.ForeColor = Color.LightGreen;
-            label2.Location = new Point(65, 39);
-            label2.Name = "label2";
-            label2.Size = new Size(136, 41);
-            label2.TabIndex = 1;
-            label2.Text = "1,000.00";
+            lblCompras.AutoSize = true;
+            lblCompras.Font = new Font("Segoe UI", 18F, FontStyle.Bold | FontStyle.Italic);
+            lblCompras.ForeColor = Color.LightGreen;
+            lblCompras.Location = new Point(55, 39);
+            lblCompras.Name = "lblCompras";
+            lblCompras.Size = new Size(35, 41);
+            lblCompras.TabIndex = 1;
+            lblCompras.Text = "0";
             // 
             // buttonReporte
             // 
             buttonReporte.FlatStyle = FlatStyle.Flat;
             buttonReporte.Image = Farmacia.Properties.Resources.reportes;
-            buttonReporte.Location = new Point(790, 696);
+            buttonReporte.Location = new Point(979, 708);
             buttonReporte.Margin = new Padding(3, 4, 3, 4);
             buttonReporte.Name = "buttonReporte";
             buttonReporte.Size = new Size(159, 93);
@@ -230,15 +191,14 @@
             ClientSize = new Size(1271, 833);
             Controls.Add(buttonReporte);
             Controls.Add(panel1);
-            Controls.Add(btnLimpiarCompras);
             Controls.Add(labelTablaCompras);
-            Controls.Add(dataGridViewCompras);
+            Controls.Add(dgvCompras);
             Margin = new Padding(3, 4, 3, 4);
             Name = "FormCompras";
             Text = "Historial Compras";
             TransparencyKey = Color.Transparent;
             Load += FormCompras_Load_1;
-            ((System.ComponentModel.ISupportInitialize)dataGridViewCompras).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvCompras).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
@@ -249,21 +209,17 @@
 
         #endregion
 
-        private DataGridView dataGridViewCompras;
+        private DataGridView dgvCompras;
         private Label labelTablaCompras;
-        private Button btnLimpiarCompras;
-        private DataGridViewTextBoxColumn Codigo;
-        private DataGridViewTextBoxColumn cantidad;
-        private DataGridViewTextBoxColumn Descripcion;
-        private DataGridViewTextBoxColumn precio;
-        private DataGridViewTextBoxColumn total;
-        private DataGridViewTextBoxColumn acumulado;
-        private DataGridViewTextBoxColumn fecha;
         private Panel panel1;
         private Label label3;
-        private Label label2;
+        private Label lblCompras;
         private Label labelAcumulado;
         private Panel panel2;
         private Button buttonReporte;
+        private DataGridViewTextBoxColumn Producto;
+        private DataGridViewTextBoxColumn Cantidad;
+        private DataGridViewTextBoxColumn Precio;
+        private DataGridViewTextBoxColumn Subtotal;
     }
 }

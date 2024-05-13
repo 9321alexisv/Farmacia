@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿
+using Farmacia.Datos;
 using Farmacia.Presentacion;
+using VistasFarmacia.Entidad;
 
 namespace VistasFarmacia.Forms
 {
@@ -21,6 +15,7 @@ namespace VistasFarmacia.Forms
         private void FormCompras_Load_1(object sender, EventArgs e)
         {
             LoadTheme();
+            MostrarHistorialVentas();
         }
 
         private void LoadTheme()
@@ -36,12 +31,52 @@ namespace VistasFarmacia.Forms
                 }
             }
             labelTablaCompras.ForeColor = ThemeColor.SecondaryColor;
-            dataGridViewCompras.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dataGridViewCompras.ColumnHeadersDefaultCellStyle.BackColor = ThemeColor.SecondaryColor;
-            dataGridViewCompras.RowHeadersDefaultCellStyle.ForeColor = Color.White;
-            dataGridViewCompras.RowHeadersDefaultCellStyle.BackColor = ThemeColor.PrimaryColor;
+            dgvCompras.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvCompras.ColumnHeadersDefaultCellStyle.BackColor = ThemeColor.SecondaryColor;
+            dgvCompras.RowHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvCompras.RowHeadersDefaultCellStyle.BackColor = ThemeColor.PrimaryColor;
             panel2.BackColor = ThemeColor.SecondaryColor;
         }
 
+        public void MostrarHistorialVentas()
+        {
+            D_Compras compras = new();
+            List<Compra> todasCompras = compras.ObtenerCompras();
+
+            decimal totalCompras = 0;
+
+            dgvCompras.Rows.Clear();
+
+            foreach (var compra in todasCompras)
+            {
+                List<DetalleCompra> detallesCompra = compras.ObtenerDetallesCompra(compra.IdCompra);
+
+                // PARA ETIQUETAS GLOBALES CON PROPOSITOS INFORMATIVOS
+                decimal totalCompra = detallesCompra.Sum(detalle => detalle.PrecioCompra * detalle.Cantidad);
+                totalCompras += totalCompra; // Sumar al total de compra
+
+                // Encabezado de cada venta dentro de la tabla
+                int rowIndex = dgvCompras.Rows.Add(
+                    $"COMPRA #{compra.IdCompra}",
+                    $"PROVEEDOR: {compra.Proveedor}",
+                    $"FECHA: {compra.Fecha}",
+                    $"TOTAL: {totalCompra}"
+                 );
+                dgvCompras.Rows[rowIndex].DefaultCellStyle.BackColor = Color.Green;
+                dgvCompras.Rows[rowIndex].Height = 50;
+
+                foreach (var detalle in detallesCompra)
+                {
+                    dgvCompras.Rows.Add(
+                        detalle.Producto,
+                        detalle.Cantidad,
+                        detalle.PrecioCompra,
+                        detalle.PrecioCompra * detalle.Cantidad
+                    );
+                }
+            }
+
+            lblCompras.Text = totalCompras.ToString();
+        }
     }
 }
