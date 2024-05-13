@@ -269,6 +269,7 @@
             // 
             // panelDesktopPane
             // 
+            panelDesktopPane.BackColor = Color.FromArgb(39, 39, 58);
             panelDesktopPane.Controls.Add(pictureBox1);
             panelDesktopPane.Dock = DockStyle.Fill;
             panelDesktopPane.Location = new Point(251, 100);

@@ -29,24 +29,27 @@
         private void InitializeComponent()
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             labelTablaVentas = new Label();
-            btnLimpiarVentas = new Button();
             button1 = new Button();
             panel1 = new Panel();
-            label3 = new Label();
-            label2 = new Label();
             labelAcumulado = new Label();
+            label3 = new Label();
+            lblVentas = new Label();
+            dgvVentas = new DataGridView();
+            Codigo = new DataGridViewTextBoxColumn();
+            Producto = new DataGridViewTextBoxColumn();
+            Cantidad = new DataGridViewTextBoxColumn();
+            PrecioCompra = new DataGridViewTextBoxColumn();
+            PrecioVenta = new DataGridViewTextBoxColumn();
+            Subtotal = new DataGridViewTextBoxColumn();
             panel2 = new Panel();
-            dataGridViewVentas = new DataGridView();
-            Column1 = new DataGridViewTextBoxColumn();
-            Column2 = new DataGridViewTextBoxColumn();
-            Column3 = new DataGridViewTextBoxColumn();
-            Column5 = new DataGridViewTextBoxColumn();
-            Column4 = new DataGridViewTextBoxColumn();
-            Column6 = new DataGridViewTextBoxColumn();
+            label1 = new Label();
+            label2 = new Label();
+            lblGanancias = new Label();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvVentas).BeginInit();
             panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridViewVentas).BeginInit();
             SuspendLayout();
             // 
             // labelTablaVentas
@@ -59,24 +62,11 @@
             labelTablaVentas.TabIndex = 1;
             labelTablaVentas.Text = "Historial de Ventas";
             // 
-            // btnLimpiarVentas
-            // 
-            btnLimpiarVentas.FlatStyle = FlatStyle.Flat;
-            btnLimpiarVentas.Image = Farmacia.Properties.Resources.cleaner;
-            btnLimpiarVentas.Location = new Point(966, 691);
-            btnLimpiarVentas.Margin = new Padding(3, 4, 3, 4);
-            btnLimpiarVentas.Name = "btnLimpiarVentas";
-            btnLimpiarVentas.Size = new Size(144, 89);
-            btnLimpiarVentas.TabIndex = 2;
-            btnLimpiarVentas.Text = "Limpiar";
-            btnLimpiarVentas.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnLimpiarVentas.UseVisualStyleBackColor = true;
-            // 
             // button1
             // 
             button1.FlatStyle = FlatStyle.Flat;
             button1.Image = Farmacia.Properties.Resources.reportes;
-            button1.Location = new Point(793, 691);
+            button1.Location = new Point(1063, 681);
             button1.Margin = new Padding(3, 4, 3, 4);
             button1.Name = "button1";
             button1.Size = new Size(139, 89);
@@ -88,124 +78,174 @@
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(49, 49, 68);
+            panel1.Controls.Add(labelAcumulado);
             panel1.Controls.Add(label3);
-            panel1.Controls.Add(label2);
-            panel1.Location = new Point(920, 16);
+            panel1.Controls.Add(lblVentas);
+            panel1.Location = new Point(706, 16);
             panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
             panel1.Size = new Size(190, 96);
             panel1.TabIndex = 5;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 18F, FontStyle.Bold | FontStyle.Italic);
-            label3.ForeColor = Color.LightGreen;
-            label3.Location = new Point(-1, 35);
-            label3.Name = "label3";
-            label3.Size = new Size(41, 41);
-            label3.TabIndex = 2;
-            label3.Text = "Q";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 18F, FontStyle.Bold | FontStyle.Italic);
-            label2.ForeColor = Color.LightGreen;
-            label2.Location = new Point(65, 39);
-            label2.Name = "label2";
-            label2.Size = new Size(136, 41);
-            label2.TabIndex = 1;
-            label2.Text = "1,000.00";
             // 
             // labelAcumulado
             // 
             labelAcumulado.AutoSize = true;
             labelAcumulado.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             labelAcumulado.ForeColor = Color.White;
-            labelAcumulado.Location = new Point(49, 5);
+            labelAcumulado.Location = new Point(0, 0);
             labelAcumulado.Name = "labelAcumulado";
-            labelAcumulado.Size = new Size(110, 20);
+            labelAcumulado.Size = new Size(115, 20);
             labelAcumulado.TabIndex = 0;
-            labelAcumulado.Text = "ACUMULADO:";
+            labelAcumulado.Text = "TOTAL VENTAS";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 18F, FontStyle.Bold | FontStyle.Italic);
+            label3.ForeColor = Color.LightGreen;
+            label3.Location = new Point(0, 42);
+            label3.Name = "label3";
+            label3.Size = new Size(41, 41);
+            label3.TabIndex = 2;
+            label3.Text = "Q";
+            // 
+            // lblVentas
+            // 
+            lblVentas.AutoSize = true;
+            lblVentas.Font = new Font("Segoe UI", 18F, FontStyle.Bold | FontStyle.Italic);
+            lblVentas.ForeColor = Color.LightGreen;
+            lblVentas.Location = new Point(51, 42);
+            lblVentas.Name = "lblVentas";
+            lblVentas.Size = new Size(136, 41);
+            lblVentas.TabIndex = 1;
+            lblVentas.Text = "1,000.00";
+            // 
+            // dgvVentas
+            // 
+            dgvVentas.AllowUserToAddRows = false;
+            dgvVentas.AllowUserToDeleteRows = false;
+            dgvVentas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvVentas.BackgroundColor = Color.FromArgb(49, 49, 68);
+            dgvVentas.BorderStyle = BorderStyle.None;
+            dgvVentas.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dgvVentas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvVentas.Columns.AddRange(new DataGridViewColumn[] { Codigo, Producto, Cantidad, PrecioCompra, PrecioVenta, Subtotal });
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Window;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            dgvVentas.DefaultCellStyle = dataGridViewCellStyle1;
+            dgvVentas.EnableHeadersVisualStyles = false;
+            dgvVentas.GridColor = Color.FromArgb(49, 49, 68);
+            dgvVentas.Location = new Point(152, 140);
+            dgvVentas.Margin = new Padding(3, 4, 3, 4);
+            dgvVentas.Name = "dgvVentas";
+            dgvVentas.ReadOnly = true;
+            dgvVentas.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dgvVentas.RowHeadersVisible = false;
+            dgvVentas.RowHeadersWidth = 15;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(49, 49, 68);
+            dataGridViewCellStyle2.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = Color.SteelBlue;
+            dgvVentas.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dgvVentas.RowTemplate.DefaultCellStyle.BackColor = Color.FromArgb(49, 49, 68);
+            dgvVentas.RowTemplate.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dgvVentas.RowTemplate.DefaultCellStyle.ForeColor = Color.White;
+            dgvVentas.RowTemplate.DefaultCellStyle.SelectionBackColor = Color.SteelBlue;
+            dgvVentas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvVentas.Size = new Size(1050, 525);
+            dgvVentas.TabIndex = 7;
+            // 
+            // Codigo
+            // 
+            Codigo.HeaderText = "Cod. Producto";
+            Codigo.MinimumWidth = 6;
+            Codigo.Name = "Codigo";
+            Codigo.ReadOnly = true;
+            // 
+            // Producto
+            // 
+            Producto.HeaderText = "Producto";
+            Producto.MinimumWidth = 6;
+            Producto.Name = "Producto";
+            Producto.ReadOnly = true;
+            // 
+            // Cantidad
+            // 
+            Cantidad.HeaderText = "Cantidad";
+            Cantidad.MinimumWidth = 6;
+            Cantidad.Name = "Cantidad";
+            Cantidad.ReadOnly = true;
+            // 
+            // PrecioCompra
+            // 
+            PrecioCompra.HeaderText = "Precio Compra";
+            PrecioCompra.MinimumWidth = 6;
+            PrecioCompra.Name = "PrecioCompra";
+            PrecioCompra.ReadOnly = true;
+            // 
+            // PrecioVenta
+            // 
+            PrecioVenta.HeaderText = "Precio Venta";
+            PrecioVenta.MinimumWidth = 6;
+            PrecioVenta.Name = "PrecioVenta";
+            PrecioVenta.ReadOnly = true;
+            // 
+            // Subtotal
+            // 
+            Subtotal.HeaderText = "Subtotal";
+            Subtotal.MinimumWidth = 6;
+            Subtotal.Name = "Subtotal";
+            Subtotal.ReadOnly = true;
             // 
             // panel2
             // 
-            panel2.Controls.Add(labelAcumulado);
-            panel2.Location = new Point(919, 16);
+            panel2.BackColor = Color.FromArgb(49, 49, 68);
+            panel2.Controls.Add(label1);
+            panel2.Controls.Add(label2);
+            panel2.Controls.Add(lblGanancias);
+            panel2.Location = new Point(920, 13);
             panel2.Margin = new Padding(3, 4, 3, 4);
             panel2.Name = "panel2";
-            panel2.Size = new Size(191, 31);
+            panel2.Size = new Size(190, 96);
             panel2.TabIndex = 6;
             // 
-            // dataGridViewVentas
+            // label1
             // 
-            dataGridViewVentas.AllowUserToOrderColumns = true;
-            dataGridViewVentas.BackgroundColor = Color.FromArgb(49, 49, 68);
-            dataGridViewVentas.BorderStyle = BorderStyle.None;
-            dataGridViewVentas.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewVentas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewVentas.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column5, Column4, Column6 });
-            dataGridViewVentas.EnableHeadersVisualStyles = false;
-            dataGridViewVentas.GridColor = Color.FromArgb(49, 49, 68);
-            dataGridViewVentas.Location = new Point(152, 144);
-            dataGridViewVentas.Margin = new Padding(3, 4, 3, 4);
-            dataGridViewVentas.Name = "dataGridViewVentas";
-            dataGridViewVentas.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewVentas.RowHeadersWidth = 15;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(49, 49, 68);
-            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = Color.SteelBlue;
-            dataGridViewVentas.RowsDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewVentas.RowTemplate.DefaultCellStyle.BackColor = Color.FromArgb(49, 49, 68);
-            dataGridViewVentas.RowTemplate.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewVentas.RowTemplate.DefaultCellStyle.ForeColor = Color.White;
-            dataGridViewVentas.RowTemplate.DefaultCellStyle.SelectionBackColor = Color.SteelBlue;
-            dataGridViewVentas.Size = new Size(958, 525);
-            dataGridViewVentas.TabIndex = 7;
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(0, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(148, 20);
+            label1.TabIndex = 0;
+            label1.Text = "TOTAL GANANCIAS";
             // 
-            // Column1
+            // label2
             // 
-            Column1.HeaderText = "Código";
-            Column1.MinimumWidth = 6;
-            Column1.Name = "Column1";
-            Column1.Width = 125;
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 18F, FontStyle.Bold | FontStyle.Italic);
+            label2.ForeColor = Color.LightGreen;
+            label2.Location = new Point(0, 42);
+            label2.Name = "label2";
+            label2.Size = new Size(41, 41);
+            label2.TabIndex = 2;
+            label2.Text = "Q";
             // 
-            // Column2
+            // lblGanancias
             // 
-            Column2.HeaderText = "Cantidad";
-            Column2.MinimumWidth = 6;
-            Column2.Name = "Column2";
-            Column2.Width = 125;
-            // 
-            // Column3
-            // 
-            Column3.HeaderText = "Descripción";
-            Column3.MinimumWidth = 6;
-            Column3.Name = "Column3";
-            Column3.Width = 300;
-            // 
-            // Column5
-            // 
-            Column5.HeaderText = "Precio";
-            Column5.MinimumWidth = 6;
-            Column5.Name = "Column5";
-            Column5.Width = 125;
-            // 
-            // Column4
-            // 
-            Column4.HeaderText = "Total";
-            Column4.MinimumWidth = 6;
-            Column4.Name = "Column4";
-            Column4.Width = 120;
-            // 
-            // Column6
-            // 
-            Column6.HeaderText = "Fecha";
-            Column6.MinimumWidth = 6;
-            Column6.Name = "Column6";
-            Column6.Width = 102;
+            lblGanancias.AutoSize = true;
+            lblGanancias.Font = new Font("Segoe UI", 18F, FontStyle.Bold | FontStyle.Italic);
+            lblGanancias.ForeColor = Color.LightGreen;
+            lblGanancias.Location = new Point(51, 42);
+            lblGanancias.Name = "lblGanancias";
+            lblGanancias.Size = new Size(136, 41);
+            lblGanancias.TabIndex = 1;
+            lblGanancias.Text = "1,000.00";
             // 
             // FormVentas
             // 
@@ -213,11 +253,10 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(39, 39, 58);
             ClientSize = new Size(1298, 783);
-            Controls.Add(dataGridViewVentas);
             Controls.Add(panel2);
+            Controls.Add(dgvVentas);
             Controls.Add(panel1);
             Controls.Add(button1);
-            Controls.Add(btnLimpiarVentas);
             Controls.Add(labelTablaVentas);
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 4, 3, 4);
@@ -226,28 +265,30 @@
             Load += FormVentas_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvVentas).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridViewVentas).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
         private Label labelTablaVentas;
-        private Button btnLimpiarVentas;
         private Button button1;
         private Panel panel1;
         private Label labelAcumulado;
-        private Label label2;
+        private Label lblVentas;
         private Label label3;
+        private DataGridView dgvVentas;
         private Panel panel2;
-        private DataGridView dataGridViewVentas;
-        private DataGridViewTextBoxColumn Column1;
-        private DataGridViewTextBoxColumn Column2;
-        private DataGridViewTextBoxColumn Column3;
-        private DataGridViewTextBoxColumn Column5;
-        private DataGridViewTextBoxColumn Column4;
-        private DataGridViewTextBoxColumn Column6;
+        private Label label1;
+        private Label label2;
+        private Label lblGanancias;
+        private DataGridViewTextBoxColumn Codigo;
+        private DataGridViewTextBoxColumn Producto;
+        private DataGridViewTextBoxColumn Cantidad;
+        private DataGridViewTextBoxColumn PrecioCompra;
+        private DataGridViewTextBoxColumn PrecioVenta;
+        private DataGridViewTextBoxColumn Subtotal;
     }
 }

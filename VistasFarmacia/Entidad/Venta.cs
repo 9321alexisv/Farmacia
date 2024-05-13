@@ -4,8 +4,8 @@ namespace VistasFarmacia.Entidad
     public class Venta
     {
         public int IdVenta { get; set; }
-        public Cliente ObjCliente { get; set; }
-        public string FechaVenta { get; set; }
+        public string Cliente { get; set; }
+        public string Fecha { get; set; }
         public List<DetalleVenta> ObjDetalleVenta { get; set; }
     } 
 }

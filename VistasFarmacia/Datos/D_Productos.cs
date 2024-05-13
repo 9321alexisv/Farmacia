@@ -48,7 +48,7 @@ namespace Farmacia.Datos
                 {
                     producto = new Producto
                     {
-                        IdProducto = Convert.ToInt32(leer["id"]),
+                        IdProducto = Convert.ToInt32(leer["id_producto"]),
                         ObjProveedor = new Proveedor
                         {
                             IdProveedor = Convert.ToInt32(leer["id_proveedor"])

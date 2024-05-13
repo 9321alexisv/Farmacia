@@ -74,9 +74,10 @@ CREATE TABLE detalle_venta (
     id_detalle_venta SERIAL,
     id_venta INT NOT NULL,
     id_producto INT NOT NULL,
+    precio_compra NUMERIC(10, 2) NOT NULL,
     precio_venta NUMERIC(10, 2) NOT NULL,
     cantidad INT NOT NULL,
     CONSTRAINT pk_detalleventa PRIMARY KEY (id_detalle_venta),
     CONSTRAINT fk_detalleventa_venta FOREIGN KEY (id_venta) REFERENCES venta(id_venta),
-    CONSTRAINT fk_detallevnetas_producto FOREIGN KEY (id_producto) REFERENCES producto(id_producto)
+    CONSTRAINT fk_detalleventa_producto FOREIGN KEY (id_producto) REFERENCES producto(id_producto)
 );
