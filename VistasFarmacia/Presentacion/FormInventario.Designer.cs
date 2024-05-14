@@ -30,7 +30,7 @@ namespace VistasFarmacia.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             dgvProductos = new DataGridView();
             labelTablaInventario = new Label();
             btnCrear = new Button();
@@ -41,7 +41,7 @@ namespace VistasFarmacia.Forms
             panel2 = new Panel();
             labelAcumulado = new Label();
             label2 = new Label();
-            button1 = new Button();
+            btnReporte = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvProductos).BeginInit();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -63,10 +63,10 @@ namespace VistasFarmacia.Forms
             dgvProductos.Name = "dgvProductos";
             dgvProductos.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dgvProductos.RowHeadersWidth = 15;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(49, 49, 68);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = Color.SteelBlue;
-            dgvProductos.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(49, 49, 68);
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = Color.SteelBlue;
+            dgvProductos.RowsDefaultCellStyle = dataGridViewCellStyle1;
             dgvProductos.RowTemplate.DefaultCellStyle.BackColor = Color.FromArgb(49, 49, 68);
             dgvProductos.RowTemplate.DefaultCellStyle.ForeColor = Color.White;
             dgvProductos.RowTemplate.DefaultCellStyle.SelectionBackColor = Color.SteelBlue;
@@ -180,18 +180,19 @@ namespace VistasFarmacia.Forms
             label2.TabIndex = 1;
             label2.Text = "1,000.00";
             // 
-            // button1
+            // btnReporte
             // 
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Image = Farmacia.Properties.Resources.reportes;
-            button1.Location = new Point(63, 727);
-            button1.Margin = new Padding(3, 4, 3, 4);
-            button1.Name = "button1";
-            button1.Size = new Size(134, 83);
-            button1.TabIndex = 10;
-            button1.Text = "Reporte";
-            button1.TextImageRelation = TextImageRelation.ImageBeforeText;
-            button1.UseVisualStyleBackColor = true;
+            btnReporte.FlatStyle = FlatStyle.Flat;
+            btnReporte.Image = Farmacia.Properties.Resources.reportes;
+            btnReporte.Location = new Point(63, 727);
+            btnReporte.Margin = new Padding(3, 4, 3, 4);
+            btnReporte.Name = "btnReporte";
+            btnReporte.Size = new Size(134, 83);
+            btnReporte.TabIndex = 10;
+            btnReporte.Text = "Reporte";
+            btnReporte.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnReporte.UseVisualStyleBackColor = true;
+            btnReporte.Click += btnReporte_Click;
             // 
             // FormInventario
             // 
@@ -199,7 +200,7 @@ namespace VistasFarmacia.Forms
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(39, 39, 58);
             ClientSize = new Size(1335, 855);
-            Controls.Add(button1);
+            Controls.Add(btnReporte);
             Controls.Add(panel1);
             Controls.Add(btnEliminar);
             Controls.Add(btnEditar);
@@ -231,6 +232,6 @@ namespace VistasFarmacia.Forms
         private Label label2;
         private Label labelAcumulado;
         private Panel panel2;
-        private Button button1;
+        private Button btnReporte;
     }
 }

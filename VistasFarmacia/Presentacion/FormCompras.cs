@@ -1,6 +1,7 @@
 ﻿
 using Farmacia.Datos;
 using Farmacia.Presentacion;
+using Farmacia.Presentacion.Reportes;
 using VistasFarmacia.Entidad;
 
 namespace VistasFarmacia.Forms
@@ -77,6 +78,12 @@ namespace VistasFarmacia.Forms
             }
 
             lblCompras.Text = totalCompras.ToString();
+        }
+
+        private void btnReporte_Click(object sender, EventArgs e)
+        {
+            ReportesClosedXML reportes = new();
+            reportes.Excel("Compras", dgvCompras);
         }
     }
 }

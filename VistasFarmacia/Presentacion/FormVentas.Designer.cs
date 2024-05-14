@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             labelTablaVentas = new Label();
-            button1 = new Button();
+            btnReporte = new Button();
             panel1 = new Panel();
             labelAcumulado = new Label();
             label3 = new Label();
@@ -62,18 +62,19 @@
             labelTablaVentas.TabIndex = 1;
             labelTablaVentas.Text = "Historial de Ventas";
             // 
-            // button1
+            // btnReporte
             // 
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Image = Farmacia.Properties.Resources.reportes;
-            button1.Location = new Point(1063, 681);
-            button1.Margin = new Padding(3, 4, 3, 4);
-            button1.Name = "button1";
-            button1.Size = new Size(139, 89);
-            button1.TabIndex = 4;
-            button1.Text = "Reportes";
-            button1.TextImageRelation = TextImageRelation.ImageBeforeText;
-            button1.UseVisualStyleBackColor = true;
+            btnReporte.FlatStyle = FlatStyle.Flat;
+            btnReporte.Image = Farmacia.Properties.Resources.reportes;
+            btnReporte.Location = new Point(990, 681);
+            btnReporte.Margin = new Padding(3, 4, 3, 4);
+            btnReporte.Name = "btnReporte";
+            btnReporte.Size = new Size(212, 89);
+            btnReporte.TabIndex = 4;
+            btnReporte.Text = "Generar Excel";
+            btnReporte.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnReporte.UseVisualStyleBackColor = true;
+            btnReporte.Click += btnReporte_Click;
             // 
             // panel1
             // 
@@ -130,14 +131,14 @@
             dgvVentas.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dgvVentas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvVentas.Columns.AddRange(new DataGridViewColumn[] { Codigo, Producto, Cantidad, PrecioCompra, PrecioVenta, Subtotal });
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Window;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
-            dgvVentas.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = SystemColors.Window;
+            dataGridViewCellStyle5.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle5.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.False;
+            dgvVentas.DefaultCellStyle = dataGridViewCellStyle5;
             dgvVentas.EnableHeadersVisualStyles = false;
             dgvVentas.GridColor = Color.FromArgb(49, 49, 68);
             dgvVentas.Location = new Point(152, 140);
@@ -147,11 +148,11 @@
             dgvVentas.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dgvVentas.RowHeadersVisible = false;
             dgvVentas.RowHeadersWidth = 15;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(49, 49, 68);
-            dataGridViewCellStyle2.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = Color.SteelBlue;
-            dgvVentas.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.BackColor = Color.FromArgb(49, 49, 68);
+            dataGridViewCellStyle6.Font = new Font("Arial", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle6.ForeColor = Color.White;
+            dataGridViewCellStyle6.SelectionBackColor = Color.SteelBlue;
+            dgvVentas.RowsDefaultCellStyle = dataGridViewCellStyle6;
             dgvVentas.RowTemplate.DefaultCellStyle.BackColor = Color.FromArgb(49, 49, 68);
             dgvVentas.RowTemplate.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             dgvVentas.RowTemplate.DefaultCellStyle.ForeColor = Color.White;
@@ -256,7 +257,7 @@
             Controls.Add(panel2);
             Controls.Add(dgvVentas);
             Controls.Add(panel1);
-            Controls.Add(button1);
+            Controls.Add(btnReporte);
             Controls.Add(labelTablaVentas);
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 4, 3, 4);
@@ -274,7 +275,7 @@
 
         #endregion
         private Label labelTablaVentas;
-        private Button button1;
+        private Button btnReporte;
         private Panel panel1;
         private Label labelAcumulado;
         private Label lblVentas;

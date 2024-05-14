@@ -1,6 +1,7 @@
 ﻿
 using Farmacia.Datos;
 using Farmacia.Presentacion;
+using Farmacia.Presentacion.Reportes;
 
 namespace VistasFarmacia.Forms
 {
@@ -98,6 +99,12 @@ namespace VistasFarmacia.Forms
                 MessageBox.Show("Eliminado correctamente", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ListarProductos();
             }
+        }
+
+        private void btnReporte_Click(object sender, EventArgs e)
+        {
+            ReportesClosedXML reportes = new();
+            reportes.Excel("Inventario", dgvProductos);
         }
     }
     #endregion

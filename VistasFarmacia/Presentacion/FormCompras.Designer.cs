@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             dgvCompras = new DataGridView();
             Producto = new DataGridViewTextBoxColumn();
             Cantidad = new DataGridViewTextBoxColumn();
@@ -41,7 +41,7 @@
             panel2 = new Panel();
             labelAcumulado = new Label();
             lblCompras = new Label();
-            buttonReporte = new Button();
+            btnReporte = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvCompras).BeginInit();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -54,24 +54,24 @@
             dgvCompras.BorderStyle = BorderStyle.None;
             dgvCompras.CellBorderStyle = DataGridViewCellBorderStyle.None;
             dgvCompras.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(49, 49, 68);
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = Color.SteelBlue;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dgvCompras.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = Color.FromArgb(49, 49, 68);
+            dataGridViewCellStyle5.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle5.ForeColor = Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = Color.SteelBlue;
+            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
+            dgvCompras.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             dgvCompras.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvCompras.Columns.AddRange(new DataGridViewColumn[] { Producto, Cantidad, Precio, Subtotal });
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(49, 49, 68);
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = Color.SteelBlue;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            dgvCompras.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = Color.FromArgb(49, 49, 68);
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle6.ForeColor = Color.White;
+            dataGridViewCellStyle6.SelectionBackColor = Color.SteelBlue;
+            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
+            dgvCompras.DefaultCellStyle = dataGridViewCellStyle6;
             dgvCompras.EnableHeadersVisualStyles = false;
             dgvCompras.Location = new Point(118, 135);
             dgvCompras.Margin = new Padding(3, 4, 3, 4);
@@ -170,18 +170,19 @@
             lblCompras.TabIndex = 1;
             lblCompras.Text = "0";
             // 
-            // buttonReporte
+            // btnReporte
             // 
-            buttonReporte.FlatStyle = FlatStyle.Flat;
-            buttonReporte.Image = Farmacia.Properties.Resources.reportes;
-            buttonReporte.Location = new Point(979, 708);
-            buttonReporte.Margin = new Padding(3, 4, 3, 4);
-            buttonReporte.Name = "buttonReporte";
-            buttonReporte.Size = new Size(159, 93);
-            buttonReporte.TabIndex = 17;
-            buttonReporte.Text = "Reportes";
-            buttonReporte.TextImageRelation = TextImageRelation.ImageBeforeText;
-            buttonReporte.UseVisualStyleBackColor = true;
+            btnReporte.FlatStyle = FlatStyle.Flat;
+            btnReporte.Image = Farmacia.Properties.Resources.reportes;
+            btnReporte.Location = new Point(946, 708);
+            btnReporte.Margin = new Padding(3, 4, 3, 4);
+            btnReporte.Name = "btnReporte";
+            btnReporte.Size = new Size(192, 93);
+            btnReporte.TabIndex = 17;
+            btnReporte.Text = "Generar Excel";
+            btnReporte.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnReporte.UseVisualStyleBackColor = true;
+            btnReporte.Click += btnReporte_Click;
             // 
             // FormCompras
             // 
@@ -189,7 +190,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(39, 39, 58);
             ClientSize = new Size(1271, 833);
-            Controls.Add(buttonReporte);
+            Controls.Add(btnReporte);
             Controls.Add(panel1);
             Controls.Add(labelTablaCompras);
             Controls.Add(dgvCompras);
@@ -216,7 +217,7 @@
         private Label lblCompras;
         private Label labelAcumulado;
         private Panel panel2;
-        private Button buttonReporte;
+        private Button btnReporte;
         private DataGridViewTextBoxColumn Producto;
         private DataGridViewTextBoxColumn Cantidad;
         private DataGridViewTextBoxColumn Precio;

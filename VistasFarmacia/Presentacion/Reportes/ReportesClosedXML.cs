@@ -5,7 +5,7 @@ namespace Farmacia.Presentacion.Reportes
 {
     public class ReportesClosedXML
     {
-        public void Excel(DataGridView dgvRegistros)
+        public void Excel(string titulo, DataGridView dgvRegistros)
         {
             using (var workbook = new XLWorkbook())
             {
@@ -47,7 +47,7 @@ namespace Farmacia.Presentacion.Reportes
 
                 // Guardar en el escritorio
                 string escritorio = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                string rutaArchivo = Path.Combine(escritorio, $"{fechaHoraConversion}.xlsx");
+                string rutaArchivo = Path.Combine(escritorio, $"{titulo}__{fechaHoraConversion}.xlsx");
                 workbook.SaveAs(rutaArchivo);
 
                 MessageBox.Show("Guardado en el Escritorio", "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
