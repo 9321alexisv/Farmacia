@@ -1,15 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿
 using Farmacia.Datos;
 using Farmacia.Presentacion;
-using VistasFarmacia.Datos;
 
 namespace VistasFarmacia.Forms
 {
@@ -20,6 +11,7 @@ namespace VistasFarmacia.Forms
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
             this.MaximizeBox = false;
+
         }
 
         private void FormClientes_Load_1(object sender, EventArgs e)
@@ -52,20 +44,44 @@ namespace VistasFarmacia.Forms
 
         #region "Datos"
         D_Proveedores proveedores = new D_Proveedores();
+
         private void buttonSaveClient_Click(object sender, EventArgs e)
         {
+            // Verificar campos nulos
+            if (txtNit.TextLength < 1 || txtProveedor.TextLength < 1 ||
+                txtTelefono.TextLength < 1 || txtRepresentante.TextLength < 1)
+            {
+                MessageBox.Show("Todos los campos son obligatorios", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
             try
             {
-                proveedores.Insertar(
-                    txtNit.Text,
-                    txtProveedor.Text,
-                    txtTelefono.Text,
-                    txtRepresentante.Text
-                 );
+                // Nuevo
+                if (txtId.TextLength == 0)
+                {
+                    proveedores.Insertar(
+                        txtNit.Text,
+                        txtProveedor.Text,
+                        txtTelefono.Text,
+                        txtRepresentante.Text
+                     );
+                }
+                else
+                {
+                    // Actualizar
+                    proveedores.Actualizar(
+                        Convert.ToInt32(txtId.Text),
+                        txtNit.Text,
+                        txtProveedor.Text,
+                        txtTelefono.Text,
+                        txtRepresentante.Text
+                    );
+                }
 
-                MessageBox.Show("Se guardó correctamente");
-                //LimpiarCampos();
+                LimpiarCampos();
                 CargarProveedores();
+                MessageBox.Show($"Se guardo correctamente", "Completado", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
@@ -81,10 +97,63 @@ namespace VistasFarmacia.Forms
             }
             catch (Exception ex)
             {
-
-                MessageBox.Show("Error al mostrar datos. " + ex.Message, "Error de visualización", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error al mostrar datos. " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            DialogResult pregunta = MessageBox.Show("Eliminar registro?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (pregunta == DialogResult.Yes)
+            {
+                if (dgvProveedores.SelectedRows.Count > 0)
+                {
+                    int idProveedor = Convert.ToInt32(dgvProveedores.CurrentRow.Cells[0].Value);
+                    proveedores.Eliminar(idProveedor);
+
+                    CargarProveedores();
+                    MessageBox.Show("Eliminado correctamente.", "Eliminado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                    MessageBox.Show("Seleccionar registro a eliminar.", "Seleccionar", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            CargarCampos(dgvProveedores.CurrentRow);
+        }
+
+        #endregion
+
+        #region "Helpers"
+        private void LimpiarCampos()
+        {
+            txtId.Clear();
+            txtNit.Clear();
+            txtProveedor.Clear();
+            txtTelefono.Clear();
+            txtRepresentante.Clear();
+        }
+
+        public void CargarCampos(DataGridViewRow fila)
+        {
+            LimpiarCampos();
+            // Copiar los valores de la fila seleccionada a los campos de texto.
+            txtId.Text = fila.Cells[0].Value.ToString();
+            txtNit.Text = fila.Cells[1].Value.ToString();
+            txtProveedor.Text = fila.Cells[2].Value.ToString();
+            txtTelefono.Text = fila.Cells[3].Value.ToString();
+            txtRepresentante.Text = fila.Cells[4].Value.ToString();
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            LimpiarCampos();
+        }
+
         #endregion
     }
 }
