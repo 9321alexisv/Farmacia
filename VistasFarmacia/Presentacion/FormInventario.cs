@@ -74,7 +74,7 @@ namespace VistasFarmacia.Forms
             DataGridViewRow fila = dgvProductos.CurrentRow;
             Proveedor proveedor = new()
             {
-                IdProveedor = Convert.ToInt32(fila.Cells[1].Value),
+                Nombre = fila.Cells[1].Value.ToString() ?? ""
             };
 
             Producto producto = new()
@@ -102,7 +102,7 @@ namespace VistasFarmacia.Forms
 
             // Consultar si eliminar o no
             DialogResult consulta = MessageBox.Show(
-                "Borrar el producto: " + dgvProductos.CurrentRow.Cells["nombre"].Value,
+                "Borrar el producto: " + dgvProductos.CurrentRow.Cells["producto"].Value,
                 "Confirmar Eliminación",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question);
@@ -110,7 +110,7 @@ namespace VistasFarmacia.Forms
             if (consulta != DialogResult.Yes) return;
 
             // Si se confirma la eliminacion
-            int productoSeleccionado = Convert.ToInt32(dgvProductos.CurrentRow.Cells["id_producto"].Value);
+            int productoSeleccionado = Convert.ToInt32(dgvProductos.CurrentRow.Cells[0].Value);
             bool resultado = productos.Eliminar(productoSeleccionado);
             if (resultado)
             {

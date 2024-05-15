@@ -11,6 +11,7 @@ namespace VistasFarmacia.Forms
 
         private readonly Producto _producto;
         int idProducto = 0;
+        string proveedor;
 
         public FormNuevoProducto(Producto producto)
         {
@@ -26,13 +27,27 @@ namespace VistasFarmacia.Forms
             txtPrecioVenta.Text = _producto.PrecioVenta.ToString() ?? "";
             txtStock.Text = _producto.Stock.ToString() ?? "";
 
-            if (idProducto != 0) lblTitulo.Text = "Actualizar Producto";
+            if (idProducto != 0)
+            {
+                lblTitulo.Text = "Actualizar Producto";
+                btnGuardar.Text = "Actualizar Producto";
+            }
+            proveedor = producto.ObjProveedor.Nombre.ToString();
         }
 
         private void FormNuevoProducto_Load(object sender, EventArgs e)
         {
             LoadTheme();
             ListarProveedores();
+
+            // Buscar el índice del proveedor 
+            int index = cmbProveedor.FindStringExact(proveedor);
+            // Verificar si se encontró el proveedor
+            if (index != -1)
+            {
+                // Seleccionar el proveedor en el ComboBox
+                cmbProveedor.SelectedIndex = index;
+            }
         }
 
         private void LoadTheme()
@@ -96,13 +111,13 @@ namespace VistasFarmacia.Forms
                 }
 
                 LimpiarCampos();
-                MessageBox.Show("Nuevo producto agregado correctamente.", "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Guardado", "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 this.Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al crear producto." + ex.Message + ex.StackTrace, "Error al crear", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error al crear o actualizar producto." + ex.Message + ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion

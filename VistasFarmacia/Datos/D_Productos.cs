@@ -10,13 +10,17 @@ namespace Farmacia.Datos
     {
         public DataTable Listar()
         {
-            ConexionDB conexion = new ConexionDB();
+            ConexionDB conexion = new();
             NpgsqlDataReader leer;
-            DataTable tabla = new DataTable();
+            DataTable tabla = new();
+            string query = "SELECT p.id_producto codigo, pro.proveedor, p.nombre producto, " +
+                "p.precio_compra, p.precio_venta, p.stock FROM producto p " +
+                "INNER JOIN proveedor pro ON p.id_proveedor = pro.id_proveedor " +
+                "WHERE p.estado = true;";
 
             try
             {
-                NpgsqlCommand comando = new NpgsqlCommand("select * from producto", conexion.AbrirConexion());
+                NpgsqlCommand comando = new(query, conexion.AbrirConexion());
                 leer = comando.ExecuteReader();
                 tabla.Load(leer);
                 return tabla;
