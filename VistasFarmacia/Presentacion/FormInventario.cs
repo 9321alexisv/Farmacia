@@ -11,6 +11,33 @@ namespace VistasFarmacia.Forms
         public FormInventario()
         {
             InitializeComponent();
+
+            // Columna a cambiar color
+            int columnIndex = 5;
+
+            // Manear el evento CellFormatting del DataGridView
+            dgvProductos.CellFormatting += (sender, e) =>
+            {
+                // Si la celda actual pertenece a la columna
+                if (e.ColumnIndex == columnIndex && e.RowIndex >= 0)
+                {
+                    // Obtener el valor de la celda actual
+                    int valorCelda;
+                    if (int.TryParse(e.Value.ToString(), out valorCelda))
+                    {
+                        // Si el valor es menor que 5, pintar la celda en rojo
+                        if (valorCelda < 5 )
+                        {
+                            e.CellStyle.BackColor = Color.Red;
+                        }
+                        if(valorCelda > 5 && valorCelda < 20) 
+                        { 
+                            e.CellStyle.BackColor = Color.Orange;
+                            e.CellStyle.ForeColor = Color.Black;
+                        }
+                    }
+                }
+            };
         }
 
         private void FormInventario_Load(object sender, EventArgs e)

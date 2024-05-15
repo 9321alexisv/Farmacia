@@ -32,7 +32,8 @@ namespace VistasFarmacia.Forms
                 lblTitulo.Text = "Actualizar Producto";
                 btnGuardar.Text = "Actualizar Producto";
             }
-            proveedor = producto.ObjProveedor.Nombre.ToString();
+
+            proveedor = producto.ObjProveedor?.Nombre?.ToString() ?? "NA";
         }
 
         private void FormNuevoProducto_Load(object sender, EventArgs e)

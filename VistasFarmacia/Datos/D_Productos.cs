@@ -81,12 +81,14 @@ namespace Farmacia.Datos
             ConexionDB conexion = new();
             NpgsqlDataReader leer;
             DataTable tabla = new();
+            string sentencia = "SELECT p.id_producto codigo, pro.proveedor, p.nombre producto, " +
+                "p.precio_compra, p.precio_venta, p.stock FROM producto p " +
+                "INNER JOIN proveedor pro ON p.id_proveedor = pro.id_proveedor " +
+                $"WHERE UPPER(p.nombre) LIKE '%{query.ToUpper()}%' AND p.estado = true;";
 
             try
             {
-                NpgsqlCommand comando = new(
-                    $"select * from producto where nombre LIKE '%{query}%';", 
-                    conexion.AbrirConexion()
+                NpgsqlCommand comando = new(sentencia, conexion.AbrirConexion()
                 );
                 leer = comando.ExecuteReader();
                 tabla.Load(leer);
