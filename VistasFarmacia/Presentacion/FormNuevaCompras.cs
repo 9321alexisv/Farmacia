@@ -1,7 +1,6 @@
 ﻿
 using Farmacia.Datos;
 using Farmacia.Presentacion;
-using VistasFarmacia.Datos;
 using VistasFarmacia.Entidad;
 
 namespace VistasFarmacia.Forms
@@ -63,8 +62,8 @@ namespace VistasFarmacia.Forms
                 D_Compras compras = new();
 
                 int idCompra = compras.CrearCompra();
+                compras.ActualizarStockProductos(idCompra, dgvProductos);
                 compras.InsertarDetalleCompra(idCompra, dgvProductos);
-
             }
             catch (Exception ex)
             {
