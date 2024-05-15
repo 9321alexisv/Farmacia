@@ -75,10 +75,10 @@ namespace VistasFarmacia.Forms
                 int rowIndex = dgvVentas.Rows.Add(
                     $"VENTA #{venta.IdVenta}",
                     $"CLIENTE: {venta.Cliente}",
-                    $"FECHA: {venta.Fecha}",
-                    "",
-                    "",
-                    $"TOTAL: {totalVenta}"
+                    "FECHA",
+                    venta.Fecha.ToString(),
+                    "TOTAL",
+                    totalVenta
                  );
                 dgvVentas.Rows[rowIndex].DefaultCellStyle.BackColor = Color.Green;
                 dgvVentas.Rows[rowIndex].Height = 50;
