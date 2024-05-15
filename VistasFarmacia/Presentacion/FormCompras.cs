@@ -59,9 +59,9 @@ namespace VistasFarmacia.Forms
                 // Encabezado de cada venta dentro de la tabla
                 int rowIndex = dgvCompras.Rows.Add(
                     $"COMPRA #{compra.IdCompra}",
-                    $"PROVEEDOR: {compra.Proveedor}",
                     $"FECHA: {compra.Fecha}",
-                    $"TOTAL: {totalCompra}"
+                    "TOTAL",
+                    totalCompra
                  );
                 dgvCompras.Rows[rowIndex].DefaultCellStyle.BackColor = Color.Green;
                 dgvCompras.Rows[rowIndex].Height = 50;

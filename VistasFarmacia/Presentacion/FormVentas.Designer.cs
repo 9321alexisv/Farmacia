@@ -31,6 +31,7 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             labelTablaVentas = new Label();
             btnReporte = new Button();
             panel1 = new Panel();
@@ -57,7 +58,7 @@
             // 
             labelTablaVentas.AutoSize = true;
             labelTablaVentas.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            labelTablaVentas.Location = new Point(152, 48);
+            labelTablaVentas.Location = new Point(60, 40);
             labelTablaVentas.Name = "labelTablaVentas";
             labelTablaVentas.Size = new Size(283, 41);
             labelTablaVentas.TabIndex = 1;
@@ -67,7 +68,7 @@
             // 
             btnReporte.FlatStyle = FlatStyle.Flat;
             btnReporte.Image = Farmacia.Properties.Resources.reportes;
-            btnReporte.Location = new Point(990, 681);
+            btnReporte.Location = new Point(867, 681);
             btnReporte.Margin = new Padding(3, 4, 3, 4);
             btnReporte.Name = "btnReporte";
             btnReporte.Size = new Size(212, 89);
@@ -83,10 +84,10 @@
             panel1.Controls.Add(labelAcumulado);
             panel1.Controls.Add(label3);
             panel1.Controls.Add(lblVentas);
-            panel1.Location = new Point(706, 16);
+            panel1.Location = new Point(1113, 274);
             panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(190, 96);
+            panel1.Size = new Size(260, 96);
             panel1.TabIndex = 5;
             // 
             // labelAcumulado
@@ -116,11 +117,11 @@
             lblVentas.AutoSize = true;
             lblVentas.Font = new Font("Segoe UI", 18F, FontStyle.Bold | FontStyle.Italic);
             lblVentas.ForeColor = Color.LightGreen;
-            lblVentas.Location = new Point(51, 42);
+            lblVentas.Location = new Point(98, 42);
             lblVentas.Name = "lblVentas";
-            lblVentas.Size = new Size(136, 41);
+            lblVentas.Size = new Size(77, 41);
             lblVentas.TabIndex = 1;
-            lblVentas.Text = "1,000.00";
+            lblVentas.Text = "00.0";
             // 
             // dgvVentas
             // 
@@ -150,24 +151,32 @@
             dgvVentas.DefaultCellStyle = dataGridViewCellStyle2;
             dgvVentas.EnableHeadersVisualStyles = false;
             dgvVentas.GridColor = Color.FromArgb(49, 49, 68);
-            dgvVentas.Location = new Point(152, 140);
+            dgvVentas.Location = new Point(60, 136);
             dgvVentas.Margin = new Padding(3, 4, 3, 4);
             dgvVentas.Name = "dgvVentas";
             dgvVentas.ReadOnly = true;
             dgvVentas.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Control;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dgvVentas.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dgvVentas.RowHeadersVisible = false;
             dgvVentas.RowHeadersWidth = 15;
-            dataGridViewCellStyle3.BackColor = Color.FromArgb(49, 49, 68);
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle3.ForeColor = Color.White;
-            dataGridViewCellStyle3.SelectionBackColor = Color.SteelBlue;
-            dgvVentas.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.BackColor = Color.FromArgb(49, 49, 68);
+            dataGridViewCellStyle4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle4.ForeColor = Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = Color.SteelBlue;
+            dgvVentas.RowsDefaultCellStyle = dataGridViewCellStyle4;
             dgvVentas.RowTemplate.DefaultCellStyle.BackColor = Color.FromArgb(49, 49, 68);
             dgvVentas.RowTemplate.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             dgvVentas.RowTemplate.DefaultCellStyle.ForeColor = Color.White;
             dgvVentas.RowTemplate.DefaultCellStyle.SelectionBackColor = Color.SteelBlue;
             dgvVentas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvVentas.Size = new Size(1050, 525);
+            dgvVentas.Size = new Size(1019, 525);
             dgvVentas.TabIndex = 7;
             // 
             // Codigo
@@ -218,10 +227,10 @@
             panel2.Controls.Add(label1);
             panel2.Controls.Add(label2);
             panel2.Controls.Add(lblGanancias);
-            panel2.Location = new Point(920, 13);
+            panel2.Location = new Point(1113, 136);
             panel2.Margin = new Padding(3, 4, 3, 4);
             panel2.Name = "panel2";
-            panel2.Size = new Size(190, 96);
+            panel2.Size = new Size(248, 96);
             panel2.TabIndex = 6;
             // 
             // label1
@@ -251,18 +260,18 @@
             lblGanancias.AutoSize = true;
             lblGanancias.Font = new Font("Segoe UI", 18F, FontStyle.Bold | FontStyle.Italic);
             lblGanancias.ForeColor = Color.LightGreen;
-            lblGanancias.Location = new Point(51, 42);
+            lblGanancias.Location = new Point(98, 42);
             lblGanancias.Name = "lblGanancias";
-            lblGanancias.Size = new Size(136, 41);
+            lblGanancias.Size = new Size(77, 41);
             lblGanancias.TabIndex = 1;
-            lblGanancias.Text = "1,000.00";
+            lblGanancias.Text = "00.0";
             // 
             // FormVentas
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(39, 39, 58);
-            ClientSize = new Size(1298, 783);
+            ClientSize = new Size(1399, 783);
             Controls.Add(panel2);
             Controls.Add(dgvVentas);
             Controls.Add(panel1);
