@@ -11,39 +11,14 @@ namespace VistasFarmacia.Forms
         public FormInventario()
         {
             InitializeComponent();
-
-            // Columna a cambiar color
-            int columnIndex = 5;
-
-            // Manear el evento CellFormatting del DataGridView
-            dgvProductos.CellFormatting += (sender, e) =>
-            {
-                // Si la celda actual pertenece a la columna
-                if (e.ColumnIndex == columnIndex && e.RowIndex >= 0)
-                {
-                    // Obtener el valor de la celda actual
-                    int valorCelda;
-                    if (int.TryParse(e.Value.ToString(), out valorCelda))
-                    {
-                        // Si el valor es menor que 5, pintar la celda en rojo
-                        if (valorCelda < 5 )
-                        {
-                            e.CellStyle.BackColor = Color.Red;
-                        }
-                        if(valorCelda > 5 && valorCelda < 20) 
-                        { 
-                            e.CellStyle.BackColor = Color.Orange;
-                            e.CellStyle.ForeColor = Color.Black;
-                        }
-                    }
-                }
-            };
+            dgvProductos.CellFormatting += dgvProductos_CellFormatting!;
         }
 
         private void FormInventario_Load(object sender, EventArgs e)
         {
             LoadTheme();
             ListarProductos();
+            CalcularTotal();
         }
         private void LoadTheme()
         {
@@ -158,7 +133,8 @@ namespace VistasFarmacia.Forms
             {
                 dgvProductos.DataSource = productos.BuscarPorNombre(txtQuery.Text);
 
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show("Error al buscar. " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -168,7 +144,53 @@ namespace VistasFarmacia.Forms
         {
             ListarProductos();
         }
-    }
-    #endregion
 
+        #endregion
+
+        #region "Helpers
+        private void CalcularTotal()
+        {
+            decimal total = 0;
+
+            // Multiplicar la columna 2 con la columna 3 para todas las filas
+            foreach (DataGridViewRow row in dgvProductos.Rows)
+            {
+                decimal stock = Convert.ToDecimal(row.Cells["stock"].Value);
+                decimal precioCompra = Convert.ToDecimal(row.Cells["precio_compra"].Value);
+
+                total += stock * precioCompra;
+            }
+
+            // Asignar el total al Label
+            lblTotal.Text = total.ToString();
+        }
+
+        // Alerta de Stock
+        private void dgvProductos_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            // Columna a cambiar color
+            int columnIndex = 5;
+
+            // Si la celda actual pertenece a la columna
+            if (e.ColumnIndex == columnIndex && e.RowIndex >= 0)
+            {
+                // Obtener el valor de la celda actual
+                int valorCelda;
+                if (int.TryParse(e.Value?.ToString(), out valorCelda))
+                {
+                    // Si el valor es menor que 5, pintar la celda en rojo
+                    if (valorCelda <= 5)
+                    {
+                        e.CellStyle.BackColor = Color.Red;
+                    }
+                    else if (valorCelda > 5 && valorCelda < 20)
+                    {
+                        e.CellStyle.BackColor = Color.Orange;
+                        e.CellStyle.ForeColor = Color.Black;
+                    }
+                }
+            }
+        }
+        #endregion
+    }
 }

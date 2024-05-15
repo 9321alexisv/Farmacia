@@ -145,7 +145,7 @@
             // 
             btnGuardar.FlatStyle = FlatStyle.Flat;
             btnGuardar.Image = Farmacia.Properties.Resources.ADD;
-            btnGuardar.Location = new Point(212, 488);
+            btnGuardar.Location = new Point(337, 488);
             btnGuardar.Margin = new Padding(3, 4, 3, 4);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(170, 83);
@@ -159,7 +159,7 @@
             // 
             btnLimpiar.FlatStyle = FlatStyle.Flat;
             btnLimpiar.Image = Farmacia.Properties.Resources.cleaner;
-            btnLimpiar.Location = new Point(438, 488);
+            btnLimpiar.Location = new Point(88, 488);
             btnLimpiar.Margin = new Padding(3, 4, 3, 4);
             btnLimpiar.Name = "btnLimpiar";
             btnLimpiar.Size = new Size(127, 83);

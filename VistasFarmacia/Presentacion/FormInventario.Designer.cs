@@ -41,7 +41,7 @@ namespace VistasFarmacia.Forms
             label3 = new Label();
             panel2 = new Panel();
             labelAcumulado = new Label();
-            label2 = new Label();
+            lblTotal = new Label();
             btnReporte = new Button();
             btnBuscar = new Button();
             txtQuery = new TextBox();
@@ -144,20 +144,19 @@ namespace VistasFarmacia.Forms
             panel1.BackColor = Color.FromArgb(49, 49, 68);
             panel1.Controls.Add(label3);
             panel1.Controls.Add(panel2);
-            panel1.Controls.Add(label2);
-            panel1.Location = new Point(1005, 27);
+            panel1.Controls.Add(lblTotal);
+            panel1.Location = new Point(1001, 25);
             panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
             panel1.Size = new Size(237, 96);
             panel1.TabIndex = 7;
-            panel1.Visible = false;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 18F, FontStyle.Bold | FontStyle.Italic);
             label3.ForeColor = Color.LightGreen;
-            label3.Location = new Point(0, 34);
+            label3.Location = new Point(0, 41);
             label3.Name = "label3";
             label3.Size = new Size(41, 41);
             label3.TabIndex = 2;
@@ -183,16 +182,16 @@ namespace VistasFarmacia.Forms
             labelAcumulado.TabIndex = 0;
             labelAcumulado.Text = "TOTAL COMPRA";
             // 
-            // label2
+            // lblTotal
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 18F, FontStyle.Bold | FontStyle.Italic);
-            label2.ForeColor = Color.LightGreen;
-            label2.Location = new Point(101, 35);
-            label2.Name = "label2";
-            label2.Size = new Size(136, 41);
-            label2.TabIndex = 1;
-            label2.Text = "1,000.00";
+            lblTotal.AutoSize = true;
+            lblTotal.Font = new Font("Segoe UI", 18F, FontStyle.Bold | FontStyle.Italic);
+            lblTotal.ForeColor = Color.LightGreen;
+            lblTotal.Location = new Point(66, 38);
+            lblTotal.Name = "lblTotal";
+            lblTotal.Size = new Size(77, 41);
+            lblTotal.TabIndex = 1;
+            lblTotal.Text = "0.00";
             // 
             // btnReporte
             // 
@@ -280,7 +279,7 @@ namespace VistasFarmacia.Forms
         private Button btnEliminar;
         private Panel panel1;
         private Label label3;
-        private Label label2;
+        private Label lblTotal;
         private Label labelAcumulado;
         private Panel panel2;
         private Button btnReporte;

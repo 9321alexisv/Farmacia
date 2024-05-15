@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             labelClientes = new Label();
             dgvProveedores = new DataGridView();
             labelId = new Label();
@@ -40,9 +40,9 @@
             labelNit = new Label();
             btnGuardar = new Button();
             txtTelefono = new TextBox();
-            label1 = new Label();
+            lblTelefono = new Label();
             txtRepresentante = new TextBox();
-            label2 = new Label();
+            lblRepresentante = new Label();
             btnLimpiar = new Button();
             btnEliminar = new Button();
             btnEditar = new Button();
@@ -69,23 +69,23 @@
             dgvProveedores.BackgroundColor = Color.FromArgb(49, 49, 68);
             dgvProveedores.BorderStyle = BorderStyle.None;
             dgvProveedores.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Control;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dgvProveedores.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Control;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dgvProveedores.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dgvProveedores.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(49, 49, 68);
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = Color.SteelBlue;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            dgvProveedores.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = Color.FromArgb(49, 49, 68);
+            dataGridViewCellStyle4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle4.ForeColor = Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = Color.SteelBlue;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
+            dgvProveedores.DefaultCellStyle = dataGridViewCellStyle4;
             dgvProveedores.EnableHeadersVisualStyles = false;
             dgvProveedores.GridColor = Color.FromArgb(49, 49, 68);
             dgvProveedores.Location = new Point(49, 124);
@@ -180,16 +180,16 @@
             txtTelefono.Size = new Size(250, 27);
             txtTelefono.TabIndex = 15;
             // 
-            // label1
+            // lblTelefono
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            label1.ForeColor = Color.White;
-            label1.Location = new Point(969, 324);
-            label1.Name = "label1";
-            label1.Size = new Size(99, 28);
-            label1.TabIndex = 14;
-            label1.Text = "Teléfono:";
+            lblTelefono.AutoSize = true;
+            lblTelefono.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            lblTelefono.ForeColor = Color.White;
+            lblTelefono.Location = new Point(969, 324);
+            lblTelefono.Name = "lblTelefono";
+            lblTelefono.Size = new Size(99, 28);
+            lblTelefono.TabIndex = 14;
+            lblTelefono.Text = "Teléfono:";
             // 
             // txtRepresentante
             // 
@@ -199,16 +199,16 @@
             txtRepresentante.Size = new Size(212, 27);
             txtRepresentante.TabIndex = 17;
             // 
-            // label2
+            // lblRepresentante
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            label2.ForeColor = Color.White;
-            label2.Location = new Point(969, 392);
-            label2.Name = "label2";
-            label2.Size = new Size(154, 28);
-            label2.TabIndex = 16;
-            label2.Text = "Representante:";
+            lblRepresentante.AutoSize = true;
+            lblRepresentante.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            lblRepresentante.ForeColor = Color.White;
+            lblRepresentante.Location = new Point(969, 392);
+            lblRepresentante.Name = "lblRepresentante";
+            lblRepresentante.Size = new Size(154, 28);
+            lblRepresentante.TabIndex = 16;
+            lblRepresentante.Text = "Representante:";
             // 
             // btnLimpiar
             // 
@@ -257,14 +257,14 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(39, 39, 58);
-            ClientSize = new Size(1373, 800);
+            ClientSize = new Size(1382, 803);
             Controls.Add(btnEditar);
             Controls.Add(btnEliminar);
             Controls.Add(btnLimpiar);
             Controls.Add(txtRepresentante);
-            Controls.Add(label2);
+            Controls.Add(lblRepresentante);
             Controls.Add(txtTelefono);
-            Controls.Add(label1);
+            Controls.Add(lblTelefono);
             Controls.Add(btnGuardar);
             Controls.Add(txtNit);
             Controls.Add(labelNit);
@@ -295,9 +295,9 @@
         private Label labelNit;
         private Button btnGuardar;
         private TextBox txtTelefono;
-        private Label label1;
+        private Label lblTelefono;
         private TextBox txtRepresentante;
-        private Label label2;
+        private Label lblRepresentante;
         private Button btnLimpiar;
         private Button btnEliminar;
         private Button btnEditar;

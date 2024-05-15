@@ -31,10 +31,13 @@ namespace VistasFarmacia.Forms
                     btn.FlatAppearance.BorderColor = ThemeColor.SecondaryColor;
                 }
             }
+
             labelClientes.ForeColor = ThemeColor.PrimaryColor;
             labelId.ForeColor = ThemeColor.SecondaryColor;
             labelNombre.ForeColor = ThemeColor.SecondaryColor;
             labelNit.ForeColor = ThemeColor.SecondaryColor;
+            lblTelefono.ForeColor = ThemeColor.SecondaryColor;
+
             dgvClientes.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dgvClientes.ColumnHeadersDefaultCellStyle.BackColor = ThemeColor.SecondaryColor;
             dgvClientes.RowHeadersDefaultCellStyle.ForeColor = Color.White;
