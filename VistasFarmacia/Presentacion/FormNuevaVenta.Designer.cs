@@ -55,23 +55,24 @@
             // 
             // dgvNuevaVenta
             // 
+            dgvNuevaVenta.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dgvNuevaVenta.BackgroundColor = Color.FromArgb(49, 49, 68);
             dgvNuevaVenta.BorderStyle = BorderStyle.None;
             dgvNuevaVenta.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dgvNuevaVenta.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dgvNuevaVenta.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dgvNuevaVenta.ColumnHeadersHeight = 20;
+            dgvNuevaVenta.ColumnHeadersHeight = 30;
             dgvNuevaVenta.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dgvNuevaVenta.Columns.AddRange(new DataGridViewColumn[] { Codigo, cantidad, Producto, precio, PrecioCompra, Subtotal });
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(49, 49, 68);
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dataGridViewCellStyle2.ForeColor = Color.White;
             dataGridViewCellStyle2.SelectionBackColor = SystemColors.GradientActiveCaption;
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
@@ -91,6 +92,7 @@
             dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
             dgvNuevaVenta.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dgvNuevaVenta.RowHeadersVisible = false;
             dgvNuevaVenta.RowHeadersWidth = 25;
             dgvNuevaVenta.Size = new Size(1088, 520);
             dgvNuevaVenta.TabIndex = 0;
@@ -101,48 +103,48 @@
             Codigo.HeaderText = "Codigo";
             Codigo.MinimumWidth = 6;
             Codigo.Name = "Codigo";
-            Codigo.Width = 65;
+            Codigo.Width = 104;
             // 
             // cantidad
             // 
             cantidad.HeaderText = "Cantidad";
             cantidad.MinimumWidth = 6;
             cantidad.Name = "cantidad";
-            cantidad.Width = 90;
+            cantidad.Width = 118;
             // 
             // Producto
             // 
             Producto.HeaderText = "Producto";
             Producto.MinimumWidth = 6;
             Producto.Name = "Producto";
-            Producto.Width = 250;
+            Producto.Width = 120;
             // 
             // precio
             // 
             precio.HeaderText = "Precio";
             precio.MinimumWidth = 6;
             precio.Name = "precio";
-            precio.Width = 125;
+            precio.Width = 93;
             // 
             // PrecioCompra
             // 
             PrecioCompra.HeaderText = "Precio Compra";
             PrecioCompra.MinimumWidth = 6;
             PrecioCompra.Name = "PrecioCompra";
-            PrecioCompra.Width = 125;
+            PrecioCompra.Width = 168;
             // 
             // Subtotal
             // 
             Subtotal.HeaderText = "Subtotal";
             Subtotal.MinimumWidth = 6;
             Subtotal.Name = "Subtotal";
-            Subtotal.Width = 125;
+            Subtotal.Width = 114;
             // 
             // labelTablaIngresoVentas
             // 
             labelTablaIngresoVentas.AutoSize = true;
             labelTablaIngresoVentas.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            labelTablaIngresoVentas.Location = new Point(91, 17);
+            labelTablaIngresoVentas.Location = new Point(96, 24);
             labelTablaIngresoVentas.Name = "labelTablaIngresoVentas";
             labelTablaIngresoVentas.Size = new Size(196, 41);
             labelTablaIngresoVentas.TabIndex = 1;
@@ -152,12 +154,12 @@
             // 
             btnLimpiar.FlatStyle = FlatStyle.Flat;
             btnLimpiar.Image = Farmacia.Properties.Resources.cleaner;
-            btnLimpiar.Location = new Point(1014, 719);
+            btnLimpiar.Location = new Point(96, 719);
             btnLimpiar.Margin = new Padding(3, 4, 3, 4);
             btnLimpiar.Name = "btnLimpiar";
             btnLimpiar.Size = new Size(170, 85);
             btnLimpiar.TabIndex = 2;
-            btnLimpiar.Text = "Limpiar Venta";
+            btnLimpiar.Text = "Cancelar Venta";
             btnLimpiar.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnLimpiar.UseVisualStyleBackColor = true;
             btnLimpiar.Click += btnLimpiar_Click;
@@ -166,7 +168,7 @@
             // 
             btnGuardar.FlatStyle = FlatStyle.Flat;
             btnGuardar.Image = Farmacia.Properties.Resources.save;
-            btnGuardar.Location = new Point(837, 719);
+            btnGuardar.Location = new Point(1011, 719);
             btnGuardar.Margin = new Padding(3, 4, 3, 4);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(170, 85);
@@ -191,10 +193,10 @@
             panel1.BackColor = Color.FromArgb(49, 49, 68);
             panel1.Controls.Add(label3);
             panel1.Controls.Add(lblTotal);
-            panel1.Location = new Point(994, 16);
+            panel1.Location = new Point(933, 44);
             panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(190, 96);
+            panel1.Size = new Size(248, 96);
             panel1.TabIndex = 14;
             // 
             // label3
@@ -202,7 +204,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 18F, FontStyle.Bold | FontStyle.Italic);
             label3.ForeColor = Color.LightGreen;
-            label3.Location = new Point(-1, 35);
+            label3.Location = new Point(0, 55);
             label3.Name = "label3";
             label3.Size = new Size(41, 41);
             label3.TabIndex = 2;
@@ -213,11 +215,11 @@
             lblTotal.AutoSize = true;
             lblTotal.Font = new Font("Segoe UI", 18F, FontStyle.Bold | FontStyle.Italic);
             lblTotal.ForeColor = Color.LightGreen;
-            lblTotal.Location = new Point(54, 40);
+            lblTotal.Location = new Point(61, 55);
             lblTotal.Name = "lblTotal";
-            lblTotal.Size = new Size(136, 41);
+            lblTotal.Size = new Size(77, 41);
             lblTotal.TabIndex = 1;
-            lblTotal.Text = "1,000.00";
+            lblTotal.Text = "0.00";
             // 
             // labelAcumulado
             // 
@@ -233,10 +235,10 @@
             // panel2
             // 
             panel2.Controls.Add(labelAcumulado);
-            panel2.Location = new Point(993, 17);
+            panel2.Location = new Point(933, 45);
             panel2.Margin = new Padding(3, 4, 3, 4);
             panel2.Name = "panel2";
-            panel2.Size = new Size(191, 35);
+            panel2.Size = new Size(248, 35);
             panel2.TabIndex = 15;
             // 
             // cmbClientes
