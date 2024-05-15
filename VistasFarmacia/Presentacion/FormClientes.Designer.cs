@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             labelClientes = new Label();
             dgvClientes = new DataGridView();
@@ -40,6 +41,9 @@
             label1 = new Label();
             txtNit = new TextBox();
             labelNit = new Label();
+            btnEditar = new Button();
+            btnEliminar = new Button();
+            btnCancelar = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvClientes).BeginInit();
             SuspendLayout();
             // 
@@ -59,13 +63,22 @@
             dgvClientes.AllowUserToAddRows = false;
             dgvClientes.AllowUserToDeleteRows = false;
             dgvClientes.AllowUserToOrderColumns = true;
+            dgvClientes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvClientes.BackgroundColor = Color.FromArgb(49, 49, 68);
             dgvClientes.BorderStyle = BorderStyle.None;
             dgvClientes.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dgvClientes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(49, 49, 68);
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dataGridViewCellStyle2.ForeColor = Color.White;
             dataGridViewCellStyle2.SelectionBackColor = Color.SteelBlue;
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
@@ -75,10 +88,13 @@
             dgvClientes.GridColor = Color.FromArgb(49, 49, 68);
             dgvClientes.Location = new Point(53, 106);
             dgvClientes.Margin = new Padding(3, 4, 3, 4);
+            dgvClientes.MultiSelect = false;
             dgvClientes.Name = "dgvClientes";
             dgvClientes.ReadOnly = true;
             dgvClientes.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dgvClientes.RowHeadersVisible = false;
             dgvClientes.RowHeadersWidth = 51;
+            dgvClientes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvClientes.Size = new Size(682, 556);
             dgvClientes.TabIndex = 1;
             // 
@@ -125,15 +141,15 @@
             // 
             btnGuardar.FlatStyle = FlatStyle.Flat;
             btnGuardar.Image = Farmacia.Properties.Resources.ADD;
-            btnGuardar.Location = new Point(885, 482);
+            btnGuardar.Location = new Point(985, 371);
             btnGuardar.Margin = new Padding(3, 4, 3, 4);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(161, 72);
+            btnGuardar.Size = new Size(150, 80);
             btnGuardar.TabIndex = 13;
-            btnGuardar.Text = "Guardar Cliente";
+            btnGuardar.Text = "Guardar";
             btnGuardar.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnGuardar.UseVisualStyleBackColor = true;
-            btnGuardar.Click += buttonSaveClient_Click;
+            btnGuardar.Click += btnGuardar_Click;
             // 
             // txtTelefono
             // 
@@ -173,12 +189,57 @@
             labelNit.TabIndex = 16;
             labelNit.Text = "NIT:";
             // 
+            // btnEditar
+            // 
+            btnEditar.FlatStyle = FlatStyle.Flat;
+            btnEditar.Image = Farmacia.Properties.Resources.edit;
+            btnEditar.Location = new Point(770, 582);
+            btnEditar.Margin = new Padding(3, 4, 3, 4);
+            btnEditar.Name = "btnEditar";
+            btnEditar.Size = new Size(150, 80);
+            btnEditar.TabIndex = 18;
+            btnEditar.Text = "Editar";
+            btnEditar.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnEditar.UseVisualStyleBackColor = true;
+            btnEditar.Click += btnEditar_Click;
+            // 
+            // btnEliminar
+            // 
+            btnEliminar.FlatStyle = FlatStyle.Flat;
+            btnEliminar.Image = Farmacia.Properties.Resources.borrar;
+            btnEliminar.Location = new Point(985, 582);
+            btnEliminar.Margin = new Padding(3, 4, 3, 4);
+            btnEliminar.Name = "btnEliminar";
+            btnEliminar.Size = new Size(150, 80);
+            btnEliminar.TabIndex = 19;
+            btnEliminar.Text = "Eliminar";
+            btnEliminar.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.Click += btnEliminar_Click;
+            // 
+            // btnCancelar
+            // 
+            btnCancelar.FlatStyle = FlatStyle.Flat;
+            btnCancelar.Image = Farmacia.Properties.Resources.cleaner;
+            btnCancelar.Location = new Point(770, 371);
+            btnCancelar.Margin = new Padding(3, 4, 3, 4);
+            btnCancelar.Name = "btnCancelar";
+            btnCancelar.Size = new Size(150, 80);
+            btnCancelar.TabIndex = 20;
+            btnCancelar.Text = "Cancelar";
+            btnCancelar.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.Click += btnCancelar_Click;
+            // 
             // FormClientes
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(39, 39, 58);
             ClientSize = new Size(1182, 703);
+            Controls.Add(btnCancelar);
+            Controls.Add(btnEliminar);
+            Controls.Add(btnEditar);
             Controls.Add(txtNit);
             Controls.Add(labelNit);
             Controls.Add(txtTelefono);
@@ -212,5 +273,8 @@
         private Label label1;
         private TextBox txtNit;
         private Label labelNit;
+        private Button btnEditar;
+        private Button btnEliminar;
+        private Button btnCancelar;
     }
 }

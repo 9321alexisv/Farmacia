@@ -1,4 +1,5 @@
-﻿using Npgsql;
+﻿
+using Npgsql;
 using System.Data;
 
 namespace VistasFarmacia.Datos
@@ -55,5 +56,52 @@ namespace VistasFarmacia.Datos
             }
         }
 
+        public void Editar(int idCliente, string nit, string nombre, string telefono)
+        {
+            ConexionDB conexion = new();
+
+            try
+            {
+                using NpgsqlConnection conn = conexion.AbrirConexion();
+                using NpgsqlCommand cmd = new("UPDATE cliente SET nit = @nit, nombre = @nombre, telefono = @telefono WHERE id_cliente = @idCliente", conn);
+                cmd.Parameters.AddWithValue("@nit", nit);
+                cmd.Parameters.AddWithValue("@nombre", nombre);
+                cmd.Parameters.AddWithValue("@telefono", telefono);
+                cmd.Parameters.AddWithValue("@idCliente", idCliente);
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (NpgsqlException ex)
+            {
+                throw new Exception("Error al actualizar el cliente en la base de datos.", ex);
+            }
+            finally
+            {
+                conexion.CerrarConexion();
+            }
+        }
+
+        // Eliminado logico
+        public void Eliminar(int idCliente)
+        {
+            ConexionDB conexion = new();
+
+            try
+            {
+                using NpgsqlConnection conn = conexion.AbrirConexion();
+                using NpgsqlCommand cmd = new("UPDATE cliente SET estado = false WHERE id_cliente = @idCliente", conn);
+                cmd.Parameters.AddWithValue("@idCliente", idCliente);
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (NpgsqlException ex)
+            {
+                throw new Exception("Error al borrar el cliente en la base de datos.", ex);
+            }
+            finally
+            {
+                conexion.CerrarConexion();
+            }
+        }
     }
 }
