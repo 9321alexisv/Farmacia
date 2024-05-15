@@ -64,6 +64,7 @@ namespace VistasFarmacia.Forms
 
                 int idCliente = Convert.ToInt32(cmbClientes.SelectedValue);
                 int idVenta = ventas.CrearVenta(idCliente);
+                ventas.ActualizarStockProductos(idVenta, dgvNuevaVenta);
                 ventas.InsertarDetalleVenta(idVenta, dgvNuevaVenta);
             }
             catch (Exception ex)
@@ -93,6 +94,7 @@ namespace VistasFarmacia.Forms
                     if (producto != null)
                     {
                         dgvNuevaVenta.Rows[e.RowIndex].Cells["Producto"].Value = producto.Nombre;
+                        dgvNuevaVenta.Rows[e.RowIndex].Cells["Stock"].Value = producto.Stock;
                         dgvNuevaVenta.Rows[e.RowIndex].Cells["Precio"].Value = producto.PrecioVenta;
                         dgvNuevaVenta.Rows[e.RowIndex].Cells["PrecioCompra"].Value = producto.PrecioCompra;
                         dgvNuevaVenta.Rows[e.RowIndex].Cells["Cantidad"].Value = 1;

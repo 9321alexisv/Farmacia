@@ -32,12 +32,6 @@
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             dgvNuevaVenta = new DataGridView();
-            Codigo = new DataGridViewTextBoxColumn();
-            cantidad = new DataGridViewTextBoxColumn();
-            Producto = new DataGridViewTextBoxColumn();
-            precio = new DataGridViewTextBoxColumn();
-            PrecioCompra = new DataGridViewTextBoxColumn();
-            Subtotal = new DataGridViewTextBoxColumn();
             labelTablaIngresoVentas = new Label();
             btnLimpiar = new Button();
             btnGuardar = new Button();
@@ -48,6 +42,13 @@
             labelAcumulado = new Label();
             panel2 = new Panel();
             cmbClientes = new ComboBox();
+            Codigo = new DataGridViewTextBoxColumn();
+            cantidad = new DataGridViewTextBoxColumn();
+            Producto = new DataGridViewTextBoxColumn();
+            Stock = new DataGridViewTextBoxColumn();
+            precio = new DataGridViewTextBoxColumn();
+            PrecioCompra = new DataGridViewTextBoxColumn();
+            Subtotal = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dgvNuevaVenta).BeginInit();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -69,7 +70,7 @@
             dgvNuevaVenta.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvNuevaVenta.ColumnHeadersHeight = 30;
             dgvNuevaVenta.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvNuevaVenta.Columns.AddRange(new DataGridViewColumn[] { Codigo, cantidad, Producto, precio, PrecioCompra, Subtotal });
+            dgvNuevaVenta.Columns.AddRange(new DataGridViewColumn[] { Codigo, cantidad, Producto, Stock, precio, PrecioCompra, Subtotal });
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(49, 49, 68);
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -97,48 +98,6 @@
             dgvNuevaVenta.Size = new Size(1088, 520);
             dgvNuevaVenta.TabIndex = 0;
             dgvNuevaVenta.CellEndEdit += dgvNuevaVenta_CellEndEdit;
-            // 
-            // Codigo
-            // 
-            Codigo.HeaderText = "Codigo";
-            Codigo.MinimumWidth = 6;
-            Codigo.Name = "Codigo";
-            Codigo.Width = 104;
-            // 
-            // cantidad
-            // 
-            cantidad.HeaderText = "Cantidad";
-            cantidad.MinimumWidth = 6;
-            cantidad.Name = "cantidad";
-            cantidad.Width = 118;
-            // 
-            // Producto
-            // 
-            Producto.HeaderText = "Producto";
-            Producto.MinimumWidth = 6;
-            Producto.Name = "Producto";
-            Producto.Width = 120;
-            // 
-            // precio
-            // 
-            precio.HeaderText = "Precio";
-            precio.MinimumWidth = 6;
-            precio.Name = "precio";
-            precio.Width = 93;
-            // 
-            // PrecioCompra
-            // 
-            PrecioCompra.HeaderText = "Precio Compra";
-            PrecioCompra.MinimumWidth = 6;
-            PrecioCompra.Name = "PrecioCompra";
-            PrecioCompra.Width = 168;
-            // 
-            // Subtotal
-            // 
-            Subtotal.HeaderText = "Subtotal";
-            Subtotal.MinimumWidth = 6;
-            Subtotal.Name = "Subtotal";
-            Subtotal.Width = 114;
             // 
             // labelTablaIngresoVentas
             // 
@@ -250,6 +209,56 @@
             cmbClientes.Size = new Size(290, 28);
             cmbClientes.TabIndex = 16;
             // 
+            // Codigo
+            // 
+            Codigo.HeaderText = "Codigo";
+            Codigo.MinimumWidth = 6;
+            Codigo.Name = "Codigo";
+            Codigo.Width = 104;
+            // 
+            // cantidad
+            // 
+            cantidad.HeaderText = "Cantidad";
+            cantidad.MinimumWidth = 6;
+            cantidad.Name = "cantidad";
+            cantidad.Width = 118;
+            // 
+            // Producto
+            // 
+            Producto.HeaderText = "Producto";
+            Producto.MinimumWidth = 6;
+            Producto.Name = "Producto";
+            Producto.Width = 120;
+            // 
+            // Stock
+            // 
+            Stock.HeaderText = "Stock";
+            Stock.MinimumWidth = 6;
+            Stock.Name = "Stock";
+            Stock.ReadOnly = true;
+            Stock.Width = 87;
+            // 
+            // precio
+            // 
+            precio.HeaderText = "Precio Venta";
+            precio.MinimumWidth = 6;
+            precio.Name = "precio";
+            precio.Width = 147;
+            // 
+            // PrecioCompra
+            // 
+            PrecioCompra.HeaderText = "Precio Compra";
+            PrecioCompra.MinimumWidth = 6;
+            PrecioCompra.Name = "PrecioCompra";
+            PrecioCompra.Width = 168;
+            // 
+            // Subtotal
+            // 
+            Subtotal.HeaderText = "Subtotal";
+            Subtotal.MinimumWidth = 6;
+            Subtotal.Name = "Subtotal";
+            Subtotal.Width = 114;
+            // 
             // FormNuevaVenta
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -295,6 +304,7 @@
         private DataGridViewTextBoxColumn Codigo;
         private DataGridViewTextBoxColumn cantidad;
         private DataGridViewTextBoxColumn Producto;
+        private DataGridViewTextBoxColumn Stock;
         private DataGridViewTextBoxColumn precio;
         private DataGridViewTextBoxColumn PrecioCompra;
         private DataGridViewTextBoxColumn Subtotal;

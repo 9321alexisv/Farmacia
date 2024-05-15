@@ -68,6 +68,38 @@ namespace Farmacia.Datos
         }
 
         // ============================================================================================
+        // ACTUALIZAR STOCK ===========================================================================
+        // ============================================================================================
+        public void ActualizarStockProductos(int idVenta, DataGridView dgvProductos)
+        {
+            ConexionDB conexion = new();
+            NpgsqlConnection conn = conexion.AbrirConexion();
+
+            try
+            {
+                foreach (DataGridViewRow row in dgvProductos.Rows)
+                {
+                    int idProducto = Convert.ToInt32(row.Cells["codigo"].Value);
+                    int cantidad = Convert.ToInt32(row.Cells["Cantidad"].Value);
+
+                    string queryUpdateStock = "UPDATE producto SET stock = stock - @cantidad WHERE id_producto = @idProducto";
+                    NpgsqlCommand commandUpdateStock = new(queryUpdateStock, conn);
+                    commandUpdateStock.Parameters.AddWithValue("@cantidad", cantidad);
+                    commandUpdateStock.Parameters.AddWithValue("@idProducto", idProducto);
+                    commandUpdateStock.ExecuteNonQuery();
+                }
+            }
+            catch (NpgsqlException ex)
+            {
+                throw new Exception("Error al actualizar el stock de los productos: " + ex.Message);
+            }
+            finally
+            {
+                conexion.CerrarConexion();
+            }
+        }
+
+        // ============================================================================================
         // OBTENER TODAS LAS VENTAS ===================================================================
         // ============================================================================================
         public List<Venta> ObtenerVentas()
