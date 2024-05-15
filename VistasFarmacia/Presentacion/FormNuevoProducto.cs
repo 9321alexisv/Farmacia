@@ -76,18 +76,26 @@ namespace VistasFarmacia.Forms
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            // Convertir numeros a decimales al utilizar punto, ej, 10.50
-            // Por defecto convierte utilizando comas, ej, 10,5
+            // Obtener los valores de los cuadros de texto
+            string inputCompra = txtPrecioCompra.Text;
+            string inputVenta = txtPrecioVenta.Text;
+
+            // Reemplaza la coma por un punto si está presente
+            inputCompra = inputCompra.Replace(',', '.');
+            inputVenta = inputVenta.Replace(',', '.');
+
+            // Parsear los valores
             decimal precioCompra;
             decimal precioVenta;
 
-            decimal.TryParse(txtPrecioCompra.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out precioCompra);
-            decimal.TryParse(txtPrecioVenta.Text, NumberStyles.Any, CultureInfo.InvariantCulture, out precioVenta);
-
             try
             {
+                // Aanalizar los valores
+                precioCompra = decimal.Parse(inputCompra, CultureInfo.InvariantCulture);
+                precioVenta = decimal.Parse(inputVenta, CultureInfo.InvariantCulture);
+
                 // Nuevo
-                if(idProducto == 0)
+                if (idProducto == 0)
                 {
                     Productos.Crear(
                     Convert.ToInt32(cmbProveedor.SelectedValue),
@@ -118,7 +126,7 @@ namespace VistasFarmacia.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al crear o actualizar producto." + ex.Message + ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error al crear o actualizar producto." + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
