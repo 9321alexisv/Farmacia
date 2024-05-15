@@ -2,6 +2,7 @@
 using Farmacia.Datos;
 using Farmacia.Presentacion;
 using Farmacia.Presentacion.Reportes;
+using VistasFarmacia.Entidad;
 
 namespace VistasFarmacia.Forms
 {
@@ -56,7 +57,8 @@ namespace VistasFarmacia.Forms
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            FormNuevoProducto formNuevoProducto = new FormNuevoProducto();
+            Producto producto = new();
+            FormNuevoProducto formNuevoProducto = new FormNuevoProducto(producto);
             formNuevoProducto.Show();
         }
 
@@ -69,8 +71,24 @@ namespace VistasFarmacia.Forms
                 return;
             }
 
-            // TODO: Editar producto
+            DataGridViewRow fila = dgvProductos.CurrentRow;
+            Proveedor proveedor = new()
+            {
+                IdProveedor = Convert.ToInt32(fila.Cells[1].Value),
+            };
 
+            Producto producto = new()
+            {
+                IdProducto = Convert.ToInt32(fila.Cells[0].Value),
+                ObjProveedor = proveedor,
+                Nombre = fila.Cells[2].Value.ToString() ?? "",
+                PrecioCompra = Convert.ToDecimal(fila.Cells[3].Value),
+                PrecioVenta = Convert.ToDecimal(fila.Cells[4].Value),
+                Stock = Convert.ToInt32(fila.Cells[5].Value),
+            };
+
+            FormNuevoProducto formNuevoProducto = new(producto);
+            formNuevoProducto.Show();
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -105,6 +123,23 @@ namespace VistasFarmacia.Forms
         {
             ReportesClosedXML reportes = new();
             reportes.Excel("Inventario", dgvProductos);
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                dgvProductos.DataSource = productos.BuscarPorNombre(txtQuery.Text);
+
+            } catch(Exception ex)
+            {
+                MessageBox.Show("Error al buscar. " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnTodo_Click(object sender, EventArgs e)
+        {
+            ListarProductos();
         }
     }
     #endregion

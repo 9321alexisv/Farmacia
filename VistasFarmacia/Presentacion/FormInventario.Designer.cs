@@ -31,6 +31,7 @@ namespace VistasFarmacia.Forms
         private void InitializeComponent()
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             dgvProductos = new DataGridView();
             labelTablaInventario = new Label();
             btnCrear = new Button();
@@ -42,6 +43,9 @@ namespace VistasFarmacia.Forms
             labelAcumulado = new Label();
             label2 = new Label();
             btnReporte = new Button();
+            btnBuscar = new Button();
+            txtQuery = new TextBox();
+            btnTodo = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvProductos).BeginInit();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -54,6 +58,14 @@ namespace VistasFarmacia.Forms
             dgvProductos.BackgroundColor = Color.FromArgb(49, 49, 68);
             dgvProductos.BorderStyle = BorderStyle.None;
             dgvProductos.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dgvProductos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvProductos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvProductos.EnableHeadersVisualStyles = false;
             dgvProductos.GridColor = Color.FromArgb(49, 49, 68);
@@ -62,11 +74,12 @@ namespace VistasFarmacia.Forms
             dgvProductos.MultiSelect = false;
             dgvProductos.Name = "dgvProductos";
             dgvProductos.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dgvProductos.RowHeadersVisible = false;
             dgvProductos.RowHeadersWidth = 15;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(49, 49, 68);
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = Color.SteelBlue;
-            dgvProductos.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(49, 49, 68);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = Color.SteelBlue;
+            dgvProductos.RowsDefaultCellStyle = dataGridViewCellStyle2;
             dgvProductos.RowTemplate.DefaultCellStyle.BackColor = Color.FromArgb(49, 49, 68);
             dgvProductos.RowTemplate.DefaultCellStyle.ForeColor = Color.White;
             dgvProductos.RowTemplate.DefaultCellStyle.SelectionBackColor = Color.SteelBlue;
@@ -88,10 +101,10 @@ namespace VistasFarmacia.Forms
             // 
             btnCrear.FlatStyle = FlatStyle.Flat;
             btnCrear.Image = Farmacia.Properties.Resources.addproduct;
-            btnCrear.Location = new Point(834, 727);
+            btnCrear.Location = new Point(1088, 727);
             btnCrear.Margin = new Padding(3, 4, 3, 4);
             btnCrear.Name = "btnCrear";
-            btnCrear.Size = new Size(120, 83);
+            btnCrear.Size = new Size(150, 80);
             btnCrear.TabIndex = 2;
             btnCrear.Text = "Agregar Producto";
             btnCrear.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -102,10 +115,10 @@ namespace VistasFarmacia.Forms
             // 
             btnEditar.FlatStyle = FlatStyle.Flat;
             btnEditar.Image = Farmacia.Properties.Resources.edit;
-            btnEditar.Location = new Point(979, 727);
+            btnEditar.Location = new Point(866, 727);
             btnEditar.Margin = new Padding(3, 4, 3, 4);
             btnEditar.Name = "btnEditar";
-            btnEditar.Size = new Size(115, 83);
+            btnEditar.Size = new Size(150, 80);
             btnEditar.TabIndex = 3;
             btnEditar.Text = "Editar Producto";
             btnEditar.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -116,10 +129,10 @@ namespace VistasFarmacia.Forms
             // 
             btnEliminar.FlatStyle = FlatStyle.Flat;
             btnEliminar.Image = Farmacia.Properties.Resources.borrar;
-            btnEliminar.Location = new Point(1117, 727);
+            btnEliminar.Location = new Point(637, 727);
             btnEliminar.Margin = new Padding(3, 4, 3, 4);
             btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(121, 83);
+            btnEliminar.Size = new Size(150, 80);
             btnEliminar.TabIndex = 4;
             btnEliminar.Text = "Eliminar Producto";
             btnEliminar.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -132,11 +145,12 @@ namespace VistasFarmacia.Forms
             panel1.Controls.Add(label3);
             panel1.Controls.Add(panel2);
             panel1.Controls.Add(label2);
-            panel1.Location = new Point(1051, 31);
+            panel1.Location = new Point(1005, 27);
             panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(190, 96);
+            panel1.Size = new Size(237, 96);
             panel1.TabIndex = 7;
+            panel1.Visible = false;
             // 
             // label3
             // 
@@ -174,7 +188,7 @@ namespace VistasFarmacia.Forms
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 18F, FontStyle.Bold | FontStyle.Italic);
             label2.ForeColor = Color.LightGreen;
-            label2.Location = new Point(65, 39);
+            label2.Location = new Point(101, 35);
             label2.Name = "label2";
             label2.Size = new Size(136, 41);
             label2.TabIndex = 1;
@@ -184,22 +198,59 @@ namespace VistasFarmacia.Forms
             // 
             btnReporte.FlatStyle = FlatStyle.Flat;
             btnReporte.Image = Farmacia.Properties.Resources.reportes;
-            btnReporte.Location = new Point(63, 727);
+            btnReporte.Location = new Point(64, 727);
             btnReporte.Margin = new Padding(3, 4, 3, 4);
             btnReporte.Name = "btnReporte";
-            btnReporte.Size = new Size(134, 83);
+            btnReporte.Size = new Size(150, 80);
             btnReporte.TabIndex = 10;
             btnReporte.Text = "Reporte";
             btnReporte.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnReporte.UseVisualStyleBackColor = true;
             btnReporte.Click += btnReporte_Click;
             // 
+            // btnBuscar
+            // 
+            btnBuscar.FlatStyle = FlatStyle.Flat;
+            btnBuscar.Location = new Point(613, 63);
+            btnBuscar.Margin = new Padding(3, 4, 3, 4);
+            btnBuscar.Name = "btnBuscar";
+            btnBuscar.Size = new Size(150, 40);
+            btnBuscar.TabIndex = 12;
+            btnBuscar.Text = "Buscar";
+            btnBuscar.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnBuscar.UseVisualStyleBackColor = true;
+            btnBuscar.Click += btnBuscar_Click;
+            // 
+            // txtQuery
+            // 
+            txtQuery.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtQuery.Location = new Point(283, 68);
+            txtQuery.Name = "txtQuery";
+            txtQuery.Size = new Size(290, 34);
+            txtQuery.TabIndex = 13;
+            // 
+            // btnTodo
+            // 
+            btnTodo.FlatStyle = FlatStyle.Flat;
+            btnTodo.Location = new Point(797, 65);
+            btnTodo.Margin = new Padding(3, 4, 3, 4);
+            btnTodo.Name = "btnTodo";
+            btnTodo.Size = new Size(150, 40);
+            btnTodo.TabIndex = 14;
+            btnTodo.Text = "Ver todos";
+            btnTodo.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnTodo.UseVisualStyleBackColor = true;
+            btnTodo.Click += btnTodo_Click;
+            // 
             // FormInventario
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(39, 39, 58);
-            ClientSize = new Size(1335, 855);
+            ClientSize = new Size(1305, 855);
+            Controls.Add(btnTodo);
+            Controls.Add(txtQuery);
+            Controls.Add(btnBuscar);
             Controls.Add(btnReporte);
             Controls.Add(panel1);
             Controls.Add(btnEliminar);
@@ -233,5 +284,8 @@ namespace VistasFarmacia.Forms
         private Label labelAcumulado;
         private Panel panel2;
         private Button btnReporte;
+        private Button btnBuscar;
+        private TextBox txtQuery;
+        private Button btnTodo;
     }
 }

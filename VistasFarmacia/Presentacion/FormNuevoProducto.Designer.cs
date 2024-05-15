@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            labelIngresoProductos = new Label();
+            lblTitulo = new Label();
             labelProveedor = new Label();
             txtNombre = new TextBox();
             labelNombre = new Label();
@@ -43,16 +43,16 @@
             cmbProveedor = new ComboBox();
             SuspendLayout();
             // 
-            // labelIngresoProductos
+            // lblTitulo
             // 
-            labelIngresoProductos.AutoSize = true;
-            labelIngresoProductos.Font = new Font("Segoe UI", 18F, FontStyle.Bold | FontStyle.Italic);
-            labelIngresoProductos.ForeColor = Color.White;
-            labelIngresoProductos.Location = new Point(88, 31);
-            labelIngresoProductos.Name = "labelIngresoProductos";
-            labelIngresoProductos.Size = new Size(243, 41);
-            labelIngresoProductos.TabIndex = 1;
-            labelIngresoProductos.Text = "Nuevo Producto";
+            lblTitulo.AutoSize = true;
+            lblTitulo.Font = new Font("Segoe UI", 18F, FontStyle.Bold | FontStyle.Italic);
+            lblTitulo.ForeColor = Color.White;
+            lblTitulo.Location = new Point(88, 31);
+            lblTitulo.Name = "lblTitulo";
+            lblTitulo.Size = new Size(243, 41);
+            lblTitulo.TabIndex = 1;
+            lblTitulo.Text = "Nuevo Producto";
             // 
             // labelProveedor
             // 
@@ -196,7 +196,7 @@
             Controls.Add(txtNombre);
             Controls.Add(labelNombre);
             Controls.Add(labelProveedor);
-            Controls.Add(labelIngresoProductos);
+            Controls.Add(lblTitulo);
             Margin = new Padding(3, 4, 3, 4);
             Name = "FormNuevoProducto";
             Text = "Nuevo Producto";
@@ -206,7 +206,7 @@
         }
 
         #endregion
-        private Label labelIngresoProductos;
+        private Label lblTitulo;
         private Label labelProveedor;
         private TextBox txtNombre;
         private Label labelNombre;

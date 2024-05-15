@@ -2,16 +2,31 @@
 using Farmacia.Datos;
 using Farmacia.Presentacion;
 using System.Globalization;
+using VistasFarmacia.Entidad;
 
 namespace VistasFarmacia.Forms
 {
     public partial class FormNuevoProducto : Form
     {
-        public FormNuevoProducto()
+
+        private readonly Producto _producto;
+        int idProducto = 0;
+
+        public FormNuevoProducto(Producto producto)
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
             this.MaximizeBox = false;
+
+            _producto = producto;
+
+            idProducto = producto.IdProducto;
+            txtNombre.Text = _producto.Nombre ?? "";
+            txtPrecioCompra.Text = _producto.PrecioCompra.ToString() ?? "";
+            txtPrecioVenta.Text = _producto.PrecioVenta.ToString() ?? "";
+            txtStock.Text = _producto.Stock.ToString() ?? "";
+
+            if (idProducto != 0) lblTitulo.Text = "Actualizar Producto";
         }
 
         private void FormNuevoProducto_Load(object sender, EventArgs e)
@@ -32,7 +47,7 @@ namespace VistasFarmacia.Forms
                     btn.FlatAppearance.BorderColor = ThemeColor.SecondaryColor;
                 }
             }
-            labelIngresoProductos.ForeColor = ThemeColor.SecondaryColor;
+            lblTitulo.ForeColor = ThemeColor.SecondaryColor;
             labelProveedor.ForeColor = ThemeColor.SecondaryColor;
             labelNombre.ForeColor = ThemeColor.SecondaryColor;
             labelPrecioCompra.ForeColor = ThemeColor.SecondaryColor;
@@ -41,7 +56,7 @@ namespace VistasFarmacia.Forms
         }
 
         #region "Datos"
-        D_Productos Productos = new D_Productos();
+        D_Productos Productos = new();
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
@@ -55,13 +70,30 @@ namespace VistasFarmacia.Forms
 
             try
             {
-                Productos.Crear(
+                // Nuevo
+                if(idProducto == 0)
+                {
+                    Productos.Crear(
                     Convert.ToInt32(cmbProveedor.SelectedValue),
                     txtNombre.Text,
                     precioCompra,
                     precioVenta,
                     Convert.ToInt32(txtStock.Text)
                     );
+                }
+
+                // Editar
+                if (idProducto != 0)
+                {
+                    Productos.Editar(
+                        idProducto,
+                        Convert.ToInt32(cmbProveedor.SelectedValue),
+                        txtNombre.Text,
+                        precioCompra,
+                        precioVenta,
+                        Convert.ToInt32(txtStock.Text)
+                    );
+                }
 
                 LimpiarCampos();
                 MessageBox.Show("Nuevo producto agregado correctamente.", "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -97,13 +129,16 @@ namespace VistasFarmacia.Forms
         {
             LimpiarCampos();
         }
+
         public void LimpiarCampos()
         {
+            idProducto = 0;
             txtNombre.Clear();
             txtPrecioCompra.Clear();
             txtPrecioVenta.Clear();
             txtStock.Clear();
         }
+
         #endregion
     }
 }

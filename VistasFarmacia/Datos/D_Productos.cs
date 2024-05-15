@@ -72,6 +72,32 @@ namespace Farmacia.Datos
             return producto;
         }
 
+        public DataTable BuscarPorNombre(string query)
+        {
+            ConexionDB conexion = new();
+            NpgsqlDataReader leer;
+            DataTable tabla = new();
+
+            try
+            {
+                NpgsqlCommand comando = new(
+                    $"select * from producto where nombre LIKE '%{query}%';", 
+                    conexion.AbrirConexion()
+                );
+                leer = comando.ExecuteReader();
+                tabla.Load(leer);
+                return tabla;
+            }
+            catch (NpgsqlException ex)
+            {
+                throw new Exception("Error al hacer la consulta en la base de datos.", ex);
+            }
+            finally
+            {
+                conexion.CerrarConexion();
+            }
+        }
+
         public void Crear(int idProveedor, string nombre, decimal precioCompra, decimal precioVenta, int stock)
         {
             ConexionDB conexion = new ConexionDB();
@@ -106,7 +132,7 @@ namespace Farmacia.Datos
 
             try
             {
-                string query = "UPDATE producto SET id_proveedor = @idProveedor, nombre = @nombre, precio_compra = @precioCompra, precio_venta = @precioVenta, stock = @stock WHERE id = @idProducto";
+                string query = "UPDATE producto SET id_proveedor = @idProveedor, nombre = @nombre, precio_compra = @precioCompra, precio_venta = @precioVenta, stock = @stock WHERE id_producto = @idProducto";
 
                 NpgsqlCommand comando = new NpgsqlCommand(query, conexion.AbrirConexion());
 
@@ -121,7 +147,7 @@ namespace Farmacia.Datos
             }
             catch (NpgsqlException ex)
             {
-                throw new Exception("Error al actualizar el registro en la base de datos.", ex);
+                throw new Exception("Error al actualizar el registro en la base de datos." + ex.Message);
             }
             finally
             {
