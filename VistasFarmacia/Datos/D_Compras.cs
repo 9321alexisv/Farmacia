@@ -101,11 +101,51 @@ namespace Farmacia.Datos
         // ============================================================================================
         // OBTENER TODAS LAS COMPRAS ==================================================================
         // ============================================================================================
+
+        public List<Compra> ObtenerComprasPorFechas(DateTime? fechaInicio, DateTime? fechaFin)
+        {
+            ConexionDB conexion = new();
+            NpgsqlConnection conn = conexion.AbrirConexion();
+
+            string query = "SELECT c.id_compra, c.fecha FROM compra c WHERE c.fecha BETWEEN @fechaInicio AND @fechaFin ORDER BY fecha DESC;";
+
+            try
+            {
+                NpgsqlCommand command = new(query, conn);
+                command.Parameters.AddWithValue("@fechaInicio", fechaInicio.HasValue ? fechaInicio.Value : DateTime.MinValue.ToString());
+                command.Parameters.AddWithValue("@fechaFin", fechaFin.HasValue ? fechaFin.Value : DateTime.Now.Date.ToString());
+
+                NpgsqlDataReader reader = command.ExecuteReader();
+                List<Compra> compras = [];
+
+                while (reader.Read())
+                {
+                    Compra compra = new()
+                    {
+                        IdCompra = reader.GetInt32(0),
+                        Fecha = reader.GetDateTime(1).ToString(),
+                    };
+
+                    compras.Add(compra);
+                }
+
+                return compras;
+            }
+            catch (NpgsqlException ex)
+            {
+                throw new Exception("Error al obtener compras por fechas", ex);
+            }
+            finally
+            {
+                conexion.CerrarConexion();
+            }
+        }
+
         public List<Compra> ObtenerCompras()
         {
             ConexionDB conexion = new ConexionDB();
             NpgsqlConnection conn = conexion.AbrirConexion();
-            string query = "SELECT c.id_compra, c.fecha FROM compra c";
+            string query = "SELECT c.id_compra, c.fecha FROM compra c ORDER BY fecha DESC;";
 
             try
             {

@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             dgvCompras = new DataGridView();
             Producto = new DataGridViewTextBoxColumn();
             Cantidad = new DataGridViewTextBoxColumn();
@@ -42,6 +42,12 @@
             labelAcumulado = new Label();
             lblCompras = new Label();
             btnReporte = new Button();
+            dtpInicio = new DateTimePicker();
+            dtpFin = new DateTimePicker();
+            label1 = new Label();
+            label2 = new Label();
+            btnFiltrar = new Button();
+            btnTodo = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvCompras).BeginInit();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -56,24 +62,24 @@
             dgvCompras.BorderStyle = BorderStyle.None;
             dgvCompras.CellBorderStyle = DataGridViewCellBorderStyle.None;
             dgvCompras.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = Color.FromArgb(49, 49, 68);
-            dataGridViewCellStyle7.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle7.ForeColor = Color.White;
-            dataGridViewCellStyle7.SelectionBackColor = Color.SteelBlue;
-            dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
-            dgvCompras.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(49, 49, 68);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = Color.SteelBlue;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dgvCompras.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvCompras.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvCompras.Columns.AddRange(new DataGridViewColumn[] { Producto, Cantidad, Precio, Subtotal });
-            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = Color.FromArgb(49, 49, 68);
-            dataGridViewCellStyle8.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle8.ForeColor = Color.White;
-            dataGridViewCellStyle8.SelectionBackColor = Color.SteelBlue;
-            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.False;
-            dgvCompras.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(49, 49, 68);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = Color.SteelBlue;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dgvCompras.DefaultCellStyle = dataGridViewCellStyle2;
             dgvCompras.EnableHeadersVisualStyles = false;
             dgvCompras.Location = new Point(77, 121);
             dgvCompras.Margin = new Padding(3, 4, 3, 4);
@@ -186,12 +192,84 @@
             btnReporte.UseVisualStyleBackColor = true;
             btnReporte.Click += btnReporte_Click;
             // 
+            // dtpInicio
+            // 
+            dtpInicio.CalendarFont = new Font("Segoe UI", 12F);
+            dtpInicio.Format = DateTimePickerFormat.Short;
+            dtpInicio.Location = new Point(397, 53);
+            dtpInicio.Name = "dtpInicio";
+            dtpInicio.Size = new Size(150, 27);
+            dtpInicio.TabIndex = 18;
+            // 
+            // dtpFin
+            // 
+            dtpFin.CalendarFont = new Font("Segoe UI", 12F);
+            dtpFin.Format = DateTimePickerFormat.Short;
+            dtpFin.Location = new Point(564, 53);
+            dtpFin.Name = "dtpFin";
+            dtpFin.Size = new Size(150, 27);
+            dtpFin.TabIndex = 19;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(436, 22);
+            label1.Name = "label1";
+            label1.Size = new Size(66, 28);
+            label1.TabIndex = 20;
+            label1.Text = "Desde";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(605, 22);
+            label2.Name = "label2";
+            label2.Size = new Size(61, 28);
+            label2.TabIndex = 21;
+            label2.Text = "Hasta";
+            // 
+            // btnFiltrar
+            // 
+            btnFiltrar.FlatStyle = FlatStyle.Flat;
+            btnFiltrar.Location = new Point(774, 43);
+            btnFiltrar.Margin = new Padding(3, 4, 3, 4);
+            btnFiltrar.Name = "btnFiltrar";
+            btnFiltrar.Size = new Size(137, 47);
+            btnFiltrar.TabIndex = 22;
+            btnFiltrar.Text = "Filtrar";
+            btnFiltrar.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnFiltrar.UseVisualStyleBackColor = true;
+            btnFiltrar.Click += btnFiltrar_Click;
+            // 
+            // btnTodo
+            // 
+            btnTodo.FlatStyle = FlatStyle.Flat;
+            btnTodo.Location = new Point(959, 43);
+            btnTodo.Margin = new Padding(3, 4, 3, 4);
+            btnTodo.Name = "btnTodo";
+            btnTodo.Size = new Size(137, 47);
+            btnTodo.TabIndex = 23;
+            btnTodo.Text = "Todo";
+            btnTodo.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnTodo.UseVisualStyleBackColor = true;
+            btnTodo.Click += btnTodo_Click;
+            // 
             // FormCompras
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(39, 39, 58);
             ClientSize = new Size(1397, 833);
+            Controls.Add(btnTodo);
+            Controls.Add(btnFiltrar);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Controls.Add(dtpFin);
+            Controls.Add(dtpInicio);
             Controls.Add(btnReporte);
             Controls.Add(panel1);
             Controls.Add(labelTablaCompras);
@@ -224,5 +302,11 @@
         private DataGridViewTextBoxColumn Cantidad;
         private DataGridViewTextBoxColumn Precio;
         private DataGridViewTextBoxColumn Subtotal;
+        private DateTimePicker dtpInicio;
+        private DateTimePicker dtpFin;
+        private Label label1;
+        private Label label2;
+        private Button btnFiltrar;
+        private Button btnTodo;
     }
 }

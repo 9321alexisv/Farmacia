@@ -85,5 +85,71 @@ namespace VistasFarmacia.Forms
             ReportesClosedXML reportes = new();
             reportes.Excel("Compras", dgvCompras);
         }
+
+        private void btnFiltrar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                FiltrarDatos();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void FiltrarDatos()
+        {
+            // Obtener los valores de los DateTimePicker en formato DateTime
+            DateTime fechaInicio = dtpInicio.Value.Date;
+            DateTime fechaFin = dtpFin.Value.Date;
+
+            // Convertir a cadena de formato corto
+            string fechaInicioStr = fechaInicio.ToString("d/M/yyyy");
+            string fechaFinStr = fechaFin.ToString("d/M/yyyy");
+
+            D_Compras compras = new();
+            List<Compra> todasCompras = compras.ObtenerComprasPorFechas(fechaInicio, fechaFin);
+
+            decimal totalCompras = 0;
+
+            dgvCompras.Rows.Clear();
+
+            foreach (var compra in todasCompras)
+            {
+                List<DetalleCompra> detallesCompra = compras.ObtenerDetallesCompra(compra.IdCompra);
+
+                // PARA ETIQUETAS GLOBALES CON PROPOSITOS INFORMATIVOS
+                decimal totalCompra = detallesCompra.Sum(detalle => detalle.PrecioCompra * detalle.Cantidad);
+                totalCompras += totalCompra; // Sumar al total de compra
+
+                // Encabezado de cada venta dentro de la tabla
+                int rowIndex = dgvCompras.Rows.Add(
+                    $"COMPRA #{compra.IdCompra}",
+                    $"FECHA: {compra.Fecha}",
+                    "TOTAL",
+                    totalCompra
+                 );
+                dgvCompras.Rows[rowIndex].DefaultCellStyle.BackColor = Color.Green;
+                dgvCompras.Rows[rowIndex].Height = 50;
+
+                foreach (var detalle in detallesCompra)
+                {
+                    dgvCompras.Rows.Add(
+                        detalle.Producto,
+                        detalle.Cantidad,
+                        detalle.PrecioCompra,
+                        detalle.PrecioCompra * detalle.Cantidad
+                    );
+                }
+            }
+
+            lblCompras.Text = totalCompras.ToString();
+        }
+
+        private void btnTodo_Click(object sender, EventArgs e)
+        {
+            MostrarHistorialVentas();
+        }
     }
 }
