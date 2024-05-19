@@ -2,7 +2,7 @@
 using Npgsql;
 using System.Data;
 
-namespace VistasFarmacia.Datos
+namespace Farmacia.Datos
 {
     internal class D_Clientes
     {
@@ -17,7 +17,7 @@ namespace VistasFarmacia.Datos
                 using NpgsqlCommand comando = new("select * from cliente", conn);
                 using NpgsqlDataReader leer = comando.ExecuteReader();
                 tabla.Load(leer);
-                
+
                 return tabla;
             }
             catch (NpgsqlException ex)
@@ -32,7 +32,7 @@ namespace VistasFarmacia.Datos
             {
                 ConexionDB conexion = new();
                 using NpgsqlConnection conn = conexion.AbrirConexion()!;
-                
+
                 using NpgsqlCommand cmd = new("INSERT INTO cliente (nit, nombre, telefono) VALUES (@nit, @nombre, @telefono)", conn);
                 cmd.Parameters.AddWithValue("@nit", nit);
                 cmd.Parameters.AddWithValue("@nombre", nombre);
@@ -54,7 +54,7 @@ namespace VistasFarmacia.Datos
                 ConexionDB conexion = new();
                 using NpgsqlConnection conn = conexion.AbrirConexion()!;
                 using NpgsqlCommand cmd = new("UPDATE cliente SET nit = @nit, nombre = @nombre, telefono = @telefono WHERE id_cliente = @idCliente", conn);
-                
+
                 cmd.Parameters.AddWithValue("@nit", nit);
                 cmd.Parameters.AddWithValue("@nombre", nombre);
                 cmd.Parameters.AddWithValue("@telefono", telefono);

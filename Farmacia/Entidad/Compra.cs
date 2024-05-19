@@ -1,5 +1,5 @@
 ﻿
-namespace VistasFarmacia.Entidad
+namespace Farmacia.Entidad
 {
     public class Compra
     {

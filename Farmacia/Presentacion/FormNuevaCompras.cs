@@ -1,7 +1,7 @@
 ﻿
 using Farmacia.Datos;
+using Farmacia.Entidad;
 using Farmacia.Presentacion;
-using VistasFarmacia.Entidad;
 
 namespace VistasFarmacia.Forms
 {

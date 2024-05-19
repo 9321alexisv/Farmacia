@@ -1,7 +1,6 @@
 ﻿
+using Farmacia.Entidad;
 using Npgsql;
-using VistasFarmacia.Datos;
-using VistasFarmacia.Entidad;
 
 namespace Farmacia.Datos
 {

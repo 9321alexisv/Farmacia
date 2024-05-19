@@ -1,6 +1,6 @@
-﻿using Npgsql;
+﻿
+using Npgsql;
 using System.Data;
-using VistasFarmacia.Datos;
 
 namespace Farmacia.Datos
 {

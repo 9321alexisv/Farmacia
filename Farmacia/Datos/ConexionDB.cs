@@ -2,7 +2,7 @@
 using Npgsql;
 using System.Data;
 
-namespace VistasFarmacia.Datos
+namespace Farmacia.Datos
 {
     public class ConexionDB
     {

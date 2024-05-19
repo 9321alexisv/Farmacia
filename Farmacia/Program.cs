@@ -1,4 +1,6 @@
-namespace VistasFarmacia
+using VistasFarmacia;
+
+namespace Farmacia
 {
     internal static class Program
     {
