@@ -16,14 +16,7 @@ namespace VistasFarmacia.Forms
         private void FormVentas_Load(object sender, EventArgs e)
         {
             LoadTheme();
-            try
-            {
-                MostrarHistorialVentas();
-            }
-            catch (Exception ex)
-            {
-
-            }
+            MostrarHistorialVentas();
         }
 
         private void LoadTheme()
@@ -49,8 +42,8 @@ namespace VistasFarmacia.Forms
 
         public void MostrarHistorialVentas()
         {
-            D_Ventas ventas = new D_Ventas();
-            List<Venta> todasVentas = ventas.ObtenerVentas();
+            D_Ventas ventas = new();
+            List<Venta> todasVentas = D_Ventas.ObtenerVentas();
 
             decimal totalVentas = 0;
             decimal totalGanancias = 0;
@@ -59,7 +52,7 @@ namespace VistasFarmacia.Forms
 
             foreach (var venta in todasVentas)
             {
-                List<DetalleVenta> detallesVenta = ventas.ObtenerDetallesVenta(venta.IdVenta);
+                List<DetalleVenta> detallesVenta = D_Ventas.ObtenerDetallesVenta(venta.IdVenta);
 
                 // Total Venta
                 decimal totalVenta = detallesVenta.Sum(detalle => detalle.PrecioVenta * detalle.Cantidad);

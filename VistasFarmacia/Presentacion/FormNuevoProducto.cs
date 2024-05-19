@@ -97,7 +97,7 @@ namespace VistasFarmacia.Forms
                 // Nuevo
                 if (idProducto == 0)
                 {
-                    Productos.Crear(
+                    D_Productos.Crear(
                     Convert.ToInt32(cmbProveedor.SelectedValue),
                     txtNombre.Text,
                     precioCompra,

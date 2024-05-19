@@ -12,7 +12,7 @@ namespace VistasFarmacia.Datos
         private readonly string usuario = "postgres";
         private readonly string contrasena = "";
 
-        private NpgsqlConnection Conexion;
+        private readonly NpgsqlConnection Conexion;
 
         public ConexionDB()
         {
@@ -21,7 +21,7 @@ namespace VistasFarmacia.Datos
             Conexion = new NpgsqlConnection(cadenaConexion);
         }
 
-        public NpgsqlConnection AbrirConexion()
+        public NpgsqlConnection? AbrirConexion()
         {
             try
             {

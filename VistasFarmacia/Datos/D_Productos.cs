@@ -104,7 +104,7 @@ namespace Farmacia.Datos
             }
         }
 
-        public void Crear(int idProveedor, string nombre, decimal precioCompra, decimal precioVenta, int stock)
+        public static void Crear(int idProveedor, string nombre, decimal precioCompra, decimal precioVenta, int stock)
         {
             ConexionDB conexion = new();
 
@@ -162,7 +162,7 @@ namespace Farmacia.Datos
         }
 
         // Eliminado logico
-        public bool Eliminar(int id)
+        public static bool Eliminar(int id)
         {
             ConexionDB conexion = new();
             NpgsqlCommand comando;

@@ -273,7 +273,6 @@
         private Label label3;
         private Label lblTotal;
         private Button button3;
-        private Button button2;
         private Button btnGuardar;
         private Label labelCodigo;
         private Button btnGuardarIngresoVentas;

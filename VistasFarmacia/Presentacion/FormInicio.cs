@@ -5,8 +5,8 @@ namespace VistasFarmacia
     public partial class FormInicio : Form
     {
         //Fields
-        private Button currentButton;
-        private Random random;
+        private Button? currentButton;
+        private readonly Random random;
         private int tempIndex;
         private Form activeForm;
 
@@ -67,10 +67,7 @@ namespace VistasFarmacia
 
         private void OpenChildForm(Form childForm, object btnSender)
         {
-            if (activeForm != null)
-            {
-                activeForm.Close();
-            }
+            activeForm?.Close();
             ActivateButton(btnSender);
             activeForm = childForm;
             childForm.TopLevel = false;
@@ -110,8 +107,7 @@ namespace VistasFarmacia
 
         private void btnHome_Click(object sender, EventArgs e)
         {
-            if (activeForm != null)
-                activeForm.Close();
+            activeForm?.Close();
             Reset();
         }
 

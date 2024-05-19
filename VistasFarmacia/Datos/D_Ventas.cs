@@ -10,10 +10,10 @@ namespace Farmacia.Datos
         // ============================================================================================
         // NUEVA VENTA ================================================================================
         // ============================================================================================
-        public int CrearVenta(int idCliente)
+        public static int CrearVenta(int idCliente)
         {
             ConexionDB conexion = new();
-            NpgsqlConnection conn = conexion.AbrirConexion();
+            NpgsqlConnection conn = conexion.AbrirConexion()!;
             string query = "INSERT INTO venta (id_cliente) VALUES (@idCliente) RETURNING id_venta;";
 
             try
@@ -34,10 +34,10 @@ namespace Farmacia.Datos
             }
         }
 
-        public void InsertarDetalleVenta(int idVenta, DataGridView dgvProductos)
+        public static void InsertarDetalleVenta(int idVenta, DataGridView dgvProductos)
         {
             ConexionDB conexion = new();
-            NpgsqlConnection conn = conexion.AbrirConexion();
+            NpgsqlConnection conn = conexion.AbrirConexion()!;
             string query = "INSERT INTO detalle_venta (id_venta, id_producto, precio_compra, precio_venta, cantidad) VALUES (@id_venta, @id_producto, @precio_compra, @precio_venta, @cantidad)";
 
             try
@@ -69,10 +69,10 @@ namespace Farmacia.Datos
         // ============================================================================================
         // ACTUALIZAR STOCK ===========================================================================
         // ============================================================================================
-        public void ActualizarStockProductos(int idVenta, DataGridView dgvProductos)
+        public static void ActualizarStockProductos(DataGridView dgvProductos)
         {
             ConexionDB conexion = new();
-            NpgsqlConnection conn = conexion.AbrirConexion();
+            NpgsqlConnection conn = conexion.AbrirConexion()!;
 
             try
             {
@@ -101,10 +101,10 @@ namespace Farmacia.Datos
         // ============================================================================================
         // OBTENER TODAS LAS VENTAS ===================================================================
         // ============================================================================================
-        public List<Venta> ObtenerVentas()
+        public static List<Venta> ObtenerVentas()
         {
             ConexionDB conexion = new();
-            NpgsqlConnection conn = conexion.AbrirConexion();
+            NpgsqlConnection conn = conexion.AbrirConexion()!;
             string query = "SELECT v.id_venta, c.nombre, v.fecha " +
                            "FROM venta v " +
                            "INNER JOIN cliente c ON v.id_cliente = c.id_cliente";
@@ -138,10 +138,10 @@ namespace Farmacia.Datos
             }
         }
 
-        public List<DetalleVenta> ObtenerDetallesVenta(int idVenta)
+        public static List<DetalleVenta> ObtenerDetallesVenta(int idVenta)
         {
             ConexionDB conexion = new();
-            NpgsqlConnection conn = conexion.AbrirConexion();
+            NpgsqlConnection conn = conexion.AbrirConexion()!;
             string query = "SELECT p.id_producto, p.nombre, dv.precio_compra, dv.precio_venta, dv.cantidad " +
                            "FROM detalle_venta dv " +
                            "INNER JOIN producto p ON dv.id_producto = p.id_producto " +

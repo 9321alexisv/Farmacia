@@ -7,7 +7,7 @@ namespace VistasFarmacia.Datos
     internal class D_Clientes
     {
 
-        public DataTable Listar()
+        public static DataTable Listar()
         {
             ConexionDB conexion = new();
             NpgsqlDataReader leer;
@@ -30,7 +30,7 @@ namespace VistasFarmacia.Datos
             }
         }
 
-        public void Insertar(string nit, string nombre, string telefono)
+        public static void Insertar(string nit, string nombre, string telefono)
         {
             ConexionDB conexion = new();
 

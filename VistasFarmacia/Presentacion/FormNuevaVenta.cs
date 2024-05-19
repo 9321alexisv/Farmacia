@@ -46,7 +46,7 @@ namespace VistasFarmacia.Forms
             try
             {
                 D_Clientes clientes = new();
-                cmbClientes.DataSource = clientes.Listar();
+                cmbClientes.DataSource = D_Clientes.Listar();
                 cmbClientes.ValueMember = "id_cliente";
                 cmbClientes.DisplayMember = "nit";
             }
@@ -60,16 +60,16 @@ namespace VistasFarmacia.Forms
         {
             try
             {
-                D_Ventas ventas = new D_Ventas();
+                D_Ventas ventas = new();
 
                 int idCliente = Convert.ToInt32(cmbClientes.SelectedValue);
-                int idVenta = ventas.CrearVenta(idCliente);
-                ventas.ActualizarStockProductos(idVenta, dgvNuevaVenta);
-                ventas.InsertarDetalleVenta(idVenta, dgvNuevaVenta);
+                int idVenta = D_Ventas.CrearVenta(idCliente);
+                D_Ventas.ActualizarStockProductos(dgvNuevaVenta);
+                D_Ventas.InsertarDetalleVenta(idVenta, dgvNuevaVenta);
             }
             catch (Exception ex)
             {
-                //MessageBox.Show("Error al guardar venta " + ex.Message, "Error al guardar venta", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error al guardar venta " + ex.Message, "Error al guardar venta", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             dgvNuevaVenta.DataSource = null;
@@ -86,10 +86,9 @@ namespace VistasFarmacia.Forms
             // BUSCAR PRODUCTO ======================================================================== 
             if (dgvNuevaVenta.Columns[e.ColumnIndex].Name == "Codigo")
             {
-                int codigoProducto;
-                if (int.TryParse(dgvNuevaVenta.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(), out codigoProducto))
+                if (int.TryParse(dgvNuevaVenta.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(), out int codigoProducto))
                 {
-                    D_Productos productos = new D_Productos();
+                    D_Productos productos = new();
                     Producto producto = productos.BuscarPorId(codigoProducto);
                     if (producto != null)
                     {
@@ -117,16 +116,14 @@ namespace VistasFarmacia.Forms
 
         private decimal CalcularSubtotal(int rowIndex)
         {
-            decimal precio = 0;
-            int cantidad = 0;
 
             // Verificar si el valor de la celda "Precio" no es nulo
             object precioObj = dgvNuevaVenta.Rows[rowIndex].Cells["Precio"].Value;
-            if (precioObj != null && decimal.TryParse(precioObj.ToString(), out precio))
+            if (precioObj != null && decimal.TryParse(precioObj.ToString(), out decimal precio))
             {
                 // Verificar si el valor de la celda "Cantidad" no es nulo
                 object cantidadObj = dgvNuevaVenta.Rows[rowIndex].Cells["Cantidad"].Value;
-                if (cantidadObj != null && int.TryParse(cantidadObj.ToString(), out cantidad))
+                if (cantidadObj != null && int.TryParse(cantidadObj.ToString(), out int cantidad))
                 {
                     return precio * cantidad;
                 }

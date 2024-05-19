@@ -51,7 +51,7 @@ namespace VistasFarmacia.Forms
         {
             try
             {
-                dgvClientes.DataSource = clientes.Listar();
+                dgvClientes.DataSource = D_Clientes.Listar();
             }
             catch (Exception ex)
             {
@@ -72,7 +72,7 @@ namespace VistasFarmacia.Forms
             {
                 if(txtId.TextLength == 0)
                 {
-                    clientes.Insertar(
+                    D_Clientes.Insertar(
                         txtNit.Text,
                         txtNombre.Text,
                         txtTelefono.Text

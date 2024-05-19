@@ -61,13 +61,13 @@ namespace VistasFarmacia.Forms
             {
                 D_Compras compras = new();
 
-                int idCompra = compras.CrearCompra();
-                compras.ActualizarStockProductos(idCompra, dgvProductos);
-                compras.InsertarDetalleCompra(idCompra, dgvProductos);
+                int idCompra = D_Compras.CrearCompra();
+                D_Compras.ActualizarStockProductos(dgvProductos);
+                D_Compras.InsertarDetalleCompra(idCompra, dgvProductos);
             }
             catch (Exception ex)
             {
-                //MessageBox.Show("Error al guardar venta " + ex.Message, "Error al guardar venta", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error al guardar venta " + ex.Message, "Error al guardar venta", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             LimpiarTabla();
@@ -86,9 +86,8 @@ namespace VistasFarmacia.Forms
             // Verifica que la celda editada esté en la columna "codigo"
             if (dgvProductos.Columns[e.ColumnIndex].Name == "Codigo")
             {
-                int codigoProducto; // Obtén el código del producto ingresado
-
-                if (int.TryParse(dgvProductos.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(), out codigoProducto))
+                // Obtén el código del producto ingresado
+                if (int.TryParse(dgvProductos.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(), out int codigoProducto))
                 {
                     // Busca el producto 
                     D_Productos productos = new();
@@ -120,16 +119,13 @@ namespace VistasFarmacia.Forms
 
         private decimal CalcularSubtotal(int rowIndex)
         {
-            decimal precio;
-            int cantidad;
-
             // Verificar si el valor de la celda "Precio" no es nulo
             object precioObj = dgvProductos.Rows[rowIndex].Cells["PrecioCompra"].Value;
-            if (precioObj != null && decimal.TryParse(precioObj.ToString(), out precio))
+            if (precioObj != null && decimal.TryParse(precioObj.ToString(), out decimal precio))
             {
                 // Verificar si el valor de la celda "Cantidad" no es nulo
                 object cantidadObj = dgvProductos.Rows[rowIndex].Cells["cantidad"].Value;
-                if (cantidadObj != null && int.TryParse(cantidadObj.ToString(), out cantidad))
+                if (cantidadObj != null && int.TryParse(cantidadObj.ToString(), out int cantidad))
                 {
                     return precio * cantidad;
                 }

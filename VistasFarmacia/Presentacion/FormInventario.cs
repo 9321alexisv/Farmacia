@@ -60,8 +60,8 @@ namespace VistasFarmacia.Forms
         private void btnAdd_Click(object sender, EventArgs e)
         {
             Producto producto = new();
-            FormNuevoProducto formNuevoProducto = new FormNuevoProducto(producto);
-            formNuevoProducto.Show();
+            FormNuevoProducto formNuevoProducto = new(producto);
+            formNuevoProducto.ShowDialog();
         }
 
         private void btnEditar_Click(object sender, EventArgs e)
@@ -113,7 +113,7 @@ namespace VistasFarmacia.Forms
 
             // Si se confirma la eliminacion
             int productoSeleccionado = Convert.ToInt32(dgvProductos.CurrentRow.Cells[0].Value);
-            bool resultado = productos.Eliminar(productoSeleccionado);
+            bool resultado = D_Productos.Eliminar(productoSeleccionado);
             if (resultado)
             {
                 MessageBox.Show("Eliminado correctamente", "Correcto", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -132,7 +132,7 @@ namespace VistasFarmacia.Forms
             try
             {
                 dgvProductos.DataSource = productos.BuscarPorNombre(txtQuery.Text);
-
+                CalcularTotal();
             }
             catch (Exception ex)
             {
@@ -143,6 +143,7 @@ namespace VistasFarmacia.Forms
         private void btnTodo_Click(object sender, EventArgs e)
         {
             ListarProductos();
+            CalcularTotal();
         }
 
         #endregion
@@ -175,17 +176,16 @@ namespace VistasFarmacia.Forms
             if (e.ColumnIndex == columnIndex && e.RowIndex >= 0)
             {
                 // Obtener el valor de la celda actual
-                int valorCelda;
-                if (int.TryParse(e.Value?.ToString(), out valorCelda))
+                if (int.TryParse(e.Value?.ToString(), out int valorCelda))
                 {
                     // Si el valor es menor que 5, pintar la celda en rojo
                     if (valorCelda <= 5)
                     {
-                        e.CellStyle.BackColor = Color.Red;
+                        e.CellStyle!.BackColor = Color.Red;
                     }
                     else if (valorCelda > 5 && valorCelda < 20)
                     {
-                        e.CellStyle.BackColor = Color.Orange;
+                        e.CellStyle!.BackColor = Color.Orange;
                         e.CellStyle.ForeColor = Color.Black;
                     }
                 }

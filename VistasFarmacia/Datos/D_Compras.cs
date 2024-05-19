@@ -10,10 +10,10 @@ namespace Farmacia.Datos
         // ============================================================================================
         // CREAR COMPRA ===============================================================================
         // ============================================================================================
-        public int CrearCompra()
+        public static int CrearCompra()
         {
             ConexionDB conexion = new();
-            NpgsqlConnection conn = conexion.AbrirConexion();
+            NpgsqlConnection conn = conexion.AbrirConexion()!;
 
             string query = "INSERT INTO compra DEFAULT VALUES RETURNING id_compra;";
 
@@ -33,10 +33,10 @@ namespace Farmacia.Datos
             }
         }
 
-        public void InsertarDetalleCompra(int idCompra, DataGridView dgvProductos)
+        public static void InsertarDetalleCompra(int idCompra, DataGridView dgvProductos)
         {
             ConexionDB conexion = new();
-            NpgsqlConnection conn = conexion.AbrirConexion();
+            NpgsqlConnection conn = conexion.AbrirConexion()!;
             string query = "INSERT INTO detalle_compra (id_compra, id_producto, precio_compra, precio_venta, cantidad) VALUES (@id_compra, @id_producto, @precio_compra, @precio_venta, @cantidad)";
 
             try
@@ -69,10 +69,10 @@ namespace Farmacia.Datos
         // ============================================================================================
         // ACTUALIZAR STOCK ===========================================================================
         // ============================================================================================
-        public void ActualizarStockProductos(int idCompra, DataGridView dgvProductos)
+        public static void ActualizarStockProductos(DataGridView dgvProductos)
         {
             ConexionDB conexion = new();
-            NpgsqlConnection conn = conexion.AbrirConexion();
+            NpgsqlConnection conn = conexion.AbrirConexion()!;
 
             try
             {
@@ -102,10 +102,10 @@ namespace Farmacia.Datos
         // OBTENER TODAS LAS COMPRAS ==================================================================
         // ============================================================================================
 
-        public List<Compra> ObtenerComprasPorFechas(DateTime? fechaInicio, DateTime? fechaFin)
+        public static List<Compra> ObtenerComprasPorFechas(DateTime? fechaInicio, DateTime? fechaFin)
         {
             ConexionDB conexion = new();
-            NpgsqlConnection conn = conexion.AbrirConexion();
+            NpgsqlConnection conn = conexion.AbrirConexion()!;
 
             string query = "SELECT c.id_compra, c.fecha FROM compra c WHERE c.fecha BETWEEN @fechaInicio AND @fechaFin ORDER BY fecha DESC;";
 
@@ -141,10 +141,10 @@ namespace Farmacia.Datos
             }
         }
 
-        public List<Compra> ObtenerCompras()
+        public static List<Compra> ObtenerCompras()
         {
             ConexionDB conexion = new();
-            NpgsqlConnection conn = conexion.AbrirConexion();
+            NpgsqlConnection conn = conexion.AbrirConexion()!;
             string query = "SELECT c.id_compra, c.fecha FROM compra c ORDER BY fecha DESC;";
 
             try
@@ -175,10 +175,10 @@ namespace Farmacia.Datos
             }
         }
 
-        public List<DetalleCompra> ObtenerDetallesCompra(int idCompra)
+        public static List<DetalleCompra> ObtenerDetallesCompra(int idCompra)
         {
             ConexionDB conexion = new();
-            NpgsqlConnection conn = conexion.AbrirConexion();
+            NpgsqlConnection conn = conexion.AbrirConexion()!;
             string query = "SELECT p.id_producto, pr.proveedor, p.nombre, dc.precio_compra, dc.cantidad " +
                            "FROM detalle_compra dc " +
                            "INNER JOIN producto p ON dc.id_producto = p.id_producto " +

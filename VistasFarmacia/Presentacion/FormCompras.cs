@@ -42,7 +42,7 @@ namespace VistasFarmacia.Forms
         public void MostrarHistorialVentas()
         {
             D_Compras compras = new();
-            List<Compra> todasCompras = compras.ObtenerCompras();
+            List<Compra> todasCompras = D_Compras.ObtenerCompras();
 
             decimal totalCompras = 0;
 
@@ -50,7 +50,7 @@ namespace VistasFarmacia.Forms
 
             foreach (var compra in todasCompras)
             {
-                List<DetalleCompra> detallesCompra = compras.ObtenerDetallesCompra(compra.IdCompra);
+                List<DetalleCompra> detallesCompra = D_Compras.ObtenerDetallesCompra(compra.IdCompra);
 
                 // PARA ETIQUETAS GLOBALES CON PROPOSITOS INFORMATIVOS
                 decimal totalCompra = detallesCompra.Sum(detalle => detalle.PrecioCompra * detalle.Cantidad);
@@ -109,7 +109,7 @@ namespace VistasFarmacia.Forms
             string fechaFinStr = fechaFin.ToString("d/M/yyyy");
 
             D_Compras compras = new();
-            List<Compra> todasCompras = compras.ObtenerComprasPorFechas(fechaInicio, fechaFin);
+            List<Compra> todasCompras = D_Compras.ObtenerComprasPorFechas(fechaInicio, fechaFin);
 
             decimal totalCompras = 0;
 
@@ -117,7 +117,7 @@ namespace VistasFarmacia.Forms
 
             foreach (var compra in todasCompras)
             {
-                List<DetalleCompra> detallesCompra = compras.ObtenerDetallesCompra(compra.IdCompra);
+                List<DetalleCompra> detallesCompra = D_Compras.ObtenerDetallesCompra(compra.IdCompra);
 
                 // PARA ETIQUETAS GLOBALES CON PROPOSITOS INFORMATIVOS
                 decimal totalCompra = detallesCompra.Sum(detalle => detalle.PrecioCompra * detalle.Cantidad);
