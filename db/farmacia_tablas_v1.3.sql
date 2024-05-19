@@ -8,7 +8,7 @@
 CREATE TABLE proveedor (
     id_proveedor SERIAL,
     nit VARCHAR(20) UNIQUE,
-    proveedor VARCHAR(100) NOT NULL,
+    nombre VARCHAR(100) NOT NULL,
     telefono VARCHAR(15),
     representante VARCHAR(100),
     estado BOOLEAN DEFAULT TRUE,
@@ -25,17 +25,28 @@ CREATE TABLE cliente (
     CONSTRAINT pk_cliente PRIMARY KEY (id_cliente)
 );
 
+-- Crear tabla Marca
+CREATE TABLE marca (
+    id_marca SERIAL,
+    nombre VARCHAR(100) NOT NULL,
+    telefono VARCHAR(15),
+    representante VARCHAR(100),
+    estado BOOLEAN DEFAULT TRUE,
+    CONSTRAINT pk_marca PRIMARY KEY (id_marca)
+);
+
 -- Crear tabla Producto
 CREATE TABLE producto (
     id_producto SERIAL,
-    id_proveedor INT NOT NULL,
+    id_marca INT NOT NULL,
     nombre VARCHAR(250) NOT NULL,
     precio_compra NUMERIC(10, 2) NOT NULL,
     precio_venta NUMERIC(10, 2) NOT NULL,
     stock INT NOT NULL,
+    stock_minimo INT NOT NULL DEFAULT 1,
     estado BOOLEAN DEFAULT TRUE,
     CONSTRAINT pk_producto PRIMARY KEY (id_producto),
-    CONSTRAINT fk_producto_proveedor FOREIGN KEY (id_proveedor) REFERENCES proveedor(id_proveedor)
+    CONSTRAINT fk_producto_marca FOREIGN KEY (id_marca) REFERENCES marca(id_marca)
 );
 
 -- Crear tabla Compra

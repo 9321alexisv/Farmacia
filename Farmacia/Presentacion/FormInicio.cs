@@ -131,5 +131,10 @@ namespace VistasFarmacia
         {
             OpenChildForm(new Forms.FormProveedores(), sender);
         }
+
+        private void btnMarcas_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.FormMarcas(), sender);
+        }
     }
 }
