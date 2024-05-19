@@ -12,36 +12,32 @@ namespace Farmacia.Datos
         // ============================================================================================
         public static int CrearCompra()
         {
-            ConexionDB conexion = new();
-            NpgsqlConnection conn = conexion.AbrirConexion()!;
-
             string query = "INSERT INTO compra DEFAULT VALUES RETURNING id_compra;";
 
             try
             {
-                NpgsqlCommand command = new(query, conn);
+                ConexionDB conexion = new();
+                using NpgsqlConnection conn = conexion.AbrirConexion()!;
+                using NpgsqlCommand command = new(query, conn);
                 int idCompra = Convert.ToInt32(command.ExecuteScalar());
+                
                 return idCompra;
             }
             catch (NpgsqlException ex)
             {
-                throw new Exception("Error al insertar en la tabla 'compra'", ex);
-            }
-            finally
-            {
-                conexion.CerrarConexion();
+                throw new NpgsqlException("Error al crear registro pivote.", ex);
             }
         }
 
         public static void InsertarDetalleCompra(int idCompra, DataGridView dgvProductos)
         {
-            ConexionDB conexion = new();
-            NpgsqlConnection conn = conexion.AbrirConexion()!;
             string query = "INSERT INTO detalle_compra (id_compra, id_producto, precio_compra, precio_venta, cantidad) VALUES (@id_compra, @id_producto, @precio_compra, @precio_venta, @cantidad)";
 
             try
             {
-                NpgsqlCommand command = new(query, conn);
+                ConexionDB conexion = new();
+                using NpgsqlConnection conn = conexion.AbrirConexion()!;
+                using NpgsqlCommand command = new(query, conn);
 
                 foreach (DataGridViewRow row in dgvProductos.Rows)
                 {
@@ -58,11 +54,7 @@ namespace Farmacia.Datos
             }
             catch (NpgsqlException ex)
             {
-                throw new Exception("Error al insertar en la tabla 'detalle_compra': " + ex.Message);
-            }
-            finally
-            {
-                conexion.CerrarConexion();
+                throw new NpgsqlException("Error al insertar en la tabla 'detalle_compra': " + ex.Message);
             }
         }
 
@@ -71,30 +63,27 @@ namespace Farmacia.Datos
         // ============================================================================================
         public static void ActualizarStockProductos(DataGridView dgvProductos)
         {
-            ConexionDB conexion = new();
-            NpgsqlConnection conn = conexion.AbrirConexion()!;
-
             try
             {
+                ConexionDB conexion = new();
+                using NpgsqlConnection conn = conexion.AbrirConexion()!;
+
                 foreach (DataGridViewRow row in dgvProductos.Rows)
                 {
                     int idProducto = Convert.ToInt32(row.Cells["codigo"].Value);
                     int cantidad = Convert.ToInt32(row.Cells["Cantidad"].Value);
 
-                    string queryUpdateStock = "UPDATE producto SET stock = stock + @cantidad WHERE id_producto = @idProducto";
-                    NpgsqlCommand commandUpdateStock = new(queryUpdateStock, conn);
-                    commandUpdateStock.Parameters.AddWithValue("@cantidad", cantidad);
-                    commandUpdateStock.Parameters.AddWithValue("@idProducto", idProducto);
-                    commandUpdateStock.ExecuteNonQuery();
+                    string query = "UPDATE producto SET stock = stock + @cantidad WHERE id_producto = @idProducto";
+
+                    using NpgsqlCommand cmd = new(query, conn);
+                    cmd.Parameters.AddWithValue("@cantidad", cantidad);
+                    cmd.Parameters.AddWithValue("@idProducto", idProducto);
+                    cmd.ExecuteNonQuery();
                 }
             }
             catch (NpgsqlException ex)
             {
-                throw new Exception("Error al actualizar el stock de los productos: " + ex.Message);
-            }
-            finally
-            {
-                conexion.CerrarConexion();
+                throw new NpgsqlException("Error al actualizar el stock de los productos: " + ex.Message);
             }
         }
 
@@ -104,18 +93,17 @@ namespace Farmacia.Datos
 
         public static List<Compra> ObtenerComprasPorFechas(DateTime? fechaInicio, DateTime? fechaFin)
         {
-            ConexionDB conexion = new();
-            NpgsqlConnection conn = conexion.AbrirConexion()!;
-
             string query = "SELECT c.id_compra, c.fecha FROM compra c WHERE c.fecha BETWEEN @fechaInicio AND @fechaFin ORDER BY fecha DESC;";
 
             try
             {
-                NpgsqlCommand command = new(query, conn);
+                ConexionDB conexion = new();
+                using NpgsqlConnection conn = conexion.AbrirConexion()!;
+                using NpgsqlCommand command = new(query, conn);
                 command.Parameters.AddWithValue("@fechaInicio", fechaInicio.HasValue ? fechaInicio.Value : DateTime.MinValue.ToString());
                 command.Parameters.AddWithValue("@fechaFin", fechaFin.HasValue ? fechaFin.Value : DateTime.Now.Date.ToString());
 
-                NpgsqlDataReader reader = command.ExecuteReader();
+                using NpgsqlDataReader reader = command.ExecuteReader();
                 List<Compra> compras = [];
 
                 while (reader.Read())
@@ -133,25 +121,20 @@ namespace Farmacia.Datos
             }
             catch (NpgsqlException ex)
             {
-                throw new Exception("Error al obtener compras por fechas", ex);
-            }
-            finally
-            {
-                conexion.CerrarConexion();
+                throw new NpgsqlException("Error al obtener compras por fechas.", ex);
             }
         }
 
         public static List<Compra> ObtenerCompras()
         {
-            ConexionDB conexion = new();
-            NpgsqlConnection conn = conexion.AbrirConexion()!;
             string query = "SELECT c.id_compra, c.fecha FROM compra c ORDER BY fecha DESC;";
 
             try
             {
-                NpgsqlCommand command = new(query, conn);
-
-                NpgsqlDataReader reader = command.ExecuteReader();
+                ConexionDB conexion = new();
+                using NpgsqlConnection conn = conexion.AbrirConexion()!;
+                using NpgsqlCommand command = new(query, conn);
+                using NpgsqlDataReader reader = command.ExecuteReader();
                 List<Compra> compras = [];
 
                 while (reader.Read())
@@ -161,24 +144,20 @@ namespace Farmacia.Datos
                         IdCompra = reader.GetInt32(0),
                         Fecha = reader.GetDateTime(1).ToString(),
                     };
+
                     compras.Add(compra);
                 }
+
                 return compras;
             }
             catch (NpgsqlException ex)
             {
-                throw new Exception("Error al obtener todas las compras", ex);
-            }
-            finally
-            {
-                conexion.CerrarConexion();
+                throw new NpgsqlException("Error al obtener todas las compras", ex);
             }
         }
 
         public static List<DetalleCompra> ObtenerDetallesCompra(int idCompra)
         {
-            ConexionDB conexion = new();
-            NpgsqlConnection conn = conexion.AbrirConexion()!;
             string query = "SELECT p.id_producto, pr.proveedor, p.nombre, dc.precio_compra, dc.cantidad " +
                            "FROM detalle_compra dc " +
                            "INNER JOIN producto p ON dc.id_producto = p.id_producto " +
@@ -187,11 +166,14 @@ namespace Farmacia.Datos
 
             try
             {
-                NpgsqlCommand command = new(query, conn);
+                ConexionDB conexion = new();
+                using NpgsqlConnection conn = conexion.AbrirConexion()!;
+                using NpgsqlCommand command = new(query, conn);
                 command.Parameters.AddWithValue("@idCompra", idCompra);
 
-                NpgsqlDataReader reader = command.ExecuteReader();
+                using NpgsqlDataReader reader = command.ExecuteReader();
                 List<DetalleCompra> detalleCompra = [];
+
                 while (reader.Read())
                 {
                     DetalleCompra detalle = new()
@@ -201,19 +183,16 @@ namespace Farmacia.Datos
                         PrecioCompra = reader.GetDecimal(3),
                         Cantidad = reader.GetInt32(4)
                     };
+
                     detalleCompra.Add(detalle);
                 }
+
                 return detalleCompra;
             }
             catch (NpgsqlException ex)
             {
-                throw new Exception("Error al obtener los detalles de la compra", ex);
-            }
-            finally
-            {
-                conexion.CerrarConexion();
+                throw new NpgsqlException("Error al obtener los detalles de la compra", ex);
             }
         }
-
     }
 }

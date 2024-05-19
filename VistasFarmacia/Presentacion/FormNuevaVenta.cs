@@ -89,7 +89,7 @@ namespace VistasFarmacia.Forms
                 if (int.TryParse(dgvNuevaVenta.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(), out int codigoProducto))
                 {
                     D_Productos productos = new();
-                    Producto producto = productos.BuscarPorId(codigoProducto);
+                    Producto producto = D_Productos.BuscarPorId(codigoProducto);
                     if (producto != null)
                     {
                         dgvNuevaVenta.Rows[e.RowIndex].Cells["Producto"].Value = producto.Nombre;

@@ -109,7 +109,7 @@ namespace VistasFarmacia.Forms
                 // Editar
                 if (idProducto != 0)
                 {
-                    Productos.Editar(
+                    D_Productos.Editar(
                         idProducto,
                         Convert.ToInt32(cmbProveedor.SelectedValue),
                         txtNombre.Text,
@@ -138,7 +138,7 @@ namespace VistasFarmacia.Forms
 
             try
             {
-                cmbProveedor.DataSource = Datos.Listar();
+                cmbProveedor.DataSource = D_Proveedores.Listar();
                 cmbProveedor.ValueMember = "id_proveedor";
                 cmbProveedor.DisplayMember = "proveedor";
 

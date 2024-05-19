@@ -45,7 +45,7 @@ namespace VistasFarmacia.Forms
             try
             {
                 D_Proveedores proveedores = new();
-                cmbProveedores.DataSource = proveedores.Listar();
+                cmbProveedores.DataSource = D_Proveedores.Listar();
                 cmbProveedores.ValueMember = "id_proveedor";
                 cmbProveedores.DisplayMember = "proveedor";
             }
@@ -91,7 +91,7 @@ namespace VistasFarmacia.Forms
                 {
                     // Busca el producto 
                     D_Productos productos = new();
-                    Producto producto = productos.BuscarPorId(codigoProducto);
+                    Producto producto = D_Productos.BuscarPorId(codigoProducto);
 
                     if (producto != null)
                     {

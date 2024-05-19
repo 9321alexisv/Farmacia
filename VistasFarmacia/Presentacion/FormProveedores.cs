@@ -64,7 +64,7 @@ namespace VistasFarmacia.Forms
                 // Nuevo
                 if (txtId.TextLength == 0)
                 {
-                    proveedores.Insertar(
+                    D_Proveedores.Insertar(
                         txtNit.Text,
                         txtProveedor.Text,
                         txtTelefono.Text,
@@ -97,7 +97,7 @@ namespace VistasFarmacia.Forms
         {
             try
             {
-                dgvProveedores.DataSource = proveedores.Listar();
+                dgvProveedores.DataSource = D_Proveedores.Listar();
             }
             catch (Exception ex)
             {
@@ -114,7 +114,7 @@ namespace VistasFarmacia.Forms
                 if (dgvProveedores.SelectedRows.Count > 0)
                 {
                     int idProveedor = Convert.ToInt32(dgvProveedores.CurrentRow.Cells[0].Value);
-                    proveedores.Eliminar(idProveedor);
+                    D_Proveedores.Eliminar(idProveedor);
 
                     CargarProveedores();
                     MessageBox.Show("Eliminado correctamente.", "Eliminado", MessageBoxButtons.OK, MessageBoxIcon.Information);

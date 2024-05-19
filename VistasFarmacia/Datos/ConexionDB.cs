@@ -27,20 +27,18 @@ namespace VistasFarmacia.Datos
             {
                 if (Conexion.State == ConnectionState.Closed) Conexion.Open();
                 return Conexion;
-            } catch (Exception ex)
+            }
+            catch (Exception)
             {
-                MessageBox.Show("Error al conectarse a la base de datos." + ex.Message, "Error de Base de Datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error al conectarse a la base de datos.", "Error de Base de Datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
-
         }
 
-        public NpgsqlConnection CerrarConexion()
+        // No es necesario llamar el metodo si se utiliza USING para crear la instancia de la conexion
+        public void CerrarConexion()
         {
-            //if (Conexion != null && Conexion.State == ConnectionState.Open) Conexion.Close();
-
-            if (Conexion.State == ConnectionState.Open) Conexion.Close();
-            return Conexion;
+            //if (Conexion != null && Conexion.State == ConnectionState.Open) Conexion.Dispose();
         }
     }
 }

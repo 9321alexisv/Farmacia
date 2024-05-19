@@ -6,37 +6,33 @@ namespace VistasFarmacia.Datos
 {
     internal class D_Clientes
     {
-
         public static DataTable Listar()
         {
-            ConexionDB conexion = new();
-            NpgsqlDataReader leer;
             DataTable tabla = new();
 
             try
             {
-                NpgsqlCommand comando = new("select * from cliente", conexion.AbrirConexion());
-                leer = comando.ExecuteReader();
+                ConexionDB conexion = new();
+                using NpgsqlConnection conn = conexion.AbrirConexion()!;
+                using NpgsqlCommand comando = new("select * from cliente", conn);
+                using NpgsqlDataReader leer = comando.ExecuteReader();
                 tabla.Load(leer);
+                
                 return tabla;
             }
             catch (NpgsqlException ex)
             {
-                throw new Exception("Error al hacer la consulta en la base de datos.", ex);
-            }
-            finally
-            {
-                conexion.CerrarConexion();
+                throw new NpgsqlException("Error al obtener todos los registros de la base de datos.", ex);
             }
         }
 
         public static void Insertar(string nit, string nombre, string telefono)
         {
-            ConexionDB conexion = new();
-
             try
             {
-                using NpgsqlConnection conn = conexion.AbrirConexion();
+                ConexionDB conexion = new();
+                using NpgsqlConnection conn = conexion.AbrirConexion()!;
+                
                 using NpgsqlCommand cmd = new("INSERT INTO cliente (nit, nombre, telefono) VALUES (@nit, @nombre, @telefono)", conn);
                 cmd.Parameters.AddWithValue("@nit", nit);
                 cmd.Parameters.AddWithValue("@nombre", nombre);
@@ -46,22 +42,19 @@ namespace VistasFarmacia.Datos
             }
             catch (NpgsqlException ex)
             {
-                throw new Exception("Error al insertar el cliente en la base de datos.", ex);
-            }
-            finally
-            {
-                conexion.CerrarConexion();
+                throw new NpgsqlException("Error al crear el registro en la base de datos.", ex);
             }
         }
 
-        public void Editar(int idCliente, string nit, string nombre, string telefono)
+        public static void Editar(int idCliente, string nit, string nombre, string telefono)
         {
-            ConexionDB conexion = new();
 
             try
             {
-                using NpgsqlConnection conn = conexion.AbrirConexion();
+                ConexionDB conexion = new();
+                using NpgsqlConnection conn = conexion.AbrirConexion()!;
                 using NpgsqlCommand cmd = new("UPDATE cliente SET nit = @nit, nombre = @nombre, telefono = @telefono WHERE id_cliente = @idCliente", conn);
+                
                 cmd.Parameters.AddWithValue("@nit", nit);
                 cmd.Parameters.AddWithValue("@nombre", nombre);
                 cmd.Parameters.AddWithValue("@telefono", telefono);
@@ -71,22 +64,17 @@ namespace VistasFarmacia.Datos
             }
             catch (NpgsqlException ex)
             {
-                throw new Exception("Error al actualizar el cliente en la base de datos.", ex);
-            }
-            finally
-            {
-                conexion.CerrarConexion();
+                throw new NpgsqlException("Error al actualizar el registro en la base de datos.", ex);
             }
         }
 
         // Eliminado logico
-        public void Eliminar(int idCliente)
+        public static void Eliminar(int idCliente)
         {
-            ConexionDB conexion = new();
-
             try
             {
-                using NpgsqlConnection conn = conexion.AbrirConexion();
+                ConexionDB conexion = new();
+                using NpgsqlConnection conn = conexion.AbrirConexion()!;
                 using NpgsqlCommand cmd = new("UPDATE cliente SET estado = false WHERE id_cliente = @idCliente", conn);
                 cmd.Parameters.AddWithValue("@idCliente", idCliente);
 
@@ -94,11 +82,7 @@ namespace VistasFarmacia.Datos
             }
             catch (NpgsqlException ex)
             {
-                throw new Exception("Error al borrar el cliente en la base de datos.", ex);
-            }
-            finally
-            {
-                conexion.CerrarConexion();
+                throw new Exception("Error al eliminar (logico) el reistro de la base de datos.", ex);
             }
         }
     }

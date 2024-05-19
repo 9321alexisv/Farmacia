@@ -81,7 +81,7 @@ namespace VistasFarmacia.Forms
 
                 if(txtId.TextLength > 0)
                 {
-                    clientes.Editar(
+                    D_Clientes.Editar(
                         Convert.ToInt32(txtId.Text),
                         txtNit.Text,
                         txtNombre.Text,
@@ -116,7 +116,7 @@ namespace VistasFarmacia.Forms
             if (confirmar != DialogResult.Yes) return;
 
             int idCliente = Convert.ToInt32(dgvClientes.CurrentRow.Cells[0].Value);
-            clientes.Eliminar(idCliente);
+            D_Clientes.Eliminar(idCliente);
             MostrarClientes();
         }
 

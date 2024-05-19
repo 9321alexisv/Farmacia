@@ -48,7 +48,7 @@ namespace VistasFarmacia.Forms
         {
             try
             {
-                dgvProductos.DataSource = productos.Listar();
+                dgvProductos.DataSource = D_Productos.Listar();
             }
             catch (Exception ex)
             {
@@ -131,7 +131,7 @@ namespace VistasFarmacia.Forms
         {
             try
             {
-                dgvProductos.DataSource = productos.BuscarPorNombre(txtQuery.Text);
+                dgvProductos.DataSource = D_Productos.BuscarPorNombre(txtQuery.Text);
                 CalcularTotal();
             }
             catch (Exception ex)

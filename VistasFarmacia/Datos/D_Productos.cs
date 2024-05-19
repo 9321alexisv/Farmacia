@@ -8,10 +8,8 @@ namespace Farmacia.Datos
 {
     public class D_Productos
     {
-        public DataTable Listar()
+        public static DataTable Listar()
         {
-            ConexionDB conexion = new();
-            NpgsqlDataReader leer;
             DataTable tabla = new();
             string query = "SELECT p.id_producto codigo, pro.proveedor, p.nombre producto, " +
                 "p.precio_compra, p.precio_venta, p.stock FROM producto p " +
@@ -20,66 +18,62 @@ namespace Farmacia.Datos
 
             try
             {
-                NpgsqlCommand comando = new(query, conexion.AbrirConexion());
-                leer = comando.ExecuteReader();
+                ConexionDB conexion = new();
+                using NpgsqlConnection conn = conexion.AbrirConexion()!;
+                using NpgsqlCommand comando = new(query, conn);
+                using NpgsqlDataReader leer = comando.ExecuteReader();
                 tabla.Load(leer);
+
                 return tabla;
             }
             catch (NpgsqlException ex)
             {
-                throw new Exception("Error al hacer la consulta en la base de datos.", ex);
-            }
-            finally
-            {
-                conexion.CerrarConexion();
+                throw new NpgsqlException("Error al obtener todos los registros de la base de datos.", ex);
             }
         }
 
-        public Producto BuscarPorId(int idProducto)
+        public static Producto? BuscarPorId(int idProducto)
         {
-            ConexionDB conexion = new();
-            Producto? producto = null;
+            Producto producto;
+            string query = "SELECT * FROM producto WHERE id_producto = @idProducto";
 
             try
             {
-                string query = "SELECT * FROM producto WHERE id_producto = @idProducto";
-                NpgsqlCommand comando = new(query, conexion.AbrirConexion());
+                ConexionDB conexion = new();
+                using NpgsqlConnection conn = conexion.AbrirConexion()!;
+                using NpgsqlCommand comando = new(query, conn);
                 comando.Parameters.AddWithValue("@idProducto", idProducto);
 
-                NpgsqlDataReader leer = comando.ExecuteReader();
+                using NpgsqlDataReader leer = comando.ExecuteReader();
 
                 if (leer.Read())
                 {
-                    producto = new Producto
+                    producto = new()
                     {
                         IdProducto = Convert.ToInt32(leer["id_producto"]),
                         ObjProveedor = new Proveedor
                         {
                             IdProveedor = Convert.ToInt32(leer["id_proveedor"])
                         },
-                        Nombre = Convert.ToString(leer["nombre"]),
+                        Nombre = Convert.ToString(leer["nombre"]) ?? "",
                         PrecioCompra = Convert.ToDecimal(leer["precio_compra"]),
                         PrecioVenta = Convert.ToDecimal(leer["precio_venta"]),
                         Stock = Convert.ToInt32(leer["stock"])
                     };
+                    
+                    return producto;
                 }
             }
             catch (NpgsqlException ex)
             {
-                throw new Exception("Error al buscar el producto por ID en la base de datos.", ex);
-            }
-            finally
-            {
-                conexion.CerrarConexion();
+                throw new NpgsqlException("Error al buscar el registro por ID en la base de datos.", ex);
             }
 
-            return producto;
+            return null;
         }
 
-        public DataTable BuscarPorNombre(string query)
+        public static DataTable BuscarPorNombre(string query)
         {
-            ConexionDB conexion = new();
-            NpgsqlDataReader leer;
             DataTable tabla = new();
             string sentencia = "SELECT p.id_producto codigo, pro.proveedor, p.nombre producto, " +
                 "p.precio_compra, p.precio_venta, p.stock FROM producto p " +
@@ -88,31 +82,29 @@ namespace Farmacia.Datos
 
             try
             {
-                NpgsqlCommand comando = new(sentencia, conexion.AbrirConexion()
-                );
-                leer = comando.ExecuteReader();
+                ConexionDB conexion = new();
+                using NpgsqlConnection conn = conexion.AbrirConexion()!;
+                using NpgsqlCommand comando = new(sentencia, conn);
+                using NpgsqlDataReader leer = comando.ExecuteReader();
                 tabla.Load(leer);
+                
                 return tabla;
             }
             catch (NpgsqlException ex)
             {
-                throw new Exception("Error al hacer la consulta en la base de datos.", ex);
-            }
-            finally
-            {
-                conexion.CerrarConexion();
+                throw new NpgsqlException("Error al buscar los regisros en la base de datos.", ex);
             }
         }
 
         public static void Crear(int idProveedor, string nombre, decimal precioCompra, decimal precioVenta, int stock)
         {
-            ConexionDB conexion = new();
+            string query = "INSERT INTO producto (id_proveedor, nombre, precio_compra, precio_venta, stock) VALUES (@idProveedor, @nombre, @precioCompra, @precioVenta, @stock)";
 
             try
             {
-                string query = "INSERT INTO producto (id_proveedor, nombre, precio_compra, precio_venta, stock) VALUES (@idProveedor, @nombre, @precioCompra, @precioVenta, @stock)";
-
-                NpgsqlCommand comando = new(query, conexion.AbrirConexion());
+                ConexionDB conexion = new();
+                using NpgsqlConnection conn = conexion.AbrirConexion()!;
+                using NpgsqlCommand comando = new(query, conn);
 
                 comando.Parameters.AddWithValue("@idProveedor", idProveedor);
                 comando.Parameters.AddWithValue("@nombre", nombre);
@@ -124,23 +116,19 @@ namespace Farmacia.Datos
             }
             catch (NpgsqlException ex)
             {
-                throw new Exception("Error al guardar el registro en la base de datos.", ex);
-            }
-            finally
-            {
-                conexion.CerrarConexion();
+                throw new NpgsqlException("Error al crear el registro en la base de datos.", ex);
             }
         }
 
-        public void Editar(int idProducto, int idProveedor, string nombre, decimal precioCompra, decimal precioVenta, int stock)
+        public static void Editar(int idProducto, int idProveedor, string nombre, decimal precioCompra, decimal precioVenta, int stock)
         {
-            ConexionDB conexion = new();
+            string query = "UPDATE producto SET id_proveedor = @idProveedor, nombre = @nombre, precio_compra = @precioCompra, precio_venta = @precioVenta, stock = @stock WHERE id_producto = @idProducto";
 
             try
             {
-                string query = "UPDATE producto SET id_proveedor = @idProveedor, nombre = @nombre, precio_compra = @precioCompra, precio_venta = @precioVenta, stock = @stock WHERE id_producto = @idProducto";
-
-                NpgsqlCommand comando = new(query, conexion.AbrirConexion());
+                ConexionDB conexion = new();
+                using NpgsqlConnection conn = conexion.AbrirConexion()!;
+                using NpgsqlCommand comando = new(query, conn);
 
                 comando.Parameters.AddWithValue("@idProducto", idProducto);
                 comando.Parameters.AddWithValue("@idProveedor", idProveedor);
@@ -153,35 +141,26 @@ namespace Farmacia.Datos
             }
             catch (NpgsqlException ex)
             {
-                throw new Exception("Error al actualizar el registro en la base de datos." + ex.Message);
-            }
-            finally
-            {
-                conexion.CerrarConexion();
+                throw new NpgsqlException("Error al actualizar el registro en la base de datos." + ex);
             }
         }
 
         // Eliminado logico
         public static bool Eliminar(int id)
         {
-            ConexionDB conexion = new();
-            NpgsqlCommand comando;
-
             try
             {
-                comando = new NpgsqlCommand("UPDATE producto SET estado = false WHERE id_producto = @id", conexion.AbrirConexion());
+                ConexionDB conexion = new();
+                using NpgsqlConnection conn = conexion.AbrirConexion()!;
+                using NpgsqlCommand comando = new("UPDATE producto SET estado = false WHERE id_producto = @id", conn);
                 comando.Parameters.AddWithValue("@id", id);
-
                 int filasAfectadas = comando.ExecuteNonQuery();
+                
                 return filasAfectadas > 0; // True si se actualizó al menos un registro
             }
             catch (NpgsqlException ex)
             {
-                throw new Exception("Error al actualizar el producto en la base de datos.", ex);
-            }
-            finally
-            {
-                conexion.CerrarConexion();
+                throw new NpgsqlException("Error al eliminar (logico) el registro de la base de datos.", ex);
             }
         }
 
