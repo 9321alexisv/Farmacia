@@ -215,7 +215,6 @@
             labelCodigo.Size = new Size(133, 32);
             labelCodigo.TabIndex = 16;
             labelCodigo.Text = "Proveedor";
-            labelCodigo.Visible = false;
             // 
             // btnLimpiar
             // 
@@ -239,7 +238,6 @@
             cmbProveedores.Name = "cmbProveedores";
             cmbProveedores.Size = new Size(262, 28);
             cmbProveedores.TabIndex = 26;
-            cmbProveedores.Visible = false;
             // 
             // FormNuevaCompras
             // 

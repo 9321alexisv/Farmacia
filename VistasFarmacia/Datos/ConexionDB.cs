@@ -6,11 +6,11 @@ namespace VistasFarmacia.Datos
 {
     public class ConexionDB
     {
-        private string servidor = "localhost";
-        private string baseDatos = "farmacia_candelaria_dev";
-        private int puerto = 5433;
-        private string usuario = "postgres";
-        private string contrasena = "";
+        private readonly string servidor = "localhost";
+        private readonly string baseDatos = "farmacia_candelaria_dev";
+        private readonly int puerto = 5433;
+        private readonly string usuario = "postgres";
+        private readonly string contrasena = "";
 
         private NpgsqlConnection Conexion;
 

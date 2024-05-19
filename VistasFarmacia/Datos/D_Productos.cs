@@ -37,13 +37,13 @@ namespace Farmacia.Datos
 
         public Producto BuscarPorId(int idProducto)
         {
-            ConexionDB conexion = new ConexionDB();
-            Producto producto = null;
+            ConexionDB conexion = new();
+            Producto? producto = null;
 
             try
             {
                 string query = "SELECT * FROM producto WHERE id_producto = @idProducto";
-                NpgsqlCommand comando = new NpgsqlCommand(query, conexion.AbrirConexion());
+                NpgsqlCommand comando = new(query, conexion.AbrirConexion());
                 comando.Parameters.AddWithValue("@idProducto", idProducto);
 
                 NpgsqlDataReader leer = comando.ExecuteReader();
@@ -106,13 +106,13 @@ namespace Farmacia.Datos
 
         public void Crear(int idProveedor, string nombre, decimal precioCompra, decimal precioVenta, int stock)
         {
-            ConexionDB conexion = new ConexionDB();
+            ConexionDB conexion = new();
 
             try
             {
                 string query = "INSERT INTO producto (id_proveedor, nombre, precio_compra, precio_venta, stock) VALUES (@idProveedor, @nombre, @precioCompra, @precioVenta, @stock)";
 
-                NpgsqlCommand comando = new NpgsqlCommand(query, conexion.AbrirConexion());
+                NpgsqlCommand comando = new(query, conexion.AbrirConexion());
 
                 comando.Parameters.AddWithValue("@idProveedor", idProveedor);
                 comando.Parameters.AddWithValue("@nombre", nombre);
@@ -134,13 +134,13 @@ namespace Farmacia.Datos
 
         public void Editar(int idProducto, int idProveedor, string nombre, decimal precioCompra, decimal precioVenta, int stock)
         {
-            ConexionDB conexion = new ConexionDB();
+            ConexionDB conexion = new();
 
             try
             {
                 string query = "UPDATE producto SET id_proveedor = @idProveedor, nombre = @nombre, precio_compra = @precioCompra, precio_venta = @precioVenta, stock = @stock WHERE id_producto = @idProducto";
 
-                NpgsqlCommand comando = new NpgsqlCommand(query, conexion.AbrirConexion());
+                NpgsqlCommand comando = new(query, conexion.AbrirConexion());
 
                 comando.Parameters.AddWithValue("@idProducto", idProducto);
                 comando.Parameters.AddWithValue("@idProveedor", idProveedor);
@@ -164,7 +164,7 @@ namespace Farmacia.Datos
         // Eliminado logico
         public bool Eliminar(int id)
         {
-            ConexionDB conexion = new ConexionDB();
+            ConexionDB conexion = new();
             NpgsqlCommand comando;
 
             try

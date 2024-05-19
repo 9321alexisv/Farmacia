@@ -12,14 +12,14 @@ namespace Farmacia.Datos
         // ============================================================================================
         public int CrearCompra()
         {
-            ConexionDB conexion = new ConexionDB();
+            ConexionDB conexion = new();
             NpgsqlConnection conn = conexion.AbrirConexion();
 
             string query = "INSERT INTO compra DEFAULT VALUES RETURNING id_compra;";
 
             try
             {
-                NpgsqlCommand command = new NpgsqlCommand(query, conn);
+                NpgsqlCommand command = new(query, conn);
                 int idCompra = Convert.ToInt32(command.ExecuteScalar());
                 return idCompra;
             }
@@ -35,13 +35,13 @@ namespace Farmacia.Datos
 
         public void InsertarDetalleCompra(int idCompra, DataGridView dgvProductos)
         {
-            ConexionDB conexion = new ConexionDB();
+            ConexionDB conexion = new();
             NpgsqlConnection conn = conexion.AbrirConexion();
             string query = "INSERT INTO detalle_compra (id_compra, id_producto, precio_compra, precio_venta, cantidad) VALUES (@id_compra, @id_producto, @precio_compra, @precio_venta, @cantidad)";
 
             try
             {
-                NpgsqlCommand command = new NpgsqlCommand(query, conn);
+                NpgsqlCommand command = new(query, conn);
 
                 foreach (DataGridViewRow row in dgvProductos.Rows)
                 {
@@ -143,20 +143,20 @@ namespace Farmacia.Datos
 
         public List<Compra> ObtenerCompras()
         {
-            ConexionDB conexion = new ConexionDB();
+            ConexionDB conexion = new();
             NpgsqlConnection conn = conexion.AbrirConexion();
             string query = "SELECT c.id_compra, c.fecha FROM compra c ORDER BY fecha DESC;";
 
             try
             {
-                NpgsqlCommand command = new NpgsqlCommand(query, conn);
+                NpgsqlCommand command = new(query, conn);
 
                 NpgsqlDataReader reader = command.ExecuteReader();
-                List<Compra> compras = new List<Compra>();
+                List<Compra> compras = [];
 
                 while (reader.Read())
                 {
-                    Compra compra = new Compra
+                    Compra compra = new()
                     {
                         IdCompra = reader.GetInt32(0),
                         Fecha = reader.GetDateTime(1).ToString(),
@@ -177,7 +177,7 @@ namespace Farmacia.Datos
 
         public List<DetalleCompra> ObtenerDetallesCompra(int idCompra)
         {
-            ConexionDB conexion = new ConexionDB();
+            ConexionDB conexion = new();
             NpgsqlConnection conn = conexion.AbrirConexion();
             string query = "SELECT p.id_producto, pr.proveedor, p.nombre, dc.precio_compra, dc.cantidad " +
                            "FROM detalle_compra dc " +
@@ -187,14 +187,14 @@ namespace Farmacia.Datos
 
             try
             {
-                NpgsqlCommand command = new NpgsqlCommand(query, conn);
+                NpgsqlCommand command = new(query, conn);
                 command.Parameters.AddWithValue("@idCompra", idCompra);
 
                 NpgsqlDataReader reader = command.ExecuteReader();
-                List<DetalleCompra> detalleCompra = new List<DetalleCompra>();
+                List<DetalleCompra> detalleCompra = [];
                 while (reader.Read())
                 {
-                    DetalleCompra detalle = new DetalleCompra
+                    DetalleCompra detalle = new()
                     {
                         Proveedor = reader.GetString(1),
                         Producto = reader.GetString(2),

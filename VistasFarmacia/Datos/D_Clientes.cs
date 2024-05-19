@@ -9,13 +9,13 @@ namespace VistasFarmacia.Datos
 
         public DataTable Listar()
         {
-            ConexionDB conexion = new ConexionDB();
+            ConexionDB conexion = new();
             NpgsqlDataReader leer;
-            DataTable tabla = new DataTable();
+            DataTable tabla = new();
 
             try
             {
-                NpgsqlCommand comando = new NpgsqlCommand("select * from cliente", conexion.AbrirConexion());
+                NpgsqlCommand comando = new("select * from cliente", conexion.AbrirConexion());
                 leer = comando.ExecuteReader();
                 tabla.Load(leer);
                 return tabla;
@@ -32,19 +32,17 @@ namespace VistasFarmacia.Datos
 
         public void Insertar(string nit, string nombre, string telefono)
         {
-            ConexionDB conexion = new ConexionDB();
+            ConexionDB conexion = new();
 
             try
             {
-                using (NpgsqlConnection conn = conexion.AbrirConexion())
-                using (NpgsqlCommand cmd = new NpgsqlCommand("INSERT INTO cliente (nit, nombre, telefono) VALUES (@nit, @nombre, @telefono)", conn))
-                {
-                    cmd.Parameters.AddWithValue("@nit", nit);
-                    cmd.Parameters.AddWithValue("@nombre", nombre);
-                    cmd.Parameters.AddWithValue("@telefono", telefono);
+                using NpgsqlConnection conn = conexion.AbrirConexion();
+                using NpgsqlCommand cmd = new("INSERT INTO cliente (nit, nombre, telefono) VALUES (@nit, @nombre, @telefono)", conn);
+                cmd.Parameters.AddWithValue("@nit", nit);
+                cmd.Parameters.AddWithValue("@nombre", nombre);
+                cmd.Parameters.AddWithValue("@telefono", telefono);
 
-                    cmd.ExecuteNonQuery();
-                }
+                cmd.ExecuteNonQuery();
             }
             catch (NpgsqlException ex)
             {

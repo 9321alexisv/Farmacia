@@ -1,6 +1,5 @@
 ﻿
 using Npgsql;
-using System.Reflection;
 using VistasFarmacia.Datos;
 using VistasFarmacia.Entidad;
 
@@ -13,13 +12,13 @@ namespace Farmacia.Datos
         // ============================================================================================
         public int CrearVenta(int idCliente)
         {
-            ConexionDB conexion = new ConexionDB();
+            ConexionDB conexion = new();
             NpgsqlConnection conn = conexion.AbrirConexion();
             string query = "INSERT INTO venta (id_cliente) VALUES (@idCliente) RETURNING id_venta;";
 
             try
             {
-                NpgsqlCommand command = new NpgsqlCommand(query, conn);
+                NpgsqlCommand command = new(query, conn);
                 command.Parameters.AddWithValue("@idCliente", idCliente);
 
                 int idVenta = Convert.ToInt32(command.ExecuteScalar());
@@ -37,13 +36,13 @@ namespace Farmacia.Datos
 
         public void InsertarDetalleVenta(int idVenta, DataGridView dgvProductos)
         {
-            ConexionDB conexion = new ConexionDB();
+            ConexionDB conexion = new();
             NpgsqlConnection conn = conexion.AbrirConexion();
             string query = "INSERT INTO detalle_venta (id_venta, id_producto, precio_compra, precio_venta, cantidad) VALUES (@id_venta, @id_producto, @precio_compra, @precio_venta, @cantidad)";
 
             try
             {
-                NpgsqlCommand command = new NpgsqlCommand(query, conn);
+                NpgsqlCommand command = new(query, conn);
 
                 foreach (DataGridViewRow row in dgvProductos.Rows)
                 {
@@ -104,7 +103,7 @@ namespace Farmacia.Datos
         // ============================================================================================
         public List<Venta> ObtenerVentas()
         {
-            ConexionDB conexion = new ConexionDB();
+            ConexionDB conexion = new();
             NpgsqlConnection conn = conexion.AbrirConexion();
             string query = "SELECT v.id_venta, c.nombre, v.fecha " +
                            "FROM venta v " +
@@ -112,14 +111,14 @@ namespace Farmacia.Datos
 
             try
             {
-                NpgsqlCommand command = new NpgsqlCommand(query, conn);
+                NpgsqlCommand command = new(query, conn);
 
                 NpgsqlDataReader reader = command.ExecuteReader();
-                List<Venta> ventas = new List<Venta>();
+                List<Venta> ventas = [];
 
                 while (reader.Read())
                 {
-                    Venta venta = new Venta
+                    Venta venta = new()
                     {
                         IdVenta = reader.GetInt32(0),
                         Cliente = reader.GetString(1),
@@ -141,7 +140,7 @@ namespace Farmacia.Datos
 
         public List<DetalleVenta> ObtenerDetallesVenta(int idVenta)
         {
-            ConexionDB conexion = new ConexionDB();
+            ConexionDB conexion = new();
             NpgsqlConnection conn = conexion.AbrirConexion();
             string query = "SELECT p.id_producto, p.nombre, dv.precio_compra, dv.precio_venta, dv.cantidad " +
                            "FROM detalle_venta dv " +
@@ -150,14 +149,14 @@ namespace Farmacia.Datos
 
             try
             {
-                NpgsqlCommand command = new NpgsqlCommand(query, conn);
+                NpgsqlCommand command = new(query, conn);
                 command.Parameters.AddWithValue("@idVenta", idVenta);
 
                 NpgsqlDataReader reader = command.ExecuteReader();
-                List<DetalleVenta> detalleVenta = new List<DetalleVenta>();
+                List<DetalleVenta> detalleVenta = [];
                 while (reader.Read())
                 {
-                    DetalleVenta detalle = new DetalleVenta
+                    DetalleVenta detalle = new()
                     {
                         IdProducto = reader.GetInt32(0),
                         Producto = reader.GetString(1),
