@@ -136,10 +136,11 @@ namespace VistasFarmacia.Forms
         public void LlenarCampos(DataGridViewRow fila)
         {
             if (fila == null) return;
-            idCliente = Convert.ToInt32(fila.Cells[0].Value);
-            txtNit.Text = fila.Cells["Nit"].Value.ToString();
-            txtNombre.Text = fila.Cells["Nombre"].Value.ToString();
-            txtTelefono.Text = fila.Cells["Telefono"].Value.ToString();
+
+            idCliente = Convert.ToInt32(fila.Cells["IdCliente"].Value);
+            txtNit.Text = Convert.ToString(fila.Cells["Nit"].Value);
+            txtNombre.Text = Convert.ToString(fila.Cells["Nombre"].Value);
+            txtTelefono.Text = Convert.ToString(fila.Cells["Telefono"].Value);
         }
 
         #endregion

@@ -138,10 +138,10 @@ namespace VistasFarmacia.Forms
         public void LlenarCampos(DataGridViewRow fila)
         {
             if (fila == null) return;
-            idMarca = Convert.ToInt32(fila.Cells[0].Value);
-            txtNombre.Text = fila.Cells[1].Value.ToString();
-            txtTelefono.Text = fila.Cells[2].Value.ToString();
-            txtRepresentante.Text = fila.Cells[3].Value.ToString();
+            idMarca = Convert.ToInt32(fila.Cells["IdMarca"].Value);
+            txtNombre.Text = Convert.ToString(fila.Cells["Nombre"].Value);
+            txtTelefono.Text = Convert.ToString(fila.Cells["Telefono"].Value);
+            txtRepresentante.Text = Convert.ToString(fila.Cells["Representante"].Value);
         }
 
         #endregion
