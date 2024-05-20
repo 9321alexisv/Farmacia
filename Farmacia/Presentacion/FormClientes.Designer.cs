@@ -28,12 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             labelClientes = new Label();
             dgvClientes = new DataGridView();
-            labelId = new Label();
-            txtId = new TextBox();
             txtNombre = new TextBox();
             labelNombre = new Label();
             btnGuardar = new Button();
@@ -67,23 +65,23 @@
             dgvClientes.BackgroundColor = Color.FromArgb(49, 49, 68);
             dgvClientes.BorderStyle = BorderStyle.None;
             dgvClientes.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = SystemColors.Control;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            dgvClientes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dgvClientes.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = Color.FromArgb(49, 49, 68);
-            dataGridViewCellStyle4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle4.ForeColor = Color.White;
-            dataGridViewCellStyle4.SelectionBackColor = Color.SteelBlue;
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
-            dgvClientes.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(49, 49, 68);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = Color.SteelBlue;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dgvClientes.DefaultCellStyle = dataGridViewCellStyle2;
             dgvClientes.EnableHeadersVisualStyles = false;
             dgvClientes.GridColor = Color.FromArgb(49, 49, 68);
             dgvClientes.Location = new Point(53, 106);
@@ -98,29 +96,9 @@
             dgvClientes.Size = new Size(826, 556);
             dgvClientes.TabIndex = 1;
             // 
-            // labelId
-            // 
-            labelId.AutoSize = true;
-            labelId.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            labelId.ForeColor = Color.White;
-            labelId.Location = new Point(946, 113);
-            labelId.Name = "labelId";
-            labelId.Size = new Size(38, 28);
-            labelId.TabIndex = 2;
-            labelId.Text = "ID:";
-            // 
-            // txtId
-            // 
-            txtId.Enabled = false;
-            txtId.Location = new Point(1061, 114);
-            txtId.Margin = new Padding(3, 4, 3, 4);
-            txtId.Name = "txtId";
-            txtId.Size = new Size(67, 27);
-            txtId.TabIndex = 3;
-            // 
             // txtNombre
             // 
-            txtNombre.Location = new Point(1061, 247);
+            txtNombre.Location = new Point(1061, 167);
             txtNombre.Margin = new Padding(3, 4, 3, 4);
             txtNombre.Name = "txtNombre";
             txtNombre.Size = new Size(250, 27);
@@ -131,7 +109,7 @@
             labelNombre.AutoSize = true;
             labelNombre.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             labelNombre.ForeColor = Color.White;
-            labelNombre.Location = new Point(946, 247);
+            labelNombre.Location = new Point(946, 167);
             labelNombre.Name = "labelNombre";
             labelNombre.Size = new Size(94, 28);
             labelNombre.TabIndex = 4;
@@ -141,7 +119,7 @@
             // 
             btnGuardar.FlatStyle = FlatStyle.Flat;
             btnGuardar.Image = Farmacia.Properties.Resources.ADD;
-            btnGuardar.Location = new Point(1161, 442);
+            btnGuardar.Location = new Point(1161, 393);
             btnGuardar.Margin = new Padding(3, 4, 3, 4);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(150, 80);
@@ -153,7 +131,7 @@
             // 
             // txtTelefono
             // 
-            txtTelefono.Location = new Point(1061, 320);
+            txtTelefono.Location = new Point(1061, 240);
             txtTelefono.Margin = new Padding(3, 4, 3, 4);
             txtTelefono.Name = "txtTelefono";
             txtTelefono.Size = new Size(250, 27);
@@ -164,7 +142,7 @@
             lblTelefono.AutoSize = true;
             lblTelefono.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lblTelefono.ForeColor = Color.White;
-            lblTelefono.Location = new Point(946, 319);
+            lblTelefono.Location = new Point(946, 239);
             lblTelefono.Name = "lblTelefono";
             lblTelefono.Size = new Size(99, 28);
             lblTelefono.TabIndex = 14;
@@ -172,7 +150,7 @@
             // 
             // txtNit
             // 
-            txtNit.Location = new Point(1061, 186);
+            txtNit.Location = new Point(1061, 106);
             txtNit.Margin = new Padding(3, 4, 3, 4);
             txtNit.Name = "txtNit";
             txtNit.Size = new Size(250, 27);
@@ -183,7 +161,7 @@
             labelNit.AutoSize = true;
             labelNit.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             labelNit.ForeColor = Color.White;
-            labelNit.Location = new Point(946, 182);
+            labelNit.Location = new Point(946, 102);
             labelNit.Name = "labelNit";
             labelNit.Size = new Size(51, 28);
             labelNit.TabIndex = 16;
@@ -221,7 +199,7 @@
             // 
             btnCancelar.FlatStyle = FlatStyle.Flat;
             btnCancelar.Image = Farmacia.Properties.Resources.cleaner;
-            btnCancelar.Location = new Point(946, 442);
+            btnCancelar.Location = new Point(946, 393);
             btnCancelar.Margin = new Padding(3, 4, 3, 4);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(150, 80);
@@ -247,8 +225,6 @@
             Controls.Add(btnGuardar);
             Controls.Add(txtNombre);
             Controls.Add(labelNombre);
-            Controls.Add(txtId);
-            Controls.Add(labelId);
             Controls.Add(dgvClientes);
             Controls.Add(labelClientes);
             Margin = new Padding(3, 4, 3, 4);
@@ -264,8 +240,6 @@
 
         private Label labelClientes;
         private DataGridView dgvClientes;
-        private Label labelId;
-        private TextBox txtId;
         private TextBox txtNombre;
         private Label labelNombre;
         private Button btnGuardar;

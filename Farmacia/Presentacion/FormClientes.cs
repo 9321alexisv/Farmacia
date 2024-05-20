@@ -1,5 +1,6 @@
 ﻿
 using Farmacia.Datos;
+using Farmacia.Entidad;
 using Farmacia.Presentacion;
 
 namespace VistasFarmacia.Forms
@@ -33,7 +34,6 @@ namespace VistasFarmacia.Forms
             }
 
             labelClientes.ForeColor = ThemeColor.PrimaryColor;
-            labelId.ForeColor = ThemeColor.SecondaryColor;
             labelNombre.ForeColor = ThemeColor.SecondaryColor;
             labelNit.ForeColor = ThemeColor.SecondaryColor;
             lblTelefono.ForeColor = ThemeColor.SecondaryColor;
@@ -44,8 +44,8 @@ namespace VistasFarmacia.Forms
             dgvClientes.RowHeadersDefaultCellStyle.BackColor = ThemeColor.PrimaryColor;
         }
 
-        #region "Datos"
-        readonly D_Clientes clientes = new();
+        #region Datos
+        int idCliente = 0;
 
         private void MostrarClientes()
         {
@@ -55,39 +55,34 @@ namespace VistasFarmacia.Forms
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show("Error al mostrar datos. " + ex.Message, "Error de visualización", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
+        #endregion
+
+        #region Botones
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if(txtNit.TextLength < 1 || txtNombre.TextLength < 1 || txtTelefono.TextLength < 1)
+            if(txtNombre.TextLength < 1)
             {
-                MessageBox.Show("Todos los campos son obligatorios", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("El Nombre es obligatorio", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
             try
             {
-                if(txtId.TextLength == 0)
+                Cliente cliente = new()
                 {
-                    D_Clientes.Insertar(
-                        txtNit.Text,
-                        txtNombre.Text,
-                        txtTelefono.Text
-                    );
-                }
+                    IdCliente = idCliente,
+                    Nit = txtNit.Text,
+                    Nombre = txtNombre.Text,
+                    Telefono = txtTelefono.Text
+                };
 
-                if(txtId.TextLength > 0)
-                {
-                    D_Clientes.Editar(
-                        Convert.ToInt32(txtId.Text),
-                        txtNit.Text,
-                        txtNombre.Text,
-                        txtTelefono.Text
-                    );
-                }
+                if (idCliente == 0) D_Clientes.Insertar(cliente);
+
+                if(idCliente > 0) D_Clientes.Editar(cliente);
 
                 LimpiarCampos();
                 MostrarClientes();
@@ -111,21 +106,28 @@ namespace VistasFarmacia.Forms
                 MessageBox.Show("Ningun regisro seleccionado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
 
-            DialogResult confirmar = MessageBox.Show("Eliminar el cliente?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            DialogResult confirmar = MessageBox.Show("Eliminar el registro?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
             if (confirmar != DialogResult.Yes) return;
 
             int idCliente = Convert.ToInt32(dgvClientes.CurrentRow.Cells[0].Value);
             D_Clientes.Eliminar(idCliente);
+
+            LimpiarCampos();
             MostrarClientes();
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            LimpiarCampos();
         }
 
         #endregion
 
-        #region "Helpers"
+        #region Helpers
         public void LimpiarCampos()
         {
-            txtId.Clear();
+            idCliente = 0;
             txtNit.Clear();
             txtNombre.Clear();
             txtTelefono.Clear();
@@ -134,15 +136,10 @@ namespace VistasFarmacia.Forms
         public void LlenarCampos(DataGridViewRow fila)
         {
             if (fila == null) return;
-            txtId.Text = fila.Cells[0].Value.ToString();
-            txtNit.Text = fila.Cells[1].Value.ToString();
-            txtNombre.Text = fila.Cells[2].Value.ToString();
-            txtTelefono.Text = fila.Cells[3].Value.ToString();
-        }
-
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            LimpiarCampos();
+            idCliente = Convert.ToInt32(fila.Cells[0].Value);
+            txtNit.Text = fila.Cells["Nit"].Value.ToString();
+            txtNombre.Text = fila.Cells["Nombre"].Value.ToString();
+            txtTelefono.Text = fila.Cells["Telefono"].Value.ToString();
         }
 
         #endregion
