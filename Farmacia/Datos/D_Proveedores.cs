@@ -1,4 +1,5 @@
 ﻿
+using Farmacia.Entidad;
 using Npgsql;
 using System.Data;
 
@@ -6,19 +7,33 @@ namespace Farmacia.Datos
 {
     public class D_Proveedores
     {
-        public static DataTable Listar()
+        public static List<Proveedor> Listar()
         {
-            DataTable tabla = new();
+            List<Proveedor> proveedores = [];
 
             try
             {
                 ConexionDB conexion = new();
                 using NpgsqlConnection conn = conexion.AbrirConexion()!;
-                using NpgsqlCommand comando = new("select * from proveedor where estado = true", conn);
-                using NpgsqlDataReader leer = comando.ExecuteReader();
-                tabla.Load(leer);
-                
-                return tabla;
+                using NpgsqlCommand comando = new("select * from proveedor;", conn);
+                using NpgsqlDataReader datos = comando.ExecuteReader();
+
+                while (datos.Read()) {
+
+                    Proveedor proveedor = new()
+                    {
+                        IdProveedor = (int)datos.GetFieldValue<int>("id_proveedor"),
+                        Nit = datos.GetFieldValue<string>("nit"),
+                        Nombre = datos.GetFieldValue<string>("nombre"),
+                        Telefono = datos.GetFieldValue<string>("telefono"),
+                        Representante = datos.GetFieldValue<string>("representante"),
+                        Estado = datos.GetFieldValue<bool>("estado")
+                    };
+
+                    proveedores.Add(proveedor);
+                }
+
+                return proveedores;
             }
             catch (NpgsqlException ex)
             {
@@ -26,21 +41,21 @@ namespace Farmacia.Datos
             }
         }
 
-        public static void Insertar(string nit, string proveedor, string telefono, string representante)
+        public static bool Insertar(Proveedor proveedor)
         {
-
             try
             {
                 ConexionDB conexion = new();
                 using NpgsqlConnection conn = conexion.AbrirConexion()!;
-                using NpgsqlCommand cmd = new("INSERT INTO proveedor (nit, proveedor, telefono, representante) VALUES (@nit, @proveedor, @telefono, @representante)", conn);
-                
-                cmd.Parameters.AddWithValue("@nit", nit);
-                cmd.Parameters.AddWithValue("@proveedor", proveedor);
-                cmd.Parameters.AddWithValue("@telefono", telefono);
-                cmd.Parameters.AddWithValue("@representante", representante);
+                using NpgsqlCommand cmd = new("INSERT INTO proveedor (nit, nombre, telefono, representante) VALUES (@nit, @nombre, @telefono, @representante)", conn);
 
-                cmd.ExecuteNonQuery();
+                cmd.Parameters.AddWithValue("@nit", proveedor.Nit ?? "");
+                cmd.Parameters.AddWithValue("@nombre", proveedor.Nombre);
+                cmd.Parameters.AddWithValue("@telefono", proveedor.Telefono ?? "");
+                cmd.Parameters.AddWithValue("@representante", proveedor.Representante ?? "");
+
+                int filasAfectadas = cmd.ExecuteNonQuery();
+                return filasAfectadas == 1;
             }
             catch (NpgsqlException ex)
             {
@@ -48,22 +63,22 @@ namespace Farmacia.Datos
             }
         }
 
-        public void Actualizar(int idProveedor, string nit, string proveedor, string telefono, string representante)
+        public static bool Actualizar(Proveedor proveedor)
         {
-
             try
             {
                 ConexionDB conexion = new();
                 using NpgsqlConnection conn = conexion.AbrirConexion()!;
-                using NpgsqlCommand cmd = new("UPDATE proveedor SET nit = @nit, proveedor = @proveedor, telefono = @telefono, representante = @representante WHERE id_proveedor = @idProveedor", conn);
+                using NpgsqlCommand cmd = new("UPDATE proveedor SET nit = @nit, nombre = @nombre, telefono = @telefono, representante = @representante WHERE id_proveedor = @id_proveedor", conn);
 
-                cmd.Parameters.AddWithValue("@nit", nit);
-                cmd.Parameters.AddWithValue("@proveedor", proveedor);
-                cmd.Parameters.AddWithValue("@telefono", telefono);
-                cmd.Parameters.AddWithValue("@representante", representante);
-                cmd.Parameters.AddWithValue("@idProveedor", idProveedor);
+                cmd.Parameters.AddWithValue("@nit", proveedor.Nit ?? "");
+                cmd.Parameters.AddWithValue("@nombre", proveedor.Nombre);
+                cmd.Parameters.AddWithValue("@telefono", proveedor.Telefono ?? "");
+                cmd.Parameters.AddWithValue("@representante", proveedor.Representante ?? "");
+                cmd.Parameters.AddWithValue("@id_proveedor", proveedor.IdProveedor);
 
-                cmd.ExecuteNonQuery();
+                int filasAfectadas = cmd.ExecuteNonQuery();
+                return filasAfectadas == 1;
             }
             catch (NpgsqlException ex)
             {
@@ -72,17 +87,17 @@ namespace Farmacia.Datos
         }
 
         // Eliminado logico
-        public static bool Eliminar(int id)
+        public static bool Eliminar(int idProveedor)
         {
             try
             {
                 ConexionDB conexion = new();
                 using NpgsqlConnection conn = conexion.AbrirConexion()!;
-                using NpgsqlCommand comando = new("UPDATE proveedor SET estado = false WHERE id_proveedor = @id", conn);
-                comando.Parameters.AddWithValue("@id", id);
+                using NpgsqlCommand comando = new("UPDATE proveedor SET estado = false WHERE id_proveedor = @id_proveedor", conn);
+                comando.Parameters.AddWithValue("@id_proveedor", idProveedor);
 
                 int filasAfectadas = comando.ExecuteNonQuery();
-                return filasAfectadas > 0; // True si se actualizó al menos un registro
+                return filasAfectadas == 1;
             }
             catch (NpgsqlException ex)
             {

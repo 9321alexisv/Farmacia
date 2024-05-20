@@ -32,9 +32,7 @@
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             labelClientes = new Label();
             dgvProveedores = new DataGridView();
-            labelId = new Label();
-            txtId = new TextBox();
-            txtProveedor = new TextBox();
+            txtNombre = new TextBox();
             labelNombre = new Label();
             txtNit = new TextBox();
             labelNit = new Label();
@@ -65,7 +63,7 @@
             dgvProveedores.AllowUserToAddRows = false;
             dgvProveedores.AllowUserToDeleteRows = false;
             dgvProveedores.AllowUserToOrderColumns = true;
-            dgvProveedores.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvProveedores.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgvProveedores.BackgroundColor = Color.FromArgb(49, 49, 68);
             dgvProveedores.BorderStyle = BorderStyle.None;
             dgvProveedores.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
@@ -100,48 +98,28 @@
             dgvProveedores.Size = new Size(875, 535);
             dgvProveedores.TabIndex = 1;
             // 
-            // labelId
+            // txtNombre
             // 
-            labelId.AutoSize = true;
-            labelId.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            labelId.ForeColor = Color.White;
-            labelId.Location = new Point(971, 129);
-            labelId.Name = "labelId";
-            labelId.Size = new Size(38, 28);
-            labelId.TabIndex = 2;
-            labelId.Text = "ID:";
-            // 
-            // txtId
-            // 
-            txtId.Enabled = false;
-            txtId.Location = new Point(1091, 130);
-            txtId.Margin = new Padding(3, 4, 3, 4);
-            txtId.Name = "txtId";
-            txtId.Size = new Size(67, 27);
-            txtId.TabIndex = 3;
-            // 
-            // txtProveedor
-            // 
-            txtProveedor.Location = new Point(1091, 253);
-            txtProveedor.Margin = new Padding(3, 4, 3, 4);
-            txtProveedor.Name = "txtProveedor";
-            txtProveedor.Size = new Size(250, 27);
-            txtProveedor.TabIndex = 5;
+            txtNombre.Location = new Point(1091, 180);
+            txtNombre.Margin = new Padding(3, 4, 3, 4);
+            txtNombre.Name = "txtNombre";
+            txtNombre.Size = new Size(250, 27);
+            txtNombre.TabIndex = 5;
             // 
             // labelNombre
             // 
             labelNombre.AutoSize = true;
             labelNombre.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             labelNombre.ForeColor = Color.White;
-            labelNombre.Location = new Point(969, 253);
+            labelNombre.Location = new Point(969, 180);
             labelNombre.Name = "labelNombre";
-            labelNombre.Size = new Size(115, 28);
+            labelNombre.Size = new Size(94, 28);
             labelNombre.TabIndex = 4;
-            labelNombre.Text = "Proveedor:";
+            labelNombre.Text = "Nombre:";
             // 
             // txtNit
             // 
-            txtNit.Location = new Point(1091, 197);
+            txtNit.Location = new Point(1091, 124);
             txtNit.Margin = new Padding(3, 4, 3, 4);
             txtNit.Name = "txtNit";
             txtNit.Size = new Size(250, 27);
@@ -152,7 +130,7 @@
             labelNit.AutoSize = true;
             labelNit.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             labelNit.ForeColor = Color.White;
-            labelNit.Location = new Point(969, 193);
+            labelNit.Location = new Point(969, 120);
             labelNit.Name = "labelNit";
             labelNit.Size = new Size(51, 28);
             labelNit.TabIndex = 6;
@@ -162,7 +140,7 @@
             // 
             btnGuardar.FlatStyle = FlatStyle.Flat;
             btnGuardar.Image = Farmacia.Properties.Resources.ADD;
-            btnGuardar.Location = new Point(1191, 529);
+            btnGuardar.Location = new Point(1191, 485);
             btnGuardar.Margin = new Padding(3, 4, 3, 4);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(150, 80);
@@ -174,7 +152,7 @@
             // 
             // txtTelefono
             // 
-            txtTelefono.Location = new Point(1091, 324);
+            txtTelefono.Location = new Point(1091, 251);
             txtTelefono.Margin = new Padding(3, 4, 3, 4);
             txtTelefono.Name = "txtTelefono";
             txtTelefono.Size = new Size(250, 27);
@@ -185,7 +163,7 @@
             lblTelefono.AutoSize = true;
             lblTelefono.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lblTelefono.ForeColor = Color.White;
-            lblTelefono.Location = new Point(969, 324);
+            lblTelefono.Location = new Point(969, 251);
             lblTelefono.Name = "lblTelefono";
             lblTelefono.Size = new Size(99, 28);
             lblTelefono.TabIndex = 14;
@@ -193,7 +171,7 @@
             // 
             // txtRepresentante
             // 
-            txtRepresentante.Location = new Point(1129, 392);
+            txtRepresentante.Location = new Point(1129, 319);
             txtRepresentante.Margin = new Padding(3, 4, 3, 4);
             txtRepresentante.Name = "txtRepresentante";
             txtRepresentante.Size = new Size(212, 27);
@@ -204,7 +182,7 @@
             lblRepresentante.AutoSize = true;
             lblRepresentante.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lblRepresentante.ForeColor = Color.White;
-            lblRepresentante.Location = new Point(969, 392);
+            lblRepresentante.Location = new Point(969, 319);
             lblRepresentante.Name = "lblRepresentante";
             lblRepresentante.Size = new Size(154, 28);
             lblRepresentante.TabIndex = 16;
@@ -214,7 +192,7 @@
             // 
             btnLimpiar.FlatStyle = FlatStyle.Flat;
             btnLimpiar.Image = Farmacia.Properties.Resources.cleaner;
-            btnLimpiar.Location = new Point(969, 529);
+            btnLimpiar.Location = new Point(969, 485);
             btnLimpiar.Margin = new Padding(3, 4, 3, 4);
             btnLimpiar.Name = "btnLimpiar";
             btnLimpiar.Size = new Size(150, 80);
@@ -268,10 +246,8 @@
             Controls.Add(btnGuardar);
             Controls.Add(txtNit);
             Controls.Add(labelNit);
-            Controls.Add(txtProveedor);
+            Controls.Add(txtNombre);
             Controls.Add(labelNombre);
-            Controls.Add(txtId);
-            Controls.Add(labelId);
             Controls.Add(dgvProveedores);
             Controls.Add(labelClientes);
             Margin = new Padding(3, 4, 3, 4);
@@ -289,7 +265,7 @@
         private DataGridView dgvProveedores;
         private Label labelId;
         private TextBox txtId;
-        private TextBox txtProveedor;
+        private TextBox txtNombre;
         private Label labelNombre;
         private TextBox txtNit;
         private Label labelNit;

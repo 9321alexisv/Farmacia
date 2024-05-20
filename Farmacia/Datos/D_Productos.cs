@@ -52,7 +52,8 @@ namespace Farmacia.Datos
                         IdProducto = Convert.ToInt32(leer["id_producto"]),
                         ObjProveedor = new Proveedor
                         {
-                            IdProveedor = Convert.ToInt32(leer["id_proveedor"])
+                            IdProveedor = Convert.ToInt32(leer["id_proveedor"]),
+                            Nombre = ""
                         },
                         Nombre = Convert.ToString(leer["nombre"]) ?? "",
                         PrecioCompra = Convert.ToDecimal(leer["precio_compra"]),
