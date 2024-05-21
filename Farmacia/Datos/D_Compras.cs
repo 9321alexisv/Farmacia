@@ -90,7 +90,7 @@ namespace Farmacia.Datos
         // ============================================================================================
         // OBTENER TODAS LAS COMPRAS ==================================================================
         // ============================================================================================
-        public static List<Compra> ObtenerComprasPorFechas(DateTime? fechaInicio, DateTime? fechaFin)
+        public static List<Compra> ComprasPorFechas(DateTime? fechaInicio, DateTime? fechaFin)
         {
             List<Compra> compras = [];
             string query = """
@@ -114,13 +114,13 @@ namespace Farmacia.Datos
                 {
                     Compra compra = new()
                     {
-                        IdCompra = datos.GetInt32(0),
+                        IdCompra = datos.GetInt32("id_compra"),
                         Proveedor = new()
                         {
                             IdProveedor = datos.GetFieldValue<int>("id_proveedor"),
                             Nombre = datos.GetFieldValue<string>("proveedor"),
                         },
-                        Fecha = datos.GetFieldValue<string>("fecha"),
+                        Fecha = datos.GetFieldValue<DateTime>("fecha").ToString(),
                     };
 
                     compras.Add(compra);
@@ -174,8 +174,10 @@ namespace Farmacia.Datos
             }
         }
 
-        public static List<DetalleCompra> ObtenerDetallesCompra(int idCompra)
+        public static List<Producto> DetalleCompra(int idCompra)
         {
+            List<Producto> detalleCompra = [];
+
             string query = """
                 SELECT p.id_producto, p.nombre producto, m.id_marca, m.nombre marca,
                 dc.precio_compra, dc.precio_venta, dc.cantidad 
@@ -193,32 +195,25 @@ namespace Farmacia.Datos
                 command.Parameters.AddWithValue("@idCompra", idCompra);
 
                 using NpgsqlDataReader reader = command.ExecuteReader();
-                List<DetalleCompra> detalleCompra = [];
 
                 while (reader.Read())
                 {
-                    DetalleCompra detalle = new()
+                    Producto producto = new()
                     {
-
-                        Producto = new Producto()
+                        IdProducto = reader.GetInt32("id_producto"),
+                        Marca = new()
                         {
-                            IdProducto = reader.GetInt32("id_producto"),
-                            Marca = new()
-                            {
-                                IdMarca = reader.GetInt32("id_marca"),
-                                Nombre = reader.GetString("marca")
-                            },
-                            Nombre = reader.GetString("producto"),
-                            PrecioCompra = reader.GetDecimal("precio_compra"),
-                            PrecioVenta = reader.GetDecimal("precio_venta"),
-                            Stock = reader.GetInt32("cantidad"),
-                            StockMinimo = 0,
+                            IdMarca = reader.GetInt32("id_marca"),
+                            Nombre = reader.GetString("marca")
                         },
+                        Nombre = reader.GetString("producto"),
                         PrecioCompra = reader.GetDecimal("precio_compra"),
-                        Cantidad = reader.GetInt32("cantidad")
+                        PrecioVenta = reader.GetDecimal("precio_venta"),
+                        Stock = reader.GetInt32("cantidad"),
+                        StockMinimo = 0,
                     };
 
-                    detalleCompra.Add(detalle);
+                    detalleCompra.Add(producto);
                 }
 
                 return detalleCompra;

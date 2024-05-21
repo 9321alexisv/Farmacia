@@ -3,6 +3,7 @@ using Farmacia.Datos;
 using Farmacia.Entidad;
 using Farmacia.Presentacion;
 using Farmacia.Presentacion.Reportes;
+using Irony.Parsing;
 
 namespace VistasFarmacia.Forms
 {
@@ -51,10 +52,10 @@ namespace VistasFarmacia.Forms
 
             foreach (var compra in todasCompras)
             {
-                List<DetalleCompra> detallesCompra = D_Compras.ObtenerDetallesCompra(compra.IdCompra);
+                List<Producto> detallesCompra = D_Compras.DetalleCompra(compra.IdCompra);
 
                 // PARA ETIQUETAS GLOBALES CON PROPOSITOS INFORMATIVOS
-                decimal totalCompra = detallesCompra.Sum(detalle => detalle.PrecioCompra * detalle.Cantidad);
+                decimal totalCompra = detallesCompra.Sum(detalle => detalle.PrecioCompra * detalle.Stock);
                 totalCompras += totalCompra; // Sumar al total de compra
 
                 // Encabezado de cada venta dentro de la tabla
@@ -69,15 +70,15 @@ namespace VistasFarmacia.Forms
                 dgvCompras.Rows[rowIndex].DefaultCellStyle.BackColor = Color.Green;
                 dgvCompras.Rows[rowIndex].Height = 50;
 
-                foreach (var detalle in detallesCompra)
+                foreach (var producto in detallesCompra)
                 {
                     dgvCompras.Rows.Add(
-                        detalle.Producto.IdProducto,
-                        detalle.Producto.Marca.Nombre,
-                        detalle.Producto.Nombre,
-                        detalle.Cantidad,
-                        detalle.PrecioCompra,
-                        detalle.PrecioCompra * detalle.Cantidad
+                        producto.IdProducto,
+                        producto.Marca.Nombre,
+                        producto.Nombre,
+                        producto.Stock,
+                        producto.PrecioCompra,
+                        producto.PrecioCompra * producto.Stock
                     );
                 }
             }
@@ -96,7 +97,7 @@ namespace VistasFarmacia.Forms
             string fechaFinStr = fechaFin.ToString("d/M/yyyy");
 
             D_Compras compras = new();
-            List<Compra> todasCompras = D_Compras.ObtenerComprasPorFechas(fechaInicio, fechaFin);
+            List<Compra> todasCompras = D_Compras.ComprasPorFechas(fechaInicio, fechaFin);
 
             decimal totalCompras = 0;
 
@@ -104,35 +105,40 @@ namespace VistasFarmacia.Forms
 
             foreach (var compra in todasCompras)
             {
-                List<DetalleCompra> detallesCompra = D_Compras.ObtenerDetallesCompra(compra.IdCompra);
+                List<Producto> detallesCompra = D_Compras.DetalleCompra(compra.IdCompra);
 
                 // PARA ETIQUETAS GLOBALES CON PROPOSITOS INFORMATIVOS
-                decimal totalCompra = detallesCompra.Sum(detalle => detalle.PrecioCompra * detalle.Cantidad);
+                decimal totalCompra = detallesCompra.Sum(detalle => detalle.PrecioCompra * detalle.Stock);
                 totalCompras += totalCompra; // Sumar al total de compra
 
                 // Encabezado de cada venta dentro de la tabla
                 int rowIndex = dgvCompras.Rows.Add(
                     $"COMPRA #{compra.IdCompra}",
                     $"FECHA: {compra.Fecha}",
+                    "PROVEEDOR:",
+                    compra.Proveedor.Nombre,
                     "TOTAL",
                     totalCompra
                  );
                 dgvCompras.Rows[rowIndex].DefaultCellStyle.BackColor = Color.Green;
                 dgvCompras.Rows[rowIndex].Height = 50;
 
-                foreach (var detalle in detallesCompra)
+                foreach (var producto in detallesCompra)
                 {
                     dgvCompras.Rows.Add(
-                        detalle.Producto,
-                        detalle.Cantidad,
-                        detalle.PrecioCompra,
-                        detalle.PrecioCompra * detalle.Cantidad
+                        producto.IdProducto,
+                        producto.Marca.Nombre,
+                        producto.Nombre,
+                        producto.Stock,
+                        producto.PrecioCompra,
+                        producto.PrecioCompra * producto.Stock
                     );
                 }
             }
 
             lblCompras.Text = totalCompras.ToString();
         }
+
         #endregion
 
         #region Botones
@@ -151,7 +157,7 @@ namespace VistasFarmacia.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message + ex.InnerException);
             }
         }
 
