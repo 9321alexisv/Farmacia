@@ -8,5 +8,6 @@ namespace Farmacia.Entidad
         public required string Nombre { get; set; }
         public string? Telefono { get; set; }
         public bool Estado { get; set; }
+        public string NombreNit => $"{Nombre} - {Nit}";
     }
 }

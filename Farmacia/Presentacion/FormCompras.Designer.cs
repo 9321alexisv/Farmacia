@@ -215,20 +215,22 @@
             // 
             // dtpInicio
             // 
-            dtpInicio.CalendarFont = new Font("Segoe UI", 12F);
+            dtpInicio.CalendarFont = new Font("Segoe UI", 13.8F);
+            dtpInicio.Font = new Font("Segoe UI", 12F);
             dtpInicio.Format = DateTimePickerFormat.Short;
             dtpInicio.Location = new Point(397, 53);
             dtpInicio.Name = "dtpInicio";
-            dtpInicio.Size = new Size(150, 27);
+            dtpInicio.Size = new Size(150, 34);
             dtpInicio.TabIndex = 18;
             // 
             // dtpFin
             // 
-            dtpFin.CalendarFont = new Font("Segoe UI", 12F);
+            dtpFin.CalendarFont = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dtpFin.Font = new Font("Segoe UI", 12F);
             dtpFin.Format = DateTimePickerFormat.Short;
             dtpFin.Location = new Point(564, 53);
             dtpFin.Name = "dtpFin";
-            dtpFin.Size = new Size(150, 27);
+            dtpFin.Size = new Size(150, 34);
             dtpFin.TabIndex = 19;
             // 
             // label1

@@ -99,7 +99,7 @@ namespace VistasFarmacia.Forms
         private void dgvProductos_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             // BUSCAR PRODUCTO ========================================================================
-            // Verifica que la celda editada esté en la columna "codigo"
+            // Verifica que la celda editada esté en la columna "IdProducto"
             if (dgvProductos.Columns[e.ColumnIndex].Name == "IdProducto")
             {
                 // Obtén el código del producto ingresado
@@ -117,6 +117,7 @@ namespace VistasFarmacia.Forms
                     }
 
                     // Carga los datos del producto en la fila correspondiente
+                    dgvProductos.Rows[e.RowIndex].Cells["StockActual"].Value = producto.Stock;
                     dgvProductos.Rows[e.RowIndex].Cells["Nombre"].Value = producto.Nombre;
                     dgvProductos.Rows[e.RowIndex].Cells["Marca"].Value = producto.Marca.Nombre;
                     dgvProductos.Rows[e.RowIndex].Cells["PrecioCompra"].Value = producto.PrecioCompra;

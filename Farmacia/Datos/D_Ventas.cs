@@ -37,29 +37,34 @@ namespace Farmacia.Datos
             {
                 ConexionDB conexion = new();
                 using NpgsqlConnection conn = conexion.AbrirConexion()!;
-                using NpgsqlCommand command = new(query, conn);
+                using NpgsqlCommand cmd = new(query, conn);
+
+                cmd.Parameters.AddWithValue("@id_venta", idVenta);
+                cmd.Parameters.Add("@id_producto", NpgsqlTypes.NpgsqlDbType.Integer);
+                cmd.Parameters.Add("@precio_compra", NpgsqlTypes.NpgsqlDbType.Numeric);
+                cmd.Parameters.Add("@precio_venta", NpgsqlTypes.NpgsqlDbType.Numeric);
+                cmd.Parameters.Add("@cantidad", NpgsqlTypes.NpgsqlDbType.Integer);
 
                 foreach (DataGridViewRow row in dgvProductos.Rows)
                 {
-                    command.Parameters.AddWithValue("@id_venta", idVenta);
-                    command.Parameters.AddWithValue("@id_producto", Convert.ToInt32(row.Cells["codigo"].Value));
-                    command.Parameters.AddWithValue("@precio_compra", Convert.ToDecimal(row.Cells["PrecioCompra"].Value));
-                    command.Parameters.AddWithValue("@precio_venta", Convert.ToDecimal(row.Cells["Precio"].Value));
-                    command.Parameters.AddWithValue("@cantidad", Convert.ToInt32(row.Cells["Cantidad"].Value));
-
-                    command.ExecuteNonQuery();
-                    command.Parameters.Clear();
+                    if (row.IsNewRow) continue;
+                    
+                    cmd.Parameters["@id_producto"].Value = Convert.ToInt32(row.Cells["IdProducto"].Value);
+                    cmd.Parameters["@precio_compra"].Value = Convert.ToDecimal(row.Cells["PrecioCompra"].Value);
+                    cmd.Parameters["@precio_venta"].Value = Convert.ToDecimal(row.Cells["PrecioVenta"].Value);
+                    cmd.Parameters["@cantidad"].Value = Convert.ToInt32(row.Cells["Cantidad"].Value);
+                    
+                    cmd.ExecuteNonQuery();
                 }
+
+                ActualizarStockProductos(dgvProductos);
             }
             catch (NpgsqlException ex)
             {
-                throw new NpgsqlException("Error al insertar en la tabla 'detalle_venta'" + ex.Message);
+                throw new NpgsqlException("Error al insertar en la tabla 'detalle_venta'" + ex.Message + ex);
             }
         }
 
-        // ============================================================================================
-        // ACTUALIZAR STOCK ===========================================================================
-        // ============================================================================================
         public static void ActualizarStockProductos(DataGridView dgvProductos)
         {
             try
@@ -69,15 +74,15 @@ namespace Farmacia.Datos
 
                 foreach (DataGridViewRow row in dgvProductos.Rows)
                 {
-                    int idProducto = Convert.ToInt32(row.Cells["codigo"].Value);
+                    int idProducto = Convert.ToInt32(row.Cells["IdProducto"].Value);
                     int cantidad = Convert.ToInt32(row.Cells["Cantidad"].Value);
 
-                    string queryUpdateStock = "UPDATE producto SET stock = stock - @cantidad WHERE id_producto = @idProducto";
-                    
-                    using NpgsqlCommand commandUpdateStock = new(queryUpdateStock, conn);
-                    commandUpdateStock.Parameters.AddWithValue("@cantidad", cantidad);
-                    commandUpdateStock.Parameters.AddWithValue("@idProducto", idProducto);
-                    commandUpdateStock.ExecuteNonQuery();
+                    string query = "UPDATE producto SET stock = stock - @cantidad WHERE id_producto = @idProducto";
+
+                    using NpgsqlCommand cmd = new(query, conn);
+                    cmd.Parameters.AddWithValue("@cantidad", cantidad);
+                    cmd.Parameters.AddWithValue("@idProducto", idProducto);
+                    cmd.ExecuteNonQuery();
                 }
             }
             catch (NpgsqlException ex)

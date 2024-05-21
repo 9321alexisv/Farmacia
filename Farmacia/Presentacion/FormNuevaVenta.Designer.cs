@@ -31,13 +31,14 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            dgvNuevaVenta = new DataGridView();
-            Codigo = new DataGridViewTextBoxColumn();
-            cantidad = new DataGridViewTextBoxColumn();
-            Producto = new DataGridViewTextBoxColumn();
+            dgvProductos = new DataGridView();
+            IdProducto = new DataGridViewTextBoxColumn();
+            Cantidad = new DataGridViewTextBoxColumn();
             Stock = new DataGridViewTextBoxColumn();
-            precio = new DataGridViewTextBoxColumn();
+            Producto = new DataGridViewTextBoxColumn();
+            Marca = new DataGridViewTextBoxColumn();
             PrecioCompra = new DataGridViewTextBoxColumn();
+            PrecioVenta = new DataGridViewTextBoxColumn();
             Subtotal = new DataGridViewTextBoxColumn();
             labelTablaIngresoVentas = new Label();
             btnLimpiar = new Button();
@@ -49,42 +50,42 @@
             labelAcumulado = new Label();
             panel2 = new Panel();
             cmbClientes = new ComboBox();
-            ((System.ComponentModel.ISupportInitialize)dgvNuevaVenta).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvProductos).BeginInit();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             SuspendLayout();
             // 
-            // dgvNuevaVenta
+            // dgvProductos
             // 
-            dgvNuevaVenta.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            dgvNuevaVenta.BackgroundColor = Color.FromArgb(49, 49, 68);
-            dgvNuevaVenta.BorderStyle = BorderStyle.None;
-            dgvNuevaVenta.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dgvNuevaVenta.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dgvProductos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgvProductos.BackgroundColor = Color.FromArgb(49, 49, 68);
+            dgvProductos.BorderStyle = BorderStyle.None;
+            dgvProductos.CellBorderStyle = DataGridViewCellBorderStyle.Sunken;
+            dgvProductos.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dgvNuevaVenta.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dgvNuevaVenta.ColumnHeadersHeight = 30;
-            dgvNuevaVenta.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvNuevaVenta.Columns.AddRange(new DataGridViewColumn[] { Codigo, cantidad, Producto, Stock, precio, PrecioCompra, Subtotal });
+            dgvProductos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dgvProductos.ColumnHeadersHeight = 30;
+            dgvProductos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dgvProductos.Columns.AddRange(new DataGridViewColumn[] { IdProducto, Cantidad, Stock, Producto, Marca, PrecioCompra, PrecioVenta, Subtotal });
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(49, 49, 68);
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.GradientActiveCaption;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.SelectionBackColor = Color.LightGreen;
+            dataGridViewCellStyle2.SelectionForeColor = Color.Black;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            dgvNuevaVenta.DefaultCellStyle = dataGridViewCellStyle2;
-            dgvNuevaVenta.EnableHeadersVisualStyles = false;
-            dgvNuevaVenta.GridColor = Color.FromArgb(49, 49, 68);
-            dgvNuevaVenta.Location = new Point(96, 176);
-            dgvNuevaVenta.Margin = new Padding(3, 4, 3, 4);
-            dgvNuevaVenta.Name = "dgvNuevaVenta";
-            dgvNuevaVenta.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dgvProductos.DefaultCellStyle = dataGridViewCellStyle2;
+            dgvProductos.EnableHeadersVisualStyles = false;
+            dgvProductos.GridColor = Color.FromArgb(49, 49, 68);
+            dgvProductos.Location = new Point(96, 176);
+            dgvProductos.Margin = new Padding(3, 4, 3, 4);
+            dgvProductos.Name = "dgvProductos";
+            dgvProductos.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = Color.FromArgb(49, 49, 68);
             dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
@@ -92,34 +93,27 @@
             dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            dgvNuevaVenta.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            dgvNuevaVenta.RowHeadersVisible = false;
-            dgvNuevaVenta.RowHeadersWidth = 25;
-            dgvNuevaVenta.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvNuevaVenta.Size = new Size(1088, 520);
-            dgvNuevaVenta.TabIndex = 0;
-            dgvNuevaVenta.CellEndEdit += dgvNuevaVenta_CellEndEdit;
+            dgvProductos.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dgvProductos.RowHeadersVisible = false;
+            dgvProductos.RowHeadersWidth = 25;
+            dgvProductos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvProductos.Size = new Size(1088, 520);
+            dgvProductos.TabIndex = 0;
+            dgvProductos.CellEndEdit += dgvNuevaVenta_CellEndEdit;
             // 
-            // Codigo
+            // IdProducto
             // 
-            Codigo.HeaderText = "Codigo";
-            Codigo.MinimumWidth = 6;
-            Codigo.Name = "Codigo";
-            Codigo.Width = 104;
+            IdProducto.HeaderText = "Codigo";
+            IdProducto.MinimumWidth = 6;
+            IdProducto.Name = "IdProducto";
+            IdProducto.Width = 104;
             // 
-            // cantidad
+            // Cantidad
             // 
-            cantidad.HeaderText = "Cantidad";
-            cantidad.MinimumWidth = 6;
-            cantidad.Name = "cantidad";
-            cantidad.Width = 118;
-            // 
-            // Producto
-            // 
-            Producto.HeaderText = "Producto";
-            Producto.MinimumWidth = 6;
-            Producto.Name = "Producto";
-            Producto.Width = 120;
+            Cantidad.HeaderText = "Cantidad";
+            Cantidad.MinimumWidth = 6;
+            Cantidad.Name = "Cantidad";
+            Cantidad.Width = 118;
             // 
             // Stock
             // 
@@ -129,25 +123,43 @@
             Stock.ReadOnly = true;
             Stock.Width = 87;
             // 
-            // precio
+            // Producto
             // 
-            precio.HeaderText = "Precio Venta";
-            precio.MinimumWidth = 6;
-            precio.Name = "precio";
-            precio.Width = 147;
+            Producto.HeaderText = "Producto";
+            Producto.MinimumWidth = 6;
+            Producto.Name = "Producto";
+            Producto.Width = 120;
+            // 
+            // Marca
+            // 
+            Marca.HeaderText = "Marca";
+            Marca.MinimumWidth = 6;
+            Marca.Name = "Marca";
+            Marca.ReadOnly = true;
+            Marca.Width = 93;
             // 
             // PrecioCompra
             // 
             PrecioCompra.HeaderText = "Precio Compra";
             PrecioCompra.MinimumWidth = 6;
             PrecioCompra.Name = "PrecioCompra";
+            PrecioCompra.ReadOnly = true;
             PrecioCompra.Width = 168;
+            // 
+            // PrecioVenta
+            // 
+            PrecioVenta.HeaderText = "Precio Venta";
+            PrecioVenta.MinimumWidth = 6;
+            PrecioVenta.Name = "PrecioVenta";
+            PrecioVenta.ReadOnly = true;
+            PrecioVenta.Width = 147;
             // 
             // Subtotal
             // 
             Subtotal.HeaderText = "Subtotal";
             Subtotal.MinimumWidth = 6;
             Subtotal.Name = "Subtotal";
+            Subtotal.ReadOnly = true;
             Subtotal.Width = 114;
             // 
             // labelTablaIngresoVentas
@@ -253,7 +265,8 @@
             // 
             // cmbClientes
             // 
-            cmbClientes.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbClientes.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbClientes.AutoCompleteSource = AutoCompleteSource.ListItems;
             cmbClientes.FormattingEnabled = true;
             cmbClientes.Location = new Point(211, 114);
             cmbClientes.Name = "cmbClientes";
@@ -273,13 +286,13 @@
             Controls.Add(btnGuardar);
             Controls.Add(btnLimpiar);
             Controls.Add(labelTablaIngresoVentas);
-            Controls.Add(dgvNuevaVenta);
+            Controls.Add(dgvProductos);
             Font = new Font("Segoe UI", 9F);
             Margin = new Padding(3, 4, 3, 4);
             Name = "FormNuevaVenta";
             Text = "Nueva Venta";
             Load += FormIngresoVentas_Load;
-            ((System.ComponentModel.ISupportInitialize)dgvNuevaVenta).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvProductos).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
@@ -290,7 +303,7 @@
 
         #endregion
 
-        private DataGridView dgvNuevaVenta;
+        private DataGridView dgvProductos;
         private DataGridViewTextBoxColumn acumulado;
         private Label labelTablaIngresoVentas;
         private Button btnLimpiar;
@@ -302,12 +315,13 @@
         private Label lblTotal;
         private Panel panel2;
         private ComboBox cmbClientes;
-        private DataGridViewTextBoxColumn Codigo;
-        private DataGridViewTextBoxColumn cantidad;
-        private DataGridViewTextBoxColumn Producto;
+        private DataGridViewTextBoxColumn IdProducto;
+        private DataGridViewTextBoxColumn Cantidad;
         private DataGridViewTextBoxColumn Stock;
-        private DataGridViewTextBoxColumn precio;
+        private DataGridViewTextBoxColumn Producto;
+        private DataGridViewTextBoxColumn Marca;
         private DataGridViewTextBoxColumn PrecioCompra;
+        private DataGridViewTextBoxColumn PrecioVenta;
         private DataGridViewTextBoxColumn Subtotal;
     }
 }

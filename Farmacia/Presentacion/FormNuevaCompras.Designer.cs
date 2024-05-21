@@ -37,6 +37,7 @@
             Cantidad = new DataGridViewTextBoxColumn();
             Nombre = new DataGridViewTextBoxColumn();
             Marca = new DataGridViewTextBoxColumn();
+            StockActual = new DataGridViewTextBoxColumn();
             PrecioCompra = new DataGridViewTextBoxColumn();
             PrecioVenta = new DataGridViewTextBoxColumn();
             Subtotal = new DataGridViewTextBoxColumn();
@@ -70,13 +71,13 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dgvProductos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvProductos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvProductos.Columns.AddRange(new DataGridViewColumn[] { IdProducto, Cantidad, Nombre, Marca, PrecioCompra, PrecioVenta, Subtotal });
+            dgvProductos.Columns.AddRange(new DataGridViewColumn[] { IdProducto, Cantidad, Nombre, Marca, StockActual, PrecioCompra, PrecioVenta, Subtotal });
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = SystemColors.Window;
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.SelectionBackColor = Color.LimeGreen;
+            dataGridViewCellStyle2.SelectionForeColor = Color.Black;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dgvProductos.DefaultCellStyle = dataGridViewCellStyle2;
             dgvProductos.EnableHeadersVisualStyles = false;
@@ -129,6 +130,13 @@
             Marca.MinimumWidth = 6;
             Marca.Name = "Marca";
             Marca.ReadOnly = true;
+            // 
+            // StockActual
+            // 
+            StockActual.HeaderText = "Stock Actual";
+            StockActual.MinimumWidth = 6;
+            StockActual.Name = "StockActual";
+            StockActual.ReadOnly = true;
             // 
             // PrecioCompra
             // 
@@ -296,6 +304,7 @@
         private DataGridViewTextBoxColumn Cantidad;
         private DataGridViewTextBoxColumn Nombre;
         private DataGridViewTextBoxColumn Marca;
+        private DataGridViewTextBoxColumn StockActual;
         private DataGridViewTextBoxColumn PrecioCompra;
         private DataGridViewTextBoxColumn PrecioVenta;
         private DataGridViewTextBoxColumn Subtotal;

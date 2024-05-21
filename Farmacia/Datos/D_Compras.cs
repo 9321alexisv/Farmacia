@@ -38,19 +38,24 @@ namespace Farmacia.Datos
             {
                 ConexionDB conexion = new();
                 using NpgsqlConnection conn = conexion.AbrirConexion()!;
-                using NpgsqlCommand command = new(query, conn);
+                using NpgsqlCommand cmd = new(query, conn);
+
+                cmd.Parameters.AddWithValue("@id_compra", idCompra);
+                cmd.Parameters.Add("@id_producto", NpgsqlTypes.NpgsqlDbType.Integer);
+                cmd.Parameters.Add("@precio_compra", NpgsqlTypes.NpgsqlDbType.Numeric);
+                cmd.Parameters.Add("@precio_venta", NpgsqlTypes.NpgsqlDbType.Numeric);
+                cmd.Parameters.Add("@cantidad", NpgsqlTypes.NpgsqlDbType.Integer);
 
                 foreach (DataGridViewRow row in dgvProductos.Rows)
                 {
-                    command.Parameters.AddWithValue("@id_compra", idCompra);
-
-                    command.Parameters.AddWithValue("@id_producto", Convert.ToInt32(row.Cells["IdProducto"].Value));
-                    command.Parameters.AddWithValue("@precio_compra", Convert.ToDecimal(row.Cells["PrecioCompra"].Value));
-                    command.Parameters.AddWithValue("@precio_venta", Convert.ToDecimal(row.Cells["PrecioVenta"].Value));
-                    command.Parameters.AddWithValue("@cantidad", Convert.ToInt32(row.Cells["Cantidad"].Value));
-
-                    command.ExecuteNonQuery();
-                    //command.Parameters.Clear(); // Causa error de fk_detallecompra_producto
+                    if (row.IsNewRow) continue;
+                    
+                    cmd.Parameters["@id_producto"].Value = Convert.ToInt32(row.Cells["IdProducto"].Value);
+                    cmd.Parameters["@precio_compra"].Value = Convert.ToDecimal(row.Cells["PrecioCompra"].Value);
+                    cmd.Parameters["@precio_venta"].Value = Convert.ToDecimal(row.Cells["PrecioVenta"].Value);
+                    cmd.Parameters["@cantidad"].Value = Convert.ToInt32(row.Cells["Cantidad"].Value);
+                    
+                    cmd.ExecuteNonQuery();
                 }
 
                 ActualizarStockProductos(dgvProductos);
