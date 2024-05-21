@@ -227,6 +227,7 @@ namespace VistasFarmacia.Forms
             txtQuery.Name = "txtQuery";
             txtQuery.Size = new Size(290, 34);
             txtQuery.TabIndex = 13;
+            txtQuery.TextChanged += txtQuery_TextChanged;
             // 
             // btnTodo
             // 

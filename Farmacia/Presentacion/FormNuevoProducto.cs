@@ -2,7 +2,6 @@
 using Farmacia.Datos;
 using Farmacia.Entidad;
 using Farmacia.Presentacion;
-using Irony.Parsing;
 using System.Globalization;
 
 namespace VistasFarmacia.Forms

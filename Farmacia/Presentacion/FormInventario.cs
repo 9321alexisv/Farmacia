@@ -96,7 +96,7 @@ namespace VistasFarmacia.Forms
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             // Verificar seleccionar de registro
-            if(!VerificarFilaSeleccionada()) return;
+            if (!VerificarFilaSeleccionada()) return;
 
             // Consultar si eliminar o no
             DialogResult consulta = MessageBox.Show(
@@ -127,21 +127,21 @@ namespace VistasFarmacia.Forms
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            try
-            {
-                dgvProductos.DataSource = D_Productos.BuscarPorIdNombreMarca(txtQuery.Text);
-                CalcularTotal();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error al buscar. " + ex.Message + ex.InnerException, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            Buscar();
         }
 
         private void btnTodo_Click(object sender, EventArgs e)
         {
             ListarProductos();
             CalcularTotal();
+        }
+
+        #endregion
+
+        #region Eventos
+        private void txtQuery_TextChanged(object sender, EventArgs e)
+        {
+            Buscar();
         }
 
         #endregion
@@ -199,6 +199,19 @@ namespace VistasFarmacia.Forms
             }
 
             return true;
+        }
+
+        public void Buscar()
+        {
+            try
+            {
+                dgvProductos.DataSource = D_Productos.BuscarPorIdNombreMarca(txtQuery.Text);
+                CalcularTotal();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al buscar. " + ex.Message + ex.InnerException, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         #endregion
     }

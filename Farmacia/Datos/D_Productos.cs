@@ -39,8 +39,13 @@ namespace Farmacia.Datos
         public static Producto? BuscarPorId(int idProducto)
         {
             Producto producto;
-
-            string query = "SELECT * FROM producto WHERE id_producto = @id_producto";
+            string query = """
+                SELECT p.id_producto, m.id_marca, m.nombre marca, p.nombre producto, p.precio_compra, 
+                p.precio_venta, p.stock, p.stock_minimo, p.estado
+                FROM producto p
+                INNER JOIN marca m ON p.id_marca = m.id_marca
+                WHERE p.estado = TRUE AND id_producto = @id_producto;
+                """;
 
             try
             {
