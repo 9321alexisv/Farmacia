@@ -10,10 +10,15 @@ namespace Farmacia.Datos
         public static DataTable Listar()
         {
             DataTable tabla = new();
-            string query = "SELECT p.id_producto codigo, pro.proveedor, p.nombre producto, " +
-                "p.precio_compra, p.precio_venta, p.stock FROM producto p " +
-                "INNER JOIN proveedor pro ON p.id_proveedor = pro.id_proveedor " +
-                "WHERE p.estado = true;";
+            string query = """
+                SELECT p.id_producto, m.id_marca, m.nombre marca, p.nombre producto, p.precio_compra, 
+                p.precio_venta, p.stock, p.stock_minimo, p.estado
+                FROM producto p
+                INNER JOIN marca m ON p.id_marca = m.id_marca
+                WHERE p.estado = TRUE;
+                """;
+
+            Console.WriteLine(query);
 
             try
             {
@@ -34,31 +39,33 @@ namespace Farmacia.Datos
         public static Producto? BuscarPorId(int idProducto)
         {
             Producto producto;
-            string query = "SELECT * FROM producto WHERE id_producto = @idProducto";
+
+            string query = "SELECT * FROM producto WHERE id_producto = @id_producto";
 
             try
             {
                 ConexionDB conexion = new();
                 using NpgsqlConnection conn = conexion.AbrirConexion()!;
                 using NpgsqlCommand comando = new(query, conn);
-                comando.Parameters.AddWithValue("@idProducto", idProducto);
+                comando.Parameters.AddWithValue("@id_producto", idProducto);
 
-                using NpgsqlDataReader leer = comando.ExecuteReader();
+                using NpgsqlDataReader datos = comando.ExecuteReader();
 
-                if (leer.Read())
+                if (datos.Read())
                 {
                     producto = new()
                     {
-                        IdProducto = Convert.ToInt32(leer["id_producto"]),
-                        ObjProveedor = new Proveedor
+                        IdProducto = Convert.ToInt32(datos["id_producto"]),
+                        Marca = new()
                         {
-                            IdProveedor = Convert.ToInt32(leer["id_proveedor"]),
+                            IdMarca = Convert.ToInt32(datos["id_proveedor"]),
                             Nombre = ""
                         },
-                        Nombre = Convert.ToString(leer["nombre"]) ?? "",
-                        PrecioCompra = Convert.ToDecimal(leer["precio_compra"]),
-                        PrecioVenta = Convert.ToDecimal(leer["precio_venta"]),
-                        Stock = Convert.ToInt32(leer["stock"])
+                        Nombre = Convert.ToString(datos["nombre"]) ?? "",
+                        PrecioCompra = Convert.ToDecimal(datos["precio_compra"]),
+                        PrecioVenta = Convert.ToDecimal(datos["precio_venta"]),
+                        Stock = Convert.ToInt32(datos["stock"]),
+                        StockMinimo = 0,
                     };
                     
                     return producto;
@@ -72,20 +79,31 @@ namespace Farmacia.Datos
             return null;
         }
 
-        public static DataTable BuscarPorNombre(string query)
+        public static DataTable BuscarPorIdNombreMarca(string termino)
         {
             DataTable tabla = new();
-            string sentencia = "SELECT p.id_producto codigo, pro.proveedor, p.nombre producto, " +
-                "p.precio_compra, p.precio_venta, p.stock FROM producto p " +
-                "INNER JOIN proveedor pro ON p.id_proveedor = pro.id_proveedor " +
-                $"WHERE UPPER(p.nombre) LIKE '%{query.ToUpper()}%' AND p.estado = true;";
+            bool isNumeric = int.TryParse(termino, out int productId);
+            string query = @"
+                SELECT p.id_producto, m.id_marca, m.nombre AS marca, p.nombre AS producto, 
+                       p.precio_compra, p.precio_venta, p.stock, p.stock_minimo, p.estado
+                FROM producto p
+                INNER JOIN marca m ON p.id_marca = m.id_marca
+                WHERE p.estado = TRUE
+                AND (
+                    (@IsNumeric AND p.id_producto = @ProductId)
+                    OR (p.nombre ILIKE '%' || @InputQuery || '%')
+                    OR (m.nombre ILIKE '%' || @InputQuery || '%')
+                );";
 
             try
             {
                 ConexionDB conexion = new();
                 using NpgsqlConnection conn = conexion.AbrirConexion()!;
-                using NpgsqlCommand comando = new(sentencia, conn);
-                using NpgsqlDataReader leer = comando.ExecuteReader();
+                using NpgsqlCommand cmd = new(query, conn);
+                cmd.Parameters.AddWithValue("@IsNumeric", isNumeric);
+                cmd.Parameters.AddWithValue("@ProductId", productId);
+                cmd.Parameters.AddWithValue("@InputQuery", termino.ToLower());
+                using NpgsqlDataReader leer = cmd.ExecuteReader();
                 tabla.Load(leer);
                 
                 return tabla;
@@ -96,23 +114,25 @@ namespace Farmacia.Datos
             }
         }
 
-        public static void Crear(int idProveedor, string nombre, decimal precioCompra, decimal precioVenta, int stock)
+        public static bool Crear(Producto producto)
         {
-            string query = "INSERT INTO producto (id_proveedor, nombre, precio_compra, precio_venta, stock) VALUES (@idProveedor, @nombre, @precioCompra, @precioVenta, @stock)";
+            string query = "INSERT INTO producto (id_marca, nombre, precio_compra, precio_venta, stock, stock_minimo) VALUES (@id_marca, @nombre, @precio_compra, @precio_venta, @stock, @stock_minimo)";
 
             try
             {
                 ConexionDB conexion = new();
                 using NpgsqlConnection conn = conexion.AbrirConexion()!;
-                using NpgsqlCommand comando = new(query, conn);
+                using NpgsqlCommand cmd = new(query, conn);
 
-                comando.Parameters.AddWithValue("@idProveedor", idProveedor);
-                comando.Parameters.AddWithValue("@nombre", nombre);
-                comando.Parameters.AddWithValue("@precioCompra", precioCompra);
-                comando.Parameters.AddWithValue("@precioVenta", precioVenta);
-                comando.Parameters.AddWithValue("@stock", stock);
+                cmd.Parameters.AddWithValue("@id_marca", producto.Marca.IdMarca);
+                cmd.Parameters.AddWithValue("@nombre", producto.Nombre);
+                cmd.Parameters.AddWithValue("@precio_compra", producto.PrecioCompra);
+                cmd.Parameters.AddWithValue("@precio_venta", producto.PrecioVenta);
+                cmd.Parameters.AddWithValue("@stock", producto.Stock);
+                cmd.Parameters.AddWithValue("@stock_minimo", producto.StockMinimo);
 
-                comando.ExecuteNonQuery();
+                int filasAfectadas = cmd.ExecuteNonQuery();
+                return filasAfectadas == 1;
             }
             catch (NpgsqlException ex)
             {
@@ -120,24 +140,26 @@ namespace Farmacia.Datos
             }
         }
 
-        public static void Editar(int idProducto, int idProveedor, string nombre, decimal precioCompra, decimal precioVenta, int stock)
+        public static bool Editar(Producto producto)
         {
-            string query = "UPDATE producto SET id_proveedor = @idProveedor, nombre = @nombre, precio_compra = @precioCompra, precio_venta = @precioVenta, stock = @stock WHERE id_producto = @idProducto";
+            string query = "UPDATE producto SET id_marca = @id_marca, nombre = @nombre, precio_compra = @precio_compra, precio_venta = @precio_venta, stock = @stock, stock_minimo = @stock_minimo WHERE id_producto = @id_producto";
 
             try
             {
                 ConexionDB conexion = new();
                 using NpgsqlConnection conn = conexion.AbrirConexion()!;
-                using NpgsqlCommand comando = new(query, conn);
+                using NpgsqlCommand cmd = new(query, conn);
 
-                comando.Parameters.AddWithValue("@idProducto", idProducto);
-                comando.Parameters.AddWithValue("@idProveedor", idProveedor);
-                comando.Parameters.AddWithValue("@nombre", nombre);
-                comando.Parameters.AddWithValue("@precioCompra", precioCompra);
-                comando.Parameters.AddWithValue("@precioVenta", precioVenta);
-                comando.Parameters.AddWithValue("@stock", stock);
+                cmd.Parameters.AddWithValue("@id_producto", producto.IdProducto!);
+                cmd.Parameters.AddWithValue("@id_marca", producto.Marca.IdMarca);
+                cmd.Parameters.AddWithValue("@nombre", producto.Nombre);
+                cmd.Parameters.AddWithValue("@precio_compra", producto.PrecioCompra);
+                cmd.Parameters.AddWithValue("@precio_venta", producto.PrecioVenta);
+                cmd.Parameters.AddWithValue("@stock", producto.Stock);
+                cmd.Parameters.AddWithValue("@stock_minimo", producto.StockMinimo);
 
-                comando.ExecuteNonQuery();
+                int filasAfectadas = cmd.ExecuteNonQuery();
+                return filasAfectadas == 1;
             }
             catch (NpgsqlException ex)
             {
@@ -146,17 +168,17 @@ namespace Farmacia.Datos
         }
 
         // Eliminado logico
-        public static bool Eliminar(int id)
+        public static bool Eliminar(int idProducto)
         {
             try
             {
                 ConexionDB conexion = new();
                 using NpgsqlConnection conn = conexion.AbrirConexion()!;
-                using NpgsqlCommand comando = new("UPDATE producto SET estado = false WHERE id_producto = @id", conn);
-                comando.Parameters.AddWithValue("@id", id);
-                int filasAfectadas = comando.ExecuteNonQuery();
+                using NpgsqlCommand cmd = new("UPDATE producto SET estado = false WHERE id_producto = @id", conn);
+                cmd.Parameters.AddWithValue("@id", idProducto);
                 
-                return filasAfectadas > 0; // True si se actualizó al menos un registro
+                int filasAfectadas = cmd.ExecuteNonQuery();
+                return filasAfectadas == 1;
             }
             catch (NpgsqlException ex)
             {

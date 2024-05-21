@@ -3,11 +3,12 @@ namespace Farmacia.Entidad
 {
     public class Producto
     {
-        public int IdProducto { get; set; }
-        public Proveedor ObjProveedor { get; set; }
-        public string Nombre { get; set; }
-        public decimal PrecioCompra { get; set; }
-        public decimal PrecioVenta { get; set; }
-        public int Stock { get; set; }
+        public required int IdProducto { get; set; }
+        public required Marca Marca { get; set; }
+        public required string Nombre { get; set; }
+        public required decimal PrecioCompra { get; set; }
+        public required decimal PrecioVenta { get; set; }
+        public required int Stock { get; set; }
+        public required int StockMinimo { get; set; }
     }
 }

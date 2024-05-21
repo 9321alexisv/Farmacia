@@ -99,15 +99,14 @@ namespace VistasFarmacia.Forms
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
+            if (!VerificarFilaSeleccionada()) return;
+
             LlenarCampos(dgvMarcas.CurrentRow);
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (dgvMarcas.SelectedRows.Count < 0)
-            {
-                MessageBox.Show("Ningun regisro seleccionado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
+            if (!VerificarFilaSeleccionada()) return;
 
             DialogResult confirmar = MessageBox.Show("Eliminar el registro?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
@@ -142,6 +141,17 @@ namespace VistasFarmacia.Forms
             txtNombre.Text = Convert.ToString(fila.Cells["Nombre"].Value);
             txtTelefono.Text = Convert.ToString(fila.Cells["Telefono"].Value);
             txtRepresentante.Text = Convert.ToString(fila.Cells["Representante"].Value);
+        }
+
+        public bool VerificarFilaSeleccionada()
+        {
+            if (dgvMarcas.SelectedRows.Count < 1)
+            {
+                MessageBox.Show("Ningun registro seleccionado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+
+            return true;
         }
 
         #endregion

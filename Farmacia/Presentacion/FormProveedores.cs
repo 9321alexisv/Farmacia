@@ -102,10 +102,7 @@ namespace VistasFarmacia.Forms
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (dgvProveedores.SelectedRows.Count < 0)
-            {
-                MessageBox.Show("Seleccionar registro a eliminar.", "Seleccionar", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
+            if (!VerificarFilaSeleccionada()) return;
             
             DialogResult pregunta = MessageBox.Show("Eliminar registro?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
@@ -121,6 +118,8 @@ namespace VistasFarmacia.Forms
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
+            if (!VerificarFilaSeleccionada()) return; 
+
             CargarCampos(dgvProveedores.CurrentRow);
         }
 
@@ -143,11 +142,24 @@ namespace VistasFarmacia.Forms
 
         public void CargarCampos(DataGridViewRow fila)
         {
+            if(fila == null) return;
             idProveedor = Convert.ToInt32(fila.Cells["IdProveedor"].Value);
             txtNit.Text = Convert.ToString(fila.Cells["Nit"].Value);
             txtNombre.Text = Convert.ToString(fila.Cells["Nombre"].Value);
             txtTelefono.Text = Convert.ToString(fila.Cells["Telefono"].Value);
             txtRepresentante.Text = Convert.ToString(fila.Cells["Representante"].Value);
+        }
+
+        public bool VerificarFilaSeleccionada()
+        {
+            if (dgvProveedores.SelectedRows.Count < 1)
+            {
+                MessageBox.Show("Ningun registro seleccionado.", "Seleccionar", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                return false;
+            }
+
+            return true;
         }
 
         #endregion

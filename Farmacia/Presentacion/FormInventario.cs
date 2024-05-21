@@ -20,6 +20,7 @@ namespace VistasFarmacia.Forms
             ListarProductos();
             CalcularTotal();
         }
+
         private void LoadTheme()
         {
             foreach (Control btns in this.Controls)
@@ -37,13 +38,10 @@ namespace VistasFarmacia.Forms
             dgvProductos.ColumnHeadersDefaultCellStyle.BackColor = ThemeColor.SecondaryColor;
             dgvProductos.RowHeadersDefaultCellStyle.ForeColor = Color.White;
             dgvProductos.RowHeadersDefaultCellStyle.BackColor = ThemeColor.PrimaryColor;
-            //dataGridView1.GridColor = ThemeColor.SecondaryColor;
             panel2.BackColor = ThemeColor.SecondaryColor;
         }
 
-        #region "Datos"
-        readonly D_Productos productos = new();
-
+        #region Datos
         public void ListarProductos()
         {
             try
@@ -52,55 +50,53 @@ namespace VistasFarmacia.Forms
             }
             catch (Exception ex)
             {
-
-                MessageBox.Show("Error al mostrar datos. " + ex.Message, "Error de visualización", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error al mostrar datos. " + ex.Message + ex.InnerException!.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
+        #endregion
+
+        #region Botones
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            Producto producto = new();
-            FormNuevoProducto formNuevoProducto = new(producto);
+            FormNuevoProducto formNuevoProducto = new(null);
             formNuevoProducto.ShowDialog();
+            ListarProductos();
         }
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
             // Verificar seleccion de producto
-            if (dgvProductos.SelectedRows.Count < 0)
-            {
-                MessageBox.Show("Ningún producto seleccionado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+            if (!VerificarFilaSeleccionada()) return;
 
             DataGridViewRow fila = dgvProductos.CurrentRow;
-            Proveedor proveedor = new()
+
+            Marca marca = new()
             {
-                Nombre = fila.Cells[1].Value.ToString() ?? ""
+                IdMarca = Convert.ToInt32(fila.Cells["id_marca"].Value),
+                Nombre = Convert.ToString(fila.Cells["marca"].Value) ?? "",
             };
 
             Producto producto = new()
             {
-                IdProducto = Convert.ToInt32(fila.Cells[0].Value),
-                ObjProveedor = proveedor,
-                Nombre = fila.Cells[2].Value.ToString() ?? "",
-                PrecioCompra = Convert.ToDecimal(fila.Cells[3].Value),
-                PrecioVenta = Convert.ToDecimal(fila.Cells[4].Value),
-                Stock = Convert.ToInt32(fila.Cells[5].Value),
+                IdProducto = Convert.ToInt32(fila.Cells["id_producto"].Value),
+                Marca = marca,
+                Nombre = Convert.ToString(fila.Cells["producto"].Value)!,
+                PrecioCompra = Convert.ToDecimal(fila.Cells["precio_compra"].Value),
+                PrecioVenta = Convert.ToDecimal(fila.Cells["precio_venta"].Value),
+                Stock = Convert.ToInt32(fila.Cells["stock"].Value),
+                StockMinimo = Convert.ToInt32(fila.Cells["stock_minimo"].Value),
             };
 
             FormNuevoProducto formNuevoProducto = new(producto);
-            formNuevoProducto.Show();
+            formNuevoProducto.ShowDialog();
+            ListarProductos();
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            // Verificar seleccion de producto
-            if (dgvProductos.SelectedRows.Count < 0)
-            {
-                MessageBox.Show("Ningún producto seleccionado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+            // Verificar seleccionar de registro
+            if(!VerificarFilaSeleccionada()) return;
 
             // Consultar si eliminar o no
             DialogResult consulta = MessageBox.Show(
@@ -112,7 +108,7 @@ namespace VistasFarmacia.Forms
             if (consulta != DialogResult.Yes) return;
 
             // Si se confirma la eliminacion
-            int productoSeleccionado = Convert.ToInt32(dgvProductos.CurrentRow.Cells[0].Value);
+            int productoSeleccionado = Convert.ToInt32(dgvProductos.CurrentRow.Cells["id_producto"].Value);
             bool resultado = D_Productos.Eliminar(productoSeleccionado);
             if (resultado)
             {
@@ -123,6 +119,8 @@ namespace VistasFarmacia.Forms
 
         private void btnReporte_Click(object sender, EventArgs e)
         {
+            if (dgvProductos.RowCount == 0) return;
+
             ReportesClosedXML reportes = new();
             reportes.Excel("Inventario", dgvProductos);
         }
@@ -131,12 +129,12 @@ namespace VistasFarmacia.Forms
         {
             try
             {
-                dgvProductos.DataSource = D_Productos.BuscarPorNombre(txtQuery.Text);
+                dgvProductos.DataSource = D_Productos.BuscarPorIdNombreMarca(txtQuery.Text);
                 CalcularTotal();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al buscar. " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error al buscar. " + ex.Message + ex.InnerException, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -148,7 +146,7 @@ namespace VistasFarmacia.Forms
 
         #endregion
 
-        #region "Helpers
+        #region Helpers
         private void CalcularTotal()
         {
             decimal total = 0;
@@ -190,6 +188,17 @@ namespace VistasFarmacia.Forms
                     }
                 }
             }
+        }
+
+        public bool VerificarFilaSeleccionada()
+        {
+            if (dgvProductos.SelectedRows.Count < 1)
+            {
+                MessageBox.Show("Ningún producto seleccionado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            return true;
         }
         #endregion
     }

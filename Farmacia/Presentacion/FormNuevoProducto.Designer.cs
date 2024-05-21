@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             lblTitulo = new Label();
-            labelProveedor = new Label();
+            lblMarca = new Label();
             txtNombre = new TextBox();
             labelNombre = new Label();
             txtPrecioCompra = new TextBox();
@@ -40,7 +40,9 @@
             labelStock = new Label();
             btnGuardar = new Button();
             btnLimpiar = new Button();
-            cmbProveedor = new ComboBox();
+            cmbMarca = new ComboBox();
+            txtStockMinimo = new TextBox();
+            lblStockMinimo = new Label();
             SuspendLayout();
             // 
             // lblTitulo
@@ -54,16 +56,16 @@
             lblTitulo.TabIndex = 1;
             lblTitulo.Text = "Nuevo Producto";
             // 
-            // labelProveedor
+            // lblMarca
             // 
-            labelProveedor.AutoSize = true;
-            labelProveedor.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
-            labelProveedor.ForeColor = Color.White;
-            labelProveedor.Location = new Point(88, 109);
-            labelProveedor.Name = "labelProveedor";
-            labelProveedor.Size = new Size(133, 32);
-            labelProveedor.TabIndex = 2;
-            labelProveedor.Text = "Proveedor";
+            lblMarca.AutoSize = true;
+            lblMarca.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            lblMarca.ForeColor = Color.White;
+            lblMarca.Location = new Point(88, 109);
+            lblMarca.Name = "lblMarca";
+            lblMarca.Size = new Size(92, 32);
+            lblMarca.TabIndex = 2;
+            lblMarca.Text = "Marca:";
             // 
             // txtNombre
             // 
@@ -169,14 +171,33 @@
             btnLimpiar.UseVisualStyleBackColor = true;
             btnLimpiar.Click += btnLimpiar_Click;
             // 
-            // cmbProveedor
+            // cmbMarca
             // 
-            cmbProveedor.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbProveedor.FormattingEnabled = true;
-            cmbProveedor.Location = new Point(337, 113);
-            cmbProveedor.Name = "cmbProveedor";
-            cmbProveedor.Size = new Size(286, 28);
-            cmbProveedor.TabIndex = 16;
+            cmbMarca.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbMarca.FormattingEnabled = true;
+            cmbMarca.Location = new Point(337, 113);
+            cmbMarca.Name = "cmbMarca";
+            cmbMarca.Size = new Size(286, 28);
+            cmbMarca.TabIndex = 16;
+            // 
+            // txtStockMinimo
+            // 
+            txtStockMinimo.Location = new Point(754, 401);
+            txtStockMinimo.Margin = new Padding(3, 4, 3, 4);
+            txtStockMinimo.Name = "txtStockMinimo";
+            txtStockMinimo.Size = new Size(114, 27);
+            txtStockMinimo.TabIndex = 18;
+            // 
+            // lblStockMinimo
+            // 
+            lblStockMinimo.AutoSize = true;
+            lblStockMinimo.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            lblStockMinimo.ForeColor = Color.White;
+            lblStockMinimo.Location = new Point(505, 399);
+            lblStockMinimo.Name = "lblStockMinimo";
+            lblStockMinimo.Size = new Size(178, 32);
+            lblStockMinimo.TabIndex = 17;
+            lblStockMinimo.Text = "Stock Mínimo:";
             // 
             // FormNuevoProducto
             // 
@@ -184,7 +205,9 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(39, 39, 58);
             ClientSize = new Size(914, 600);
-            Controls.Add(cmbProveedor);
+            Controls.Add(txtStockMinimo);
+            Controls.Add(lblStockMinimo);
+            Controls.Add(cmbMarca);
             Controls.Add(btnLimpiar);
             Controls.Add(btnGuardar);
             Controls.Add(txtStock);
@@ -195,7 +218,7 @@
             Controls.Add(labelPrecioCompra);
             Controls.Add(txtNombre);
             Controls.Add(labelNombre);
-            Controls.Add(labelProveedor);
+            Controls.Add(lblMarca);
             Controls.Add(lblTitulo);
             Margin = new Padding(3, 4, 3, 4);
             Name = "FormNuevoProducto";
@@ -207,7 +230,7 @@
 
         #endregion
         private Label lblTitulo;
-        private Label labelProveedor;
+        private Label lblMarca;
         private TextBox txtNombre;
         private Label labelNombre;
         private TextBox txtPrecioCompra;
@@ -218,6 +241,8 @@
         private Label labelStock;
         private Button btnGuardar;
         private Button btnLimpiar;
-        private ComboBox cmbProveedor;
+        private ComboBox cmbMarca;
+        private TextBox txtStockMinimo;
+        private Label lblStockMinimo;
     }
 }
