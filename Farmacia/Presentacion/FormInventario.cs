@@ -151,7 +151,6 @@ namespace VistasFarmacia.Forms
         {
             decimal total = 0;
 
-            // Multiplicar la columna 2 con la columna 3 para todas las filas
             foreach (DataGridViewRow row in dgvProductos.Rows)
             {
                 decimal stock = Convert.ToDecimal(row.Cells["stock"].Value);
@@ -167,23 +166,25 @@ namespace VistasFarmacia.Forms
         // Alerta de Stock
         private void dgvProductos_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            // Columna a cambiar color
-            int columnIndex = 5;
+            // Indices de las columnas de "stock" y "stock_minimo"
+            int stockColumnIndex = dgvProductos.Columns["stock"].Index;
+            int stockMinimoColumnIndex = dgvProductos.Columns["stock_minimo"].Index;
 
-            // Si la celda actual pertenece a la columna
-            if (e.ColumnIndex == columnIndex && e.RowIndex >= 0)
+            // Verificar que los índices de las columnas sean válidos y que la fila actual sea válida
+            if (e.RowIndex >= 0 && e.ColumnIndex == stockColumnIndex)
             {
-                // Obtener el valor de la celda actual
-                if (int.TryParse(e.Value?.ToString(), out int valorCelda))
+                // Obtener el valor de la columna "stock" para la fila actual
+                var stockValue = dgvProductos.Rows[e.RowIndex].Cells[stockColumnIndex].Value;
+                // Obtener el valor de la columna "stock_minimo" para la fila actual
+                var stockMinimoValue = dgvProductos.Rows[e.RowIndex].Cells[stockMinimoColumnIndex].Value;
+
+                // Verificar que ambos valores sean numéricos
+                if (int.TryParse(stockValue?.ToString(), out int stock) && int.TryParse(stockMinimoValue?.ToString(), out int stockMinimo))
                 {
-                    // Si el valor es menor que 5, pintar la celda en rojo
-                    if (valorCelda <= 5)
+                    // Si el stock es menor o igual al stock minimo, pintar la celda en rojo
+                    if (stock <= stockMinimo)
                     {
-                        e.CellStyle!.BackColor = Color.Red;
-                    }
-                    else if (valorCelda > 5 && valorCelda < 20)
-                    {
-                        e.CellStyle!.BackColor = Color.Orange;
+                        e.CellStyle.BackColor = Color.Red;
                         e.CellStyle.ForeColor = Color.Black;
                     }
                 }
