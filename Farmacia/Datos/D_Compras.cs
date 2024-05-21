@@ -1,6 +1,7 @@
 ﻿
 using Farmacia.Entidad;
 using Npgsql;
+using System.Data;
 
 namespace Farmacia.Datos
 {
@@ -49,18 +50,17 @@ namespace Farmacia.Datos
                     command.Parameters.AddWithValue("@cantidad", Convert.ToInt32(row.Cells["Cantidad"].Value));
 
                     command.ExecuteNonQuery();
-                    command.Parameters.Clear();
+                    //command.Parameters.Clear(); // Causa error de fk_detallecompra_producto
                 }
+
+                ActualizarStockProductos(dgvProductos);
             }
             catch (NpgsqlException ex)
             {
-                throw new NpgsqlException("Error al insertar en la tabla 'detalle_compra': " + ex.Message);
+                throw new NpgsqlException("Error al insertar en la tabla 'detalle_compra'.", ex);
             }
         }
 
-        // ============================================================================================
-        // ACTUALIZAR STOCK ===========================================================================
-        // ============================================================================================
         public static void ActualizarStockProductos(DataGridView dgvProductos)
         {
             try
@@ -90,28 +90,37 @@ namespace Farmacia.Datos
         // ============================================================================================
         // OBTENER TODAS LAS COMPRAS ==================================================================
         // ============================================================================================
-
         public static List<Compra> ObtenerComprasPorFechas(DateTime? fechaInicio, DateTime? fechaFin)
         {
-            string query = "SELECT c.id_compra, c.fecha FROM compra c WHERE c.fecha BETWEEN @fechaInicio AND @fechaFin ORDER BY fecha DESC;";
+            List<Compra> compras = [];
+            string query = """
+                SELECT c.id_compra, p.id_proveedor, p.nombre proveedor, c.fecha 
+                FROM compra c JOIN proveedor p ON c.id_proveedor = p.id_proveedor 
+                WHERE c.fecha BETWEEN @fechaInicio AND @fechaFin
+                ORDER BY fecha DESC;
+                """;
 
             try
             {
                 ConexionDB conexion = new();
                 using NpgsqlConnection conn = conexion.AbrirConexion()!;
-                using NpgsqlCommand command = new(query, conn);
-                command.Parameters.AddWithValue("@fechaInicio", fechaInicio.HasValue ? fechaInicio.Value : DateTime.MinValue.ToString());
-                command.Parameters.AddWithValue("@fechaFin", fechaFin.HasValue ? fechaFin.Value : DateTime.Now.Date.ToString());
+                using NpgsqlCommand cmd = new(query, conn);
+                cmd.Parameters.AddWithValue("@fechaInicio", fechaInicio.HasValue ? fechaInicio.Value : DateTime.MinValue.ToString());
+                cmd.Parameters.AddWithValue("@fechaFin", fechaFin.HasValue ? fechaFin.Value : DateTime.Now.Date.ToString());
 
-                using NpgsqlDataReader reader = command.ExecuteReader();
-                List<Compra> compras = [];
+                using NpgsqlDataReader datos = cmd.ExecuteReader();
 
-                while (reader.Read())
+                while (datos.Read())
                 {
                     Compra compra = new()
                     {
-                        IdCompra = reader.GetInt32(0),
-                        Fecha = reader.GetDateTime(1).ToString(),
+                        IdCompra = datos.GetInt32(0),
+                        Proveedor = new()
+                        {
+                            IdProveedor = datos.GetFieldValue<int>("id_proveedor"),
+                            Nombre = datos.GetFieldValue<string>("proveedor"),
+                        },
+                        Fecha = datos.GetFieldValue<string>("fecha"),
                     };
 
                     compras.Add(compra);
@@ -127,7 +136,12 @@ namespace Farmacia.Datos
 
         public static List<Compra> ObtenerCompras()
         {
-            string query = "SELECT c.id_compra, c.fecha FROM compra c ORDER BY fecha DESC;";
+            List<Compra> compras = [];
+            string query = """
+                SELECT c.id_compra, p.id_proveedor, p.nombre proveedor, c.fecha 
+                FROM compra c JOIN proveedor p ON c.id_proveedor = p.id_proveedor 
+                ORDER BY fecha DESC;
+                """;
 
             try
             {
@@ -135,14 +149,18 @@ namespace Farmacia.Datos
                 using NpgsqlConnection conn = conexion.AbrirConexion()!;
                 using NpgsqlCommand command = new(query, conn);
                 using NpgsqlDataReader reader = command.ExecuteReader();
-                List<Compra> compras = [];
 
                 while (reader.Read())
                 {
                     Compra compra = new()
                     {
                         IdCompra = reader.GetInt32(0),
-                        Fecha = reader.GetDateTime(1).ToString(),
+                        Proveedor = new()
+                        {
+                            IdProveedor = reader.GetInt32("id_proveedor"),
+                            Nombre = reader.GetString("proveedor"),
+                        },
+                        Fecha = reader.GetDateTime("fecha").ToString(),
                     };
 
                     compras.Add(compra);
@@ -158,11 +176,14 @@ namespace Farmacia.Datos
 
         public static List<DetalleCompra> ObtenerDetallesCompra(int idCompra)
         {
-            string query = "SELECT p.id_producto, pr.proveedor, p.nombre, dc.precio_compra, dc.cantidad " +
-                           "FROM detalle_compra dc " +
-                           "INNER JOIN producto p ON dc.id_producto = p.id_producto " +
-                           "INNER JOIN proveedor pr ON pr.id_proveedor = p.id_proveedor " +
-                           "WHERE dc.id_compra = @idCompra";
+            string query = """
+                SELECT p.id_producto, p.nombre producto, m.id_marca, m.nombre marca,
+                dc.precio_compra, dc.precio_venta, dc.cantidad 
+                FROM detalle_compra dc 
+                INNER JOIN producto p ON dc.id_producto = p.id_producto
+                INNER JOIN marca m ON p.id_marca = m.id_marca 
+                WHERE dc.id_compra = @IdCompra;
+                """;
 
             try
             {
@@ -178,10 +199,23 @@ namespace Farmacia.Datos
                 {
                     DetalleCompra detalle = new()
                     {
-                        Proveedor = reader.GetString(1),
-                        Producto = reader.GetString(2),
-                        PrecioCompra = reader.GetDecimal(3),
-                        Cantidad = reader.GetInt32(4)
+
+                        Producto = new Producto()
+                        {
+                            IdProducto = reader.GetInt32("id_producto"),
+                            Marca = new()
+                            {
+                                IdMarca = reader.GetInt32("id_marca"),
+                                Nombre = reader.GetString("marca")
+                            },
+                            Nombre = reader.GetString("producto"),
+                            PrecioCompra = reader.GetDecimal("precio_compra"),
+                            PrecioVenta = reader.GetDecimal("precio_venta"),
+                            Stock = reader.GetInt32("cantidad"),
+                            StockMinimo = 0,
+                        },
+                        PrecioCompra = reader.GetDecimal("precio_compra"),
+                        Cantidad = reader.GetInt32("cantidad")
                     };
 
                     detalleCompra.Add(detalle);

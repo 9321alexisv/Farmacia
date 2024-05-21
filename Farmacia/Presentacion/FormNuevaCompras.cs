@@ -73,7 +73,6 @@ namespace VistasFarmacia.Forms
             try
             {
                 int idCompra = D_Compras.CrearCompra(idProveedor);
-                D_Compras.ActualizarStockProductos(dgvProductos);
                 D_Compras.InsertarDetalleCompra(idCompra, dgvProductos);
             }
             catch (Exception ex)

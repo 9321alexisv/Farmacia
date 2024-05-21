@@ -39,6 +39,7 @@ namespace VistasFarmacia.Forms
             panel2.BackColor = ThemeColor.SecondaryColor;
         }
 
+        #region Datos
         public void MostrarHistorialVentas()
         {
             D_Compras compras = new();
@@ -60,6 +61,8 @@ namespace VistasFarmacia.Forms
                 int rowIndex = dgvCompras.Rows.Add(
                     $"COMPRA #{compra.IdCompra}",
                     $"FECHA: {compra.Fecha}",
+                    "PROVEEDOR:",
+                    compra.Proveedor.Nombre,
                     "TOTAL",
                     totalCompra
                  );
@@ -69,7 +72,9 @@ namespace VistasFarmacia.Forms
                 foreach (var detalle in detallesCompra)
                 {
                     dgvCompras.Rows.Add(
-                        detalle.Producto,
+                        detalle.Producto.IdProducto,
+                        detalle.Producto.Marca.Nombre,
+                        detalle.Producto.Nombre,
                         detalle.Cantidad,
                         detalle.PrecioCompra,
                         detalle.PrecioCompra * detalle.Cantidad
@@ -78,24 +83,6 @@ namespace VistasFarmacia.Forms
             }
 
             lblCompras.Text = totalCompras.ToString();
-        }
-
-        private void btnReporte_Click(object sender, EventArgs e)
-        {
-            ReportesClosedXML reportes = new();
-            reportes.Excel("Compras", dgvCompras);
-        }
-
-        private void btnFiltrar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                FiltrarDatos();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
         }
 
         private void FiltrarDatos()
@@ -146,10 +133,33 @@ namespace VistasFarmacia.Forms
 
             lblCompras.Text = totalCompras.ToString();
         }
+        #endregion
+
+        #region Botones
+
+        private void btnReporte_Click(object sender, EventArgs e)
+        {
+            ReportesClosedXML reportes = new();
+            reportes.Excel("Compras", dgvCompras);
+        }
+
+        private void btnFiltrar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                FiltrarDatos();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
 
         private void btnTodo_Click(object sender, EventArgs e)
         {
             MostrarHistorialVentas();
         }
+
+        #endregion
     }
 }
