@@ -7,6 +7,5 @@ namespace Farmacia.Entidad
         public required Proveedor Proveedor { get; set; }
         public string? Fecha { get; set; }
         public List<Producto>? Productos { get; set; }
-        public List<DetalleCompra>? DetalleCompra { get; set; }
     }
 }
