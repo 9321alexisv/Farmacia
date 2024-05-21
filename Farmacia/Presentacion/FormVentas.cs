@@ -37,7 +37,6 @@ namespace VistasFarmacia.Forms
             dgvVentas.ColumnHeadersDefaultCellStyle.BackColor = ThemeColor.SecondaryColor;
             dgvVentas.RowHeadersDefaultCellStyle.ForeColor = Color.White;
             dgvVentas.RowHeadersDefaultCellStyle.BackColor = ThemeColor.PrimaryColor;
-
         }
 
         public void MostrarHistorialVentas()

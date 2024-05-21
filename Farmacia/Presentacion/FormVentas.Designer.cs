@@ -185,6 +185,7 @@
             Codigo.MinimumWidth = 6;
             Codigo.Name = "Codigo";
             Codigo.ReadOnly = true;
+            Codigo.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
             // Producto
             // 
@@ -192,6 +193,7 @@
             Producto.MinimumWidth = 6;
             Producto.Name = "Producto";
             Producto.ReadOnly = true;
+            Producto.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
             // Cantidad
             // 
@@ -199,6 +201,7 @@
             Cantidad.MinimumWidth = 6;
             Cantidad.Name = "Cantidad";
             Cantidad.ReadOnly = true;
+            Cantidad.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
             // PrecioCompra
             // 
@@ -206,6 +209,7 @@
             PrecioCompra.MinimumWidth = 6;
             PrecioCompra.Name = "PrecioCompra";
             PrecioCompra.ReadOnly = true;
+            PrecioCompra.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
             // PrecioVenta
             // 
@@ -213,6 +217,7 @@
             PrecioVenta.MinimumWidth = 6;
             PrecioVenta.Name = "PrecioVenta";
             PrecioVenta.ReadOnly = true;
+            PrecioVenta.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
             // Subtotal
             // 
@@ -220,6 +225,7 @@
             Subtotal.MinimumWidth = 6;
             Subtotal.Name = "Subtotal";
             Subtotal.ReadOnly = true;
+            Subtotal.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
             // panel2
             // 
