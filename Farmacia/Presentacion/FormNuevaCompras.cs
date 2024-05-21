@@ -40,28 +40,39 @@ namespace VistasFarmacia.Forms
             panel1.BackColor = ThemeColor.SecondaryColor;
         }
 
+        #region Datos
+
         public void ListarProveedores()
         {
             try
             {
-                D_Proveedores proveedores = new();
                 cmbProveedores.DataSource = D_Proveedores.Listar();
-                cmbProveedores.ValueMember = "id_proveedor";
-                cmbProveedores.DisplayMember = "proveedor";
+                cmbProveedores.ValueMember = "IdProveedor";
+                cmbProveedores.DisplayMember = "NombreNit";
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message + ex.StackTrace);
+                MessageBox.Show("Error al mostrar proveedores." + ex.Message, "Error interno", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
+        #endregion
+
+        #region Botones
+
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            if (dgvProductos.RowCount <= 1)
+            {
+                MessageBox.Show("Ningun producto agregado.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            int idProveedor = Convert.ToInt32(cmbProveedores.SelectedValue);
+
             try
             {
-                D_Compras compras = new();
-
-                int idCompra = D_Compras.CrearCompra();
+                int idCompra = D_Compras.CrearCompra(idProveedor);
                 D_Compras.ActualizarStockProductos(dgvProductos);
                 D_Compras.InsertarDetalleCompra(idCompra, dgvProductos);
             }
@@ -74,6 +85,12 @@ namespace VistasFarmacia.Forms
             MessageBox.Show("Guardado", "Nueva compra", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            LimpiarTabla();
+        }
+
+        #endregion
 
         #region "Helpers"
 
@@ -84,27 +101,28 @@ namespace VistasFarmacia.Forms
         {
             // BUSCAR PRODUCTO ========================================================================
             // Verifica que la celda editada esté en la columna "codigo"
-            if (dgvProductos.Columns[e.ColumnIndex].Name == "Codigo")
+            if (dgvProductos.Columns[e.ColumnIndex].Name == "IdProducto")
             {
                 // Obtén el código del producto ingresado
                 if (int.TryParse(dgvProductos.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(), out int codigoProducto))
                 {
                     // Busca el producto 
-                    D_Productos productos = new();
-                    Producto producto = D_Productos.BuscarPorId(codigoProducto);
+                    Producto? producto = D_Productos.BuscarPorId(codigoProducto);
 
-                    if (producto != null)
-                    {
-                        // Carga los datos del producto en la fila correspondiente
-                        dgvProductos.Rows[e.RowIndex].Cells["Producto"].Value = producto.Nombre;
-                        dgvProductos.Rows[e.RowIndex].Cells["PrecioCompra"].Value = producto.PrecioCompra;
-                        dgvProductos.Rows[e.RowIndex].Cells["PrecioVenta"].Value = producto.PrecioVenta;
-                        dgvProductos.Rows[e.RowIndex].Cells["cantidad"].Value = 1;
-                    }
-                    else
+                    if (producto == null)
                     {
                         MessageBox.Show("No se encontró el producto con el código ingresado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        dgvProductos.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "";
+                        dgvProductos.Rows.RemoveAt(e.RowIndex);
+                        return;
                     }
+
+                    // Carga los datos del producto en la fila correspondiente
+                    dgvProductos.Rows[e.RowIndex].Cells["Nombre"].Value = producto.Nombre;
+                    dgvProductos.Rows[e.RowIndex].Cells["Marca"].Value = producto.Marca.Nombre;
+                    dgvProductos.Rows[e.RowIndex].Cells["PrecioCompra"].Value = producto.PrecioCompra;
+                    dgvProductos.Rows[e.RowIndex].Cells["PrecioVenta"].Value = producto.PrecioVenta;
+                    dgvProductos.Rows[e.RowIndex].Cells["Cantidad"].Value = 1;
                 }
             }
 
@@ -124,7 +142,7 @@ namespace VistasFarmacia.Forms
             if (precioObj != null && decimal.TryParse(precioObj.ToString(), out decimal precio))
             {
                 // Verificar si el valor de la celda "Cantidad" no es nulo
-                object cantidadObj = dgvProductos.Rows[rowIndex].Cells["cantidad"].Value;
+                object cantidadObj = dgvProductos.Rows[rowIndex].Cells["Cantidad"].Value;
                 if (cantidadObj != null && int.TryParse(cantidadObj.ToString(), out int cantidad))
                 {
                     return precio * cantidad;
@@ -145,11 +163,6 @@ namespace VistasFarmacia.Forms
             }
 
             return total;
-        }
-
-        private void btnLimpiar_Click(object sender, EventArgs e)
-        {
-            LimpiarTabla();
         }
 
         public void LimpiarTabla()

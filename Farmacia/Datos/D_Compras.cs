@@ -9,15 +9,16 @@ namespace Farmacia.Datos
         // ============================================================================================
         // CREAR COMPRA ===============================================================================
         // ============================================================================================
-        public static int CrearCompra()
+        public static int CrearCompra(int idProveedor)
         {
-            string query = "INSERT INTO compra DEFAULT VALUES RETURNING id_compra;";
+            string query = "INSERT INTO compra (id_proveedor) VALUES (@id_proveedor) RETURNING id_compra;";
 
             try
             {
                 ConexionDB conexion = new();
                 using NpgsqlConnection conn = conexion.AbrirConexion()!;
                 using NpgsqlCommand command = new(query, conn);
+                command.Parameters.AddWithValue("@id_proveedor", idProveedor);
                 int idCompra = Convert.ToInt32(command.ExecuteScalar());
                 
                 return idCompra;
@@ -42,7 +43,7 @@ namespace Farmacia.Datos
                 {
                     command.Parameters.AddWithValue("@id_compra", idCompra);
 
-                    command.Parameters.AddWithValue("@id_producto", Convert.ToInt32(row.Cells["codigo"].Value));
+                    command.Parameters.AddWithValue("@id_producto", Convert.ToInt32(row.Cells["IdProducto"].Value));
                     command.Parameters.AddWithValue("@precio_compra", Convert.ToDecimal(row.Cells["PrecioCompra"].Value));
                     command.Parameters.AddWithValue("@precio_venta", Convert.ToDecimal(row.Cells["PrecioVenta"].Value));
                     command.Parameters.AddWithValue("@cantidad", Convert.ToInt32(row.Cells["Cantidad"].Value));
@@ -69,7 +70,7 @@ namespace Farmacia.Datos
 
                 foreach (DataGridViewRow row in dgvProductos.Rows)
                 {
-                    int idProducto = Convert.ToInt32(row.Cells["codigo"].Value);
+                    int idProducto = Convert.ToInt32(row.Cells["IdProducto"].Value);
                     int cantidad = Convert.ToInt32(row.Cells["Cantidad"].Value);
 
                     string query = "UPDATE producto SET stock = stock + @cantidad WHERE id_producto = @idProducto";

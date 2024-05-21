@@ -60,17 +60,18 @@ namespace Farmacia.Datos
                 {
                     producto = new()
                     {
+
                         IdProducto = Convert.ToInt32(datos["id_producto"]),
                         Marca = new()
                         {
-                            IdMarca = Convert.ToInt32(datos["id_proveedor"]),
-                            Nombre = ""
+                            IdMarca = datos.GetFieldValue<int>("id_marca"),
+                            Nombre = datos.GetFieldValue<string>("marca"),
                         },
-                        Nombre = Convert.ToString(datos["nombre"]) ?? "",
-                        PrecioCompra = Convert.ToDecimal(datos["precio_compra"]),
-                        PrecioVenta = Convert.ToDecimal(datos["precio_venta"]),
-                        Stock = Convert.ToInt32(datos["stock"]),
-                        StockMinimo = 0,
+                        Nombre = datos.GetFieldValue<string>("producto"),
+                        PrecioCompra = datos.GetFieldValue<decimal>("precio_compra"),
+                        PrecioVenta = datos.GetFieldValue<decimal>("precio_venta"),
+                        Stock = datos.GetFieldValue<int>("stock"),
+                        StockMinimo = datos.GetFieldValue<int>("stock_minimo")
                     };
                     
                     return producto;

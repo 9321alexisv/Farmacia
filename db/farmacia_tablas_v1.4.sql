@@ -52,9 +52,11 @@ CREATE TABLE producto (
 -- Crear tabla Compra
 CREATE TABLE compra (
     id_compra SERIAL,
-    fecha DATE DEFAULT CURRENT_DATE NOT NULL,
+    id_proveedor INT NOT NULL,
+    fecha DATE DEFAULT CURRENT_DATE,
     estado BOOLEAN DEFAULT TRUE,
-    CONSTRAINT pk_compra PRIMARY KEY (id_compra)
+    CONSTRAINT pk_compra PRIMARY KEY (id_compra),
+    CONSTRAINT fk_compra_proveedor FOREIGN KEY (id_proveedor) REFERENCES proveedor(id_proveedor)
 );
 
 -- Crear tabla Detalle Compra
@@ -74,7 +76,7 @@ CREATE TABLE detalle_compra (
 CREATE TABLE venta (
     id_venta SERIAL,
     id_cliente INT NOT NULL,
-    fecha DATE DEFAULT CURRENT_DATE NOT NULL,
+    fecha DATE DEFAULT CURRENT_DATE,
     estado BOOLEAN DEFAULT TRUE,
     CONSTRAINT pk_venta PRIMARY KEY (id_venta),
     CONSTRAINT fk_venta_cliente FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente)

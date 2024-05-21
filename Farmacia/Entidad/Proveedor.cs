@@ -9,5 +9,8 @@ namespace Farmacia.Entidad
         public string? Telefono { get; set; }
         public string? Representante { get; set; }
         public bool Estado { get; set; }
+
+        // Propiedad personalizada para concatenar IdProveedor y Nombre
+        public string NombreNit => $"{Nombre} - NIT: {Nit}";
     }
 }

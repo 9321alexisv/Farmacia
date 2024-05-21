@@ -33,9 +33,10 @@
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             dgvProductos = new DataGridView();
-            Codigo = new DataGridViewTextBoxColumn();
-            cantidad = new DataGridViewTextBoxColumn();
-            Producto = new DataGridViewTextBoxColumn();
+            IdProducto = new DataGridViewTextBoxColumn();
+            Cantidad = new DataGridViewTextBoxColumn();
+            Nombre = new DataGridViewTextBoxColumn();
+            Marca = new DataGridViewTextBoxColumn();
             PrecioCompra = new DataGridViewTextBoxColumn();
             PrecioVenta = new DataGridViewTextBoxColumn();
             Subtotal = new DataGridViewTextBoxColumn();
@@ -54,9 +55,11 @@
             // 
             // dgvProductos
             // 
+            dgvProductos.AllowUserToOrderColumns = true;
             dgvProductos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvProductos.BackgroundColor = Color.FromArgb(49, 49, 68);
             dgvProductos.BorderStyle = BorderStyle.None;
+            dgvProductos.CellBorderStyle = DataGridViewCellBorderStyle.Sunken;
             dgvProductos.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = Color.FromArgb(49, 49, 68);
@@ -67,7 +70,7 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dgvProductos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvProductos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvProductos.Columns.AddRange(new DataGridViewColumn[] { Codigo, cantidad, Producto, PrecioCompra, PrecioVenta, Subtotal });
+            dgvProductos.Columns.AddRange(new DataGridViewColumn[] { IdProducto, Cantidad, Nombre, Marca, PrecioCompra, PrecioVenta, Subtotal });
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = SystemColors.Window;
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -101,23 +104,31 @@
             dgvProductos.TabIndex = 0;
             dgvProductos.CellEndEdit += dgvProductos_CellEndEdit;
             // 
-            // Codigo
+            // IdProducto
             // 
-            Codigo.HeaderText = "Codigo";
-            Codigo.MinimumWidth = 6;
-            Codigo.Name = "Codigo";
+            IdProducto.HeaderText = "Codigo";
+            IdProducto.MinimumWidth = 6;
+            IdProducto.Name = "IdProducto";
             // 
-            // cantidad
+            // Cantidad
             // 
-            cantidad.HeaderText = "Cantidad";
-            cantidad.MinimumWidth = 6;
-            cantidad.Name = "cantidad";
+            Cantidad.HeaderText = "Cantidad";
+            Cantidad.MinimumWidth = 6;
+            Cantidad.Name = "Cantidad";
             // 
-            // Producto
+            // Nombre
             // 
-            Producto.HeaderText = "Producto";
-            Producto.MinimumWidth = 6;
-            Producto.Name = "Producto";
+            Nombre.HeaderText = "Producto";
+            Nombre.MinimumWidth = 6;
+            Nombre.Name = "Nombre";
+            Nombre.ReadOnly = true;
+            // 
+            // Marca
+            // 
+            Marca.HeaderText = "Marca";
+            Marca.MinimumWidth = 6;
+            Marca.Name = "Marca";
+            Marca.ReadOnly = true;
             // 
             // PrecioCompra
             // 
@@ -136,6 +147,7 @@
             Subtotal.HeaderText = "Subtotal";
             Subtotal.MinimumWidth = 6;
             Subtotal.Name = "Subtotal";
+            Subtotal.ReadOnly = true;
             // 
             // labelTablaIngresoCompras
             // 
@@ -225,18 +237,20 @@
             btnLimpiar.Name = "btnLimpiar";
             btnLimpiar.Size = new Size(182, 85);
             btnLimpiar.TabIndex = 25;
-            btnLimpiar.Text = "Limpiar Compras";
+            btnLimpiar.Text = "Limpiar Compra";
             btnLimpiar.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnLimpiar.UseVisualStyleBackColor = true;
             btnLimpiar.Click += btnLimpiar_Click;
             // 
             // cmbProveedores
             // 
-            cmbProveedores.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbProveedores.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbProveedores.AutoCompleteSource = AutoCompleteSource.ListItems;
             cmbProveedores.FormattingEnabled = true;
+            cmbProveedores.Items.AddRange(new object[] { "" });
             cmbProveedores.Location = new Point(202, 116);
             cmbProveedores.Name = "cmbProveedores";
-            cmbProveedores.Size = new Size(262, 28);
+            cmbProveedores.Size = new Size(343, 28);
             cmbProveedores.TabIndex = 26;
             // 
             // FormNuevaCompras
@@ -278,9 +292,10 @@
         private Button btnGuardarIngresoVentas;
         private Button btnLimpiar;
         private ComboBox cmbProveedores;
-        private DataGridViewTextBoxColumn Codigo;
-        private DataGridViewTextBoxColumn cantidad;
-        private DataGridViewTextBoxColumn Producto;
+        private DataGridViewTextBoxColumn IdProducto;
+        private DataGridViewTextBoxColumn Cantidad;
+        private DataGridViewTextBoxColumn Nombre;
+        private DataGridViewTextBoxColumn Marca;
         private DataGridViewTextBoxColumn PrecioCompra;
         private DataGridViewTextBoxColumn PrecioVenta;
         private DataGridViewTextBoxColumn Subtotal;
