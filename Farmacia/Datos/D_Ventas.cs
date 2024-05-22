@@ -1,6 +1,7 @@
 ﻿
 using Farmacia.Entidad;
 using Npgsql;
+using System.Data;
 
 namespace Farmacia.Datos
 {
@@ -94,77 +95,96 @@ namespace Farmacia.Datos
         // ============================================================================================
         // OBTENER TODAS LAS VENTAS ===================================================================
         // ============================================================================================
-        public static List<Venta> ObtenerVentas()
+        public static List<Venta> VentasPorFechas(DateTime? fechaInicio, DateTime? fechaFin)
         {
-            string query = "SELECT v.id_venta, c.nombre, v.fecha " +
-                           "FROM venta v " +
-                           "INNER JOIN cliente c ON v.id_cliente = c.id_cliente";
+            List<Venta> ventas = [];
+            string query = """
+                    SELECT
+                    v.id_venta,
+                    v.id_cliente,
+                    c.nit nit_cliente,
+                    c.nombre cliente,
+                    c.telefono telefono_cliente,
+                    v.fecha,
+                    dv.id_producto,
+                    p.nombre producto,
+                    m.id_marca,
+                    m.nombre marca,
+                    dv.precio_compra,
+                    dv.precio_venta,
+                    dv.cantidad 
+                FROM
+                    venta v
+                    JOIN cliente c ON v.id_cliente = c.id_cliente
+                    LEFT JOIN detalle_venta dv ON v.id_venta = dv.id_venta
+                    LEFT JOIN producto p ON dv.id_producto = p.id_producto 
+                    LEFT JOIN marca m ON p.id_marca = m.id_marca
+                WHERE
+                    v.fecha BETWEEN @fechaInicio AND @fechaFin
+                ORDER BY
+                    v.id_venta DESC, dv.id_producto;
+                """;
 
             try
             {
                 ConexionDB conexion = new();
                 using NpgsqlConnection conn = conexion.AbrirConexion()!;
-                using NpgsqlCommand command = new(query, conn);
-                using NpgsqlDataReader reader = command.ExecuteReader();
-                List<Venta> ventas = [];
+                using NpgsqlCommand cmd = new(query, conn);
 
-                while (reader.Read())
+                cmd.Parameters.AddWithValue("@fechaInicio", fechaInicio.HasValue ? fechaInicio.Value : DateTime.MinValue.ToString());
+                cmd.Parameters.AddWithValue("@fechaFin", fechaFin.HasValue ? fechaFin.Value : DateTime.Now.Date.ToString());
+
+                using NpgsqlDataReader datos = cmd.ExecuteReader();
+
+                Venta? ventaActual = null;
+
+                while (datos.Read())
                 {
-                    Venta venta = new()
-                    {
-                        IdVenta = reader.GetInt32(0),
-                        Cliente = reader.GetString(1),
-                        Fecha = reader.GetDateTime(2).ToString(),
-                    };
+                    int idVenta = datos.GetFieldValue<int>("id_venta");
 
-                    ventas.Add(venta);
+                    if (ventaActual == null || ventaActual.IdVenta != idVenta)
+                    {
+                        ventaActual = new Venta
+                        {
+                            IdVenta = idVenta,
+                            Cliente = new Cliente
+                            {
+                                IdCliente = datos.GetFieldValue<int>("id_cliente"),
+                                Nit = datos.GetFieldValue<string>("nit_cliente"),
+                                Nombre = datos.GetFieldValue<string>("cliente"),
+                                Telefono = datos.GetFieldValue<string>("telefono_cliente")
+                            },
+                            Fecha = datos.GetFieldValue<DateTime>("fecha"),
+                            Productos = []
+                        };
+                        ventas.Add(ventaActual);
+                    }
+
+                    if (!datos.IsDBNull(datos.GetOrdinal("id_producto")))
+                    {
+                        ventaActual.Productos!.Add(new Producto
+                        {
+                            IdProducto = datos.GetFieldValue<int>("id_producto"),
+                            Nombre = datos.GetString("producto"),
+                            PrecioCompra = datos.GetDecimal("precio_compra"),
+                            PrecioVenta = datos.GetDecimal("precio_venta"),
+                            Stock = datos.GetFieldValue<int>("cantidad"),
+                            StockMinimo = 0,
+                            Marca = new()
+                            {
+                                IdMarca = datos.GetInt32("id_marca"),
+                                Nombre = datos.GetString("marca"),
+                            }
+                        });
+                    }
                 }
 
                 return ventas;
             }
             catch (NpgsqlException ex)
             {
-                throw new NpgsqlException("Error al obtener todas las ventas", ex);
+                throw new NpgsqlException("Error al obtener ventas por fechas.", ex);
             }
         }
-
-        public static List<DetalleVenta> ObtenerDetallesVenta(int idVenta)
-        {
-            string query = "SELECT p.id_producto, p.nombre, dv.precio_compra, dv.precio_venta, dv.cantidad " +
-                           "FROM detalle_venta dv " +
-                           "INNER JOIN producto p ON dv.id_producto = p.id_producto " +
-                           "WHERE dv.id_venta = @idVenta";
-
-            try
-            {
-                ConexionDB conexion = new();
-                using NpgsqlConnection conn = conexion.AbrirConexion()!;
-                using NpgsqlCommand command = new(query, conn);
-                command.Parameters.AddWithValue("@idVenta", idVenta);
-                using NpgsqlDataReader reader = command.ExecuteReader();
-
-                List<DetalleVenta> detalleVenta = [];
-                while (reader.Read())
-                {
-                    DetalleVenta detalle = new()
-                    {
-                        IdProducto = reader.GetInt32(0),
-                        Producto = reader.GetString(1),
-                        PrecioCompra = reader.GetDecimal(2),
-                        PrecioVenta = reader.GetDecimal(3),
-                        Cantidad = reader.GetInt32(4)
-                    };
-
-                    detalleVenta.Add(detalle);
-                }
-
-                return detalleVenta;
-            }
-            catch (NpgsqlException ex)
-            {
-                throw new NpgsqlException("Error al obtener los detalles de la venta", ex);
-            }
-        }
-
     }
 }

@@ -16,7 +16,9 @@ namespace VistasFarmacia.Forms
         private void FormVentas_Load(object sender, EventArgs e)
         {
             LoadTheme();
-            MostrarHistorialVentas();
+            DateTime fechaInicio = DateTime.MinValue.Date;
+            DateTime fechaFin = DateTime.Now.Date;
+            MostrarVentas(fechaInicio, fechaFin);
         }
 
         private void LoadTheme()
@@ -39,10 +41,31 @@ namespace VistasFarmacia.Forms
             dgvVentas.RowHeadersDefaultCellStyle.BackColor = ThemeColor.PrimaryColor;
         }
 
-        public void MostrarHistorialVentas()
+        #region Botones
+        private void btnReporte_Click(object sender, EventArgs e)
         {
-            D_Ventas ventas = new();
-            List<Venta> todasVentas = D_Ventas.ObtenerVentas();
+            ReportesClosedXML reportes = new();
+            reportes.Excel("Ventas", dgvVentas);
+        }
+
+        private void btnFiltrar_Click(object sender, EventArgs e)
+        {
+            DateTime fechaInicio = dtpDesde.Value.Date;
+            DateTime fechaFin = dtpHasta.Value.Date;
+            MostrarVentas(fechaInicio, fechaFin);
+        }
+
+        private void btnTodos_Click(object sender, EventArgs e)
+        {
+            DateTime fechaInicio = DateTime.MinValue.Date;
+            DateTime fechaFin = DateTime.Now.Date;
+            MostrarVentas(fechaInicio, fechaFin);
+        }
+        #endregion
+
+        public void MostrarVentas(DateTime fechaInicio, DateTime fechaFin)
+        {
+            List<Venta> todasVentas = D_Ventas.VentasPorFechas(fechaInicio, fechaFin);
 
             decimal totalVentas = 0;
             decimal totalGanancias = 0;
@@ -51,13 +74,13 @@ namespace VistasFarmacia.Forms
 
             foreach (var venta in todasVentas)
             {
-                List<DetalleVenta> detallesVenta = D_Ventas.ObtenerDetallesVenta(venta.IdVenta);
+                List<Producto> productosVenta = venta.Productos!;
 
                 // Total Venta
-                decimal totalVenta = detallesVenta.Sum(detalle => detalle.PrecioVenta * detalle.Cantidad);
+                decimal totalVenta = productosVenta.Sum(producto => producto.PrecioVenta * producto.Stock);
 
                 // Ganancias de la venta
-                decimal totalGananciasVenta = detallesVenta.Sum(detalle => (detalle.PrecioVenta - detalle.PrecioCompra) * detalle.Cantidad);
+                decimal totalGananciasVenta = productosVenta.Sum(producto => (producto.PrecioVenta - producto.PrecioCompra) * producto.Stock);
 
                 // PARA ETIQUETAS GLOBALES CON PROPOSITOS INFORMATIVOS
                 totalVentas += totalVenta; // Sumar al total de ventas
@@ -66,36 +89,30 @@ namespace VistasFarmacia.Forms
                 // Encabezado de cada venta dentro de la tabla
                 int rowIndex = dgvVentas.Rows.Add(
                     $"VENTA #{venta.IdVenta}",
-                    $"CLIENTE: {venta.Cliente}",
+                    $"CLIENTE: {venta.Cliente.Nombre}",
                     "FECHA",
-                    venta.Fecha.ToString(),
+                    venta.Fecha.ToString("dd/MM/yyyy"),
                     "TOTAL",
                     totalVenta
                  );
                 dgvVentas.Rows[rowIndex].DefaultCellStyle.BackColor = Color.Green;
                 dgvVentas.Rows[rowIndex].Height = 50;
 
-                foreach (var detalle in detallesVenta)
+                foreach (var producto in productosVenta)
                 {
                     dgvVentas.Rows.Add(
-                        detalle.IdProducto,
-                        detalle.Producto,
-                        detalle.Cantidad,
-                        detalle.PrecioCompra,
-                        detalle.PrecioVenta,
-                        detalle.PrecioVenta * detalle.Cantidad
+                        producto.IdProducto,
+                        producto.Nombre,
+                        producto.Stock,
+                        producto.PrecioCompra,
+                        producto.PrecioVenta,
+                        producto.PrecioVenta * producto.Stock
                     );
                 }
             }
 
             lblVentas.Text = totalVentas.ToString();
             lblGanancias.Text = totalGanancias.ToString();
-        }
-
-        private void btnReporte_Click(object sender, EventArgs e)
-        {
-            ReportesClosedXML reportes = new();
-            reportes.Excel("Ventas", dgvVentas);
         }
     }
 }

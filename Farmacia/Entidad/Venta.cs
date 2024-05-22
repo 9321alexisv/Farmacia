@@ -3,9 +3,9 @@ namespace Farmacia.Entidad
 {
     public class Venta
     {
-        public int IdVenta { get; set; }
-        public string Cliente { get; set; }
-        public string Fecha { get; set; }
-        public List<DetalleVenta> ObjDetalleVenta { get; set; }
+        public required int IdVenta { get; set; }
+        public required Cliente Cliente { get; set; }
+        public required DateTime Fecha { get; set; }
+        public List<Producto>? Productos { get; set; }
     }
 }
