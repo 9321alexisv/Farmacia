@@ -26,7 +26,7 @@
     <Compile Update="Presentacion\FormNuevaVenta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Presentacion\FormNuevaCompras.cs">
+    <Compile Update="Presentacion\FormNuevaCompra.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Presentacion\FormInventario.cs">

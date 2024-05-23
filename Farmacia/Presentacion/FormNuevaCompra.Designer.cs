@@ -1,6 +1,6 @@
 ﻿namespace VistasFarmacia.Forms
 {
-    partial class FormNuevaCompras
+    partial class FormNuevaCompra
     {
         /// <summary>
         /// Required designer variable.
@@ -104,6 +104,7 @@
             dgvProductos.Size = new Size(1028, 497);
             dgvProductos.TabIndex = 0;
             dgvProductos.CellEndEdit += dgvProductos_CellEndEdit;
+            dgvProductos.EditingControlShowing += dgvProductos_EditingControlShowing;
             // 
             // IdProducto
             // 
@@ -122,7 +123,6 @@
             Nombre.HeaderText = "Producto";
             Nombre.MinimumWidth = 6;
             Nombre.Name = "Nombre";
-            Nombre.ReadOnly = true;
             // 
             // Marca
             // 
@@ -261,7 +261,7 @@
             cmbProveedores.Size = new Size(343, 28);
             cmbProveedores.TabIndex = 26;
             // 
-            // FormNuevaCompras
+            // FormNuevaCompra
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -275,7 +275,7 @@
             Controls.Add(labelTablaIngresoCompras);
             Controls.Add(dgvProductos);
             Margin = new Padding(3, 4, 3, 4);
-            Name = "FormNuevaCompras";
+            Name = "FormNuevaCompra";
             Text = "Nueva Compra";
             Load += FormIngresoCompras_Load;
             ((System.ComponentModel.ISupportInitialize)dgvProductos).EndInit();

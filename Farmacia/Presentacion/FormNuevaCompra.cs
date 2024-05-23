@@ -1,13 +1,16 @@
 ﻿
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using Farmacia.Datos;
 using Farmacia.Entidad;
 using Farmacia.Presentacion;
+using Irony.Parsing;
+using System.Data;
 
 namespace VistasFarmacia.Forms
 {
-    public partial class FormNuevaCompras : Form
+    public partial class FormNuevaCompra : Form
     {
-        public FormNuevaCompras()
+        public FormNuevaCompra()
         {
             InitializeComponent();
         }
@@ -98,41 +101,78 @@ namespace VistasFarmacia.Forms
         // ============================================================================================
         private void dgvProductos_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            // BUSCAR PRODUCTO ========================================================================
-            // Verifica que la celda editada esté en la columna "IdProducto"
+            // Buscar producto si se ingresa el codigo en la columna ==================================
             if (dgvProductos.Columns[e.ColumnIndex].Name == "IdProducto")
             {
                 // Obtén el código del producto ingresado
-                if (int.TryParse(dgvProductos.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(), out int codigoProducto))
+                if (!int.TryParse(dgvProductos.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(), out int codigoProducto) || D_Productos.BuscarPorId(codigoProducto) is not Producto producto)
                 {
-                    // Busca el producto 
-                    Producto? producto = D_Productos.BuscarPorId(codigoProducto);
+                    MessageBox.Show("No se encontró el producto con el código ingresado.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    
+                    dgvProductos.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "";
+                    dgvProductos.Rows.RemoveAt(e.RowIndex);
+                    return;
+                }
 
-                    if (producto == null)
-                    {
-                        MessageBox.Show("No se encontró el producto con el código ingresado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        dgvProductos.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "";
-                        dgvProductos.Rows.RemoveAt(e.RowIndex);
-                        return;
-                    }
+                AgregarProductoAlGrid(e.RowIndex, producto);
+            }
 
-                    // Carga los datos del producto en la fila correspondiente
-                    dgvProductos.Rows[e.RowIndex].Cells["StockActual"].Value = producto.Stock;
-                    dgvProductos.Rows[e.RowIndex].Cells["Nombre"].Value = producto.Nombre;
-                    dgvProductos.Rows[e.RowIndex].Cells["Marca"].Value = producto.Marca.Nombre;
-                    dgvProductos.Rows[e.RowIndex].Cells["PrecioCompra"].Value = producto.PrecioCompra;
-                    dgvProductos.Rows[e.RowIndex].Cells["PrecioVenta"].Value = producto.PrecioVenta;
+            if (dgvProductos.Columns[e.ColumnIndex].Name == "Cantidad")
+            {
+                // Verificar que no se ingrese texto en la cantidad
+                if (!int.TryParse(dgvProductos.Rows[e.RowIndex].Cells["Cantidad"].Value.ToString(), result: out _))
+                {
                     dgvProductos.Rows[e.RowIndex].Cells["Cantidad"].Value = 1;
+                }
+
+                // Si se ingresa una cantidad y no hay producto
+                if (dgvProductos.Rows[e.RowIndex].Cells["IdProducto"].Value == null)
+                {
+                    dgvProductos.Rows.RemoveAt(e.RowIndex);
                 }
             }
 
-            // CALCULAR SUBTOTAL =====================================================================
-            decimal subtotal = CalcularSubtotal(e.RowIndex);
-            dgvProductos.Rows[e.RowIndex].Cells["Subtotal"].Value = subtotal;
+            CalcularSubtotal(e.RowIndex);
+            CalcularTotal();
+        }
 
-            // CALCULAR TOTAL ========================================================================
-            decimal total = CalcularTotal();
-            lblTotal.Text = total.ToString();
+        private void dgvProductos_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            // Mostrar ventana de busqueda si se escribe dentro de la columna y fila de Producto
+            if (dgvProductos.CurrentCell.ColumnIndex != 2) return;
+
+            dgvProductos.EndEdit();
+
+            var formBuscarProducto = new FormBuscarProducto();
+            if (formBuscarProducto.ShowDialog(this) != DialogResult.OK) return;
+
+            // Acceder al elemento seleccionado en el ListBox del formulario de búsqueda
+            DataRowView? productoSeleccionado = formBuscarProducto.SelectedItem;
+            if (productoSeleccionado == null) return;
+
+            int idProducto = Convert.ToInt32(productoSeleccionado["id_producto"]);
+            Producto? producto = D_Productos.BuscarPorId(idProducto);
+            if (producto != null)
+            {
+                dgvProductos.CurrentRow.Cells["IdProducto"].Value = idProducto;
+                int rowIndex = dgvProductos.CurrentRow.Index;
+                AgregarProductoAlGrid(rowIndex, producto);
+            }
+
+            CalcularSubtotal(dgvProductos.CurrentRow.Index);
+            CalcularTotal();
+            // Agregar fila al final
+            dgvProductos.NotifyCurrentCellDirty(true);
+        }
+
+        public void AgregarProductoAlGrid(int rowIndex, Producto producto)
+        {
+            dgvProductos.Rows[rowIndex].Cells["StockActual"].Value = producto.Stock;
+            dgvProductos.Rows[rowIndex].Cells["Nombre"].Value = producto.Nombre;
+            dgvProductos.Rows[rowIndex].Cells["Marca"].Value = producto.Marca.Nombre;
+            dgvProductos.Rows[rowIndex].Cells["PrecioCompra"].Value = producto.PrecioCompra;
+            dgvProductos.Rows[rowIndex].Cells["PrecioVenta"].Value = producto.PrecioVenta;
+            dgvProductos.Rows[rowIndex].Cells["Cantidad"].Value = 1;
         }
 
         private decimal CalcularSubtotal(int rowIndex)
@@ -145,7 +185,9 @@ namespace VistasFarmacia.Forms
                 object cantidadObj = dgvProductos.Rows[rowIndex].Cells["Cantidad"].Value;
                 if (cantidadObj != null && int.TryParse(cantidadObj.ToString(), out int cantidad))
                 {
-                    return precio * cantidad;
+                    decimal subtotal = precio * cantidad;
+                    dgvProductos.Rows[rowIndex].Cells["Subtotal"].Value = subtotal;
+                    return subtotal;
                 }
             }
 
@@ -158,10 +200,12 @@ namespace VistasFarmacia.Forms
 
             foreach (DataGridViewRow row in dgvProductos.Rows)
             {
-                decimal subtotal = CalcularSubtotal(row.Index);
+                //decimal subtotal = CalcularSubtotal(row.Index);
+                decimal subtotal = Convert.ToDecimal(row.Cells["Subtotal"].Value);
                 total += subtotal;
             }
 
+            lblTotal.Text = total.ToString();
             return total;
         }
 

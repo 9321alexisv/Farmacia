@@ -145,7 +145,7 @@ namespace Farmacia.Datos
             string query = """
                 SELECT c.id_compra, p.id_proveedor, p.nombre proveedor, c.fecha 
                 FROM compra c JOIN proveedor p ON c.id_proveedor = p.id_proveedor 
-                ORDER BY fecha DESC;
+                ORDER BY c.id_compra DESC;
                 """;
 
             try

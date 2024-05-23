@@ -98,7 +98,7 @@ namespace VistasFarmacia
 
         private void btnIngresoCompras_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new Forms.FormNuevaCompras(), sender);
+            OpenChildForm(new Forms.FormNuevaCompra(), sender);
         }
 
         private void btnInventario_Click(object sender, EventArgs e)
