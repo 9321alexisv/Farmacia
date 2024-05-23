@@ -36,12 +36,6 @@
             label3 = new Label();
             lblVentas = new Label();
             dgvVentas = new DataGridView();
-            Codigo = new DataGridViewTextBoxColumn();
-            Producto = new DataGridViewTextBoxColumn();
-            Cantidad = new DataGridViewTextBoxColumn();
-            PrecioCompra = new DataGridViewTextBoxColumn();
-            PrecioVenta = new DataGridViewTextBoxColumn();
-            Subtotal = new DataGridViewTextBoxColumn();
             panel2 = new Panel();
             label1 = new Label();
             label2 = new Label();
@@ -52,6 +46,14 @@
             label5 = new Label();
             btnFiltrar = new Button();
             btnTodos = new Button();
+            btnEliminar = new Button();
+            IdVenta = new DataGridViewTextBoxColumn();
+            Codigo = new DataGridViewTextBoxColumn();
+            Producto = new DataGridViewTextBoxColumn();
+            Cantidad = new DataGridViewTextBoxColumn();
+            PrecioCompra = new DataGridViewTextBoxColumn();
+            PrecioVenta = new DataGridViewTextBoxColumn();
+            Subtotal = new DataGridViewTextBoxColumn();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvVentas).BeginInit();
             panel2.SuspendLayout();
@@ -139,7 +141,7 @@
             dgvVentas.BorderStyle = BorderStyle.None;
             dgvVentas.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dgvVentas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvVentas.Columns.AddRange(new DataGridViewColumn[] { Codigo, Producto, Cantidad, PrecioCompra, PrecioVenta, Subtotal });
+            dgvVentas.Columns.AddRange(new DataGridViewColumn[] { IdVenta, Codigo, Producto, Cantidad, PrecioCompra, PrecioVenta, Subtotal });
             dgvVentas.EnableHeadersVisualStyles = false;
             dgvVentas.GridColor = Color.FromArgb(49, 49, 68);
             dgvVentas.Location = new Point(82, 131);
@@ -161,54 +163,6 @@
             dgvVentas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvVentas.Size = new Size(1027, 616);
             dgvVentas.TabIndex = 7;
-            // 
-            // Codigo
-            // 
-            Codigo.HeaderText = "ID";
-            Codigo.MinimumWidth = 6;
-            Codigo.Name = "Codigo";
-            Codigo.ReadOnly = true;
-            Codigo.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Producto
-            // 
-            Producto.HeaderText = "Producto";
-            Producto.MinimumWidth = 6;
-            Producto.Name = "Producto";
-            Producto.ReadOnly = true;
-            Producto.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Cantidad
-            // 
-            Cantidad.HeaderText = "Cantidad";
-            Cantidad.MinimumWidth = 6;
-            Cantidad.Name = "Cantidad";
-            Cantidad.ReadOnly = true;
-            Cantidad.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // PrecioCompra
-            // 
-            PrecioCompra.HeaderText = "Precio Compra";
-            PrecioCompra.MinimumWidth = 6;
-            PrecioCompra.Name = "PrecioCompra";
-            PrecioCompra.ReadOnly = true;
-            PrecioCompra.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // PrecioVenta
-            // 
-            PrecioVenta.HeaderText = "Precio Venta";
-            PrecioVenta.MinimumWidth = 6;
-            PrecioVenta.Name = "PrecioVenta";
-            PrecioVenta.ReadOnly = true;
-            PrecioVenta.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Subtotal
-            // 
-            Subtotal.HeaderText = "Subtotal";
-            Subtotal.MinimumWidth = 6;
-            Subtotal.Name = "Subtotal";
-            Subtotal.ReadOnly = true;
-            Subtotal.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
             // panel2
             // 
@@ -330,12 +284,84 @@
             btnTodos.UseVisualStyleBackColor = true;
             btnTodos.Click += btnTodos_Click;
             // 
+            // btnEliminar
+            // 
+            btnEliminar.FlatStyle = FlatStyle.Flat;
+            btnEliminar.Image = Farmacia.Properties.Resources.borrar;
+            btnEliminar.Location = new Point(82, 779);
+            btnEliminar.Margin = new Padding(4, 6, 4, 6);
+            btnEliminar.Name = "btnEliminar";
+            btnEliminar.Size = new Size(150, 75);
+            btnEliminar.TabIndex = 15;
+            btnEliminar.Text = "Eliminar";
+            btnEliminar.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.Click += btnEliminar_Click;
+            // 
+            // IdVenta
+            // 
+            IdVenta.HeaderText = "IdVenta";
+            IdVenta.MinimumWidth = 6;
+            IdVenta.Name = "IdVenta";
+            IdVenta.ReadOnly = true;
+            IdVenta.SortMode = DataGridViewColumnSortMode.NotSortable;
+            IdVenta.Visible = false;
+            // 
+            // Codigo
+            // 
+            Codigo.HeaderText = "ID";
+            Codigo.MinimumWidth = 6;
+            Codigo.Name = "Codigo";
+            Codigo.ReadOnly = true;
+            Codigo.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Producto
+            // 
+            Producto.HeaderText = "Producto";
+            Producto.MinimumWidth = 6;
+            Producto.Name = "Producto";
+            Producto.ReadOnly = true;
+            Producto.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Cantidad
+            // 
+            Cantidad.HeaderText = "Cantidad";
+            Cantidad.MinimumWidth = 6;
+            Cantidad.Name = "Cantidad";
+            Cantidad.ReadOnly = true;
+            Cantidad.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // PrecioCompra
+            // 
+            PrecioCompra.HeaderText = "Precio Compra";
+            PrecioCompra.MinimumWidth = 6;
+            PrecioCompra.Name = "PrecioCompra";
+            PrecioCompra.ReadOnly = true;
+            PrecioCompra.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // PrecioVenta
+            // 
+            PrecioVenta.HeaderText = "Precio Venta";
+            PrecioVenta.MinimumWidth = 6;
+            PrecioVenta.Name = "PrecioVenta";
+            PrecioVenta.ReadOnly = true;
+            PrecioVenta.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Subtotal
+            // 
+            Subtotal.HeaderText = "Subtotal";
+            Subtotal.MinimumWidth = 6;
+            Subtotal.Name = "Subtotal";
+            Subtotal.ReadOnly = true;
+            Subtotal.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
             // FormVentas
             // 
             AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(39, 39, 58);
             ClientSize = new Size(1506, 869);
+            Controls.Add(btnEliminar);
             Controls.Add(btnTodos);
             Controls.Add(btnFiltrar);
             Controls.Add(label5);
@@ -374,17 +400,19 @@
         private Label label1;
         private Label label2;
         private Label lblGanancias;
-        private DataGridViewTextBoxColumn Codigo;
-        private DataGridViewTextBoxColumn Producto;
-        private DataGridViewTextBoxColumn Cantidad;
-        private DataGridViewTextBoxColumn PrecioCompra;
-        private DataGridViewTextBoxColumn PrecioVenta;
-        private DataGridViewTextBoxColumn Subtotal;
         private DateTimePicker dtpDesde;
         private DateTimePicker dtpHasta;
         private Label label4;
         private Label label5;
         private Button btnFiltrar;
         private Button btnTodos;
+        private Button btnEliminar;
+        private DataGridViewTextBoxColumn IdVenta;
+        private DataGridViewTextBoxColumn Codigo;
+        private DataGridViewTextBoxColumn Producto;
+        private DataGridViewTextBoxColumn Cantidad;
+        private DataGridViewTextBoxColumn PrecioCompra;
+        private DataGridViewTextBoxColumn PrecioVenta;
+        private DataGridViewTextBoxColumn Subtotal;
     }
 }

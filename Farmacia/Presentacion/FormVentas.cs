@@ -88,6 +88,7 @@ namespace VistasFarmacia.Forms
 
                 // Encabezado de cada venta dentro de la tabla
                 int rowIndex = dgvVentas.Rows.Add(
+                    venta.IdVenta,
                     $"VENTA #{venta.IdVenta}",
                     $"CLIENTE: {venta.Cliente.Nombre}",
                     "FECHA",
@@ -101,6 +102,7 @@ namespace VistasFarmacia.Forms
                 foreach (var producto in productosVenta)
                 {
                     dgvVentas.Rows.Add(
+                        venta.IdVenta,
                         producto.IdProducto,
                         producto.Nombre,
                         producto.Stock,
@@ -113,6 +115,24 @@ namespace VistasFarmacia.Forms
 
             lblVentas.Text = totalVentas.ToString();
             lblGanancias.Text = totalGanancias.ToString();
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (dgvVentas.SelectedRows.Count < 1)
+            {
+                MessageBox.Show("Ningun registro seleccionado");
+            };
+
+            DialogResult resultado = MessageBox.Show("Borrar la venta " + dgvVentas.CurrentRow.Cells["IdVenta"].Value, "Alerta", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (resultado != DialogResult.Yes) return;
+
+            D_Ventas.Eliminar(Convert.ToInt32(dgvVentas.CurrentRow.Cells["IdVenta"].Value));
+
+            DateTime fechaInicio = DateTime.MinValue.Date;
+            DateTime fechaFin = DateTime.Now.Date;
+            MostrarVentas(fechaInicio, fechaFin);
         }
     }
 }

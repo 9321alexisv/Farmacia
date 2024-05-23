@@ -116,7 +116,7 @@ namespace VistasFarmacia.Forms
             if (dgvProductos.Columns[e.ColumnIndex].Name == "IdProducto")
             {
                 // Obtener codigo del producto ingresado o verificar si existe el producto
-                if (!int.TryParse(dgvProductos.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(), out int codigoProducto) ||
+                if (!int.TryParse(Convert.ToString(dgvProductos.Rows[e.RowIndex].Cells[e.ColumnIndex].Value), out int codigoProducto) ||
                     D_Productos.BuscarPorId(codigoProducto) is not Producto producto)
                 {
                     MessageBox.Show("No se encontró el producto con el código ingresado.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -132,7 +132,7 @@ namespace VistasFarmacia.Forms
             if (dgvProductos.Columns[e.ColumnIndex].Name == "Cantidad")
             {
                 // Verificar que no se ingrese texto en la cantidad
-                if (!int.TryParse(dgvProductos.Rows[e.RowIndex].Cells["Cantidad"].Value.ToString(), result: out _))
+                if (!int.TryParse(Convert.ToString(dgvProductos.Rows[e.RowIndex].Cells["Cantidad"].Value), result: out _))
                 {
                     dgvProductos.Rows[e.RowIndex].Cells["Cantidad"].Value = 1;
                 }

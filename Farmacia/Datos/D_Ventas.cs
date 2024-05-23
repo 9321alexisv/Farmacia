@@ -186,5 +186,44 @@ namespace Farmacia.Datos
                 throw new NpgsqlException("Error al obtener ventas por fechas.", ex);
             }
         }
+
+        // ============================================================================================
+        // ELIMINAR VENTA (FISICO) ====================================================================
+        // ============================================================================================
+        public static void Eliminar(int idVenta)
+        {
+            string query = """
+                BEGIN;
+                    -- Actualizar stock de productos
+                    WITH productos_venta AS (
+                        SELECT id_producto, SUM(cantidad) AS cantidad_total
+                        FROM detalle_venta
+                        WHERE id_venta = @venta_eliminar
+                        GROUP BY id_producto
+                    )
+                    UPDATE producto p
+                    SET stock = p.stock + pv.cantidad_total
+                    FROM productos_venta pv
+                    WHERE p.id_producto = pv.id_producto;
+
+                    DELETE FROM detalle_venta WHERE id_venta = @venta_eliminar;
+                
+                    DELETE FROM venta WHERE id_venta = @venta_eliminar;
+                COMMIT;
+                """;
+
+            try
+            {
+                ConexionDB conexion = new();
+                using NpgsqlConnection conn = conexion.AbrirConexion()!;
+                using NpgsqlCommand command = new(query, conn);
+                command.Parameters.AddWithValue("@venta_eliminar", idVenta);
+                command.ExecuteNonQuery();
+            }
+            catch (NpgsqlException ex)
+            {
+                throw new NpgsqlException("Error al eliminar la 'venta'", ex);
+            }
+        }
     }
 }
