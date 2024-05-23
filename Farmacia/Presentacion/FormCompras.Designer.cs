@@ -44,6 +44,8 @@
             label2 = new Label();
             btnFiltrar = new Button();
             btnTodo = new Button();
+            btnEliminar = new Button();
+            IdCompra = new DataGridViewTextBoxColumn();
             IdProducto = new DataGridViewTextBoxColumn();
             Marca = new DataGridViewTextBoxColumn();
             Producto = new DataGridViewTextBoxColumn();
@@ -73,7 +75,7 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dgvCompras.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvCompras.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvCompras.Columns.AddRange(new DataGridViewColumn[] { IdProducto, Marca, Producto, Cantidad, Precio, Subtotal });
+            dgvCompras.Columns.AddRange(new DataGridViewColumn[] { IdCompra, IdProducto, Marca, Producto, Cantidad, Precio, Subtotal });
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(49, 49, 68);
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -164,7 +166,7 @@
             btnReporte.Location = new Point(904, 704);
             btnReporte.Margin = new Padding(3, 4, 3, 4);
             btnReporte.Name = "btnReporte";
-            btnReporte.Size = new Size(192, 93);
+            btnReporte.Size = new Size(192, 100);
             btnReporte.TabIndex = 17;
             btnReporte.Text = "Generar Excel";
             btnReporte.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -239,6 +241,28 @@
             btnTodo.UseVisualStyleBackColor = true;
             btnTodo.Click += btnTodo_Click;
             // 
+            // btnEliminar
+            // 
+            btnEliminar.FlatStyle = FlatStyle.Flat;
+            btnEliminar.Image = Farmacia.Properties.Resources.reportes;
+            btnEliminar.Location = new Point(77, 704);
+            btnEliminar.Margin = new Padding(3, 4, 3, 4);
+            btnEliminar.Name = "btnEliminar";
+            btnEliminar.Size = new Size(150, 100);
+            btnEliminar.TabIndex = 24;
+            btnEliminar.Text = "Eliminar";
+            btnEliminar.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.Click += btnEliminar_Click;
+            // 
+            // IdCompra
+            // 
+            IdCompra.HeaderText = "IdCompra";
+            IdCompra.MinimumWidth = 6;
+            IdCompra.Name = "IdCompra";
+            IdCompra.ReadOnly = true;
+            IdCompra.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
             // IdProducto
             // 
             IdProducto.HeaderText = "ID";
@@ -293,6 +317,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(39, 39, 58);
             ClientSize = new Size(1397, 833);
+            Controls.Add(btnEliminar);
             Controls.Add(btnTodo);
             Controls.Add(btnFiltrar);
             Controls.Add(label2);
@@ -333,6 +358,8 @@
         private Label label2;
         private Button btnFiltrar;
         private Button btnTodo;
+        private Button btnEliminar;
+        private DataGridViewTextBoxColumn IdCompra;
         private DataGridViewTextBoxColumn IdProducto;
         private DataGridViewTextBoxColumn Marca;
         private DataGridViewTextBoxColumn Producto;

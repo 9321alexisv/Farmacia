@@ -60,6 +60,7 @@ namespace VistasFarmacia.Forms
 
                 // Encabezado de cada venta dentro de la tabla
                 int rowIndex = dgvCompras.Rows.Add(
+                    compra.IdCompra,
                     $"COMPRA #{compra.IdCompra}",
                     $"FECHA: {compra.Fecha}",
                     "PROVEEDOR:",
@@ -73,6 +74,7 @@ namespace VistasFarmacia.Forms
                 foreach (var producto in detallesCompra)
                 {
                     dgvCompras.Rows.Add(
+                        compra.IdCompra,
                         producto.IdProducto,
                         producto.Marca.Nombre,
                         producto.Nombre,
@@ -163,6 +165,25 @@ namespace VistasFarmacia.Forms
 
         private void btnTodo_Click(object sender, EventArgs e)
         {
+            MostrarHistorialVentas();
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (dgvCompras.SelectedRows.Count < 1)
+            {
+                MessageBox.Show("Ningun registro seleccionado");
+            };
+
+            DialogResult resultado = MessageBox.Show(
+                "Borrar la compra " + dgvCompras.CurrentRow.Cells["IdCompra"].Value + 
+                "\n\nEsta acción no revierte los precios de los productos si estos fueron modificados por esta compra.", 
+                "Alerta", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (resultado != DialogResult.Yes) return;
+
+            D_Compras.Eliminar(Convert.ToInt32(dgvCompras.CurrentRow.Cells["IdCompra"].Value));
+
             MostrarHistorialVentas();
         }
 

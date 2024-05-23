@@ -228,5 +228,45 @@ namespace Farmacia.Datos
                 throw new NpgsqlException("Error al obtener los detalles de la compra", ex);
             }
         }
+
+        // ============================================================================================
+        // ELIMINAR COMPRA (FISICO) ===================================================================
+        // ============================================================================================
+        public static void Eliminar(int idCompra)
+        {
+            string query = """
+                BEGIN;
+                    -- Actualizar stock de productos
+                    WITH productos_compra AS (
+                        SELECT id_producto, SUM(cantidad) AS cantidad_total
+                        FROM detalle_compra
+                        WHERE id_compra = @compra_eliminar
+                        GROUP BY id_producto
+                    )
+                    UPDATE producto p
+                    SET stock = p.stock - pc.cantidad_total
+                    FROM productos_compra pc
+                    WHERE p.id_producto = pc.id_producto;
+
+                    DELETE FROM detalle_compra WHERE id_compra = @compra_eliminar;
+                
+                    DELETE FROM compra WHERE id_compra = @compra_eliminar;
+                COMMIT;
+                """;
+
+            try
+            {
+                ConexionDB conexion = new();
+                using NpgsqlConnection conn = conexion.AbrirConexion()!;
+                using NpgsqlCommand command = new(query, conn);
+                command.Parameters.AddWithValue("@compra_eliminar", idCompra);
+                command.ExecuteNonQuery();
+            }
+            catch (NpgsqlException ex)
+            {
+                throw new NpgsqlException("Error al eliminar la 'compra'", ex);
+            }
+        }
+
     }
 }
