@@ -32,14 +32,6 @@
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             dgvProductos = new DataGridView();
-            IdProducto = new DataGridViewTextBoxColumn();
-            Cantidad = new DataGridViewTextBoxColumn();
-            Stock = new DataGridViewTextBoxColumn();
-            Producto = new DataGridViewTextBoxColumn();
-            Marca = new DataGridViewTextBoxColumn();
-            PrecioCompra = new DataGridViewTextBoxColumn();
-            PrecioVenta = new DataGridViewTextBoxColumn();
-            Subtotal = new DataGridViewTextBoxColumn();
             labelTablaIngresoVentas = new Label();
             btnLimpiar = new Button();
             btnGuardar = new Button();
@@ -50,6 +42,14 @@
             labelAcumulado = new Label();
             panel2 = new Panel();
             cmbClientes = new ComboBox();
+            IdProducto = new DataGridViewTextBoxColumn();
+            Cantidad = new DataGridViewTextBoxColumn();
+            Producto = new DataGridViewTextBoxColumn();
+            Marca = new DataGridViewTextBoxColumn();
+            Stock = new DataGridViewTextBoxColumn();
+            PrecioCompra = new DataGridViewTextBoxColumn();
+            PrecioVenta = new DataGridViewTextBoxColumn();
+            Subtotal = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dgvProductos).BeginInit();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -71,7 +71,7 @@
             dgvProductos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvProductos.ColumnHeadersHeight = 30;
             dgvProductos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvProductos.Columns.AddRange(new DataGridViewColumn[] { IdProducto, Cantidad, Stock, Producto, Marca, PrecioCompra, PrecioVenta, Subtotal });
+            dgvProductos.Columns.AddRange(new DataGridViewColumn[] { IdProducto, Cantidad, Producto, Marca, Stock, PrecioCompra, PrecioVenta, Subtotal });
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(49, 49, 68);
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -100,67 +100,7 @@
             dgvProductos.Size = new Size(1088, 520);
             dgvProductos.TabIndex = 0;
             dgvProductos.CellEndEdit += dgvNuevaVenta_CellEndEdit;
-            // 
-            // IdProducto
-            // 
-            IdProducto.HeaderText = "Codigo";
-            IdProducto.MinimumWidth = 6;
-            IdProducto.Name = "IdProducto";
-            IdProducto.Width = 104;
-            // 
-            // Cantidad
-            // 
-            Cantidad.HeaderText = "Cantidad";
-            Cantidad.MinimumWidth = 6;
-            Cantidad.Name = "Cantidad";
-            Cantidad.Width = 118;
-            // 
-            // Stock
-            // 
-            Stock.HeaderText = "Stock";
-            Stock.MinimumWidth = 6;
-            Stock.Name = "Stock";
-            Stock.ReadOnly = true;
-            Stock.Width = 87;
-            // 
-            // Producto
-            // 
-            Producto.HeaderText = "Producto";
-            Producto.MinimumWidth = 6;
-            Producto.Name = "Producto";
-            Producto.Width = 120;
-            // 
-            // Marca
-            // 
-            Marca.HeaderText = "Marca";
-            Marca.MinimumWidth = 6;
-            Marca.Name = "Marca";
-            Marca.ReadOnly = true;
-            Marca.Width = 93;
-            // 
-            // PrecioCompra
-            // 
-            PrecioCompra.HeaderText = "Precio Compra";
-            PrecioCompra.MinimumWidth = 6;
-            PrecioCompra.Name = "PrecioCompra";
-            PrecioCompra.ReadOnly = true;
-            PrecioCompra.Width = 168;
-            // 
-            // PrecioVenta
-            // 
-            PrecioVenta.HeaderText = "Precio Venta";
-            PrecioVenta.MinimumWidth = 6;
-            PrecioVenta.Name = "PrecioVenta";
-            PrecioVenta.ReadOnly = true;
-            PrecioVenta.Width = 147;
-            // 
-            // Subtotal
-            // 
-            Subtotal.HeaderText = "Subtotal";
-            Subtotal.MinimumWidth = 6;
-            Subtotal.Name = "Subtotal";
-            Subtotal.ReadOnly = true;
-            Subtotal.Width = 114;
+            dgvProductos.EditingControlShowing += dgvProductos_EditingControlShowing;
             // 
             // labelTablaIngresoVentas
             // 
@@ -273,6 +213,67 @@
             cmbClientes.Size = new Size(290, 28);
             cmbClientes.TabIndex = 16;
             // 
+            // IdProducto
+            // 
+            IdProducto.HeaderText = "Codigo";
+            IdProducto.MinimumWidth = 6;
+            IdProducto.Name = "IdProducto";
+            IdProducto.Width = 104;
+            // 
+            // Cantidad
+            // 
+            Cantidad.HeaderText = "Cantidad";
+            Cantidad.MinimumWidth = 6;
+            Cantidad.Name = "Cantidad";
+            Cantidad.Width = 118;
+            // 
+            // Producto
+            // 
+            Producto.HeaderText = "Producto";
+            Producto.MinimumWidth = 6;
+            Producto.Name = "Producto";
+            Producto.Width = 120;
+            // 
+            // Marca
+            // 
+            Marca.HeaderText = "Marca";
+            Marca.MinimumWidth = 6;
+            Marca.Name = "Marca";
+            Marca.ReadOnly = true;
+            Marca.Width = 93;
+            // 
+            // Stock
+            // 
+            Stock.HeaderText = "Stock";
+            Stock.MinimumWidth = 6;
+            Stock.Name = "Stock";
+            Stock.ReadOnly = true;
+            Stock.Width = 87;
+            // 
+            // PrecioCompra
+            // 
+            PrecioCompra.HeaderText = "Precio Compra";
+            PrecioCompra.MinimumWidth = 6;
+            PrecioCompra.Name = "PrecioCompra";
+            PrecioCompra.ReadOnly = true;
+            PrecioCompra.Width = 168;
+            // 
+            // PrecioVenta
+            // 
+            PrecioVenta.HeaderText = "Precio Venta";
+            PrecioVenta.MinimumWidth = 6;
+            PrecioVenta.Name = "PrecioVenta";
+            PrecioVenta.ReadOnly = true;
+            PrecioVenta.Width = 147;
+            // 
+            // Subtotal
+            // 
+            Subtotal.HeaderText = "Subtotal";
+            Subtotal.MinimumWidth = 6;
+            Subtotal.Name = "Subtotal";
+            Subtotal.ReadOnly = true;
+            Subtotal.Width = 114;
+            // 
             // FormNuevaVenta
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -317,9 +318,9 @@
         private ComboBox cmbClientes;
         private DataGridViewTextBoxColumn IdProducto;
         private DataGridViewTextBoxColumn Cantidad;
-        private DataGridViewTextBoxColumn Stock;
         private DataGridViewTextBoxColumn Producto;
         private DataGridViewTextBoxColumn Marca;
+        private DataGridViewTextBoxColumn Stock;
         private DataGridViewTextBoxColumn PrecioCompra;
         private DataGridViewTextBoxColumn PrecioVenta;
         private DataGridViewTextBoxColumn Subtotal;
