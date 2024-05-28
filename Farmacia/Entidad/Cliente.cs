@@ -1,7 +1,7 @@
 ﻿
 namespace Farmacia.Entidad
 {
-    public class Cliente
+    public class Cliente: IPersona
     {
         public int IdCliente { get; set; }
         public string? Nit { get; set; }

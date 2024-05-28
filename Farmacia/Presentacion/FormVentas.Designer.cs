@@ -36,6 +36,13 @@
             label3 = new Label();
             lblVentas = new Label();
             dgvVentas = new DataGridView();
+            IdVenta = new DataGridViewTextBoxColumn();
+            Codigo = new DataGridViewTextBoxColumn();
+            Producto = new DataGridViewTextBoxColumn();
+            Cantidad = new DataGridViewTextBoxColumn();
+            PrecioCompra = new DataGridViewTextBoxColumn();
+            PrecioVenta = new DataGridViewTextBoxColumn();
+            Subtotal = new DataGridViewTextBoxColumn();
             panel2 = new Panel();
             label1 = new Label();
             label2 = new Label();
@@ -47,13 +54,8 @@
             btnFiltrar = new Button();
             btnTodos = new Button();
             btnEliminar = new Button();
-            IdVenta = new DataGridViewTextBoxColumn();
-            Codigo = new DataGridViewTextBoxColumn();
-            Producto = new DataGridViewTextBoxColumn();
-            Cantidad = new DataGridViewTextBoxColumn();
-            PrecioCompra = new DataGridViewTextBoxColumn();
-            PrecioVenta = new DataGridViewTextBoxColumn();
-            Subtotal = new DataGridViewTextBoxColumn();
+            btnPdf = new Button();
+            btnPDFReporte = new Button();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvVentas).BeginInit();
             panel2.SuspendLayout();
@@ -74,12 +76,12 @@
             // 
             btnReporte.FlatStyle = FlatStyle.Flat;
             btnReporte.Image = Farmacia.Properties.Resources.reportes;
-            btnReporte.Location = new Point(909, 781);
+            btnReporte.Location = new Point(360, 779);
             btnReporte.Margin = new Padding(4, 6, 4, 6);
             btnReporte.Name = "btnReporte";
             btnReporte.Size = new Size(200, 75);
             btnReporte.TabIndex = 4;
-            btnReporte.Text = "Generar Excel";
+            btnReporte.Text = "Reporte Excel";
             btnReporte.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnReporte.UseVisualStyleBackColor = true;
             btnReporte.Click += btnReporte_Click;
@@ -163,6 +165,63 @@
             dgvVentas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvVentas.Size = new Size(1027, 616);
             dgvVentas.TabIndex = 7;
+            // 
+            // IdVenta
+            // 
+            IdVenta.HeaderText = "IdVenta";
+            IdVenta.MinimumWidth = 6;
+            IdVenta.Name = "IdVenta";
+            IdVenta.ReadOnly = true;
+            IdVenta.SortMode = DataGridViewColumnSortMode.NotSortable;
+            IdVenta.Visible = false;
+            // 
+            // Codigo
+            // 
+            Codigo.HeaderText = "ID";
+            Codigo.MinimumWidth = 6;
+            Codigo.Name = "Codigo";
+            Codigo.ReadOnly = true;
+            Codigo.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Producto
+            // 
+            Producto.HeaderText = "Producto";
+            Producto.MinimumWidth = 6;
+            Producto.Name = "Producto";
+            Producto.ReadOnly = true;
+            Producto.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Cantidad
+            // 
+            Cantidad.HeaderText = "Cantidad";
+            Cantidad.MinimumWidth = 6;
+            Cantidad.Name = "Cantidad";
+            Cantidad.ReadOnly = true;
+            Cantidad.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // PrecioCompra
+            // 
+            PrecioCompra.HeaderText = "Precio Compra";
+            PrecioCompra.MinimumWidth = 6;
+            PrecioCompra.Name = "PrecioCompra";
+            PrecioCompra.ReadOnly = true;
+            PrecioCompra.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // PrecioVenta
+            // 
+            PrecioVenta.HeaderText = "Precio Venta";
+            PrecioVenta.MinimumWidth = 6;
+            PrecioVenta.Name = "PrecioVenta";
+            PrecioVenta.ReadOnly = true;
+            PrecioVenta.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Subtotal
+            // 
+            Subtotal.HeaderText = "Subtotal";
+            Subtotal.MinimumWidth = 6;
+            Subtotal.Name = "Subtotal";
+            Subtotal.ReadOnly = true;
+            Subtotal.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
             // panel2
             // 
@@ -298,62 +357,33 @@
             btnEliminar.UseVisualStyleBackColor = true;
             btnEliminar.Click += btnEliminar_Click;
             // 
-            // IdVenta
+            // btnPdf
             // 
-            IdVenta.HeaderText = "IdVenta";
-            IdVenta.MinimumWidth = 6;
-            IdVenta.Name = "IdVenta";
-            IdVenta.ReadOnly = true;
-            IdVenta.SortMode = DataGridViewColumnSortMode.NotSortable;
-            IdVenta.Visible = false;
+            btnPdf.FlatStyle = FlatStyle.Flat;
+            btnPdf.Image = Farmacia.Properties.Resources.reportes;
+            btnPdf.Location = new Point(909, 781);
+            btnPdf.Margin = new Padding(4, 6, 4, 6);
+            btnPdf.Name = "btnPdf";
+            btnPdf.Size = new Size(200, 75);
+            btnPdf.TabIndex = 16;
+            btnPdf.Text = "Una Venta PDF";
+            btnPdf.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnPdf.UseVisualStyleBackColor = true;
+            btnPdf.Click += btnPdf_Click;
             // 
-            // Codigo
+            // btnPDFReporte
             // 
-            Codigo.HeaderText = "ID";
-            Codigo.MinimumWidth = 6;
-            Codigo.Name = "Codigo";
-            Codigo.ReadOnly = true;
-            Codigo.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Producto
-            // 
-            Producto.HeaderText = "Producto";
-            Producto.MinimumWidth = 6;
-            Producto.Name = "Producto";
-            Producto.ReadOnly = true;
-            Producto.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Cantidad
-            // 
-            Cantidad.HeaderText = "Cantidad";
-            Cantidad.MinimumWidth = 6;
-            Cantidad.Name = "Cantidad";
-            Cantidad.ReadOnly = true;
-            Cantidad.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // PrecioCompra
-            // 
-            PrecioCompra.HeaderText = "Precio Compra";
-            PrecioCompra.MinimumWidth = 6;
-            PrecioCompra.Name = "PrecioCompra";
-            PrecioCompra.ReadOnly = true;
-            PrecioCompra.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // PrecioVenta
-            // 
-            PrecioVenta.HeaderText = "Precio Venta";
-            PrecioVenta.MinimumWidth = 6;
-            PrecioVenta.Name = "PrecioVenta";
-            PrecioVenta.ReadOnly = true;
-            PrecioVenta.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Subtotal
-            // 
-            Subtotal.HeaderText = "Subtotal";
-            Subtotal.MinimumWidth = 6;
-            Subtotal.Name = "Subtotal";
-            Subtotal.ReadOnly = true;
-            Subtotal.SortMode = DataGridViewColumnSortMode.NotSortable;
+            btnPDFReporte.FlatStyle = FlatStyle.Flat;
+            btnPDFReporte.Image = Farmacia.Properties.Resources.reportes;
+            btnPDFReporte.Location = new Point(632, 781);
+            btnPDFReporte.Margin = new Padding(4, 6, 4, 6);
+            btnPDFReporte.Name = "btnPDFReporte";
+            btnPDFReporte.Size = new Size(200, 75);
+            btnPDFReporte.TabIndex = 17;
+            btnPDFReporte.Text = "Reporte PDF";
+            btnPDFReporte.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnPDFReporte.UseVisualStyleBackColor = true;
+            btnPDFReporte.Click += btnPDFReporte_Click;
             // 
             // FormVentas
             // 
@@ -361,6 +391,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(39, 39, 58);
             ClientSize = new Size(1506, 869);
+            Controls.Add(btnPDFReporte);
+            Controls.Add(btnPdf);
             Controls.Add(btnEliminar);
             Controls.Add(btnTodos);
             Controls.Add(btnFiltrar);
@@ -414,5 +446,7 @@
         private DataGridViewTextBoxColumn PrecioCompra;
         private DataGridViewTextBoxColumn PrecioVenta;
         private DataGridViewTextBoxColumn Subtotal;
+        private Button btnPdf;
+        private Button btnPDFReporte;
     }
 }

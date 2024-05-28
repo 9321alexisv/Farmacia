@@ -93,7 +93,7 @@ namespace Farmacia.Datos
         }
 
         // ============================================================================================
-        // OBTENER TODAS LAS VENTAS ===================================================================
+        // OBTENER VENTAS ===================================================================
         // ============================================================================================
         public static List<Venta> VentasPorFechas(DateTime? fechaInicio, DateTime? fechaFin)
         {
@@ -184,6 +184,95 @@ namespace Farmacia.Datos
             catch (NpgsqlException ex)
             {
                 throw new NpgsqlException("Error al obtener ventas por fechas.", ex);
+            }
+        }
+
+        public static Venta? VentaPorId(int idVenta)
+        {
+            Venta? venta = null;
+            string query = """
+                SELECT
+                    v.id_venta,
+                    v.id_cliente,
+                    c.nit nit_cliente,
+                    c.nombre cliente,
+                    c.telefono telefono_cliente,
+                    v.fecha,
+                    dv.id_producto,
+                    p.nombre producto,
+                    m.id_marca,
+                    m.nombre marca,
+                    dv.precio_compra,
+                    dv.precio_venta,
+                    dv.cantidad 
+                FROM
+                    venta v
+                    JOIN cliente c ON v.id_cliente = c.id_cliente
+                    LEFT JOIN detalle_venta dv ON v.id_venta = dv.id_venta
+                    LEFT JOIN producto p ON dv.id_producto = p.id_producto 
+                    LEFT JOIN marca m ON p.id_marca = m.id_marca
+                WHERE
+                    v.id_venta = @idVenta
+                ORDER BY
+                    v.id_venta DESC, dv.id_producto;
+                """;
+
+            try
+            {
+                ConexionDB conexion = new();
+                using NpgsqlConnection conn = conexion.AbrirConexion()!;
+                using NpgsqlCommand cmd = new(query, conn);
+
+                cmd.Parameters.AddWithValue("@idVenta", idVenta);
+
+                using NpgsqlDataReader datos = cmd.ExecuteReader();
+
+                Venta? ventaActual = null;
+
+                while (datos.Read())
+                {
+                    if (ventaActual == null)
+                    {
+                        ventaActual = new Venta
+                        {
+                            IdVenta = datos.GetFieldValue<int>("id_venta"),
+                            Cliente = new Cliente
+                            {
+                                IdCliente = datos.GetFieldValue<int>("id_cliente"),
+                                Nit = datos.GetFieldValue<string>("nit_cliente"),
+                                Nombre = datos.GetFieldValue<string>("cliente"),
+                                Telefono = datos.GetFieldValue<string>("telefono_cliente")
+                            },
+                            Fecha = datos.GetFieldValue<DateTime>("fecha"),
+                            Productos = []
+                        };
+                        venta = ventaActual;
+                    }
+
+                    if (!datos.IsDBNull(datos.GetOrdinal("id_producto")))
+                    {
+                        ventaActual.Productos!.Add(new Producto
+                        {
+                            IdProducto = datos.GetFieldValue<int>("id_producto"),
+                            Nombre = datos.GetString("producto"),
+                            PrecioCompra = datos.GetDecimal("precio_compra"),
+                            PrecioVenta = datos.GetDecimal("precio_venta"),
+                            Stock = datos.GetFieldValue<int>("cantidad"),
+                            StockMinimo = 0,
+                            Marca = new()
+                            {
+                                IdMarca = datos.GetInt32("id_marca"),
+                                Nombre = datos.GetString("marca"),
+                            }
+                        });
+                    }
+                }
+
+                return venta;
+            }
+            catch (NpgsqlException ex)
+            {
+                throw new NpgsqlException("Error al obtener la venta por ID.", ex);
             }
         }
 

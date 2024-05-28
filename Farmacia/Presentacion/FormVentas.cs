@@ -3,6 +3,8 @@ using Farmacia.Datos;
 using Farmacia.Entidad;
 using Farmacia.Presentacion;
 using Farmacia.Presentacion.Reportes;
+using Farmacia.Presentacion.Reportes.QuestPDF;
+using QuestPDF.Fluent;
 
 namespace VistasFarmacia.Forms
 {
@@ -46,6 +48,49 @@ namespace VistasFarmacia.Forms
         {
             ReportesClosedXML reportes = new();
             reportes.Excel("Ventas", dgvVentas);
+        }
+
+        private void btnPdf_Click(object sender, EventArgs e)
+        {
+            if (dgvVentas.SelectedRows.Count < 1)
+            {
+                MessageBox.Show("Ninguna venta seleccionada");
+                return;
+            }
+
+            int idVenta = Convert.ToInt32(dgvVentas.CurrentRow.Cells["IdVenta"].Value);
+            var venta = D_Ventas.VentaPorId(idVenta);
+            var document = new ReporteUnaVenta(venta!);
+
+            // Mostrar sin guardar
+            //document.GeneratePdfAndShow();
+
+            string fechaHoraConversion = DateTime.Now.ToString("dd-MM-yyyy__HH-mm-ss");
+            string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), $"{fechaHoraConversion}.pdf");
+
+            // Generar PDF y guardar en la ruta especificada
+            document.GeneratePdf(filePath);
+
+            MessageBox.Show("Guardado en el escritorio.");
+        }
+
+        private void btnPDFReporte_Click(object sender, EventArgs e)
+        {
+            DateTime fechaInicio = dtpDesde.Value.Date;
+            DateTime fechaFin = dtpHasta.Value.Date;
+            var ventas = D_Ventas.VentasPorFechas(fechaInicio, fechaFin);
+            var document = new ReporteVariasVentas(ventas, fechaInicio, fechaFin);
+
+            // Mostrar sin guardar
+            //document.GeneratePdfAndShow();
+
+            string fechaHoraConversion = DateTime.Now.ToString("dd-MM-yyyy__HH-mm-ss");
+            string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), $"{fechaHoraConversion}.pdf");
+
+            // Generar PDF y guardar en la ruta especificada
+            document.GeneratePdf(filePath);
+
+            MessageBox.Show("Guardado en el escritorio.");
         }
 
         private void btnFiltrar_Click(object sender, EventArgs e)
