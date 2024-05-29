@@ -146,12 +146,9 @@ namespace VistasFarmacia.Forms
             if (formBuscarProducto.ShowDialog(this) != DialogResult.OK) return;
 
             // Acceder al elemento seleccionado en el ListBox del formulario de búsqueda
-            //DataRowView? productoSeleccionado = formBuscarProducto.SelectedItem;
-            //if (productoSeleccionado == null) return;
-            //int idProducto = Convert.ToInt32(productoSeleccionado["IdProducto"]);
-
             int idProducto = formBuscarProducto.IdProductoSeleccionado;
             if (idProducto == -1) return;
+
             Producto? producto = D_Productos.BuscarPorId(idProducto);
             if (producto != null)
             {

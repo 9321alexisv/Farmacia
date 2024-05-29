@@ -156,42 +156,6 @@ namespace Farmacia.Datos
             return productos;
         }
 
-
-        public static DataTable BuscarPorIdNombreMarcaTemp(string termino)
-        {
-            DataTable tabla = new();
-            bool isNumeric = int.TryParse(termino, out int productId);
-            string query = @"
-                SELECT p.id_producto, m.id_marca, m.nombre AS marca, p.nombre AS producto, 
-                       p.precio_compra, p.precio_venta, p.stock, p.stock_minimo, p.estado
-                FROM producto p
-                INNER JOIN marca m ON p.id_marca = m.id_marca
-                WHERE p.estado = TRUE
-                AND (
-                    (@IsNumeric AND p.id_producto = @ProductId)
-                    OR (p.nombre ILIKE '%' || @InputQuery || '%')
-                    OR (m.nombre ILIKE '%' || @InputQuery || '%')
-                );";
-
-            try
-            {
-                ConexionDB conexion = new();
-                using NpgsqlConnection conn = conexion.AbrirConexion()!;
-                using NpgsqlCommand cmd = new(query, conn);
-                cmd.Parameters.AddWithValue("@IsNumeric", isNumeric);
-                cmd.Parameters.AddWithValue("@ProductId", productId);
-                cmd.Parameters.AddWithValue("@InputQuery", termino.ToLower());
-                using NpgsqlDataReader leer = cmd.ExecuteReader();
-                tabla.Load(leer);
-
-                return tabla;
-            }
-            catch (NpgsqlException ex)
-            {
-                throw new NpgsqlException("Error al buscar los regisros en la base de datos.", ex);
-            }
-        }
-
         public static bool Crear(Producto producto)
         {
             string query = "INSERT INTO producto (id_marca, nombre, precio_compra, precio_venta, stock, stock_minimo) VALUES (@id_marca, @nombre, @precio_compra, @precio_venta, @stock, @stock_minimo)";

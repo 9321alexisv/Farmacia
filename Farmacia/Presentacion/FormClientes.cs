@@ -52,6 +52,7 @@ namespace VistasFarmacia.Forms
             try
             {
                 dgvClientes.DataSource = D_Clientes.Listar();
+                dgvClientes.Columns["NombreNit"].Visible = false;
             }
             catch (Exception ex)
             {

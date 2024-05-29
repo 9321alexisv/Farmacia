@@ -31,33 +31,6 @@ namespace Farmacia.Presentacion
             listBoxProductos.DataSource = displayProductos;
             listBoxProductos.DisplayMember = "DisplayName";
             listBoxProductos.ValueMember = "IdProducto";
-            //DataTable originalProducts = D_Productos.BuscarPorIdNombreMarcaTemp(txtBusqueda.Text);
-            //DataTable displayProducts = new();
-
-            //// Copiar las columnas originales
-            //foreach (DataColumn column in originalProducts.Columns)
-            //{
-            //    displayProducts.Columns.Add(column.ColumnName, column.DataType);
-            //}
-
-            //// Agregar columna para el display concatenado
-            //displayProducts.Columns.Add("DisplayName", typeof(string));
-
-            //// Llenar el DataTable intermedio
-            //foreach (DataRow row in originalProducts.Rows)
-            //{
-            //    DataRow newRow = displayProducts.NewRow();
-            //    foreach (DataColumn column in originalProducts.Columns)
-            //    {
-            //        newRow[column.ColumnName] = row[column.ColumnName];
-            //    }
-            //    newRow["DisplayName"] = $"{row["producto"]} - {row["marca"]}";
-            //    displayProducts.Rows.Add(newRow);
-            //}
-
-            //listBoxProductos.DataSource = displayProducts;
-            //listBoxProductos.DisplayMember = "DisplayName";
-            //listBoxProductos.ValueMember = "id_producto";
         }
 
         private void txtBusqueda_KeyDown(object sender, KeyEventArgs e)
@@ -79,11 +52,6 @@ namespace Farmacia.Presentacion
         }
 
         // Propiedad pública para obtener el elemento seleccionado en el ListBox
-        public DataRowView? SelectedItem
-        {
-            get { return listBoxProductos.SelectedItem as DataRowView; }
-        }
-
         public int IdProductoSeleccionado
         {
             get
