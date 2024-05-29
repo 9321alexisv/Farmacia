@@ -28,8 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            lblMarcas = new Label();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             dgvMarcas = new DataGridView();
             txtNombre = new TextBox();
             labelNombre = new Label();
@@ -44,18 +43,6 @@
             ((System.ComponentModel.ISupportInitialize)dgvMarcas).BeginInit();
             SuspendLayout();
             // 
-            // lblMarcas
-            // 
-            lblMarcas.AutoSize = true;
-            lblMarcas.Font = new Font("Segoe UI", 20F, FontStyle.Bold | FontStyle.Italic);
-            lblMarcas.ForeColor = SystemColors.ControlLightLight;
-            lblMarcas.Location = new Point(73, 35);
-            lblMarcas.Margin = new Padding(4, 0, 4, 0);
-            lblMarcas.Name = "lblMarcas";
-            lblMarcas.Size = new Size(135, 46);
-            lblMarcas.TabIndex = 0;
-            lblMarcas.Text = "Marcas";
-            // 
             // dgvMarcas
             // 
             dgvMarcas.AllowUserToAddRows = false;
@@ -66,17 +53,17 @@
             dgvMarcas.BorderStyle = BorderStyle.None;
             dgvMarcas.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dgvMarcas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(49, 49, 68);
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = Color.SteelBlue;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            dgvMarcas.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(49, 49, 68);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = Color.SteelBlue;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            dgvMarcas.DefaultCellStyle = dataGridViewCellStyle1;
             dgvMarcas.EnableHeadersVisualStyles = false;
             dgvMarcas.GridColor = Color.FromArgb(49, 49, 68);
-            dgvMarcas.Location = new Point(73, 148);
+            dgvMarcas.Location = new Point(61, 25);
             dgvMarcas.Margin = new Padding(4, 6, 4, 6);
             dgvMarcas.MultiSelect = false;
             dgvMarcas.Name = "dgvMarcas";
@@ -85,12 +72,12 @@
             dgvMarcas.RowHeadersVisible = false;
             dgvMarcas.RowHeadersWidth = 51;
             dgvMarcas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvMarcas.Size = new Size(863, 454);
+            dgvMarcas.Size = new Size(863, 542);
             dgvMarcas.TabIndex = 1;
             // 
             // txtNombre
             // 
-            txtNombre.Location = new Point(1147, 148);
+            txtNombre.Location = new Point(1119, 25);
             txtNombre.Margin = new Padding(4, 6, 4, 6);
             txtNombre.Name = "txtNombre";
             txtNombre.Size = new Size(357, 34);
@@ -101,7 +88,7 @@
             labelNombre.AutoSize = true;
             labelNombre.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             labelNombre.ForeColor = Color.White;
-            labelNombre.Location = new Point(989, 148);
+            labelNombre.Location = new Point(961, 25);
             labelNombre.Margin = new Padding(4, 0, 4, 0);
             labelNombre.Name = "labelNombre";
             labelNombre.Size = new Size(94, 28);
@@ -112,10 +99,10 @@
             // 
             btnGuardar.FlatStyle = FlatStyle.Flat;
             btnGuardar.Image = Farmacia.Properties.Resources.ADD;
-            btnGuardar.Location = new Point(1354, 441);
+            btnGuardar.Location = new Point(1326, 318);
             btnGuardar.Margin = new Padding(4, 6, 4, 6);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(150, 80);
+            btnGuardar.Size = new Size(150, 65);
             btnGuardar.TabIndex = 13;
             btnGuardar.Text = "Guardar";
             btnGuardar.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -124,7 +111,7 @@
             // 
             // txtTelefono
             // 
-            txtTelefono.Location = new Point(1147, 215);
+            txtTelefono.Location = new Point(1119, 92);
             txtTelefono.Margin = new Padding(4, 6, 4, 6);
             txtTelefono.Name = "txtTelefono";
             txtTelefono.Size = new Size(357, 34);
@@ -135,7 +122,7 @@
             lblTelefono.AutoSize = true;
             lblTelefono.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lblTelefono.ForeColor = Color.White;
-            lblTelefono.Location = new Point(989, 213);
+            lblTelefono.Location = new Point(961, 90);
             lblTelefono.Margin = new Padding(4, 0, 4, 0);
             lblTelefono.Name = "lblTelefono";
             lblTelefono.Size = new Size(99, 28);
@@ -144,7 +131,7 @@
             // 
             // txtRepresentante
             // 
-            txtRepresentante.Location = new Point(1223, 289);
+            txtRepresentante.Location = new Point(1195, 166);
             txtRepresentante.Margin = new Padding(4, 6, 4, 6);
             txtRepresentante.Name = "txtRepresentante";
             txtRepresentante.Size = new Size(281, 34);
@@ -155,7 +142,7 @@
             labelNit.AutoSize = true;
             labelNit.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             labelNit.ForeColor = Color.White;
-            labelNit.Location = new Point(989, 288);
+            labelNit.Location = new Point(961, 165);
             labelNit.Margin = new Padding(4, 0, 4, 0);
             labelNit.Name = "labelNit";
             labelNit.Size = new Size(154, 28);
@@ -166,10 +153,10 @@
             // 
             btnEditar.FlatStyle = FlatStyle.Flat;
             btnEditar.Image = Farmacia.Properties.Resources.edit;
-            btnEditar.Location = new Point(401, 644);
+            btnEditar.Location = new Point(256, 597);
             btnEditar.Margin = new Padding(4, 6, 4, 6);
             btnEditar.Name = "btnEditar";
-            btnEditar.Size = new Size(150, 80);
+            btnEditar.Size = new Size(150, 65);
             btnEditar.TabIndex = 18;
             btnEditar.Text = "Editar";
             btnEditar.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -180,10 +167,10 @@
             // 
             btnEliminar.FlatStyle = FlatStyle.Flat;
             btnEliminar.Image = Farmacia.Properties.Resources.borrar;
-            btnEliminar.Location = new Point(73, 644);
+            btnEliminar.Location = new Point(61, 597);
             btnEliminar.Margin = new Padding(4, 6, 4, 6);
             btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(150, 80);
+            btnEliminar.Size = new Size(150, 65);
             btnEliminar.TabIndex = 19;
             btnEliminar.Text = "Eliminar";
             btnEliminar.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -194,10 +181,10 @@
             // 
             btnCancelar.FlatStyle = FlatStyle.Flat;
             btnCancelar.Image = Farmacia.Properties.Resources.cleaner;
-            btnCancelar.Location = new Point(989, 441);
+            btnCancelar.Location = new Point(961, 318);
             btnCancelar.Margin = new Padding(4, 6, 4, 6);
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(150, 80);
+            btnCancelar.Size = new Size(150, 65);
             btnCancelar.TabIndex = 20;
             btnCancelar.Text = "Cancelar";
             btnCancelar.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -209,7 +196,7 @@
             AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(39, 39, 58);
-            ClientSize = new Size(1612, 787);
+            ClientSize = new Size(1510, 687);
             Controls.Add(btnCancelar);
             Controls.Add(btnEliminar);
             Controls.Add(btnEditar);
@@ -221,7 +208,6 @@
             Controls.Add(txtNombre);
             Controls.Add(labelNombre);
             Controls.Add(dgvMarcas);
-            Controls.Add(lblMarcas);
             Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             Margin = new Padding(4, 6, 4, 6);
             Name = "FormMarcas";
@@ -233,8 +219,6 @@
         }
 
         #endregion
-
-        private Label lblMarcas;
         private DataGridView dgvMarcas;
         private TextBox txtNombre;
         private Label labelNombre;

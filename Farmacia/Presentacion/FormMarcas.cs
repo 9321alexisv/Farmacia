@@ -33,7 +33,6 @@ namespace VistasFarmacia.Forms
                 }
             }
 
-            lblMarcas.ForeColor = ThemeColor.PrimaryColor;
             labelNombre.ForeColor = ThemeColor.SecondaryColor;
             labelNit.ForeColor = ThemeColor.SecondaryColor;
             lblTelefono.ForeColor = ThemeColor.SecondaryColor;

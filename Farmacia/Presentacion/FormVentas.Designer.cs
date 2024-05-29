@@ -74,6 +74,7 @@
             // 
             // btnReporte
             // 
+            btnReporte.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnReporte.FlatStyle = FlatStyle.Flat;
             btnReporte.Image = Farmacia.Properties.Resources.reportes;
             btnReporte.Location = new Point(360, 779);
@@ -88,11 +89,12 @@
             // 
             // panel1
             // 
+            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             panel1.BackColor = Color.FromArgb(49, 49, 68);
             panel1.Controls.Add(labelAcumulado);
             panel1.Controls.Add(label3);
             panel1.Controls.Add(lblVentas);
-            panel1.Location = new Point(1169, 304);
+            panel1.Location = new Point(1149, 302);
             panel1.Margin = new Padding(4, 6, 4, 6);
             panel1.Name = "panel1";
             panel1.Size = new Size(200, 100);
@@ -138,7 +140,8 @@
             // 
             dgvVentas.AllowUserToAddRows = false;
             dgvVentas.AllowUserToDeleteRows = false;
-            dgvVentas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvVentas.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgvVentas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dgvVentas.BackgroundColor = Color.FromArgb(49, 49, 68);
             dgvVentas.BorderStyle = BorderStyle.None;
             dgvVentas.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
@@ -174,6 +177,7 @@
             IdVenta.ReadOnly = true;
             IdVenta.SortMode = DataGridViewColumnSortMode.NotSortable;
             IdVenta.Visible = false;
+            IdVenta.Width = 125;
             // 
             // Codigo
             // 
@@ -182,6 +186,7 @@
             Codigo.Name = "Codigo";
             Codigo.ReadOnly = true;
             Codigo.SortMode = DataGridViewColumnSortMode.NotSortable;
+            Codigo.Width = 35;
             // 
             // Producto
             // 
@@ -190,6 +195,7 @@
             Producto.Name = "Producto";
             Producto.ReadOnly = true;
             Producto.SortMode = DataGridViewColumnSortMode.NotSortable;
+            Producto.Width = 97;
             // 
             // Cantidad
             // 
@@ -198,6 +204,7 @@
             Cantidad.Name = "Cantidad";
             Cantidad.ReadOnly = true;
             Cantidad.SortMode = DataGridViewColumnSortMode.NotSortable;
+            Cantidad.Width = 95;
             // 
             // PrecioCompra
             // 
@@ -206,6 +213,7 @@
             PrecioCompra.Name = "PrecioCompra";
             PrecioCompra.ReadOnly = true;
             PrecioCompra.SortMode = DataGridViewColumnSortMode.NotSortable;
+            PrecioCompra.Width = 145;
             // 
             // PrecioVenta
             // 
@@ -214,6 +222,7 @@
             PrecioVenta.Name = "PrecioVenta";
             PrecioVenta.ReadOnly = true;
             PrecioVenta.SortMode = DataGridViewColumnSortMode.NotSortable;
+            PrecioVenta.Width = 124;
             // 
             // Subtotal
             // 
@@ -222,14 +231,16 @@
             Subtotal.Name = "Subtotal";
             Subtotal.ReadOnly = true;
             Subtotal.SortMode = DataGridViewColumnSortMode.NotSortable;
+            Subtotal.Width = 91;
             // 
             // panel2
             // 
+            panel2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             panel2.BackColor = Color.FromArgb(49, 49, 68);
             panel2.Controls.Add(label1);
             panel2.Controls.Add(label2);
             panel2.Controls.Add(lblGanancias);
-            panel2.Location = new Point(1169, 131);
+            panel2.Location = new Point(1149, 131);
             panel2.Margin = new Padding(4, 6, 4, 6);
             panel2.Name = "panel2";
             panel2.Size = new Size(200, 100);
@@ -345,6 +356,7 @@
             // 
             // btnEliminar
             // 
+            btnEliminar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             btnEliminar.FlatStyle = FlatStyle.Flat;
             btnEliminar.Image = Farmacia.Properties.Resources.borrar;
             btnEliminar.Location = new Point(82, 779);
@@ -359,6 +371,7 @@
             // 
             // btnPdf
             // 
+            btnPdf.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnPdf.FlatStyle = FlatStyle.Flat;
             btnPdf.Image = Farmacia.Properties.Resources.reportes;
             btnPdf.Location = new Point(909, 781);
@@ -373,6 +386,7 @@
             // 
             // btnPDFReporte
             // 
+            btnPDFReporte.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnPDFReporte.FlatStyle = FlatStyle.Flat;
             btnPDFReporte.Image = Farmacia.Properties.Resources.reportes;
             btnPDFReporte.Location = new Point(632, 781);
@@ -390,7 +404,7 @@
             AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(39, 39, 58);
-            ClientSize = new Size(1506, 869);
+            ClientSize = new Size(1401, 869);
             Controls.Add(btnPDFReporte);
             Controls.Add(btnPdf);
             Controls.Add(btnEliminar);

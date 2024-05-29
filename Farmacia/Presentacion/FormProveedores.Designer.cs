@@ -28,8 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             labelClientes = new Label();
             dgvProveedores = new DataGridView();
             txtNombre = new TextBox();
@@ -67,23 +66,15 @@
             dgvProveedores.BackgroundColor = Color.FromArgb(49, 49, 68);
             dgvProveedores.BorderStyle = BorderStyle.None;
             dgvProveedores.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = SystemColors.Control;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            dgvProveedores.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dgvProveedores.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = Color.FromArgb(49, 49, 68);
-            dataGridViewCellStyle4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle4.ForeColor = Color.White;
-            dataGridViewCellStyle4.SelectionBackColor = Color.SteelBlue;
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
-            dgvProveedores.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(49, 49, 68);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = Color.SteelBlue;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            dgvProveedores.DefaultCellStyle = dataGridViewCellStyle1;
             dgvProveedores.EnableHeadersVisualStyles = false;
             dgvProveedores.GridColor = Color.FromArgb(49, 49, 68);
             dgvProveedores.Location = new Point(49, 124);
@@ -100,10 +91,11 @@
             // 
             // txtNombre
             // 
+            txtNombre.Font = new Font("Segoe UI", 12F);
             txtNombre.Location = new Point(1091, 180);
             txtNombre.Margin = new Padding(3, 4, 3, 4);
             txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(250, 27);
+            txtNombre.Size = new Size(250, 34);
             txtNombre.TabIndex = 5;
             // 
             // labelNombre
@@ -119,10 +111,11 @@
             // 
             // txtNit
             // 
+            txtNit.Font = new Font("Segoe UI", 12F);
             txtNit.Location = new Point(1091, 124);
             txtNit.Margin = new Padding(3, 4, 3, 4);
             txtNit.Name = "txtNit";
-            txtNit.Size = new Size(250, 27);
+            txtNit.Size = new Size(250, 34);
             txtNit.TabIndex = 7;
             // 
             // labelNit
@@ -139,11 +132,12 @@
             // btnGuardar
             // 
             btnGuardar.FlatStyle = FlatStyle.Flat;
+            btnGuardar.Font = new Font("Segoe UI", 12F);
             btnGuardar.Image = Farmacia.Properties.Resources.ADD;
             btnGuardar.Location = new Point(1191, 485);
             btnGuardar.Margin = new Padding(3, 4, 3, 4);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(150, 80);
+            btnGuardar.Size = new Size(150, 65);
             btnGuardar.TabIndex = 13;
             btnGuardar.Text = "Guardar";
             btnGuardar.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -152,10 +146,11 @@
             // 
             // txtTelefono
             // 
+            txtTelefono.Font = new Font("Segoe UI", 12F);
             txtTelefono.Location = new Point(1091, 251);
             txtTelefono.Margin = new Padding(3, 4, 3, 4);
             txtTelefono.Name = "txtTelefono";
-            txtTelefono.Size = new Size(250, 27);
+            txtTelefono.Size = new Size(250, 34);
             txtTelefono.TabIndex = 15;
             // 
             // lblTelefono
@@ -171,10 +166,11 @@
             // 
             // txtRepresentante
             // 
+            txtRepresentante.Font = new Font("Segoe UI", 12F);
             txtRepresentante.Location = new Point(1129, 319);
             txtRepresentante.Margin = new Padding(3, 4, 3, 4);
             txtRepresentante.Name = "txtRepresentante";
-            txtRepresentante.Size = new Size(212, 27);
+            txtRepresentante.Size = new Size(212, 34);
             txtRepresentante.TabIndex = 17;
             // 
             // lblRepresentante
@@ -191,11 +187,12 @@
             // btnLimpiar
             // 
             btnLimpiar.FlatStyle = FlatStyle.Flat;
+            btnLimpiar.Font = new Font("Segoe UI", 12F);
             btnLimpiar.Image = Farmacia.Properties.Resources.cleaner;
             btnLimpiar.Location = new Point(969, 485);
             btnLimpiar.Margin = new Padding(3, 4, 3, 4);
             btnLimpiar.Name = "btnLimpiar";
-            btnLimpiar.Size = new Size(150, 80);
+            btnLimpiar.Size = new Size(150, 65);
             btnLimpiar.TabIndex = 18;
             btnLimpiar.Text = "Cancelar";
             btnLimpiar.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -205,11 +202,12 @@
             // btnEliminar
             // 
             btnEliminar.FlatStyle = FlatStyle.Flat;
+            btnEliminar.Font = new Font("Segoe UI", 12F);
             btnEliminar.Image = Farmacia.Properties.Resources.borrar;
             btnEliminar.Location = new Point(49, 691);
             btnEliminar.Margin = new Padding(3, 4, 3, 4);
             btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(150, 80);
+            btnEliminar.Size = new Size(150, 65);
             btnEliminar.TabIndex = 19;
             btnEliminar.Text = "Eliminar";
             btnEliminar.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -219,11 +217,12 @@
             // btnEditar
             // 
             btnEditar.FlatStyle = FlatStyle.Flat;
+            btnEditar.Font = new Font("Segoe UI", 12F);
             btnEditar.Image = Farmacia.Properties.Resources.edit;
             btnEditar.Location = new Point(251, 691);
             btnEditar.Margin = new Padding(3, 4, 3, 4);
             btnEditar.Name = "btnEditar";
-            btnEditar.Size = new Size(150, 80);
+            btnEditar.Size = new Size(150, 65);
             btnEditar.TabIndex = 20;
             btnEditar.Text = "Editar";
             btnEditar.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -235,7 +234,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(39, 39, 58);
-            ClientSize = new Size(1382, 803);
+            ClientSize = new Size(1397, 803);
             Controls.Add(btnEditar);
             Controls.Add(btnEliminar);
             Controls.Add(btnLimpiar);

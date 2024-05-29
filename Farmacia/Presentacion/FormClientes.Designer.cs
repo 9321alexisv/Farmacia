@@ -118,11 +118,12 @@
             // btnGuardar
             // 
             btnGuardar.FlatStyle = FlatStyle.Flat;
+            btnGuardar.Font = new Font("Segoe UI", 12F);
             btnGuardar.Image = Farmacia.Properties.Resources.ADD;
             btnGuardar.Location = new Point(1161, 393);
             btnGuardar.Margin = new Padding(3, 4, 3, 4);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(150, 80);
+            btnGuardar.Size = new Size(150, 65);
             btnGuardar.TabIndex = 13;
             btnGuardar.Text = "Guardar";
             btnGuardar.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -170,11 +171,12 @@
             // btnEditar
             // 
             btnEditar.FlatStyle = FlatStyle.Flat;
+            btnEditar.Font = new Font("Segoe UI", 12F);
             btnEditar.Image = Farmacia.Properties.Resources.edit;
             btnEditar.Location = new Point(287, 696);
             btnEditar.Margin = new Padding(3, 4, 3, 4);
             btnEditar.Name = "btnEditar";
-            btnEditar.Size = new Size(150, 80);
+            btnEditar.Size = new Size(150, 65);
             btnEditar.TabIndex = 18;
             btnEditar.Text = "Editar";
             btnEditar.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -184,11 +186,12 @@
             // btnEliminar
             // 
             btnEliminar.FlatStyle = FlatStyle.Flat;
+            btnEliminar.Font = new Font("Segoe UI", 12F);
             btnEliminar.Image = Farmacia.Properties.Resources.borrar;
             btnEliminar.Location = new Point(53, 696);
             btnEliminar.Margin = new Padding(3, 4, 3, 4);
             btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(150, 80);
+            btnEliminar.Size = new Size(150, 65);
             btnEliminar.TabIndex = 19;
             btnEliminar.Text = "Eliminar";
             btnEliminar.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -198,11 +201,12 @@
             // btnCancelar
             // 
             btnCancelar.FlatStyle = FlatStyle.Flat;
+            btnCancelar.Font = new Font("Segoe UI", 12F);
             btnCancelar.Image = Farmacia.Properties.Resources.cleaner;
             btnCancelar.Location = new Point(946, 393);
             btnCancelar.Margin = new Padding(3, 4, 3, 4);
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(150, 80);
+            btnCancelar.Size = new Size(150, 65);
             btnCancelar.TabIndex = 20;
             btnCancelar.Text = "Cancelar";
             btnCancelar.TextImageRelation = TextImageRelation.ImageBeforeText;

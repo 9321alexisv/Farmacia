@@ -69,7 +69,7 @@ namespace VistasFarmacia.Forms
                 int rowIndex = dgvCompras.Rows.Add(
                     compra.IdCompra,
                     $"COMPRA No. {compra.IdCompra}",
-                    $"FECHA: {compra.Fecha}",
+                    $"FECHA: {compra.Fecha:d}",
                     "PROVEEDOR:",
                     compra.Proveedor.Nombre,
                     "TOTAL",
