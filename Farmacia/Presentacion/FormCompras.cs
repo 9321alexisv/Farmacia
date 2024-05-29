@@ -3,7 +3,8 @@ using Farmacia.Datos;
 using Farmacia.Entidad;
 using Farmacia.Presentacion;
 using Farmacia.Presentacion.Reportes;
-using Irony.Parsing;
+using Farmacia.Presentacion.Reportes.QuestPDF;
+using QuestPDF.Fluent;
 
 namespace VistasFarmacia.Forms
 {
@@ -151,6 +152,49 @@ namespace VistasFarmacia.Forms
             reportes.Excel("Compras", dgvCompras);
         }
 
+        private void btnPDFCompra_Click(object sender, EventArgs e)
+        {
+            if (dgvCompras.SelectedRows.Count < 1)
+            {
+                MessageBox.Show("Ninguna compra seleccionada");
+                return;
+            }
+
+            int idCompra = Convert.ToInt32(dgvCompras.CurrentRow.Cells["IdCompra"].Value);
+            var compra = D_Compras.CompraPorId(idCompra);
+            var document = new ReporteUnaCompra(compra!);
+
+            // Mostrar sin guardar
+            //document.GeneratePdfAndShow();
+
+            string fechaHoraConversion = DateTime.Now.ToString("dd-MM-yyyy__HH-mm-ss");
+            string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), $"Compra-No-{idCompra}__{fechaHoraConversion}.pdf");
+
+            // Generar PDF y guardar en la ruta especificada
+            document.GeneratePdf(filePath);
+
+            MessageBox.Show("Guardado en el escritorio.");
+        }
+
+        private void btnPDFReporte_Click(object sender, EventArgs e)
+        {
+            DateTime fechaInicio = dtpInicio.Value.Date;
+            DateTime fechaFin = dtpFin.Value.Date;
+            var compras = D_Compras.ComprasPorFechas(fechaInicio, fechaFin);
+            var document = new ReporteCompras(compras, fechaInicio, fechaFin);
+
+            // Mostrar sin guardar
+            //document.GeneratePdfAndShow();
+
+            string fecha = DateTime.Now.ToString("dd-MM-yyyy__HH-mm-ss");
+            string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), $"ReporteCompras_{fecha}.pdf");
+
+            // Generar PDF y guardar en la ruta especificada
+            document.GeneratePdf(filePath);
+
+            MessageBox.Show("Guardado en el escritorio.");
+        }
+
         private void btnFiltrar_Click(object sender, EventArgs e)
         {
             try
@@ -176,8 +220,8 @@ namespace VistasFarmacia.Forms
             };
 
             DialogResult resultado = MessageBox.Show(
-                "Borrar la compra " + dgvCompras.CurrentRow.Cells["IdCompra"].Value + 
-                "\n\nEsta acción no revierte los precios de los productos si estos fueron modificados por esta compra.", 
+                "Borrar la compra " + dgvCompras.CurrentRow.Cells["IdCompra"].Value +
+                "\n\nEsta acción no revierte los precios de los productos si estos fueron modificados por esta compra.",
                 "Alerta", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
             if (resultado != DialogResult.Yes) return;

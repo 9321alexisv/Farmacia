@@ -1,7 +1,7 @@
 ﻿
 namespace Farmacia.Entidad
 {
-    public class Proveedor
+    public class Proveedor: IPersona
     {
         public int IdProveedor { get; set; }
         public string? Nit { get; set; }

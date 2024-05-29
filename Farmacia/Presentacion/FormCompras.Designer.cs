@@ -31,6 +31,13 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             dgvCompras = new DataGridView();
+            IdCompra = new DataGridViewTextBoxColumn();
+            IdProducto = new DataGridViewTextBoxColumn();
+            Marca = new DataGridViewTextBoxColumn();
+            Producto = new DataGridViewTextBoxColumn();
+            Cantidad = new DataGridViewTextBoxColumn();
+            Precio = new DataGridViewTextBoxColumn();
+            Subtotal = new DataGridViewTextBoxColumn();
             labelTablaCompras = new Label();
             panel1 = new Panel();
             label3 = new Label();
@@ -45,13 +52,8 @@
             btnFiltrar = new Button();
             btnTodo = new Button();
             btnEliminar = new Button();
-            IdCompra = new DataGridViewTextBoxColumn();
-            IdProducto = new DataGridViewTextBoxColumn();
-            Marca = new DataGridViewTextBoxColumn();
-            Producto = new DataGridViewTextBoxColumn();
-            Cantidad = new DataGridViewTextBoxColumn();
-            Precio = new DataGridViewTextBoxColumn();
-            Subtotal = new DataGridViewTextBoxColumn();
+            btnPDFCompra = new Button();
+            btnPDFReporte = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvCompras).BeginInit();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -94,6 +96,62 @@
             dgvCompras.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvCompras.Size = new Size(1019, 553);
             dgvCompras.TabIndex = 0;
+            // 
+            // IdCompra
+            // 
+            IdCompra.HeaderText = "IdCompra";
+            IdCompra.MinimumWidth = 6;
+            IdCompra.Name = "IdCompra";
+            IdCompra.ReadOnly = true;
+            IdCompra.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // IdProducto
+            // 
+            IdProducto.HeaderText = "ID";
+            IdProducto.MinimumWidth = 6;
+            IdProducto.Name = "IdProducto";
+            IdProducto.ReadOnly = true;
+            IdProducto.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Marca
+            // 
+            Marca.HeaderText = "Marca";
+            Marca.MinimumWidth = 6;
+            Marca.Name = "Marca";
+            Marca.ReadOnly = true;
+            Marca.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Producto
+            // 
+            Producto.HeaderText = "Producto";
+            Producto.MinimumWidth = 6;
+            Producto.Name = "Producto";
+            Producto.ReadOnly = true;
+            Producto.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Cantidad
+            // 
+            Cantidad.HeaderText = "Cantidad";
+            Cantidad.MinimumWidth = 6;
+            Cantidad.Name = "Cantidad";
+            Cantidad.ReadOnly = true;
+            Cantidad.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Precio
+            // 
+            Precio.HeaderText = "Precio";
+            Precio.MinimumWidth = 6;
+            Precio.Name = "Precio";
+            Precio.ReadOnly = true;
+            Precio.SortMode = DataGridViewColumnSortMode.NotSortable;
+            // 
+            // Subtotal
+            // 
+            Subtotal.HeaderText = "Subtotal";
+            Subtotal.MinimumWidth = 6;
+            Subtotal.Name = "Subtotal";
+            Subtotal.ReadOnly = true;
+            Subtotal.SortMode = DataGridViewColumnSortMode.NotSortable;
             // 
             // labelTablaCompras
             // 
@@ -163,12 +221,12 @@
             // 
             btnReporte.FlatStyle = FlatStyle.Flat;
             btnReporte.Image = Farmacia.Properties.Resources.reportes;
-            btnReporte.Location = new Point(904, 704);
+            btnReporte.Location = new Point(397, 715);
             btnReporte.Margin = new Padding(3, 4, 3, 4);
             btnReporte.Name = "btnReporte";
-            btnReporte.Size = new Size(192, 100);
+            btnReporte.Size = new Size(200, 75);
             btnReporte.TabIndex = 17;
-            btnReporte.Text = "Generar Excel";
+            btnReporte.Text = "Reporte Excel";
             btnReporte.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnReporte.UseVisualStyleBackColor = true;
             btnReporte.Click += btnReporte_Click;
@@ -245,71 +303,43 @@
             // 
             btnEliminar.FlatStyle = FlatStyle.Flat;
             btnEliminar.Image = Farmacia.Properties.Resources.reportes;
-            btnEliminar.Location = new Point(77, 704);
+            btnEliminar.Location = new Point(77, 715);
             btnEliminar.Margin = new Padding(3, 4, 3, 4);
             btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(150, 100);
+            btnEliminar.Size = new Size(200, 75);
             btnEliminar.TabIndex = 24;
             btnEliminar.Text = "Eliminar";
             btnEliminar.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnEliminar.UseVisualStyleBackColor = true;
             btnEliminar.Click += btnEliminar_Click;
             // 
-            // IdCompra
+            // btnPDFCompra
             // 
-            IdCompra.HeaderText = "IdCompra";
-            IdCompra.MinimumWidth = 6;
-            IdCompra.Name = "IdCompra";
-            IdCompra.ReadOnly = true;
-            IdCompra.SortMode = DataGridViewColumnSortMode.NotSortable;
+            btnPDFCompra.FlatStyle = FlatStyle.Flat;
+            btnPDFCompra.Image = Farmacia.Properties.Resources.reportes;
+            btnPDFCompra.Location = new Point(896, 715);
+            btnPDFCompra.Margin = new Padding(3, 4, 3, 4);
+            btnPDFCompra.Name = "btnPDFCompra";
+            btnPDFCompra.Size = new Size(200, 75);
+            btnPDFCompra.TabIndex = 25;
+            btnPDFCompra.Text = "PDF Compra";
+            btnPDFCompra.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnPDFCompra.UseVisualStyleBackColor = true;
+            btnPDFCompra.Click += btnPDFCompra_Click;
             // 
-            // IdProducto
+            // btnPDFReporte
             // 
-            IdProducto.HeaderText = "ID";
-            IdProducto.MinimumWidth = 6;
-            IdProducto.Name = "IdProducto";
-            IdProducto.ReadOnly = true;
-            IdProducto.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Marca
-            // 
-            Marca.HeaderText = "Marca";
-            Marca.MinimumWidth = 6;
-            Marca.Name = "Marca";
-            Marca.ReadOnly = true;
-            Marca.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Producto
-            // 
-            Producto.HeaderText = "Producto";
-            Producto.MinimumWidth = 6;
-            Producto.Name = "Producto";
-            Producto.ReadOnly = true;
-            Producto.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Cantidad
-            // 
-            Cantidad.HeaderText = "Cantidad";
-            Cantidad.MinimumWidth = 6;
-            Cantidad.Name = "Cantidad";
-            Cantidad.ReadOnly = true;
-            Cantidad.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Precio
-            // 
-            Precio.HeaderText = "Precio";
-            Precio.MinimumWidth = 6;
-            Precio.Name = "Precio";
-            Precio.ReadOnly = true;
-            Precio.SortMode = DataGridViewColumnSortMode.NotSortable;
-            // 
-            // Subtotal
-            // 
-            Subtotal.HeaderText = "Subtotal";
-            Subtotal.MinimumWidth = 6;
-            Subtotal.Name = "Subtotal";
-            Subtotal.ReadOnly = true;
-            Subtotal.SortMode = DataGridViewColumnSortMode.NotSortable;
+            btnPDFReporte.FlatStyle = FlatStyle.Flat;
+            btnPDFReporte.Image = Farmacia.Properties.Resources.reportes;
+            btnPDFReporte.Location = new Point(642, 715);
+            btnPDFReporte.Margin = new Padding(3, 4, 3, 4);
+            btnPDFReporte.Name = "btnPDFReporte";
+            btnPDFReporte.Size = new Size(200, 75);
+            btnPDFReporte.TabIndex = 26;
+            btnPDFReporte.Text = "Reporte PDF";
+            btnPDFReporte.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnPDFReporte.UseVisualStyleBackColor = true;
+            btnPDFReporte.Click += btnPDFReporte_Click;
             // 
             // FormCompras
             // 
@@ -317,6 +347,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(39, 39, 58);
             ClientSize = new Size(1397, 833);
+            Controls.Add(btnPDFReporte);
+            Controls.Add(btnPDFCompra);
             Controls.Add(btnEliminar);
             Controls.Add(btnTodo);
             Controls.Add(btnFiltrar);
@@ -366,5 +398,7 @@
         private DataGridViewTextBoxColumn Cantidad;
         private DataGridViewTextBoxColumn Precio;
         private DataGridViewTextBoxColumn Subtotal;
+        private Button btnPDFCompra;
+        private Button btnPDFReporte;
     }
 }

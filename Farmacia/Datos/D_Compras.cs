@@ -93,9 +93,9 @@ namespace Farmacia.Datos
         }
 
         // ============================================================================================
-        // OBTENER TODAS LAS COMPRAS ==================================================================
+        // OBTENER COMPRAS ==================================================================
         // ============================================================================================
-        public static List<Compra> ComprasPorFechas(DateTime? fechaInicio, DateTime? fechaFin)
+        public static List<Compra> ComprasPorFechasTemp(DateTime? fechaInicio, DateTime? fechaFin)
         {
             List<Compra> compras = [];
             string query = """
@@ -125,7 +125,7 @@ namespace Farmacia.Datos
                             IdProveedor = datos.GetFieldValue<int>("id_proveedor"),
                             Nombre = datos.GetFieldValue<string>("proveedor"),
                         },
-                        Fecha = datos.GetFieldValue<DateTime>("fecha").ToString(),
+                        Fecha = datos.GetFieldValue<DateTime>("fecha"),
                     };
 
                     compras.Add(compra);
@@ -165,7 +165,7 @@ namespace Farmacia.Datos
                             IdProveedor = reader.GetInt32("id_proveedor"),
                             Nombre = reader.GetString("proveedor"),
                         },
-                        Fecha = reader.GetDateTime("fecha").ToString(),
+                        Fecha = reader.GetDateTime("fecha"),
                     };
 
                     compras.Add(compra);
@@ -226,6 +226,187 @@ namespace Farmacia.Datos
             catch (NpgsqlException ex)
             {
                 throw new NpgsqlException("Error al obtener los detalles de la compra", ex);
+            }
+        }
+
+        public static List<Compra> ComprasPorFechas(DateTime? fechaInicio, DateTime? fechaFin)
+        {
+            List<Compra> compras = [];
+            string query = """
+                SELECT
+                    c.id_compra,
+                    c.id_proveedor,
+                    pro.nit nit_proveedor,
+                    pro.nombre proveedor,
+                    pro.telefono telefono_proveedor,
+                    c.fecha,
+                    dc.id_producto,
+                    p.nombre producto,
+                    m.id_marca,
+                    m.nombre marca,
+                    dc.precio_compra,
+                    dc.precio_venta,
+                    dc.cantidad 
+                FROM
+                    compra c
+                    JOIN proveedor pro ON c.id_proveedor = pro.id_proveedor
+                    LEFT JOIN detalle_compra dc ON c.id_compra = dc.id_compra
+                    LEFT JOIN producto p ON dc.id_producto = p.id_producto 
+                    LEFT JOIN marca m ON p.id_marca = m.id_marca
+                WHERE
+                    c.fecha BETWEEN @fechaInicio AND @fechaFin
+                ORDER BY
+                    c.id_compra DESC, dc.id_producto;
+                """;
+
+            try
+            {
+                ConexionDB conexion = new();
+                using NpgsqlConnection conn = conexion.AbrirConexion()!;
+                using NpgsqlCommand cmd = new(query, conn);
+
+                cmd.Parameters.AddWithValue("@fechaInicio", fechaInicio.HasValue ? fechaInicio.Value : DateTime.MinValue.ToString());
+                cmd.Parameters.AddWithValue("@fechaFin", fechaFin.HasValue ? fechaFin.Value : DateTime.Now.Date.ToString());
+
+                using NpgsqlDataReader datos = cmd.ExecuteReader();
+
+                Compra? compraActual = null;
+
+                while (datos.Read())
+                {
+                    int idCompra = datos.GetFieldValue<int>("id_compra");
+
+                    if (compraActual == null || compraActual.IdCompra != idCompra)
+                    {
+                        compraActual = new Compra
+                        {
+                            IdCompra = idCompra,
+                            Proveedor = new Proveedor
+                            {
+                                IdProveedor = datos.GetFieldValue<int>("id_proveedor"),
+                                Nit = datos.GetFieldValue<string>("nit_proveedor"),
+                                Nombre = datos.GetFieldValue<string>("proveedor"),
+                                Telefono = datos.GetFieldValue<string>("telefono_proveedor")
+                            },
+                            Fecha = datos.GetFieldValue<DateTime>("fecha"),
+                            Productos = []
+                        };
+                        compras.Add(compraActual);
+                    }
+
+                    if (!datos.IsDBNull(datos.GetOrdinal("id_producto")))
+                    {
+                        compraActual.Productos!.Add(new Producto
+                        {
+                            IdProducto = datos.GetFieldValue<int>("id_producto"),
+                            Nombre = datos.GetString("producto"),
+                            PrecioCompra = datos.GetDecimal("precio_compra"),
+                            PrecioVenta = datos.GetDecimal("precio_venta"),
+                            Stock = datos.GetFieldValue<int>("cantidad"),
+                            StockMinimo = 0,
+                            Marca = new()
+                            {
+                                IdMarca = datos.GetInt32("id_marca"),
+                                Nombre = datos.GetString("marca"),
+                            }
+                        });
+                    }
+                }
+
+                return compras;
+            }
+            catch (NpgsqlException ex)
+            {
+                throw new NpgsqlException("Error al obtener compras por fechas.", ex);
+            }
+        }
+
+        public static Compra? CompraPorId(int idCompra)
+        {
+            Compra? compra = null;
+            string query = """
+                SELECT
+                    c.id_compra,
+                    c.id_proveedor,
+                    pro.nit nit_proveedor,
+                    pro.nombre proveedor,
+                    pro.telefono telefono_proveedor,
+                    c.fecha,
+                    dc.id_producto,
+                    p.nombre producto,
+                    m.id_marca,
+                    m.nombre marca,
+                    dc.precio_compra,
+                    dc.precio_venta,
+                    dc.cantidad 
+                FROM
+                    compra c
+                    JOIN proveedor pro ON c.id_proveedor = pro.id_proveedor
+                    LEFT JOIN detalle_compra dc ON c.id_compra = dc.id_compra
+                    LEFT JOIN producto p ON dc.id_producto = p.id_producto 
+                    LEFT JOIN marca m ON p.id_marca = m.id_marca
+                WHERE
+                    c.id_compra = @idCompra 
+                ORDER BY
+                    c.id_compra DESC, dc.id_producto;
+                """;
+
+            try
+            {
+                ConexionDB conexion = new();
+                using NpgsqlConnection conn = conexion.AbrirConexion()!;
+                using NpgsqlCommand cmd = new(query, conn);
+
+                cmd.Parameters.AddWithValue("@idCompra", idCompra);
+
+                using NpgsqlDataReader datos = cmd.ExecuteReader();
+
+                Compra? compraActual = null;
+
+                while (datos.Read())
+                {
+                    if (compraActual == null)
+                    {
+                        compraActual = new Compra
+                        {
+                            IdCompra = datos.GetFieldValue<int>("id_compra"),
+                            Proveedor = new Proveedor
+                            {
+                                IdProveedor = datos.GetFieldValue<int>("id_proveedor"),
+                                Nit = datos.GetFieldValue<string>("nit_proveedor"),
+                                Nombre = datos.GetFieldValue<string>("proveedor"),
+                                Telefono = datos.GetFieldValue<string>("telefono_proveedor")
+                            },
+                            Fecha = datos.GetFieldValue<DateTime>("fecha"),
+                            Productos = []
+                        };
+                        compra = compraActual;
+                    }
+
+                    if (!datos.IsDBNull(datos.GetOrdinal("id_producto")))
+                    {
+                        compraActual.Productos!.Add(new Producto
+                        {
+                            IdProducto = datos.GetFieldValue<int>("id_producto"),
+                            Nombre = datos.GetString("producto"),
+                            PrecioCompra = datos.GetDecimal("precio_compra"),
+                            PrecioVenta = datos.GetDecimal("precio_venta"),
+                            Stock = datos.GetFieldValue<int>("cantidad"),
+                            StockMinimo = 0,
+                            Marca = new()
+                            {
+                                IdMarca = datos.GetInt32("id_marca"),
+                                Nombre = datos.GetString("marca"),
+                            }
+                        });
+                    }
+                }
+
+                return compra;
+            }
+            catch (NpgsqlException ex)
+            {
+                throw new NpgsqlException("Error al obtener la compra por ID.", ex);
             }
         }
 

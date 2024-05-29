@@ -1,22 +1,26 @@
 ﻿
 using Farmacia.Entidad;
 using QuestPDF.Fluent;
-using QuestPDF.Infrastructure;
 using QuestPDF.Helpers;
+using QuestPDF.Infrastructure;
 using Image = QuestPDF.Infrastructure.Image;
-using Path = System.IO.Path;
 
 namespace Farmacia.Presentacion.Reportes.QuestPDF
 {
-    public class ReporteUnaVenta : IDocument
+    internal class ReporteCompras: IDocument
     {
         public static Image Logo { get; } = Image.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "logo.png"));
 
-        public Venta Venta { get; }
+        public List<Compra> Compras { get; }
+        public DateTime? FechaInicio { get; }
+        public DateTime? FechaFin { get; }
 
-        public ReporteUnaVenta(Venta venta)
+
+        public ReporteCompras(List<Compra> compras, DateTime? fechaInicio, DateTime? fechaFin)
         {
-            Venta = venta;
+            Compras = compras;
+            FechaInicio = fechaInicio;
+            FechaFin = fechaFin;
         }
 
         public DocumentMetadata GetMetadata() => DocumentMetadata.Default;
@@ -47,13 +51,19 @@ namespace Farmacia.Presentacion.Reportes.QuestPDF
                 row.RelativeItem().Column(column =>
                 {
                     column
-                        .Item().Text($"No. Venta #{Venta.IdVenta}")
+                        .Item().Text("Reporte de Compras")
                         .FontSize(20).SemiBold().FontColor(Colors.Blue.Medium);
 
                     column.Item().Text(text =>
                     {
-                        text.Span("Fecha Venta: ").SemiBold();
-                        text.Span($"{Venta.Fecha:d}");
+                        text.Span("Desde: ").SemiBold();
+                        text.Span($"{FechaInicio:d}");
+                    });
+
+                    column.Item().Text(text =>
+                    {
+                        text.Span("Hasta: ").SemiBold();
+                        text.Span($"{FechaFin:d}");
                     });
 
                     column.Item().Text(text =>
@@ -74,30 +84,45 @@ namespace Farmacia.Presentacion.Reportes.QuestPDF
             {
                 column.Spacing(20);
 
-                // Detalles documento
-                column.Item().Row(row =>
+                // Detalles por cada venta
+                foreach (var compra in Compras)
                 {
-                    row.RelativeItem().Component(new DetallesDocumento("Farmacia", Empresa.Instance));
-                    row.ConstantItem(50);
-                    row.RelativeItem().Component(new DetallesDocumento("Cliente", Venta.Cliente));
-                });
+                    column.Item().Element(c => EncabezadoVenta(c, compra));
+                    column.Item().Element(c => Tabla(c, compra));
+                    var totalCompra = compra.Productos.Sum(p => p.PrecioVenta * p.Stock);
+                    column.Item().PaddingRight(5).AlignRight().Text($"Total Compra: Q {totalCompra}").SemiBold();
+                }
 
-                // Tabla de productos
-                column.Item().Element(Tabla);
-
-                // Total
-                var totalPrice = Venta.Productos!.Sum(x => x.PrecioVenta * x.Stock);
-                column.Item().PaddingRight(5).AlignRight().Text($"TOTAL: Q {totalPrice}").SemiBold();
+                // Total general
+                var totalGeneral = Compras.Sum(v => v.Productos.Sum(p => p.PrecioCompra * p.Stock));
+                column.Item().PaddingRight(5).AlignRight().Text($"TOTAL GENERAL: Q {totalGeneral}").Bold();
 
                 // Footer o comentarios
                 column.Item().PaddingTop(25).Element(Comentarios);
-                //if (!string.IsNullOrWhiteSpace(Venta.Cliente.Nombre))
-                //    column.Item().PaddingTop(25).Element(Comentarios);
-
             });
         }
 
-        void Tabla(IContainer container)
+        void EncabezadoVenta(IContainer container, Compra compra)
+        {
+            container.Row(row =>
+            {
+                row.ConstantItem(50).Text($"# {compra.IdCompra}").SemiBold().FontColor(Colors.Blue.Medium);
+                row.ConstantItem(20); // Espaciado entre elementos
+                row.ConstantItem(150).Text(text =>
+                {
+                    text.Span("Fecha: ").SemiBold();
+                    text.Span($"{compra.Fecha:d}");
+                });
+                row.ConstantItem(20); // Espaciado entre elementos
+                row.RelativeItem().Text(text =>
+                {
+                    text.Span("Proveedor: ").SemiBold();
+                    text.Span(compra.Proveedor.NombreNit);
+                });
+            });
+        }
+
+        void Tabla(IContainer container, Compra compra)
         {
             var headerStyle = TextStyle.Default.SemiBold();
 
@@ -128,16 +153,16 @@ namespace Farmacia.Presentacion.Reportes.QuestPDF
                 });
 
                 // Mostrar productos
-                foreach (var item in Venta.Productos!)
+                foreach (var item in compra.Productos!)
                 {
-                    var index = Venta.Productos.IndexOf(item) + 1;
+                    var index = compra.Productos.IndexOf(item) + 1;
 
                     table.Cell().Element(CellStyle).Text($"{index}");
                     table.Cell().Element(CellStyle).Text(item.Nombre);
                     table.Cell().Element(CellStyle).Text(item.Marca.Nombre);
-                    table.Cell().Element(CellStyle).AlignRight().Text($"Q {item.PrecioVenta}");
+                    table.Cell().Element(CellStyle).AlignRight().Text($"Q {item.PrecioCompra}");
                     table.Cell().Element(CellStyle).AlignRight().Text($"{item.Stock}");
-                    table.Cell().Element(CellStyle).AlignRight().Text($"Q {item.PrecioVenta * item.Stock}");
+                    table.Cell().Element(CellStyle).AlignRight().Text($"Q {item.PrecioCompra * item.Stock}");
 
                     static IContainer CellStyle(IContainer container) => container.BorderBottom(1).BorderColor(Colors.Grey.Lighten2).PaddingVertical(5);
                 }
@@ -154,35 +179,4 @@ namespace Farmacia.Presentacion.Reportes.QuestPDF
             });
         }
     }
-
-    //public class DetallesDocumento : IComponent
-    //{
-    //    private string Title { get; }
-    //    private IPersona Persona { get; }
-
-    //    public DetallesDocumento(string title, IPersona persona)
-    //    {
-    //        Title = title;
-    //        Persona = persona;
-    //    }
-
-    //    public void Compose(IContainer container)
-    //    {
-    //        container.ShowEntire().Column(column =>
-    //        {
-    //            column.Spacing(2);
-
-    //            column.Item().Text(Title).SemiBold();
-    //            column.Item().PaddingBottom(5).LineHorizontal(1);
-
-    //            column.Item().Text(Persona.Nit ?? "");
-    //            column.Item().Text(Persona.Nombre);
-    //            column.Item().Text(Persona.Telefono ?? "");
-    //            if (Title == "Farmacia")
-    //            {
-    //                column.Item().Text("Huehuetenango, Huehuetenango");
-    //            }
-    //        });
-    //    }
-    //}
 }

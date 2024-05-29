@@ -1,22 +1,21 @@
 ﻿
 using Farmacia.Entidad;
 using QuestPDF.Fluent;
-using QuestPDF.Infrastructure;
 using QuestPDF.Helpers;
+using QuestPDF.Infrastructure;
 using Image = QuestPDF.Infrastructure.Image;
-using Path = System.IO.Path;
 
 namespace Farmacia.Presentacion.Reportes.QuestPDF
 {
-    public class ReporteUnaVenta : IDocument
+    public class ReporteUnaCompra : IDocument
     {
         public static Image Logo { get; } = Image.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "logo.png"));
 
-        public Venta Venta { get; }
+        public Compra Compra { get; }
 
-        public ReporteUnaVenta(Venta venta)
+        public ReporteUnaCompra(Compra compra)
         {
-            Venta = venta;
+            Compra = compra;
         }
 
         public DocumentMetadata GetMetadata() => DocumentMetadata.Default;
@@ -47,13 +46,13 @@ namespace Farmacia.Presentacion.Reportes.QuestPDF
                 row.RelativeItem().Column(column =>
                 {
                     column
-                        .Item().Text($"No. Venta #{Venta.IdVenta}")
+                        .Item().Text($"Compra No. {Compra.IdCompra}")
                         .FontSize(20).SemiBold().FontColor(Colors.Blue.Medium);
 
                     column.Item().Text(text =>
                     {
-                        text.Span("Fecha Venta: ").SemiBold();
-                        text.Span($"{Venta.Fecha:d}");
+                        text.Span("Fecha Compra: ").SemiBold();
+                        text.Span($"{Compra.Fecha:d}");
                     });
 
                     column.Item().Text(text =>
@@ -79,14 +78,14 @@ namespace Farmacia.Presentacion.Reportes.QuestPDF
                 {
                     row.RelativeItem().Component(new DetallesDocumento("Farmacia", Empresa.Instance));
                     row.ConstantItem(50);
-                    row.RelativeItem().Component(new DetallesDocumento("Cliente", Venta.Cliente));
+                    row.RelativeItem().Component(new DetallesDocumento("Proveedor", Compra.Proveedor));
                 });
 
                 // Tabla de productos
                 column.Item().Element(Tabla);
 
                 // Total
-                var totalPrice = Venta.Productos!.Sum(x => x.PrecioVenta * x.Stock);
+                var totalPrice = Compra.Productos!.Sum(x => x.PrecioCompra * x.Stock);
                 column.Item().PaddingRight(5).AlignRight().Text($"TOTAL: Q {totalPrice}").SemiBold();
 
                 // Footer o comentarios
@@ -128,16 +127,16 @@ namespace Farmacia.Presentacion.Reportes.QuestPDF
                 });
 
                 // Mostrar productos
-                foreach (var item in Venta.Productos!)
+                foreach (var item in Compra.Productos!)
                 {
-                    var index = Venta.Productos.IndexOf(item) + 1;
+                    var index = Compra.Productos.IndexOf(item) + 1;
 
                     table.Cell().Element(CellStyle).Text($"{index}");
                     table.Cell().Element(CellStyle).Text(item.Nombre);
                     table.Cell().Element(CellStyle).Text(item.Marca.Nombre);
-                    table.Cell().Element(CellStyle).AlignRight().Text($"Q {item.PrecioVenta}");
+                    table.Cell().Element(CellStyle).AlignRight().Text($"Q {item.PrecioCompra}");
                     table.Cell().Element(CellStyle).AlignRight().Text($"{item.Stock}");
-                    table.Cell().Element(CellStyle).AlignRight().Text($"Q {item.PrecioVenta * item.Stock}");
+                    table.Cell().Element(CellStyle).AlignRight().Text($"Q {item.PrecioCompra * item.Stock}");
 
                     static IContainer CellStyle(IContainer container) => container.BorderBottom(1).BorderColor(Colors.Grey.Lighten2).PaddingVertical(5);
                 }
@@ -155,34 +154,4 @@ namespace Farmacia.Presentacion.Reportes.QuestPDF
         }
     }
 
-    //public class DetallesDocumento : IComponent
-    //{
-    //    private string Title { get; }
-    //    private IPersona Persona { get; }
-
-    //    public DetallesDocumento(string title, IPersona persona)
-    //    {
-    //        Title = title;
-    //        Persona = persona;
-    //    }
-
-    //    public void Compose(IContainer container)
-    //    {
-    //        container.ShowEntire().Column(column =>
-    //        {
-    //            column.Spacing(2);
-
-    //            column.Item().Text(Title).SemiBold();
-    //            column.Item().PaddingBottom(5).LineHorizontal(1);
-
-    //            column.Item().Text(Persona.Nit ?? "");
-    //            column.Item().Text(Persona.Nombre);
-    //            column.Item().Text(Persona.Telefono ?? "");
-    //            if (Title == "Farmacia")
-    //            {
-    //                column.Item().Text("Huehuetenango, Huehuetenango");
-    //            }
-    //        });
-    //    }
-    //}
 }
