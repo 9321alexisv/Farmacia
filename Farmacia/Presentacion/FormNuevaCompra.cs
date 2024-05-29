@@ -33,7 +33,6 @@ namespace VistasFarmacia.Forms
                     btn.FlatAppearance.BorderColor = ThemeColor.SecondaryColor;
                 }
             }
-            labelTablaIngresoCompras.ForeColor = ThemeColor.SecondaryColor;
             labelCodigo.ForeColor = ThemeColor.SecondaryColor;
             dgvProductos.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dgvProductos.ColumnHeadersDefaultCellStyle.BackColor = ThemeColor.SecondaryColor;
@@ -139,7 +138,7 @@ namespace VistasFarmacia.Forms
         private void dgvProductos_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             // Mostrar ventana de busqueda si se escribe dentro de la columna y fila de Producto
-            if (dgvProductos.CurrentCell.ColumnIndex != 2) return;
+            if (dgvProductos.CurrentCell.ColumnIndex != 1) return;
 
             dgvProductos.EndEdit();
 
@@ -211,6 +210,7 @@ namespace VistasFarmacia.Forms
 
         public void LimpiarTabla()
         {
+            lblTotal.Text = "0.00";
             dgvProductos.DataSource = null;
             dgvProductos.Rows.Clear();
         }
