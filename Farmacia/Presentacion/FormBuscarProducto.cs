@@ -1,5 +1,7 @@
 ﻿
 using Farmacia.Datos;
+using Farmacia.Entidad;
+using Irony.Parsing;
 using System.Data;
 
 namespace Farmacia.Presentacion
@@ -18,33 +20,44 @@ namespace Farmacia.Presentacion
 
         private void txtBusqueda_TextChanged(object sender, EventArgs e)
         {
-            DataTable originalProducts = D_Productos.BuscarPorIdNombreMarcaTemp(txtBusqueda.Text);
-            DataTable displayProducts = new DataTable();
+            List<Producto> productos = D_Productos.BuscarPorIdNombreMarca(txtBusqueda.Text);
 
-            // Copiar las columnas originales
-            foreach (DataColumn column in originalProducts.Columns)
+            var displayProductos = productos.Select(producto => new
             {
-                displayProducts.Columns.Add(column.ColumnName, column.DataType);
-            }
+                producto.IdProducto,
+                DisplayName = $"{producto.Nombre} - {producto.Marca.Nombre} - Stock: {producto.Stock}"
+            }).ToList();
 
-            // Agregar columna para el display concatenado
-            displayProducts.Columns.Add("DisplayName", typeof(string));
-
-            // Llenar el DataTable intermedio
-            foreach (DataRow row in originalProducts.Rows)
-            {
-                DataRow newRow = displayProducts.NewRow();
-                foreach (DataColumn column in originalProducts.Columns)
-                {
-                    newRow[column.ColumnName] = row[column.ColumnName];
-                }
-                newRow["DisplayName"] = $"{row["producto"]} - {row["marca"]}";
-                displayProducts.Rows.Add(newRow);
-            }
-
-            listBoxProductos.DataSource = displayProducts;
+            listBoxProductos.DataSource = displayProductos;
             listBoxProductos.DisplayMember = "DisplayName";
-            listBoxProductos.ValueMember = "id_producto";
+            listBoxProductos.ValueMember = "IdProducto";
+            //DataTable originalProducts = D_Productos.BuscarPorIdNombreMarcaTemp(txtBusqueda.Text);
+            //DataTable displayProducts = new();
+
+            //// Copiar las columnas originales
+            //foreach (DataColumn column in originalProducts.Columns)
+            //{
+            //    displayProducts.Columns.Add(column.ColumnName, column.DataType);
+            //}
+
+            //// Agregar columna para el display concatenado
+            //displayProducts.Columns.Add("DisplayName", typeof(string));
+
+            //// Llenar el DataTable intermedio
+            //foreach (DataRow row in originalProducts.Rows)
+            //{
+            //    DataRow newRow = displayProducts.NewRow();
+            //    foreach (DataColumn column in originalProducts.Columns)
+            //    {
+            //        newRow[column.ColumnName] = row[column.ColumnName];
+            //    }
+            //    newRow["DisplayName"] = $"{row["producto"]} - {row["marca"]}";
+            //    displayProducts.Rows.Add(newRow);
+            //}
+
+            //listBoxProductos.DataSource = displayProducts;
+            //listBoxProductos.DisplayMember = "DisplayName";
+            //listBoxProductos.ValueMember = "id_producto";
         }
 
         private void txtBusqueda_KeyDown(object sender, KeyEventArgs e)
@@ -69,6 +82,19 @@ namespace Farmacia.Presentacion
         public DataRowView? SelectedItem
         {
             get { return listBoxProductos.SelectedItem as DataRowView; }
+        }
+
+        public int IdProductoSeleccionado
+        {
+            get
+            {
+                var selectedItem = listBoxProductos.SelectedItem;
+                if (selectedItem != null)
+                {
+                    return (int)selectedItem.GetType().GetProperty("IdProducto")!.GetValue(selectedItem)!;
+                }
+                return -1; // Otra opción es lanzar una excepción si no hay ningún elemento seleccionado
+            }
         }
     }
 }
