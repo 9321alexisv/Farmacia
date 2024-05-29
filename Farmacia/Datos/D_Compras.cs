@@ -30,7 +30,7 @@ namespace Farmacia.Datos
             }
         }
 
-        public static void InsertarDetalleCompra(int idCompra, DataGridView dgvProductos)
+        public static void InsertarDetalleCompra(int idCompra, DataGridView dgvProductos, bool promedio = false)
         {
             string query = "INSERT INTO detalle_compra (id_compra, id_producto, precio_compra, precio_venta, cantidad) VALUES (@id_compra, @id_producto, @precio_compra, @precio_venta, @cantidad)";
 
@@ -58,13 +58,46 @@ namespace Farmacia.Datos
                     cmd.ExecuteNonQuery();
                 }
 
-                ActualizarStockProductos(dgvProductos);
+                if (promedio)
+                {
+                    ActualizarProductosConPromedio(dgvProductos);
+                } else
+                {
+                    ActualizarStockProductos(dgvProductos);
+                }
+
             }
             catch (NpgsqlException ex)
             {
-                throw new NpgsqlException("Error al insertar en la tabla 'detalle_compra'.", ex);
+                throw new NpgsqlException("Error al insertar en la tabla 'detalle_compra'." + ex);
             }
         }
+
+        //public static void ActualizarStockProductosOld(DataGridView dgvProductos)
+        //{
+        //    try
+        //    {
+        //        ConexionDB conexion = new();
+        //        using NpgsqlConnection conn = conexion.AbrirConexion()!;
+
+        //        foreach (DataGridViewRow row in dgvProductos.Rows)
+        //        {
+        //            int idProducto = Convert.ToInt32(row.Cells["IdProducto"].Value);
+        //            int cantidad = Convert.ToInt32(row.Cells["Cantidad"].Value);
+
+        //            string query = "UPDATE producto SET stock = stock + @cantidad WHERE id_producto = @idProducto";
+
+        //            using NpgsqlCommand cmd = new(query, conn);
+        //            cmd.Parameters.AddWithValue("@cantidad", cantidad);
+        //            cmd.Parameters.AddWithValue("@idProducto", idProducto);
+        //            cmd.ExecuteNonQuery();
+        //        }
+        //    }
+        //    catch (NpgsqlException ex)
+        //    {
+        //        throw new NpgsqlException("Error al actualizar el stock de los productos: " + ex.Message);
+        //    }
+        //}
 
         public static void ActualizarStockProductos(DataGridView dgvProductos)
         {
@@ -77,18 +110,59 @@ namespace Farmacia.Datos
                 {
                     int idProducto = Convert.ToInt32(row.Cells["IdProducto"].Value);
                     int cantidad = Convert.ToInt32(row.Cells["Cantidad"].Value);
+                    decimal precioCompra = Convert.ToDecimal(row.Cells["PrecioCompra"].Value);
+                    decimal precioVenta = Convert.ToDecimal(row.Cells["PrecioVenta"].Value);
 
-                    string query = "UPDATE producto SET stock = stock + @cantidad WHERE id_producto = @idProducto";
+                    string query = "UPDATE producto SET stock = stock + @cantidad, precio_compra = @precioCompra, precio_venta = @precioVenta WHERE id_producto = @idProducto";
 
                     using NpgsqlCommand cmd = new(query, conn);
                     cmd.Parameters.AddWithValue("@cantidad", cantidad);
+                    cmd.Parameters.AddWithValue("@precioCompra", precioCompra);
+                    cmd.Parameters.AddWithValue("@precioVenta", precioVenta);
                     cmd.Parameters.AddWithValue("@idProducto", idProducto);
+
                     cmd.ExecuteNonQuery();
                 }
             }
             catch (NpgsqlException ex)
             {
-                throw new NpgsqlException("Error al actualizar el stock de los productos: " + ex.Message);
+                throw new NpgsqlException("Error al actualizar el stock y precios de los productos: " + ex.Message);
+            }
+        }
+
+        public static void ActualizarProductosConPromedio(DataGridView dgvProductos)
+        {
+            string query = """
+                UPDATE producto
+                SET stock = stock + @cantidad,
+                precio_compra = (SELECT (precio_compra + @precioCompra) / 2 FROM producto WHERE id_producto = @idProducto),
+                precio_venta = (SELECT (precio_venta + @precioVenta) / 2 FROM producto WHERE id_producto = @idProducto)
+                WHERE id_producto = @idProducto;
+                """;
+            try
+            {
+                ConexionDB conexion = new();
+                using NpgsqlConnection conn = conexion.AbrirConexion()!;
+
+                foreach (DataGridViewRow row in dgvProductos.Rows)
+                {
+                    int idProducto = Convert.ToInt32(row.Cells["IdProducto"].Value);
+                    int cantidad = Convert.ToInt32(row.Cells["Cantidad"].Value);
+                    decimal precioCompra = Convert.ToDecimal(row.Cells["PrecioCompra"].Value);
+                    decimal precioVenta = Convert.ToDecimal(row.Cells["PrecioVenta"].Value);
+
+                    using NpgsqlCommand cmdActualizar = new(query, conn);
+                    cmdActualizar.Parameters.AddWithValue("@cantidad", cantidad);
+                    cmdActualizar.Parameters.AddWithValue("@precioCompra", precioCompra);
+                    cmdActualizar.Parameters.AddWithValue("@precioVenta", precioVenta);
+                    cmdActualizar.Parameters.AddWithValue("@idProducto", idProducto);
+
+                    cmdActualizar.ExecuteNonQuery();
+                }
+            }
+            catch (NpgsqlException ex)
+            {
+                throw new NpgsqlException("Error al actualizar los productos con promedio: ", ex);
             }
         }
 

@@ -75,7 +75,8 @@ namespace VistasFarmacia.Forms
             try
             {
                 int idCompra = D_Compras.CrearCompra(idProveedor);
-                D_Compras.InsertarDetalleCompra(idCompra, dgvProductos);
+                bool promedio = checkPromedio.Checked;
+                D_Compras.InsertarDetalleCompra(idCompra, dgvProductos, promedio);
             }
             catch (Exception ex)
             {
@@ -107,7 +108,7 @@ namespace VistasFarmacia.Forms
                 if (!int.TryParse(dgvProductos.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(), out int codigoProducto) || D_Productos.BuscarPorId(codigoProducto) is not Producto producto)
                 {
                     MessageBox.Show("No se encontró el producto con el código ingresado.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    
+
                     dgvProductos.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "";
                     dgvProductos.Rows.RemoveAt(e.RowIndex);
                     return;

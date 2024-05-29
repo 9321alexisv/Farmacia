@@ -49,6 +49,7 @@
             labelCodigo = new Label();
             btnLimpiar = new Button();
             cmbProveedores = new ComboBox();
+            checkPromedio = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)dgvProductos).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -264,12 +265,26 @@
             cmbProveedores.Size = new Size(343, 36);
             cmbProveedores.TabIndex = 26;
             // 
+            // checkPromedio
+            // 
+            checkPromedio.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            checkPromedio.AutoSize = true;
+            checkPromedio.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            checkPromedio.ForeColor = Color.White;
+            checkPromedio.Location = new Point(814, 749);
+            checkPromedio.Name = "checkPromedio";
+            checkPromedio.Size = new Size(262, 32);
+            checkPromedio.TabIndex = 27;
+            checkPromedio.Text = "Utilizar precios promedio";
+            checkPromedio.UseVisualStyleBackColor = true;
+            // 
             // FormNuevaCompra
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(39, 39, 58);
             ClientSize = new Size(1369, 835);
+            Controls.Add(checkPromedio);
             Controls.Add(cmbProveedores);
             Controls.Add(btnLimpiar);
             Controls.Add(panel1);
@@ -309,5 +324,6 @@
         private DataGridViewTextBoxColumn PrecioCompra;
         private DataGridViewTextBoxColumn PrecioVenta;
         private DataGridViewTextBoxColumn Subtotal;
+        private CheckBox checkPromedio;
     }
 }
