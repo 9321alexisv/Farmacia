@@ -95,139 +95,6 @@ namespace Farmacia.Datos
         // ============================================================================================
         // OBTENER COMPRAS ==================================================================
         // ============================================================================================
-        public static List<Compra> ComprasPorFechasTemp(DateTime? fechaInicio, DateTime? fechaFin)
-        {
-            List<Compra> compras = [];
-            string query = """
-                SELECT c.id_compra, p.id_proveedor, p.nombre proveedor, c.fecha 
-                FROM compra c JOIN proveedor p ON c.id_proveedor = p.id_proveedor 
-                WHERE c.fecha BETWEEN @fechaInicio AND @fechaFin
-                ORDER BY fecha DESC;
-                """;
-
-            try
-            {
-                ConexionDB conexion = new();
-                using NpgsqlConnection conn = conexion.AbrirConexion()!;
-                using NpgsqlCommand cmd = new(query, conn);
-                cmd.Parameters.AddWithValue("@fechaInicio", fechaInicio.HasValue ? fechaInicio.Value : DateTime.MinValue.ToString());
-                cmd.Parameters.AddWithValue("@fechaFin", fechaFin.HasValue ? fechaFin.Value : DateTime.Now.Date.ToString());
-
-                using NpgsqlDataReader datos = cmd.ExecuteReader();
-
-                while (datos.Read())
-                {
-                    Compra compra = new()
-                    {
-                        IdCompra = datos.GetInt32("id_compra"),
-                        Proveedor = new()
-                        {
-                            IdProveedor = datos.GetFieldValue<int>("id_proveedor"),
-                            Nombre = datos.GetFieldValue<string>("proveedor"),
-                        },
-                        Fecha = datos.GetFieldValue<DateTime>("fecha"),
-                    };
-
-                    compras.Add(compra);
-                }
-
-                return compras;
-            }
-            catch (NpgsqlException ex)
-            {
-                throw new NpgsqlException("Error al obtener compras por fechas.", ex);
-            }
-        }
-
-        public static List<Compra> ObtenerCompras()
-        {
-            List<Compra> compras = [];
-            string query = """
-                SELECT c.id_compra, p.id_proveedor, p.nombre proveedor, c.fecha 
-                FROM compra c JOIN proveedor p ON c.id_proveedor = p.id_proveedor 
-                ORDER BY c.id_compra DESC;
-                """;
-
-            try
-            {
-                ConexionDB conexion = new();
-                using NpgsqlConnection conn = conexion.AbrirConexion()!;
-                using NpgsqlCommand command = new(query, conn);
-                using NpgsqlDataReader reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    Compra compra = new()
-                    {
-                        IdCompra = reader.GetInt32(0),
-                        Proveedor = new()
-                        {
-                            IdProveedor = reader.GetInt32("id_proveedor"),
-                            Nombre = reader.GetString("proveedor"),
-                        },
-                        Fecha = reader.GetDateTime("fecha"),
-                    };
-
-                    compras.Add(compra);
-                }
-
-                return compras;
-            }
-            catch (NpgsqlException ex)
-            {
-                throw new NpgsqlException("Error al obtener todas las compras", ex);
-            }
-        }
-
-        public static List<Producto> DetalleCompra(int idCompra)
-        {
-            List<Producto> detalleCompra = [];
-
-            string query = """
-                SELECT p.id_producto, p.nombre producto, m.id_marca, m.nombre marca,
-                dc.precio_compra, dc.precio_venta, dc.cantidad 
-                FROM detalle_compra dc 
-                INNER JOIN producto p ON dc.id_producto = p.id_producto
-                INNER JOIN marca m ON p.id_marca = m.id_marca 
-                WHERE dc.id_compra = @IdCompra;
-                """;
-
-            try
-            {
-                ConexionDB conexion = new();
-                using NpgsqlConnection conn = conexion.AbrirConexion()!;
-                using NpgsqlCommand command = new(query, conn);
-                command.Parameters.AddWithValue("@idCompra", idCompra);
-
-                using NpgsqlDataReader reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    Producto producto = new()
-                    {
-                        IdProducto = reader.GetInt32("id_producto"),
-                        Marca = new()
-                        {
-                            IdMarca = reader.GetInt32("id_marca"),
-                            Nombre = reader.GetString("marca")
-                        },
-                        Nombre = reader.GetString("producto"),
-                        PrecioCompra = reader.GetDecimal("precio_compra"),
-                        PrecioVenta = reader.GetDecimal("precio_venta"),
-                        Stock = reader.GetInt32("cantidad"),
-                        StockMinimo = 0,
-                    };
-
-                    detalleCompra.Add(producto);
-                }
-
-                return detalleCompra;
-            }
-            catch (NpgsqlException ex)
-            {
-                throw new NpgsqlException("Error al obtener los detalles de la compra", ex);
-            }
-        }
 
         public static List<Compra> ComprasPorFechas(DateTime? fechaInicio, DateTime? fechaFin)
         {
@@ -317,6 +184,7 @@ namespace Farmacia.Datos
             }
             catch (NpgsqlException ex)
             {
+                MessageBox.Show(ex.Message);
                 throw new NpgsqlException("Error al obtener compras por fechas.", ex);
             }
         }

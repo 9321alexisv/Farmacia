@@ -15,10 +15,11 @@ namespace VistasFarmacia.Forms
             InitializeComponent();
         }
 
+        #region Load
         private void FormCompras_Load_1(object sender, EventArgs e)
         {
             LoadTheme();
-            MostrarHistorialVentas();
+            MostrarCompras();
         }
 
         private void LoadTheme()
@@ -41,19 +42,24 @@ namespace VistasFarmacia.Forms
             panel2.BackColor = ThemeColor.SecondaryColor;
         }
 
+        #endregion
+
         #region Datos
-        public void MostrarHistorialVentas()
+        public void MostrarCompras(DateTime? fechaInicio = null, DateTime? fechaFin = null)
         {
-            D_Compras compras = new();
-            List<Compra> todasCompras = D_Compras.ObtenerCompras();
+            // Si fechaInicio o fechaFin son nulos, asignar valores predeterminados
+            DateTime inicio = fechaInicio ?? DateTime.MinValue.Date;
+            DateTime fin = fechaFin ?? DateTime.Now.Date;
+
+            List<Compra> compras = D_Compras.ComprasPorFechas(inicio, fin);
 
             decimal totalCompras = 0;
 
             dgvCompras.Rows.Clear();
 
-            foreach (var compra in todasCompras)
+            foreach (var compra in compras)
             {
-                List<Producto> detallesCompra = D_Compras.DetalleCompra(compra.IdCompra);
+                List<Producto> detallesCompra = compra.Productos!;
 
                 // PARA ETIQUETAS GLOBALES CON PROPOSITOS INFORMATIVOS
                 decimal totalCompra = detallesCompra.Sum(detalle => detalle.PrecioCompra * detalle.Stock);
@@ -62,7 +68,7 @@ namespace VistasFarmacia.Forms
                 // Encabezado de cada venta dentro de la tabla
                 int rowIndex = dgvCompras.Rows.Add(
                     compra.IdCompra,
-                    $"COMPRA #{compra.IdCompra}",
+                    $"COMPRA No. {compra.IdCompra}",
                     $"FECHA: {compra.Fecha}",
                     "PROVEEDOR:",
                     compra.Proveedor.Nombre,
@@ -89,62 +95,9 @@ namespace VistasFarmacia.Forms
             lblCompras.Text = totalCompras.ToString();
         }
 
-        private void FiltrarDatos()
-        {
-            // Obtener los valores de los DateTimePicker en formato DateTime
-            DateTime fechaInicio = dtpInicio.Value.Date;
-            DateTime fechaFin = dtpFin.Value.Date;
-
-            // Convertir a cadena de formato corto
-            string fechaInicioStr = fechaInicio.ToString("d/M/yyyy");
-            string fechaFinStr = fechaFin.ToString("d/M/yyyy");
-
-            D_Compras compras = new();
-            List<Compra> todasCompras = D_Compras.ComprasPorFechas(fechaInicio, fechaFin);
-
-            decimal totalCompras = 0;
-
-            dgvCompras.Rows.Clear();
-
-            foreach (var compra in todasCompras)
-            {
-                List<Producto> detallesCompra = D_Compras.DetalleCompra(compra.IdCompra);
-
-                // PARA ETIQUETAS GLOBALES CON PROPOSITOS INFORMATIVOS
-                decimal totalCompra = detallesCompra.Sum(detalle => detalle.PrecioCompra * detalle.Stock);
-                totalCompras += totalCompra; // Sumar al total de compra
-
-                // Encabezado de cada venta dentro de la tabla
-                int rowIndex = dgvCompras.Rows.Add(
-                    $"COMPRA #{compra.IdCompra}",
-                    $"FECHA: {compra.Fecha}",
-                    "PROVEEDOR:",
-                    compra.Proveedor.Nombre,
-                    "TOTAL",
-                    totalCompra
-                 );
-                dgvCompras.Rows[rowIndex].DefaultCellStyle.BackColor = Color.Green;
-                dgvCompras.Rows[rowIndex].Height = 50;
-
-                foreach (var producto in detallesCompra)
-                {
-                    dgvCompras.Rows.Add(
-                        producto.IdProducto,
-                        producto.Marca.Nombre,
-                        producto.Nombre,
-                        producto.Stock,
-                        producto.PrecioCompra,
-                        producto.PrecioCompra * producto.Stock
-                    );
-                }
-            }
-
-            lblCompras.Text = totalCompras.ToString();
-        }
-
         #endregion
 
-        #region Botones
+        #region Reportes
 
         private void btnReporte_Click(object sender, EventArgs e)
         {
@@ -164,9 +117,6 @@ namespace VistasFarmacia.Forms
             var compra = D_Compras.CompraPorId(idCompra);
             var document = new ReporteUnaCompra(compra!);
 
-            // Mostrar sin guardar
-            //document.GeneratePdfAndShow();
-
             string fechaHoraConversion = DateTime.Now.ToString("dd-MM-yyyy__HH-mm-ss");
             string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), $"Compra-No-{idCompra}__{fechaHoraConversion}.pdf");
 
@@ -183,9 +133,6 @@ namespace VistasFarmacia.Forms
             var compras = D_Compras.ComprasPorFechas(fechaInicio, fechaFin);
             var document = new ReporteCompras(compras, fechaInicio, fechaFin);
 
-            // Mostrar sin guardar
-            //document.GeneratePdfAndShow();
-
             string fecha = DateTime.Now.ToString("dd-MM-yyyy__HH-mm-ss");
             string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), $"ReporteCompras_{fecha}.pdf");
 
@@ -194,12 +141,17 @@ namespace VistasFarmacia.Forms
 
             MessageBox.Show("Guardado en el escritorio.");
         }
+        
+        #endregion
 
+        #region Botones
         private void btnFiltrar_Click(object sender, EventArgs e)
         {
             try
             {
-                FiltrarDatos();
+                DateTime fechaInicio = dtpInicio.Value.Date;
+                DateTime fechaFin = dtpFin.Value.Date;
+                MostrarCompras(fechaInicio, fechaFin);
             }
             catch (Exception ex)
             {
@@ -209,7 +161,7 @@ namespace VistasFarmacia.Forms
 
         private void btnTodo_Click(object sender, EventArgs e)
         {
-            MostrarHistorialVentas();
+            MostrarCompras();
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -228,7 +180,9 @@ namespace VistasFarmacia.Forms
 
             D_Compras.Eliminar(Convert.ToInt32(dgvCompras.CurrentRow.Cells["IdCompra"].Value));
 
-            MostrarHistorialVentas();
+            DateTime fechaInicio = DateTime.MinValue.Date;
+            DateTime fechaFin = DateTime.Now.Date;
+            MostrarCompras(fechaInicio, fechaFin);
         }
 
         #endregion
