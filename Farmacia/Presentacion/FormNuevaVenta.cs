@@ -31,13 +31,12 @@ namespace VistasFarmacia.Forms
                     btn.FlatAppearance.BorderColor = ThemeColor.SecondaryColor;
                 }
             }
-            labelTablaIngresoVentas.ForeColor = ThemeColor.SecondaryColor;
             lblCliente.ForeColor = ThemeColor.SecondaryColor;
             dgvProductos.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dgvProductos.ColumnHeadersDefaultCellStyle.BackColor = ThemeColor.SecondaryColor;
             dgvProductos.RowHeadersDefaultCellStyle.ForeColor = Color.White;
             dgvProductos.RowHeadersDefaultCellStyle.BackColor = ThemeColor.PrimaryColor;
-            panel2.BackColor = ThemeColor.SecondaryColor;
+            lblTotalTitulo.BackColor = ThemeColor.SecondaryColor;
         }
 
         #region Datos
@@ -121,7 +120,7 @@ namespace VistasFarmacia.Forms
                 {
                     MessageBox.Show("No se encontró el producto con el código ingresado.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-                    dgvProductos.Rows.RemoveAt(e.RowIndex);
+                    if(dgvProductos.Rows.Count > 0) dgvProductos.Rows.RemoveAt(e.RowIndex);
                     CalcularTotal();
                     return;
                 }
@@ -152,7 +151,7 @@ namespace VistasFarmacia.Forms
         private void dgvProductos_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             // Mostrar ventana de busqueda si se escribe dentro de la columna y fila de Producto
-            if (dgvProductos.CurrentCell.ColumnIndex != 2) return;
+            if (dgvProductos.CurrentCell.ColumnIndex != 1) return;
 
             dgvProductos.EndEdit();
 

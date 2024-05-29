@@ -32,19 +32,17 @@
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             dgvProductos = new DataGridView();
-            labelTablaIngresoVentas = new Label();
             btnLimpiar = new Button();
             btnGuardar = new Button();
             lblCliente = new Label();
             panel1 = new Panel();
+            lblTotalTitulo = new Label();
             label3 = new Label();
             lblTotal = new Label();
-            labelAcumulado = new Label();
-            panel2 = new Panel();
             cmbClientes = new ComboBox();
             IdProducto = new DataGridViewTextBoxColumn();
-            Cantidad = new DataGridViewTextBoxColumn();
             Producto = new DataGridViewTextBoxColumn();
+            Cantidad = new DataGridViewTextBoxColumn();
             Marca = new DataGridViewTextBoxColumn();
             Stock = new DataGridViewTextBoxColumn();
             PrecioCompra = new DataGridViewTextBoxColumn();
@@ -52,11 +50,11 @@
             Subtotal = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dgvProductos).BeginInit();
             panel1.SuspendLayout();
-            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // dgvProductos
             // 
+            dgvProductos.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvProductos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dgvProductos.BackgroundColor = Color.FromArgb(49, 49, 68);
             dgvProductos.BorderStyle = BorderStyle.None;
@@ -71,7 +69,7 @@
             dgvProductos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvProductos.ColumnHeadersHeight = 30;
             dgvProductos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvProductos.Columns.AddRange(new DataGridViewColumn[] { IdProducto, Cantidad, Producto, Marca, Stock, PrecioCompra, PrecioVenta, Subtotal });
+            dgvProductos.Columns.AddRange(new DataGridViewColumn[] { IdProducto, Producto, Cantidad, Marca, Stock, PrecioCompra, PrecioVenta, Subtotal });
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(49, 49, 68);
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -82,7 +80,7 @@
             dgvProductos.DefaultCellStyle = dataGridViewCellStyle2;
             dgvProductos.EnableHeadersVisualStyles = false;
             dgvProductos.GridColor = Color.FromArgb(49, 49, 68);
-            dgvProductos.Location = new Point(96, 176);
+            dgvProductos.Location = new Point(45, 145);
             dgvProductos.Margin = new Padding(3, 4, 3, 4);
             dgvProductos.Name = "dgvProductos";
             dgvProductos.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
@@ -97,29 +95,21 @@
             dgvProductos.RowHeadersVisible = false;
             dgvProductos.RowHeadersWidth = 25;
             dgvProductos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvProductos.Size = new Size(1088, 520);
+            dgvProductos.Size = new Size(1162, 565);
             dgvProductos.TabIndex = 0;
             dgvProductos.CellEndEdit += dgvNuevaVenta_CellEndEdit;
             dgvProductos.EditingControlShowing += dgvProductos_EditingControlShowing;
             // 
-            // labelTablaIngresoVentas
-            // 
-            labelTablaIngresoVentas.AutoSize = true;
-            labelTablaIngresoVentas.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            labelTablaIngresoVentas.Location = new Point(96, 24);
-            labelTablaIngresoVentas.Name = "labelTablaIngresoVentas";
-            labelTablaIngresoVentas.Size = new Size(196, 41);
-            labelTablaIngresoVentas.TabIndex = 1;
-            labelTablaIngresoVentas.Text = "Nueva Venta";
-            // 
             // btnLimpiar
             // 
+            btnLimpiar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             btnLimpiar.FlatStyle = FlatStyle.Flat;
+            btnLimpiar.Font = new Font("Segoe UI", 12F);
             btnLimpiar.Image = Farmacia.Properties.Resources.cleaner;
-            btnLimpiar.Location = new Point(96, 719);
+            btnLimpiar.Location = new Point(45, 731);
             btnLimpiar.Margin = new Padding(3, 4, 3, 4);
             btnLimpiar.Name = "btnLimpiar";
-            btnLimpiar.Size = new Size(170, 85);
+            btnLimpiar.Size = new Size(200, 75);
             btnLimpiar.TabIndex = 2;
             btnLimpiar.Text = "Cancelar Venta";
             btnLimpiar.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -128,12 +118,14 @@
             // 
             // btnGuardar
             // 
+            btnGuardar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnGuardar.FlatStyle = FlatStyle.Flat;
+            btnGuardar.Font = new Font("Segoe UI", 12F);
             btnGuardar.Image = Farmacia.Properties.Resources.save;
-            btnGuardar.Location = new Point(1011, 719);
+            btnGuardar.Location = new Point(1007, 731);
             btnGuardar.Margin = new Padding(3, 4, 3, 4);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(170, 85);
+            btnGuardar.Size = new Size(200, 75);
             btnGuardar.TabIndex = 3;
             btnGuardar.Text = "Guardar Venta";
             btnGuardar.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -143,23 +135,36 @@
             // lblCliente
             // 
             lblCliente.AutoSize = true;
-            lblCliente.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
-            lblCliente.Location = new Point(96, 108);
+            lblCliente.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblCliente.Location = new Point(62, 65);
             lblCliente.Name = "lblCliente";
-            lblCliente.Size = new Size(93, 32);
+            lblCliente.Size = new Size(117, 41);
             lblCliente.TabIndex = 5;
             lblCliente.Text = "Cliente";
             // 
             // panel1
             // 
+            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             panel1.BackColor = Color.FromArgb(49, 49, 68);
+            panel1.Controls.Add(lblTotalTitulo);
             panel1.Controls.Add(label3);
             panel1.Controls.Add(lblTotal);
-            panel1.Location = new Point(933, 44);
+            panel1.Location = new Point(959, 25);
             panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
             panel1.Size = new Size(248, 96);
             panel1.TabIndex = 14;
+            // 
+            // lblTotalTitulo
+            // 
+            lblTotalTitulo.Dock = DockStyle.Top;
+            lblTotalTitulo.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTotalTitulo.ForeColor = Color.White;
+            lblTotalTitulo.Location = new Point(0, 0);
+            lblTotalTitulo.Name = "lblTotalTitulo";
+            lblTotalTitulo.Size = new Size(248, 32);
+            lblTotalTitulo.TabIndex = 13;
+            lblTotalTitulo.Text = "TOTAL";
             // 
             // label3
             // 
@@ -183,34 +188,15 @@
             lblTotal.TabIndex = 1;
             lblTotal.Text = "0.00";
             // 
-            // labelAcumulado
-            // 
-            labelAcumulado.AutoSize = true;
-            labelAcumulado.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            labelAcumulado.ForeColor = Color.White;
-            labelAcumulado.Location = new Point(48, 8);
-            labelAcumulado.Name = "labelAcumulado";
-            labelAcumulado.Size = new Size(54, 20);
-            labelAcumulado.TabIndex = 13;
-            labelAcumulado.Text = "TOTAL";
-            // 
-            // panel2
-            // 
-            panel2.Controls.Add(labelAcumulado);
-            panel2.Location = new Point(933, 45);
-            panel2.Margin = new Padding(3, 4, 3, 4);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(248, 35);
-            panel2.TabIndex = 15;
-            // 
             // cmbClientes
             // 
             cmbClientes.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbClientes.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cmbClientes.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cmbClientes.FormattingEnabled = true;
-            cmbClientes.Location = new Point(211, 114);
+            cmbClientes.Location = new Point(204, 65);
             cmbClientes.Name = "cmbClientes";
-            cmbClientes.Size = new Size(290, 28);
+            cmbClientes.Size = new Size(290, 36);
             cmbClientes.TabIndex = 16;
             // 
             // IdProducto
@@ -218,14 +204,8 @@
             IdProducto.HeaderText = "Codigo";
             IdProducto.MinimumWidth = 6;
             IdProducto.Name = "IdProducto";
+            IdProducto.Visible = false;
             IdProducto.Width = 104;
-            // 
-            // Cantidad
-            // 
-            Cantidad.HeaderText = "Cantidad";
-            Cantidad.MinimumWidth = 6;
-            Cantidad.Name = "Cantidad";
-            Cantidad.Width = 118;
             // 
             // Producto
             // 
@@ -233,6 +213,13 @@
             Producto.MinimumWidth = 6;
             Producto.Name = "Producto";
             Producto.Width = 120;
+            // 
+            // Cantidad
+            // 
+            Cantidad.HeaderText = "Cantidad";
+            Cantidad.MinimumWidth = 6;
+            Cantidad.Name = "Cantidad";
+            Cantidad.Width = 118;
             // 
             // Marca
             // 
@@ -279,14 +266,12 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(39, 39, 58);
-            ClientSize = new Size(1264, 844);
+            ClientSize = new Size(1260, 844);
             Controls.Add(cmbClientes);
-            Controls.Add(panel2);
             Controls.Add(panel1);
             Controls.Add(lblCliente);
             Controls.Add(btnGuardar);
             Controls.Add(btnLimpiar);
-            Controls.Add(labelTablaIngresoVentas);
             Controls.Add(dgvProductos);
             Font = new Font("Segoe UI", 9F);
             Margin = new Padding(3, 4, 3, 4);
@@ -296,8 +281,6 @@
             ((System.ComponentModel.ISupportInitialize)dgvProductos).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            panel2.ResumeLayout(false);
-            panel2.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -306,19 +289,17 @@
 
         private DataGridView dgvProductos;
         private DataGridViewTextBoxColumn acumulado;
-        private Label labelTablaIngresoVentas;
         private Button btnLimpiar;
         private Button btnGuardar;
         private Label lblCliente;
         private Panel panel1;
         private Label label3;
-        private Label labelAcumulado;
+        private Label lblTotalTitulo;
         private Label lblTotal;
-        private Panel panel2;
         private ComboBox cmbClientes;
         private DataGridViewTextBoxColumn IdProducto;
-        private DataGridViewTextBoxColumn Cantidad;
         private DataGridViewTextBoxColumn Producto;
+        private DataGridViewTextBoxColumn Cantidad;
         private DataGridViewTextBoxColumn Marca;
         private DataGridViewTextBoxColumn Stock;
         private DataGridViewTextBoxColumn PrecioCompra;
