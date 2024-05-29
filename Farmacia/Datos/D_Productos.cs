@@ -7,18 +7,16 @@ namespace Farmacia.Datos
 {
     public class D_Productos
     {
-        public static DataTable Listar()
+        public static List<Producto> Listar()
         {
-            DataTable tabla = new();
+            List<Producto> productos = [];
             string query = """
-                SELECT p.id_producto, m.id_marca, m.nombre marca, p.nombre producto, p.precio_compra, 
-                p.precio_venta, p.stock, p.stock_minimo, p.estado
-                FROM producto p
-                INNER JOIN marca m ON p.id_marca = m.id_marca
-                WHERE p.estado = TRUE;
-                """;
-
-            Console.WriteLine(query);
+            SELECT p.id_producto, m.id_marca, m.nombre marca, p.nombre producto, p.precio_compra, 
+            p.precio_venta, p.stock, p.stock_minimo, p.estado
+            FROM producto p
+            INNER JOIN marca m ON p.id_marca = m.id_marca
+            WHERE p.estado = TRUE;
+            """;
 
             try
             {
@@ -26,14 +24,33 @@ namespace Farmacia.Datos
                 using NpgsqlConnection conn = conexion.AbrirConexion()!;
                 using NpgsqlCommand comando = new(query, conn);
                 using NpgsqlDataReader leer = comando.ExecuteReader();
-                tabla.Load(leer);
 
-                return tabla;
+                while (leer.Read())
+                {
+                    Producto producto = new()
+                    {
+                        IdProducto = leer.GetInt32(leer.GetOrdinal("id_producto")),
+                        Marca = new Marca
+                        {
+                            IdMarca = leer.GetInt32(leer.GetOrdinal("id_marca")),
+                            Nombre = leer.GetString(leer.GetOrdinal("marca"))
+                        },
+                        Nombre = leer.GetString(leer.GetOrdinal("producto")),
+                        PrecioCompra = leer.GetDecimal(leer.GetOrdinal("precio_compra")),
+                        PrecioVenta = leer.GetDecimal(leer.GetOrdinal("precio_venta")),
+                        Stock = leer.GetInt32(leer.GetOrdinal("stock")),
+                        StockMinimo = leer.GetInt32(leer.GetOrdinal("stock_minimo"))
+                    };
+
+                    productos.Add(producto);
+                }
             }
             catch (NpgsqlException ex)
             {
                 throw new NpgsqlException("Error al obtener todos los registros de la base de datos.", ex);
             }
+
+            return productos;
         }
 
         public static Producto? BuscarPorId(int idProducto)
@@ -85,7 +102,62 @@ namespace Farmacia.Datos
             return null;
         }
 
-        public static DataTable BuscarPorIdNombreMarca(string termino)
+        public static List<Producto> BuscarPorIdNombreMarca(string termino)
+        {
+            List<Producto> productos = [];
+            bool isNumeric = int.TryParse(termino, out int productId);
+            string query = @"
+                SELECT p.id_producto, m.id_marca, m.nombre AS marca, p.nombre AS producto, 
+                       p.precio_compra, p.precio_venta, p.stock, p.stock_minimo, p.estado
+                FROM producto p
+                INNER JOIN marca m ON p.id_marca = m.id_marca
+                WHERE p.estado = TRUE
+                AND (
+                    (@IsNumeric AND p.id_producto = @ProductId)
+                    OR (p.nombre ILIKE '%' || @InputQuery || '%')
+                    OR (m.nombre ILIKE '%' || @InputQuery || '%')
+                );";
+
+            try
+            {
+                ConexionDB conexion = new();
+                using NpgsqlConnection conn = conexion.AbrirConexion()!;
+                using NpgsqlCommand cmd = new(query, conn);
+                cmd.Parameters.AddWithValue("@IsNumeric", isNumeric);
+                cmd.Parameters.AddWithValue("@ProductId", productId);
+                cmd.Parameters.AddWithValue("@InputQuery", termino.ToLower());
+
+                using NpgsqlDataReader leer = cmd.ExecuteReader();
+                while (leer.Read())
+                {
+                    Producto producto = new()
+                    {
+                        IdProducto = leer.GetInt32(leer.GetOrdinal("id_producto")),
+                        Marca = new Marca
+                        {
+                            IdMarca = leer.GetInt32(leer.GetOrdinal("id_marca")),
+                            Nombre = leer.GetString(leer.GetOrdinal("marca"))
+                        },
+                        Nombre = leer.GetString(leer.GetOrdinal("producto")),
+                        PrecioCompra = leer.GetDecimal(leer.GetOrdinal("precio_compra")),
+                        PrecioVenta = leer.GetDecimal(leer.GetOrdinal("precio_venta")),
+                        Stock = leer.GetInt32(leer.GetOrdinal("stock")),
+                        StockMinimo = leer.GetInt32(leer.GetOrdinal("stock_minimo"))
+                    };
+
+                    productos.Add(producto);
+                }
+            }
+            catch (NpgsqlException ex)
+            {
+                throw new NpgsqlException("Error al buscar los registros en la base de datos.", ex);
+            }
+
+            return productos;
+        }
+
+
+        public static DataTable BuscarPorIdNombreMarcaTemp(string termino)
         {
             DataTable tabla = new();
             bool isNumeric = int.TryParse(termino, out int productId);
@@ -111,7 +183,7 @@ namespace Farmacia.Datos
                 cmd.Parameters.AddWithValue("@InputQuery", termino.ToLower());
                 using NpgsqlDataReader leer = cmd.ExecuteReader();
                 tabla.Load(leer);
-                
+
                 return tabla;
             }
             catch (NpgsqlException ex)

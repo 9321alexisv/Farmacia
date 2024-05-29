@@ -18,7 +18,7 @@ namespace Farmacia.Presentacion
 
         private void txtBusqueda_TextChanged(object sender, EventArgs e)
         {
-            DataTable originalProducts = D_Productos.BuscarPorIdNombreMarca(txtBusqueda.Text);
+            DataTable originalProducts = D_Productos.BuscarPorIdNombreMarcaTemp(txtBusqueda.Text);
             DataTable displayProducts = new DataTable();
 
             // Copiar las columnas originales

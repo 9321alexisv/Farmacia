@@ -14,6 +14,7 @@ namespace VistasFarmacia.Forms
             dgvProductos.CellFormatting += dgvProductos_CellFormatting!;
         }
 
+        #region Load
         private void FormInventario_Load(object sender, EventArgs e)
         {
             LoadTheme();
@@ -34,19 +35,41 @@ namespace VistasFarmacia.Forms
                 }
             }
             labelTablaInventario.ForeColor = ThemeColor.SecondaryColor;
+            lblTotalTitulo.BackColor = ThemeColor.SecondaryColor;
             dgvProductos.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dgvProductos.ColumnHeadersDefaultCellStyle.BackColor = ThemeColor.SecondaryColor;
             dgvProductos.RowHeadersDefaultCellStyle.ForeColor = Color.White;
             dgvProductos.RowHeadersDefaultCellStyle.BackColor = ThemeColor.PrimaryColor;
-            panel2.BackColor = ThemeColor.SecondaryColor;
         }
-
+        
+        #endregion
+        
         #region Datos
         public void ListarProductos()
         {
             try
             {
-                dgvProductos.DataSource = D_Productos.Listar();
+                //dgvProductos.DataSource = D_Productos.Listar();
+                List<Producto> productos = D_Productos.Listar();
+
+                // Limpiar el DataGridView
+                dgvProductos.Rows.Clear();
+
+                // Añadir filas con datos de productos
+                foreach (var producto in productos)
+                {
+                    int rowIndex = dgvProductos.Rows.Add();
+                    DataGridViewRow row = dgvProductos.Rows[rowIndex];
+
+                    row.Cells["IdProducto"].Value = producto.IdProducto;
+                    row.Cells["Producto"].Value = producto.Nombre;
+                    row.Cells["IdMarca"].Value = producto.Marca.IdMarca;
+                    row.Cells["Marca"].Value = producto.Marca.Nombre;
+                    row.Cells["PrecioCompra"].Value = producto.PrecioCompra;
+                    row.Cells["PrecioVenta"].Value = producto.PrecioVenta;
+                    row.Cells["Stock"].Value = producto.Stock;
+                    row.Cells["StockMinimo"].Value = producto.StockMinimo;
+                }
             }
             catch (Exception ex)
             {
@@ -73,19 +96,19 @@ namespace VistasFarmacia.Forms
 
             Marca marca = new()
             {
-                IdMarca = Convert.ToInt32(fila.Cells["id_marca"].Value),
-                Nombre = Convert.ToString(fila.Cells["marca"].Value) ?? "",
+                IdMarca = Convert.ToInt32(fila.Cells["IdMarca"].Value),
+                Nombre = Convert.ToString(fila.Cells["Marca"].Value) ?? "",
             };
 
             Producto producto = new()
             {
-                IdProducto = Convert.ToInt32(fila.Cells["id_producto"].Value),
+                IdProducto = Convert.ToInt32(fila.Cells["IdProducto"].Value),
                 Marca = marca,
-                Nombre = Convert.ToString(fila.Cells["producto"].Value)!,
-                PrecioCompra = Convert.ToDecimal(fila.Cells["precio_compra"].Value),
-                PrecioVenta = Convert.ToDecimal(fila.Cells["precio_venta"].Value),
-                Stock = Convert.ToInt32(fila.Cells["stock"].Value),
-                StockMinimo = Convert.ToInt32(fila.Cells["stock_minimo"].Value),
+                Nombre = Convert.ToString(fila.Cells["Producto"].Value)!,
+                PrecioCompra = Convert.ToDecimal(fila.Cells["PrecioCompra"].Value),
+                PrecioVenta = Convert.ToDecimal(fila.Cells["PrecioVenta"].Value),
+                Stock = Convert.ToInt32(fila.Cells["Stock"].Value),
+                StockMinimo = Convert.ToInt32(fila.Cells["StockMinimo"].Value),
             };
 
             FormNuevoProducto formNuevoProducto = new(producto);
@@ -100,7 +123,7 @@ namespace VistasFarmacia.Forms
 
             // Consultar si eliminar o no
             DialogResult consulta = MessageBox.Show(
-                "Borrar el producto: " + dgvProductos.CurrentRow.Cells["producto"].Value,
+                "Borrar el producto: " + dgvProductos.CurrentRow.Cells["Producto"].Value,
                 "Confirmar Eliminación",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question);
@@ -108,7 +131,7 @@ namespace VistasFarmacia.Forms
             if (consulta != DialogResult.Yes) return;
 
             // Si se confirma la eliminacion
-            int productoSeleccionado = Convert.ToInt32(dgvProductos.CurrentRow.Cells["id_producto"].Value);
+            int productoSeleccionado = Convert.ToInt32(dgvProductos.CurrentRow.Cells["IdProducto"].Value);
             bool resultado = D_Productos.Eliminar(productoSeleccionado);
             if (resultado)
             {
@@ -153,8 +176,8 @@ namespace VistasFarmacia.Forms
 
             foreach (DataGridViewRow row in dgvProductos.Rows)
             {
-                decimal stock = Convert.ToDecimal(row.Cells["stock"].Value);
-                decimal precioCompra = Convert.ToDecimal(row.Cells["precio_compra"].Value);
+                decimal stock = Convert.ToDecimal(row.Cells["Stock"].Value);
+                decimal precioCompra = Convert.ToDecimal(row.Cells["PrecioCompra"].Value);
 
                 total += stock * precioCompra;
             }
@@ -167,8 +190,8 @@ namespace VistasFarmacia.Forms
         private void dgvProductos_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             // Indices de las columnas de "stock" y "stock_minimo"
-            int stockColumnIndex = dgvProductos.Columns["stock"].Index;
-            int stockMinimoColumnIndex = dgvProductos.Columns["stock_minimo"].Index;
+            int stockColumnIndex = dgvProductos.Columns["Stock"].Index;
+            int stockMinimoColumnIndex = dgvProductos.Columns["StockMinimo"].Index;
 
             // Verificar que los índices de las columnas sean válidos y que la fila actual sea válida
             if (e.RowIndex >= 0 && e.ColumnIndex == stockColumnIndex)
@@ -206,7 +229,27 @@ namespace VistasFarmacia.Forms
         {
             try
             {
-                dgvProductos.DataSource = D_Productos.BuscarPorIdNombreMarca(txtQuery.Text);
+                List<Producto> productos = D_Productos.BuscarPorIdNombreMarca(txtQuery.Text);
+
+                // Limpiar el DataGridView
+                dgvProductos.Rows.Clear();
+
+                // Añadir filas con datos de productos
+                foreach (var producto in productos)
+                {
+                    int rowIndex = dgvProductos.Rows.Add();
+                    DataGridViewRow row = dgvProductos.Rows[rowIndex];
+
+                    row.Cells["IdProducto"].Value = producto.IdProducto;
+                    row.Cells["Producto"].Value = producto.Nombre;
+                    row.Cells["IdMarca"].Value = producto.Marca.IdMarca;
+                    row.Cells["Marca"].Value = producto.Marca.Nombre;
+                    row.Cells["PrecioCompra"].Value = producto.PrecioCompra;
+                    row.Cells["PrecioVenta"].Value = producto.PrecioVenta;
+                    row.Cells["Stock"].Value = producto.Stock;
+                    row.Cells["StockMinimo"].Value = producto.StockMinimo;
+                }
+
                 CalcularTotal();
             }
             catch (Exception ex)
