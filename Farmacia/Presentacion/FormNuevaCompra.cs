@@ -1,10 +1,7 @@
 ﻿
-using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using Farmacia.Datos;
 using Farmacia.Entidad;
 using Farmacia.Presentacion;
-using Irony.Parsing;
-using System.Data;
 
 namespace VistasFarmacia.Forms
 {
@@ -64,6 +61,8 @@ namespace VistasFarmacia.Forms
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            EliminarFilasVacias();
+
             if (dgvProductos.RowCount <= 1)
             {
                 MessageBox.Show("Ningun producto agregado.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -109,7 +108,7 @@ namespace VistasFarmacia.Forms
                 {
                     MessageBox.Show("No se encontró el producto con el código ingresado.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-                    dgvProductos.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "";
+                    dgvProductos.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = null;
                     dgvProductos.Rows.RemoveAt(e.RowIndex);
                     return;
                 }
@@ -120,7 +119,7 @@ namespace VistasFarmacia.Forms
             if (dgvProductos.Columns[e.ColumnIndex].Name == "Cantidad")
             {
                 // Verificar que no se ingrese texto en la cantidad
-                if (!int.TryParse(dgvProductos.Rows[e.RowIndex].Cells["Cantidad"].Value.ToString(), result: out _))
+                if (!int.TryParse(Convert.ToString(dgvProductos.Rows[e.RowIndex].Cells["Cantidad"].Value), result: out _))
                 {
                     dgvProductos.Rows[e.RowIndex].Cells["Cantidad"].Value = 1;
                 }
@@ -128,7 +127,8 @@ namespace VistasFarmacia.Forms
                 // Si se ingresa una cantidad y no hay producto
                 if (dgvProductos.Rows[e.RowIndex].Cells["IdProducto"].Value == null)
                 {
-                    dgvProductos.Rows.RemoveAt(e.RowIndex);
+                    //dgvProductos.Rows.RemoveAt(e.RowIndex);
+                    dgvProductos.Rows[e.RowIndex].Cells["Cantidad"].Value = "";
                 }
             }
 
@@ -215,6 +215,31 @@ namespace VistasFarmacia.Forms
             dgvProductos.Rows.Clear();
         }
 
+        private void EliminarFilasVacias()
+        {
+            // Terminar cualquier edición en curso en el DataGridView
+            if (dgvProductos.IsCurrentCellInEditMode) dgvProductos.EndEdit();
+
+            // Obtener el índice de la columna "IdProducto"
+            int columnaIdProducto = dgvProductos.Columns["IdProducto"].Index;
+
+            // Recorrer las filas en orden inverso para evitar problemas al eliminar filas
+            for (int i = dgvProductos.Rows.Count - 1; i >= 0; i--)
+            {
+                // Saltar la nueva fila sin confirmar
+                if (dgvProductos.Rows[i].IsNewRow) continue;
+
+                // Verificar si la celda de la columna "IdProducto" está vacía
+                if (dgvProductos.Rows[i].Cells[columnaIdProducto].Value == null ||
+                    string.IsNullOrWhiteSpace(dgvProductos.Rows[i].Cells[columnaIdProducto].Value.ToString()))
+                {
+                    dgvProductos.Rows.RemoveAt(i);
+                }
+            }
+
+            // Cancelar cualquier edición en curso para la fila nueva después de la eliminación
+            dgvProductos.CancelEdit();
+        }
         #endregion
     }
 }

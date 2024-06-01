@@ -2,7 +2,6 @@
 using Farmacia.Datos;
 using Farmacia.Entidad;
 using Farmacia.Presentacion;
-using System.Data;
 
 namespace VistasFarmacia.Forms
 {
@@ -61,6 +60,8 @@ namespace VistasFarmacia.Forms
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            EliminarFilasVacias();
+
             // Verificar tabla vacia
             if (dgvProductos.RowCount <= 1)
             {
@@ -139,8 +140,8 @@ namespace VistasFarmacia.Forms
                 // Si se ingresa una cantidad y no hay producto
                 if (dgvProductos.Rows[e.RowIndex].Cells["IdProducto"].Value == null)
                 {
-                    //if (dgvProductos.Columns[e.ColumnIndex].Name == "Producto") return;
-                    dgvProductos.Rows.RemoveAt(e.RowIndex);
+                    dgvProductos.Rows[e.RowIndex].Cells["Cantidad"].Value = null;
+                    //dgvProductos.Rows.RemoveAt(e.RowIndex);
                 }
             }
 
@@ -239,6 +240,31 @@ namespace VistasFarmacia.Forms
             return total;
         }
 
+        private void EliminarFilasVacias()
+        {
+            // Terminar cualquier edición en curso en el DataGridView
+            if (dgvProductos.IsCurrentCellInEditMode) dgvProductos.EndEdit();
+
+            // Obtener el índice de la columna "IdProducto"
+            int columnaIdProducto = dgvProductos.Columns["IdProducto"].Index;
+
+            // Recorrer las filas en orden inverso para evitar problemas al eliminar filas
+            for (int i = dgvProductos.Rows.Count - 1; i >= 0; i--)
+            {
+                // Saltar la nueva fila sin confirmar
+                if (dgvProductos.Rows[i].IsNewRow) continue;
+
+                // Verificar si la celda de la columna "IdProducto" está vacía
+                if (dgvProductos.Rows[i].Cells[columnaIdProducto].Value == null ||
+                    string.IsNullOrWhiteSpace(dgvProductos.Rows[i].Cells[columnaIdProducto].Value.ToString()))
+                {
+                    dgvProductos.Rows.RemoveAt(i);
+                }
+            }
+
+            // Cancelar cualquier edición en curso para la fila nueva después de la eliminación
+            dgvProductos.CancelEdit();
+        }
         #endregion
     }
 }
