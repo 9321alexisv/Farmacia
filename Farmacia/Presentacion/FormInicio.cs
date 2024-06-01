@@ -10,6 +10,7 @@ namespace VistasFarmacia
         private readonly Random random;
         private int tempIndex;
         private Form activeForm;
+        private Dictionary<string, Form> openForms = [];
 
         //Constructor
         public FormInicio()
@@ -68,17 +69,32 @@ namespace VistasFarmacia
 
         private void OpenChildForm(Form childForm, object btnSender)
         {
-            activeForm?.Close();
+            // Ocultar el formulario activo
+            activeForm?.Hide();
+            
+            string formType = childForm.GetType().Name;
+
+            // Verificar si el formulario ya está abierto
+            if (openForms.TryGetValue(formType, out Form? value))
+            {
+                activeForm = value;
+            }
+            else
+            {
+                // Configuración del nuevo formulario hijo
+                childForm.TopLevel = false;
+                childForm.FormBorderStyle = FormBorderStyle.None;
+                childForm.Dock = DockStyle.Fill;
+                this.panelDesktopPane.Controls.Add(childForm);
+                this.panelDesktopPane.Tag = childForm;
+                openForms[formType] = childForm;
+                activeForm = childForm;
+            }
+
             ActivateButton(btnSender);
-            activeForm = childForm;
-            childForm.TopLevel = false;
-            childForm.FormBorderStyle = FormBorderStyle.None;
-            childForm.Dock = DockStyle.Fill;
-            this.panelDesktopPane.Controls.Add(childForm);
-            this.panelDesktopPane.Tag = childForm;
-            childForm.BringToFront();
-            childForm.Show();
-            labelTitle.Text = childForm.Text;
+            activeForm.BringToFront();
+            activeForm.Show();
+            labelTitle.Text = activeForm.Text;
         }
 
         private void btnVentas_Click(object sender, EventArgs e)
