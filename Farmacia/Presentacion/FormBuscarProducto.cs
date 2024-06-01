@@ -37,6 +37,12 @@ namespace Farmacia.Presentacion
         {
             if (e.KeyCode == Keys.Escape) this.Close();
             if (e.KeyCode == Keys.Down) listBoxProductos.Focus();
+
+            if (e.KeyCode == Keys.Enter && listBoxProductos.SelectedItem != null)
+            {
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
         }
 
         private void listBoxProductos_KeyDown(object sender, KeyEventArgs e)
