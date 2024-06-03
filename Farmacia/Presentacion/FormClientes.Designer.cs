@@ -61,6 +61,8 @@
             dgvClientes.AllowUserToAddRows = false;
             dgvClientes.AllowUserToDeleteRows = false;
             dgvClientes.AllowUserToOrderColumns = true;
+            dgvClientes.AllowUserToResizeRows = false;
+            dgvClientes.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvClientes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvClientes.BackgroundColor = Color.FromArgb(49, 49, 68);
             dgvClientes.BorderStyle = BorderStyle.None;
@@ -93,23 +95,26 @@
             dgvClientes.RowHeadersVisible = false;
             dgvClientes.RowHeadersWidth = 51;
             dgvClientes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvClientes.Size = new Size(826, 556);
+            dgvClientes.Size = new Size(787, 556);
             dgvClientes.TabIndex = 1;
             // 
             // txtNombre
             // 
-            txtNombre.Location = new Point(1061, 167);
+            txtNombre.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            txtNombre.Font = new Font("Segoe UI", 12F);
+            txtNombre.Location = new Point(1016, 177);
             txtNombre.Margin = new Padding(3, 4, 3, 4);
             txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(250, 27);
+            txtNombre.Size = new Size(317, 34);
             txtNombre.TabIndex = 5;
             // 
             // labelNombre
             // 
+            labelNombre.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             labelNombre.AutoSize = true;
             labelNombre.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             labelNombre.ForeColor = Color.White;
-            labelNombre.Location = new Point(946, 167);
+            labelNombre.Location = new Point(884, 177);
             labelNombre.Name = "labelNombre";
             labelNombre.Size = new Size(94, 28);
             labelNombre.TabIndex = 4;
@@ -117,33 +122,39 @@
             // 
             // btnGuardar
             // 
+            btnGuardar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnGuardar.BackColor = Color.LimeGreen;
+            btnGuardar.FlatAppearance.BorderColor = Color.LimeGreen;
             btnGuardar.FlatStyle = FlatStyle.Flat;
             btnGuardar.Font = new Font("Segoe UI", 12F);
             btnGuardar.Image = Farmacia.Properties.Resources.ADD;
-            btnGuardar.Location = new Point(1161, 393);
+            btnGuardar.Location = new Point(1183, 392);
             btnGuardar.Margin = new Padding(3, 4, 3, 4);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(150, 65);
             btnGuardar.TabIndex = 13;
             btnGuardar.Text = "Guardar";
             btnGuardar.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.UseVisualStyleBackColor = false;
             btnGuardar.Click += btnGuardar_Click;
             // 
             // txtTelefono
             // 
-            txtTelefono.Location = new Point(1061, 240);
+            txtTelefono.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            txtTelefono.Font = new Font("Segoe UI", 12F);
+            txtTelefono.Location = new Point(1016, 250);
             txtTelefono.Margin = new Padding(3, 4, 3, 4);
             txtTelefono.Name = "txtTelefono";
-            txtTelefono.Size = new Size(250, 27);
+            txtTelefono.Size = new Size(317, 34);
             txtTelefono.TabIndex = 15;
             // 
             // lblTelefono
             // 
+            lblTelefono.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             lblTelefono.AutoSize = true;
             lblTelefono.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lblTelefono.ForeColor = Color.White;
-            lblTelefono.Location = new Point(946, 239);
+            lblTelefono.Location = new Point(884, 249);
             lblTelefono.Name = "lblTelefono";
             lblTelefono.Size = new Size(99, 28);
             lblTelefono.TabIndex = 14;
@@ -151,18 +162,21 @@
             // 
             // txtNit
             // 
-            txtNit.Location = new Point(1061, 106);
+            txtNit.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            txtNit.Font = new Font("Segoe UI", 12F);
+            txtNit.Location = new Point(1016, 116);
             txtNit.Margin = new Padding(3, 4, 3, 4);
             txtNit.Name = "txtNit";
-            txtNit.Size = new Size(250, 27);
+            txtNit.Size = new Size(317, 34);
             txtNit.TabIndex = 17;
             // 
             // labelNit
             // 
+            labelNit.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             labelNit.AutoSize = true;
             labelNit.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             labelNit.ForeColor = Color.White;
-            labelNit.Location = new Point(946, 102);
+            labelNit.Location = new Point(884, 112);
             labelNit.Name = "labelNit";
             labelNit.Size = new Size(51, 28);
             labelNit.TabIndex = 16;
@@ -170,8 +184,12 @@
             // 
             // btnEditar
             // 
+            btnEditar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnEditar.BackColor = Color.SteelBlue;
+            btnEditar.FlatAppearance.BorderColor = Color.SteelBlue;
             btnEditar.FlatStyle = FlatStyle.Flat;
             btnEditar.Font = new Font("Segoe UI", 12F);
+            btnEditar.ForeColor = Color.WhiteSmoke;
             btnEditar.Image = Farmacia.Properties.Resources.edit;
             btnEditar.Location = new Point(287, 696);
             btnEditar.Margin = new Padding(3, 4, 3, 4);
@@ -180,13 +198,17 @@
             btnEditar.TabIndex = 18;
             btnEditar.Text = "Editar";
             btnEditar.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnEditar.UseVisualStyleBackColor = true;
+            btnEditar.UseVisualStyleBackColor = false;
             btnEditar.Click += btnEditar_Click;
             // 
             // btnEliminar
             // 
+            btnEliminar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnEliminar.BackColor = Color.Firebrick;
+            btnEliminar.FlatAppearance.BorderColor = Color.Firebrick;
             btnEliminar.FlatStyle = FlatStyle.Flat;
             btnEliminar.Font = new Font("Segoe UI", 12F);
+            btnEliminar.ForeColor = Color.White;
             btnEliminar.Image = Farmacia.Properties.Resources.borrar;
             btnEliminar.Location = new Point(53, 696);
             btnEliminar.Margin = new Padding(3, 4, 3, 4);
@@ -195,22 +217,25 @@
             btnEliminar.TabIndex = 19;
             btnEliminar.Text = "Eliminar";
             btnEliminar.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.UseVisualStyleBackColor = false;
             btnEliminar.Click += btnEliminar_Click;
             // 
             // btnCancelar
             // 
+            btnCancelar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnCancelar.BackColor = Color.Silver;
+            btnCancelar.FlatAppearance.BorderColor = Color.Silver;
             btnCancelar.FlatStyle = FlatStyle.Flat;
             btnCancelar.Font = new Font("Segoe UI", 12F);
             btnCancelar.Image = Farmacia.Properties.Resources.cleaner;
-            btnCancelar.Location = new Point(946, 393);
+            btnCancelar.Location = new Point(884, 392);
             btnCancelar.Margin = new Padding(3, 4, 3, 4);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(150, 65);
             btnCancelar.TabIndex = 20;
             btnCancelar.Text = "Cancelar";
             btnCancelar.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.UseVisualStyleBackColor = false;
             btnCancelar.Click += btnCancelar_Click;
             // 
             // FormClientes
