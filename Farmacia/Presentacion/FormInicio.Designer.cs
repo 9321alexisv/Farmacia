@@ -326,7 +326,7 @@
             Margin = new Padding(3, 4, 3, 4);
             Name = "FormInicio";
             StartPosition = FormStartPosition.Manual;
-            Text = "MENU";
+            Text = "Farmacia";
             WindowState = FormWindowState.Maximized;
             panelMenu.ResumeLayout(false);
             panelLogo.ResumeLayout(false);
