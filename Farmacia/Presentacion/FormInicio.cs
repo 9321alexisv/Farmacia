@@ -124,13 +124,12 @@ namespace VistasFarmacia
 
         private void btnHome_Click(object sender, EventArgs e)
         {
-            activeForm?.Close();
-            Reset();
-        }
+            // Cerrar todos los formularios abiertos y limpiar el diccionario
+            foreach (var form in openForms.Values) form.Close();
+            openForms.Clear();
 
-        private void Reset()
-        {
             DisableButton();
+
             labelTitle.Text = "INICIO";
             panelTitleBar.BackColor = Color.FromArgb(51, 51, 76);
             panelLogo.BackColor = Color.FromArgb(39, 39, 58);

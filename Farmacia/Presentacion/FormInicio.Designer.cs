@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormInicio));
             panelMenu = new Panel();
+            btnMarcas = new Button();
             btnProveedores = new Button();
             btnClientes = new Button();
             btnInventario = new Button();
@@ -43,7 +45,6 @@
             labelTitle = new Label();
             panelDesktopPane = new Panel();
             pictureBox1 = new PictureBox();
-            btnMarcas = new Button();
             panelMenu.SuspendLayout();
             panelLogo.SuspendLayout();
             panelTitleBar.SuspendLayout();
@@ -69,6 +70,26 @@
             panelMenu.Name = "panelMenu";
             panelMenu.Size = new Size(251, 792);
             panelMenu.TabIndex = 0;
+            // 
+            // btnMarcas
+            // 
+            btnMarcas.Dock = DockStyle.Top;
+            btnMarcas.FlatAppearance.BorderSize = 0;
+            btnMarcas.FlatStyle = FlatStyle.Flat;
+            btnMarcas.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnMarcas.ForeColor = SystemColors.ControlLightLight;
+            btnMarcas.Image = Farmacia.Properties.Resources.clients;
+            btnMarcas.ImageAlign = ContentAlignment.MiddleLeft;
+            btnMarcas.Location = new Point(0, 660);
+            btnMarcas.Margin = new Padding(3, 4, 3, 4);
+            btnMarcas.Name = "btnMarcas";
+            btnMarcas.Padding = new Padding(11, 0, 0, 0);
+            btnMarcas.Size = new Size(251, 80);
+            btnMarcas.TabIndex = 8;
+            btnMarcas.Text = "MARCAS";
+            btnMarcas.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnMarcas.UseVisualStyleBackColor = true;
+            btnMarcas.Click += btnMarcas_Click;
             // 
             // btnProveedores
             // 
@@ -291,26 +312,6 @@
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             // 
-            // btnMarcas
-            // 
-            btnMarcas.Dock = DockStyle.Top;
-            btnMarcas.FlatAppearance.BorderSize = 0;
-            btnMarcas.FlatStyle = FlatStyle.Flat;
-            btnMarcas.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            btnMarcas.ForeColor = SystemColors.ControlLightLight;
-            btnMarcas.Image = Farmacia.Properties.Resources.clients;
-            btnMarcas.ImageAlign = ContentAlignment.MiddleLeft;
-            btnMarcas.Location = new Point(0, 660);
-            btnMarcas.Margin = new Padding(3, 4, 3, 4);
-            btnMarcas.Name = "btnMarcas";
-            btnMarcas.Padding = new Padding(11, 0, 0, 0);
-            btnMarcas.Size = new Size(251, 80);
-            btnMarcas.TabIndex = 8;
-            btnMarcas.Text = "MARCAS";
-            btnMarcas.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnMarcas.UseVisualStyleBackColor = true;
-            btnMarcas.Click += btnMarcas_Click;
-            // 
             // FormInicio
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -320,6 +321,7 @@
             Controls.Add(panelDesktopPane);
             Controls.Add(panelTitleBar);
             Controls.Add(panelMenu);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 4, 3, 4);
             Name = "FormInicio";
             StartPosition = FormStartPosition.Manual;
