@@ -22,20 +22,18 @@ namespace VistasFarmacia.Forms
 
         private void LoadTheme()
         {
-            foreach (Control btns in this.Controls)
-            {
-                if (btns.GetType() == typeof(Button))
-                {
-                    Button btn = (Button)btns;
-                    btn.BackColor = ThemeColor.PrimaryColor;
-                    btn.ForeColor = Color.White;
-                    btn.FlatAppearance.BorderColor = ThemeColor.SecondaryColor;
-                }
-            }
+            //foreach (Control btns in this.Controls)
+            //{
+            //    if (btns.GetType() == typeof(Button))
+            //    {
+            //        Button btn = (Button)btns;
+            //        btn.BackColor = ThemeColor.PrimaryColor;
+            //        btn.ForeColor = Color.White;
+            //        btn.FlatAppearance.BorderColor = ThemeColor.SecondaryColor;
+            //    }
+            //}
 
             labelNombre.ForeColor = ThemeColor.SecondaryColor;
-            labelNit.ForeColor = ThemeColor.SecondaryColor;
-            lblTelefono.ForeColor = ThemeColor.SecondaryColor;
 
             dgvMarcas.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dgvMarcas.ColumnHeadersDefaultCellStyle.BackColor = ThemeColor.SecondaryColor;
@@ -64,9 +62,9 @@ namespace VistasFarmacia.Forms
         private void btnGuardar_Click(object sender, EventArgs e)
         {
 
-            if (txtNombre.TextLength < 1 || txtTelefono.TextLength < 1 || txtRepresentante.TextLength < 1)
+            if (txtNombre.TextLength < 1 )
             {
-                MessageBox.Show("Todos los campos son obligatorios", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("El nombre es obligatorio", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
@@ -76,8 +74,6 @@ namespace VistasFarmacia.Forms
                 {
                     IdMarca = idMarca,
                     Nombre = txtNombre.Text,
-                    Telefono = txtTelefono.Text,
-                    Representante = txtRepresentante.Text
                 };
 
                 // Nuevo
@@ -129,8 +125,6 @@ namespace VistasFarmacia.Forms
         {
             idMarca = 0;
             txtNombre.Clear();
-            txtTelefono.Clear();
-            txtRepresentante.Clear();
         }
 
         public void LlenarCampos(DataGridViewRow fila)
@@ -138,8 +132,6 @@ namespace VistasFarmacia.Forms
             if (fila == null) return;
             idMarca = Convert.ToInt32(fila.Cells["IdMarca"].Value);
             txtNombre.Text = Convert.ToString(fila.Cells["Nombre"].Value);
-            txtTelefono.Text = Convert.ToString(fila.Cells["Telefono"].Value);
-            txtRepresentante.Text = Convert.ToString(fila.Cells["Representante"].Value);
         }
 
         public bool VerificarFilaSeleccionada()

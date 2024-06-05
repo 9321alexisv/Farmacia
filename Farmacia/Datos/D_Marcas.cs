@@ -23,8 +23,6 @@ namespace Farmacia.Datos
                     {
                         IdMarca = leer.GetInt32(leer.GetOrdinal("id_marca")),
                         Nombre = leer.GetString(leer.GetOrdinal("nombre")),
-                        Telefono = leer.GetString(leer.GetOrdinal("telefono")),
-                        Representante = leer.GetString(leer.GetOrdinal("representante")),
                         Estado = leer.GetBoolean(leer.GetOrdinal("estado")),
                     };
 
@@ -45,11 +43,9 @@ namespace Farmacia.Datos
             {
                 ConexionDB conexion = new();
                 using NpgsqlConnection conn = conexion.AbrirConexion()!;
-                using NpgsqlCommand cmd = new("INSERT INTO marca (nombre, telefono, representante) VALUES (@nombre, @telefono, @representante)", conn);
+                using NpgsqlCommand cmd = new("INSERT INTO marca (nombre) VALUES (@nombre)", conn);
 
                 cmd.Parameters.AddWithValue("@nombre", marca.Nombre);
-                cmd.Parameters.AddWithValue("@telefono", marca.Telefono ?? "");
-                cmd.Parameters.AddWithValue("@representante", marca.Representante ?? "");
 
                 int filasAfectadas = cmd.ExecuteNonQuery();
                 return filasAfectadas > 0;
@@ -62,7 +58,7 @@ namespace Farmacia.Datos
 
         public static bool Editar(Marca marca)
         {
-            string query = "UPDATE marca SET nombre = @nombre, telefono = @telefono, representante = @representante WHERE id_marca = @id_marca";
+            string query = "UPDATE marca SET nombre = @nombre WHERE id_marca = @id_marca";
 
             try
             {
@@ -71,8 +67,6 @@ namespace Farmacia.Datos
                 using NpgsqlCommand cmd = new(query, conn);
 
                 cmd.Parameters.AddWithValue("@nombre", marca.Nombre);
-                cmd.Parameters.AddWithValue("@telefono", marca.Telefono ?? "");
-                cmd.Parameters.AddWithValue("@representante", marca.Representante ?? "");
                 cmd.Parameters.AddWithValue("@id_marca", marca.IdMarca);
 
                 int filasAfectas = cmd.ExecuteNonQuery();

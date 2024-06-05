@@ -29,8 +29,6 @@ CREATE TABLE cliente (
 CREATE TABLE marca (
     id_marca SERIAL,
     nombre VARCHAR(100) NOT NULL,
-    telefono VARCHAR(15),
-    representante VARCHAR(100),
     estado BOOLEAN DEFAULT TRUE,
     CONSTRAINT pk_marca PRIMARY KEY (id_marca)
 );
