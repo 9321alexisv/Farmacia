@@ -122,21 +122,6 @@ namespace VistasFarmacia
             OpenChildForm(new Forms.FormInventario(), sender);
         }
 
-        private void btnHome_Click(object sender, EventArgs e)
-        {
-            // Cerrar todos los formularios abiertos y limpiar el diccionario
-            foreach (var form in openForms.Values) form.Close();
-            openForms.Clear();
-
-            DisableButton();
-
-            labelTitle.Text = "INICIO";
-            panelTitleBar.BackColor = Color.FromArgb(51, 51, 76);
-            panelLogo.BackColor = Color.FromArgb(39, 39, 58);
-            currentButton = null;
-            btnHome.Visible = false;
-        }
-
         private void btnClientes_Click(object sender, EventArgs e)
         {
             OpenChildForm(new Forms.FormClientes(), sender);
