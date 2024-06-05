@@ -48,6 +48,7 @@
             dgvMarcas.AllowUserToAddRows = false;
             dgvMarcas.AllowUserToDeleteRows = false;
             dgvMarcas.AllowUserToOrderColumns = true;
+            dgvMarcas.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dgvMarcas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvMarcas.BackgroundColor = Color.FromArgb(49, 49, 68);
             dgvMarcas.BorderStyle = BorderStyle.None;
@@ -77,6 +78,7 @@
             // 
             // txtNombre
             // 
+            txtNombre.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             txtNombre.Location = new Point(1119, 25);
             txtNombre.Margin = new Padding(4, 6, 4, 6);
             txtNombre.Name = "txtNombre";
@@ -85,6 +87,7 @@
             // 
             // labelNombre
             // 
+            labelNombre.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             labelNombre.AutoSize = true;
             labelNombre.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             labelNombre.ForeColor = Color.White;
@@ -97,6 +100,7 @@
             // 
             // btnGuardar
             // 
+            btnGuardar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnGuardar.FlatStyle = FlatStyle.Flat;
             btnGuardar.Image = Farmacia.Properties.Resources.ADD;
             btnGuardar.Location = new Point(1326, 318);
@@ -111,6 +115,7 @@
             // 
             // txtTelefono
             // 
+            txtTelefono.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             txtTelefono.Location = new Point(1119, 92);
             txtTelefono.Margin = new Padding(4, 6, 4, 6);
             txtTelefono.Name = "txtTelefono";
@@ -119,6 +124,7 @@
             // 
             // lblTelefono
             // 
+            lblTelefono.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             lblTelefono.AutoSize = true;
             lblTelefono.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lblTelefono.ForeColor = Color.White;
@@ -131,6 +137,7 @@
             // 
             // txtRepresentante
             // 
+            txtRepresentante.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             txtRepresentante.Location = new Point(1195, 166);
             txtRepresentante.Margin = new Padding(4, 6, 4, 6);
             txtRepresentante.Name = "txtRepresentante";
@@ -139,6 +146,7 @@
             // 
             // labelNit
             // 
+            labelNit.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             labelNit.AutoSize = true;
             labelNit.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             labelNit.ForeColor = Color.White;
@@ -151,6 +159,7 @@
             // 
             // btnEditar
             // 
+            btnEditar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             btnEditar.FlatStyle = FlatStyle.Flat;
             btnEditar.Image = Farmacia.Properties.Resources.edit;
             btnEditar.Location = new Point(256, 597);
@@ -165,6 +174,7 @@
             // 
             // btnEliminar
             // 
+            btnEliminar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             btnEliminar.FlatStyle = FlatStyle.Flat;
             btnEliminar.Image = Farmacia.Properties.Resources.borrar;
             btnEliminar.Location = new Point(61, 597);
@@ -179,6 +189,7 @@
             // 
             // btnCancelar
             // 
+            btnCancelar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnCancelar.FlatStyle = FlatStyle.Flat;
             btnCancelar.Image = Farmacia.Properties.Resources.cleaner;
             btnCancelar.Location = new Point(961, 318);
