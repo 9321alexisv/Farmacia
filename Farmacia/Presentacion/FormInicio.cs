@@ -17,7 +17,6 @@ namespace VistasFarmacia
         {
             InitializeComponent();
             random = new Random();
-            btnHome.Visible = false;
         }
 
         //Methods
@@ -49,7 +48,6 @@ namespace VistasFarmacia
                     panelLogo.BackColor = ThemeColor.ChangeColorBrightness(color, -0.3);
                     ThemeColor.PrimaryColor = color;
                     ThemeColor.SecondaryColor = ThemeColor.ChangeColorBrightness(color, -0.3);
-                    btnHome.Visible = true;
                 }
             }
         }
