@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             dgvCompras = new DataGridView();
             IdCompra = new DataGridViewTextBoxColumn();
             IdProducto = new DataGridViewTextBoxColumn();
@@ -69,24 +69,24 @@
             dgvCompras.BorderStyle = BorderStyle.None;
             dgvCompras.CellBorderStyle = DataGridViewCellBorderStyle.None;
             dgvCompras.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(49, 49, 68);
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = Color.SteelBlue;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dgvCompras.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = Color.FromArgb(49, 49, 68);
+            dataGridViewCellStyle5.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle5.ForeColor = Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = Color.SteelBlue;
+            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
+            dgvCompras.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             dgvCompras.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvCompras.Columns.AddRange(new DataGridViewColumn[] { IdCompra, IdProducto, Marca, Producto, Cantidad, Precio, Subtotal });
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(49, 49, 68);
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = Color.SteelBlue;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            dgvCompras.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = Color.FromArgb(49, 49, 68);
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle6.ForeColor = Color.White;
+            dataGridViewCellStyle6.SelectionBackColor = Color.SteelBlue;
+            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
+            dgvCompras.DefaultCellStyle = dataGridViewCellStyle6;
             dgvCompras.EnableHeadersVisualStyles = false;
             dgvCompras.Location = new Point(77, 121);
             dgvCompras.Margin = new Padding(3, 4, 3, 4);
@@ -229,6 +229,8 @@
             // btnReporte
             // 
             btnReporte.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnReporte.BackColor = Color.Silver;
+            btnReporte.FlatAppearance.BorderSize = 0;
             btnReporte.FlatStyle = FlatStyle.Flat;
             btnReporte.Font = new Font("Segoe UI", 12F);
             btnReporte.Image = Farmacia.Properties.Resources.reportes;
@@ -239,7 +241,7 @@
             btnReporte.TabIndex = 17;
             btnReporte.Text = "Reporte Excel";
             btnReporte.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnReporte.UseVisualStyleBackColor = true;
+            btnReporte.UseVisualStyleBackColor = false;
             btnReporte.Click += btnReporte_Click;
             // 
             // dtpInicio
@@ -315,9 +317,12 @@
             // btnEliminar
             // 
             btnEliminar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnEliminar.BackColor = Color.Firebrick;
+            btnEliminar.FlatAppearance.BorderSize = 0;
             btnEliminar.FlatStyle = FlatStyle.Flat;
             btnEliminar.Font = new Font("Segoe UI", 12F);
-            btnEliminar.Image = Farmacia.Properties.Resources.reportes;
+            btnEliminar.ForeColor = Color.White;
+            btnEliminar.Image = Farmacia.Properties.Resources.borrar;
             btnEliminar.Location = new Point(77, 715);
             btnEliminar.Margin = new Padding(3, 4, 3, 4);
             btnEliminar.Name = "btnEliminar";
@@ -325,12 +330,13 @@
             btnEliminar.TabIndex = 24;
             btnEliminar.Text = "Eliminar";
             btnEliminar.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.UseVisualStyleBackColor = false;
             btnEliminar.Click += btnEliminar_Click;
             // 
             // btnPDFCompra
             // 
             btnPDFCompra.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnPDFCompra.BackColor = Color.LimeGreen;
             btnPDFCompra.FlatStyle = FlatStyle.Flat;
             btnPDFCompra.Font = new Font("Segoe UI", 12F);
             btnPDFCompra.Image = Farmacia.Properties.Resources.reportes;
@@ -341,12 +347,14 @@
             btnPDFCompra.TabIndex = 25;
             btnPDFCompra.Text = "PDF Compra";
             btnPDFCompra.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnPDFCompra.UseVisualStyleBackColor = true;
+            btnPDFCompra.UseVisualStyleBackColor = false;
             btnPDFCompra.Click += btnPDFCompra_Click;
             // 
             // btnPDFReporte
             // 
             btnPDFReporte.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnPDFReporte.BackColor = Color.SteelBlue;
+            btnPDFReporte.FlatAppearance.BorderSize = 0;
             btnPDFReporte.FlatStyle = FlatStyle.Flat;
             btnPDFReporte.Font = new Font("Segoe UI", 12F);
             btnPDFReporte.Image = Farmacia.Properties.Resources.reportes;
@@ -357,7 +365,7 @@
             btnPDFReporte.TabIndex = 26;
             btnPDFReporte.Text = "Reporte PDF";
             btnPDFReporte.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnPDFReporte.UseVisualStyleBackColor = true;
+            btnPDFReporte.UseVisualStyleBackColor = false;
             btnPDFReporte.Click += btnPDFReporte_Click;
             // 
             // FormCompras

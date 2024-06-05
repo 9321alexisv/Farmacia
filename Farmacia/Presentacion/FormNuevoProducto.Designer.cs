@@ -145,30 +145,35 @@
             // 
             // btnGuardar
             // 
+            btnGuardar.BackColor = Color.LimeGreen;
             btnGuardar.FlatStyle = FlatStyle.Flat;
+            btnGuardar.Font = new Font("Segoe UI", 12F);
             btnGuardar.Image = Farmacia.Properties.Resources.ADD;
             btnGuardar.Location = new Point(337, 488);
             btnGuardar.Margin = new Padding(3, 4, 3, 4);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(170, 83);
+            btnGuardar.Size = new Size(220, 80);
             btnGuardar.TabIndex = 14;
             btnGuardar.Text = "Guardar Producto";
             btnGuardar.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.UseVisualStyleBackColor = false;
             btnGuardar.Click += btnGuardar_Click;
             // 
             // btnLimpiar
             // 
+            btnLimpiar.BackColor = Color.Silver;
+            btnLimpiar.FlatAppearance.BorderSize = 0;
             btnLimpiar.FlatStyle = FlatStyle.Flat;
+            btnLimpiar.Font = new Font("Segoe UI", 12F);
             btnLimpiar.Image = Farmacia.Properties.Resources.cleaner;
             btnLimpiar.Location = new Point(88, 488);
             btnLimpiar.Margin = new Padding(3, 4, 3, 4);
             btnLimpiar.Name = "btnLimpiar";
-            btnLimpiar.Size = new Size(127, 83);
+            btnLimpiar.Size = new Size(175, 80);
             btnLimpiar.TabIndex = 15;
             btnLimpiar.Text = "Limpiar";
             btnLimpiar.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnLimpiar.UseVisualStyleBackColor = true;
+            btnLimpiar.UseVisualStyleBackColor = false;
             btnLimpiar.Click += btnLimpiar_Click;
             // 
             // cmbMarca

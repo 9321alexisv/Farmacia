@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             labelTablaVentas = new Label();
             btnReporte = new Button();
             panel1 = new Panel();
@@ -75,6 +75,8 @@
             // btnReporte
             // 
             btnReporte.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnReporte.BackColor = Color.Silver;
+            btnReporte.FlatAppearance.BorderSize = 0;
             btnReporte.FlatStyle = FlatStyle.Flat;
             btnReporte.Image = Farmacia.Properties.Resources.reportes;
             btnReporte.Location = new Point(360, 779);
@@ -84,7 +86,7 @@
             btnReporte.TabIndex = 4;
             btnReporte.Text = "Reporte Excel";
             btnReporte.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnReporte.UseVisualStyleBackColor = true;
+            btnReporte.UseVisualStyleBackColor = false;
             btnReporte.Click += btnReporte_Click;
             // 
             // panel1
@@ -156,11 +158,11 @@
             dgvVentas.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dgvVentas.RowHeadersVisible = false;
             dgvVentas.RowHeadersWidth = 15;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(49, 49, 68);
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = Color.SteelBlue;
-            dgvVentas.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.BackColor = Color.FromArgb(49, 49, 68);
+            dataGridViewCellStyle5.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle5.ForeColor = Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = Color.SteelBlue;
+            dgvVentas.RowsDefaultCellStyle = dataGridViewCellStyle5;
             dgvVentas.RowTemplate.DefaultCellStyle.BackColor = Color.FromArgb(49, 49, 68);
             dgvVentas.RowTemplate.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             dgvVentas.RowTemplate.DefaultCellStyle.ForeColor = Color.White;
@@ -357,7 +359,10 @@
             // btnEliminar
             // 
             btnEliminar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnEliminar.BackColor = Color.Firebrick;
+            btnEliminar.FlatAppearance.BorderSize = 0;
             btnEliminar.FlatStyle = FlatStyle.Flat;
+            btnEliminar.ForeColor = Color.White;
             btnEliminar.Image = Farmacia.Properties.Resources.borrar;
             btnEliminar.Location = new Point(82, 779);
             btnEliminar.Margin = new Padding(4, 6, 4, 6);
@@ -366,12 +371,14 @@
             btnEliminar.TabIndex = 15;
             btnEliminar.Text = "Eliminar";
             btnEliminar.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnEliminar.UseVisualStyleBackColor = true;
+            btnEliminar.UseVisualStyleBackColor = false;
             btnEliminar.Click += btnEliminar_Click;
             // 
             // btnPdf
             // 
             btnPdf.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnPdf.BackColor = Color.LimeGreen;
+            btnPdf.FlatAppearance.BorderSize = 0;
             btnPdf.FlatStyle = FlatStyle.Flat;
             btnPdf.Image = Farmacia.Properties.Resources.reportes;
             btnPdf.Location = new Point(909, 781);
@@ -381,12 +388,14 @@
             btnPdf.TabIndex = 16;
             btnPdf.Text = "Una Venta PDF";
             btnPdf.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnPdf.UseVisualStyleBackColor = true;
+            btnPdf.UseVisualStyleBackColor = false;
             btnPdf.Click += btnPdf_Click;
             // 
             // btnPDFReporte
             // 
             btnPDFReporte.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnPDFReporte.BackColor = Color.SteelBlue;
+            btnPDFReporte.FlatAppearance.BorderSize = 0;
             btnPDFReporte.FlatStyle = FlatStyle.Flat;
             btnPDFReporte.Image = Farmacia.Properties.Resources.reportes;
             btnPDFReporte.Location = new Point(632, 781);
@@ -396,7 +405,7 @@
             btnPDFReporte.TabIndex = 17;
             btnPDFReporte.Text = "Reporte PDF";
             btnPDFReporte.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnPDFReporte.UseVisualStyleBackColor = true;
+            btnPDFReporte.UseVisualStyleBackColor = false;
             btnPDFReporte.Click += btnPDFReporte_Click;
             // 
             // FormVentas

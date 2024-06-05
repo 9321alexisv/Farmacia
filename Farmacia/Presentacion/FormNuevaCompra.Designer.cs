@@ -216,16 +216,19 @@
             // btnGuardar
             // 
             btnGuardar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnGuardar.BackColor = Color.LimeGreen;
+            btnGuardar.FlatAppearance.BorderSize = 0;
             btnGuardar.FlatStyle = FlatStyle.Flat;
+            btnGuardar.Font = new Font("Segoe UI", 12F);
             btnGuardar.Image = Farmacia.Properties.Resources.ADD;
-            btnGuardar.Location = new Point(1157, 725);
+            btnGuardar.Location = new Point(1089, 725);
             btnGuardar.Margin = new Padding(3, 4, 3, 4);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(182, 85);
+            btnGuardar.Size = new Size(250, 85);
             btnGuardar.TabIndex = 20;
             btnGuardar.Text = "Ingresar Compra";
             btnGuardar.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.UseVisualStyleBackColor = false;
             btnGuardar.Click += btnGuardar_Click;
             // 
             // labelCodigo
@@ -241,16 +244,19 @@
             // btnLimpiar
             // 
             btnLimpiar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnLimpiar.BackColor = Color.Silver;
+            btnLimpiar.FlatAppearance.BorderSize = 0;
             btnLimpiar.FlatStyle = FlatStyle.Flat;
+            btnLimpiar.Font = new Font("Segoe UI", 12F);
             btnLimpiar.Image = Farmacia.Properties.Resources.cleaner;
             btnLimpiar.Location = new Point(63, 725);
             btnLimpiar.Margin = new Padding(3, 4, 3, 4);
             btnLimpiar.Name = "btnLimpiar";
-            btnLimpiar.Size = new Size(182, 85);
+            btnLimpiar.Size = new Size(250, 85);
             btnLimpiar.TabIndex = 25;
             btnLimpiar.Text = "Limpiar Compra";
             btnLimpiar.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnLimpiar.UseVisualStyleBackColor = true;
+            btnLimpiar.UseVisualStyleBackColor = false;
             btnLimpiar.Click += btnLimpiar_Click;
             // 
             // cmbProveedores
@@ -271,7 +277,7 @@
             checkPromedio.AutoSize = true;
             checkPromedio.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             checkPromedio.ForeColor = Color.White;
-            checkPromedio.Location = new Point(814, 749);
+            checkPromedio.Location = new Point(780, 752);
             checkPromedio.Name = "checkPromedio";
             checkPromedio.Size = new Size(262, 32);
             checkPromedio.TabIndex = 27;
