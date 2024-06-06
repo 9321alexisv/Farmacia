@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             dgvMarcas = new DataGridView();
             txtNombre = new TextBox();
             labelNombre = new Label();
@@ -50,14 +50,14 @@
             dgvMarcas.BorderStyle = BorderStyle.None;
             dgvMarcas.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dgvMarcas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(49, 49, 68);
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = Color.SteelBlue;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
-            dgvMarcas.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = Color.FromArgb(49, 49, 68);
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle6.ForeColor = Color.White;
+            dataGridViewCellStyle6.SelectionBackColor = Color.SteelBlue;
+            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
+            dgvMarcas.DefaultCellStyle = dataGridViewCellStyle6;
             dgvMarcas.EnableHeadersVisualStyles = false;
             dgvMarcas.GridColor = Color.FromArgb(49, 49, 68);
             dgvMarcas.Location = new Point(61, 25);
@@ -71,6 +71,7 @@
             dgvMarcas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvMarcas.Size = new Size(621, 574);
             dgvMarcas.TabIndex = 1;
+            dgvMarcas.TabStop = false;
             // 
             // txtNombre
             // 
@@ -100,7 +101,7 @@
             btnGuardar.BackColor = Color.LimeGreen;
             btnGuardar.FlatAppearance.BorderColor = Color.LimeGreen;
             btnGuardar.FlatStyle = FlatStyle.Flat;
-            btnGuardar.Image = Farmacia.Properties.Resources.ADD;
+            btnGuardar.Image = Farmacia.Properties.Resources._new;
             btnGuardar.Location = new Point(1091, 242);
             btnGuardar.Margin = new Padding(4, 6, 4, 6);
             btnGuardar.Name = "btnGuardar";
@@ -115,9 +116,13 @@
             // 
             btnEditar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnEditar.BackColor = Color.SteelBlue;
+            btnEditar.BackgroundImageLayout = ImageLayout.Zoom;
+            btnEditar.Cursor = Cursors.Hand;
             btnEditar.FlatAppearance.BorderColor = Color.SteelBlue;
             btnEditar.FlatStyle = FlatStyle.Flat;
+            btnEditar.ForeColor = Color.White;
             btnEditar.Image = Farmacia.Properties.Resources.edit;
+            btnEditar.ImageAlign = ContentAlignment.MiddleLeft;
             btnEditar.Location = new Point(1091, 534);
             btnEditar.Margin = new Padding(4, 6, 4, 6);
             btnEditar.Name = "btnEditar";
@@ -135,7 +140,7 @@
             btnEliminar.FlatAppearance.BorderColor = Color.Firebrick;
             btnEliminar.FlatStyle = FlatStyle.Flat;
             btnEliminar.ForeColor = Color.White;
-            btnEliminar.Image = Farmacia.Properties.Resources.borrar;
+            btnEliminar.Image = Farmacia.Properties.Resources.delete;
             btnEliminar.Location = new Point(726, 534);
             btnEliminar.Margin = new Padding(4, 6, 4, 6);
             btnEliminar.Name = "btnEliminar";
@@ -152,7 +157,7 @@
             btnCancelar.BackColor = Color.Silver;
             btnCancelar.FlatAppearance.BorderColor = Color.Silver;
             btnCancelar.FlatStyle = FlatStyle.Flat;
-            btnCancelar.Image = Farmacia.Properties.Resources.cleaner;
+            btnCancelar.Image = Farmacia.Properties.Resources.clear;
             btnCancelar.Location = new Point(726, 242);
             btnCancelar.Margin = new Padding(4, 6, 4, 6);
             btnCancelar.Name = "btnCancelar";

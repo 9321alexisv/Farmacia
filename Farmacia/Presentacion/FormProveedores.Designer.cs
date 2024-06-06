@@ -151,7 +151,7 @@
             btnGuardar.FlatAppearance.BorderColor = Color.LimeGreen;
             btnGuardar.FlatStyle = FlatStyle.Flat;
             btnGuardar.Font = new Font("Segoe UI", 12F);
-            btnGuardar.Image = Farmacia.Properties.Resources.ADD;
+            btnGuardar.Image = Farmacia.Properties.Resources._new;
             btnGuardar.Location = new Point(1191, 485);
             btnGuardar.Margin = new Padding(3, 4, 3, 4);
             btnGuardar.Name = "btnGuardar";
@@ -213,7 +213,7 @@
             btnLimpiar.FlatAppearance.BorderColor = Color.Silver;
             btnLimpiar.FlatStyle = FlatStyle.Flat;
             btnLimpiar.Font = new Font("Segoe UI", 12F);
-            btnLimpiar.Image = Farmacia.Properties.Resources.cleaner;
+            btnLimpiar.Image = Farmacia.Properties.Resources.clear;
             btnLimpiar.Location = new Point(916, 485);
             btnLimpiar.Margin = new Padding(3, 4, 3, 4);
             btnLimpiar.Name = "btnLimpiar";
@@ -232,7 +232,7 @@
             btnEliminar.FlatStyle = FlatStyle.Flat;
             btnEliminar.Font = new Font("Segoe UI", 12F);
             btnEliminar.ForeColor = Color.White;
-            btnEliminar.Image = Farmacia.Properties.Resources.borrar;
+            btnEliminar.Image = Farmacia.Properties.Resources.delete;
             btnEliminar.Location = new Point(47, 709);
             btnEliminar.Margin = new Padding(3, 4, 3, 4);
             btnEliminar.Name = "btnEliminar";
@@ -250,6 +250,7 @@
             btnEditar.FlatAppearance.BorderColor = Color.SteelBlue;
             btnEditar.FlatStyle = FlatStyle.Flat;
             btnEditar.Font = new Font("Segoe UI", 12F);
+            btnEditar.ForeColor = Color.White;
             btnEditar.Image = Farmacia.Properties.Resources.edit;
             btnEditar.Location = new Point(249, 709);
             btnEditar.Margin = new Padding(3, 4, 3, 4);

@@ -65,8 +65,9 @@
             panelMenu.Controls.Add(panelLogo);
             panelMenu.Dock = DockStyle.Left;
             panelMenu.Location = new Point(0, 0);
+            panelMenu.Margin = new Padding(3, 4, 3, 4);
             panelMenu.Name = "panelMenu";
-            panelMenu.Size = new Size(220, 594);
+            panelMenu.Size = new Size(251, 792);
             panelMenu.TabIndex = 0;
             // 
             // btnMarcas
@@ -76,12 +77,13 @@
             btnMarcas.FlatStyle = FlatStyle.Flat;
             btnMarcas.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnMarcas.ForeColor = SystemColors.ControlLightLight;
-            btnMarcas.Image = Farmacia.Properties.Resources.clients;
+            btnMarcas.Image = Farmacia.Properties.Resources.album;
             btnMarcas.ImageAlign = ContentAlignment.MiddleLeft;
-            btnMarcas.Location = new Point(0, 495);
+            btnMarcas.Location = new Point(0, 660);
+            btnMarcas.Margin = new Padding(3, 4, 3, 4);
             btnMarcas.Name = "btnMarcas";
-            btnMarcas.Padding = new Padding(10, 0, 0, 0);
-            btnMarcas.Size = new Size(220, 60);
+            btnMarcas.Padding = new Padding(11, 0, 0, 0);
+            btnMarcas.Size = new Size(251, 80);
             btnMarcas.TabIndex = 8;
             btnMarcas.Text = "MARCAS";
             btnMarcas.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -95,12 +97,13 @@
             btnProveedores.FlatStyle = FlatStyle.Flat;
             btnProveedores.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnProveedores.ForeColor = SystemColors.ControlLightLight;
-            btnProveedores.Image = Farmacia.Properties.Resources.clients;
+            btnProveedores.Image = Farmacia.Properties.Resources.person;
             btnProveedores.ImageAlign = ContentAlignment.MiddleLeft;
-            btnProveedores.Location = new Point(0, 435);
+            btnProveedores.Location = new Point(0, 580);
+            btnProveedores.Margin = new Padding(3, 4, 3, 4);
             btnProveedores.Name = "btnProveedores";
-            btnProveedores.Padding = new Padding(10, 0, 0, 0);
-            btnProveedores.Size = new Size(220, 60);
+            btnProveedores.Padding = new Padding(11, 0, 0, 0);
+            btnProveedores.Size = new Size(251, 80);
             btnProveedores.TabIndex = 7;
             btnProveedores.Text = "PROVEEDORES";
             btnProveedores.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -114,12 +117,13 @@
             btnClientes.FlatStyle = FlatStyle.Flat;
             btnClientes.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnClientes.ForeColor = SystemColors.ControlLightLight;
-            btnClientes.Image = Farmacia.Properties.Resources.clients;
+            btnClientes.Image = Farmacia.Properties.Resources.people;
             btnClientes.ImageAlign = ContentAlignment.MiddleLeft;
-            btnClientes.Location = new Point(0, 375);
+            btnClientes.Location = new Point(0, 500);
+            btnClientes.Margin = new Padding(3, 4, 3, 4);
             btnClientes.Name = "btnClientes";
-            btnClientes.Padding = new Padding(10, 0, 0, 0);
-            btnClientes.Size = new Size(220, 60);
+            btnClientes.Padding = new Padding(11, 0, 0, 0);
+            btnClientes.Size = new Size(251, 80);
             btnClientes.TabIndex = 6;
             btnClientes.Text = "CLIENTES";
             btnClientes.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -133,12 +137,13 @@
             btnInventario.FlatStyle = FlatStyle.Flat;
             btnInventario.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnInventario.ForeColor = SystemColors.ControlLightLight;
-            btnInventario.Image = Farmacia.Properties.Resources.inventario;
+            btnInventario.Image = Farmacia.Properties.Resources.layout;
             btnInventario.ImageAlign = ContentAlignment.MiddleLeft;
-            btnInventario.Location = new Point(0, 315);
+            btnInventario.Location = new Point(0, 420);
+            btnInventario.Margin = new Padding(3, 4, 3, 4);
             btnInventario.Name = "btnInventario";
-            btnInventario.Padding = new Padding(10, 0, 0, 0);
-            btnInventario.Size = new Size(220, 60);
+            btnInventario.Padding = new Padding(11, 0, 0, 0);
+            btnInventario.Size = new Size(251, 80);
             btnInventario.TabIndex = 5;
             btnInventario.Text = "INVENTARIO";
             btnInventario.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -152,12 +157,13 @@
             btnIngresoCompras.FlatStyle = FlatStyle.Flat;
             btnIngresoCompras.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnIngresoCompras.ForeColor = SystemColors.ControlLightLight;
-            btnIngresoCompras.Image = Farmacia.Properties.Resources.ingresoCompras;
+            btnIngresoCompras.Image = Farmacia.Properties.Resources.card;
             btnIngresoCompras.ImageAlign = ContentAlignment.MiddleLeft;
-            btnIngresoCompras.Location = new Point(0, 255);
+            btnIngresoCompras.Location = new Point(0, 340);
+            btnIngresoCompras.Margin = new Padding(3, 4, 3, 4);
             btnIngresoCompras.Name = "btnIngresoCompras";
-            btnIngresoCompras.Padding = new Padding(10, 0, 0, 0);
-            btnIngresoCompras.Size = new Size(220, 60);
+            btnIngresoCompras.Padding = new Padding(11, 0, 0, 0);
+            btnIngresoCompras.Size = new Size(251, 80);
             btnIngresoCompras.TabIndex = 4;
             btnIngresoCompras.Text = "NUEVA COMPRA";
             btnIngresoCompras.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -171,12 +177,13 @@
             btnCompras.FlatStyle = FlatStyle.Flat;
             btnCompras.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnCompras.ForeColor = SystemColors.ControlLightLight;
-            btnCompras.Image = Farmacia.Properties.Resources.compras;
+            btnCompras.Image = Farmacia.Properties.Resources.book;
             btnCompras.ImageAlign = ContentAlignment.MiddleLeft;
-            btnCompras.Location = new Point(0, 195);
+            btnCompras.Location = new Point(0, 260);
+            btnCompras.Margin = new Padding(3, 4, 3, 4);
             btnCompras.Name = "btnCompras";
-            btnCompras.Padding = new Padding(10, 0, 0, 0);
-            btnCompras.Size = new Size(220, 60);
+            btnCompras.Padding = new Padding(11, 0, 0, 0);
+            btnCompras.Size = new Size(251, 80);
             btnCompras.TabIndex = 3;
             btnCompras.Text = "HISTORIAL COMPRAS";
             btnCompras.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -190,12 +197,13 @@
             btnIngresoVentas.FlatStyle = FlatStyle.Flat;
             btnIngresoVentas.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnIngresoVentas.ForeColor = SystemColors.ControlLightLight;
-            btnIngresoVentas.Image = Farmacia.Properties.Resources.ingresoVentas;
+            btnIngresoVentas.Image = Farmacia.Properties.Resources.cart;
             btnIngresoVentas.ImageAlign = ContentAlignment.MiddleLeft;
-            btnIngresoVentas.Location = new Point(0, 135);
+            btnIngresoVentas.Location = new Point(0, 180);
+            btnIngresoVentas.Margin = new Padding(3, 4, 3, 4);
             btnIngresoVentas.Name = "btnIngresoVentas";
-            btnIngresoVentas.Padding = new Padding(10, 0, 0, 0);
-            btnIngresoVentas.Size = new Size(220, 60);
+            btnIngresoVentas.Padding = new Padding(11, 0, 0, 0);
+            btnIngresoVentas.Size = new Size(251, 80);
             btnIngresoVentas.TabIndex = 2;
             btnIngresoVentas.Text = "NUEVA VENTA";
             btnIngresoVentas.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -209,12 +217,13 @@
             btnVentas.FlatStyle = FlatStyle.Flat;
             btnVentas.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnVentas.ForeColor = SystemColors.ControlLightLight;
-            btnVentas.Image = Farmacia.Properties.Resources.ventas1;
+            btnVentas.Image = Farmacia.Properties.Resources.chart;
             btnVentas.ImageAlign = ContentAlignment.MiddleLeft;
-            btnVentas.Location = new Point(0, 75);
+            btnVentas.Location = new Point(0, 100);
+            btnVentas.Margin = new Padding(3, 4, 3, 4);
             btnVentas.Name = "btnVentas";
-            btnVentas.Padding = new Padding(10, 0, 0, 0);
-            btnVentas.Size = new Size(220, 60);
+            btnVentas.Padding = new Padding(11, 0, 0, 0);
+            btnVentas.Size = new Size(251, 80);
             btnVentas.TabIndex = 1;
             btnVentas.Text = "HISTORIAL VENTAS";
             btnVentas.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -227,8 +236,9 @@
             panelLogo.Controls.Add(labelFarmacia);
             panelLogo.Dock = DockStyle.Top;
             panelLogo.Location = new Point(0, 0);
+            panelLogo.Margin = new Padding(3, 4, 3, 4);
             panelLogo.Name = "panelLogo";
-            panelLogo.Size = new Size(220, 75);
+            panelLogo.Size = new Size(251, 100);
             panelLogo.TabIndex = 0;
             // 
             // labelFarmacia
@@ -236,9 +246,9 @@
             labelFarmacia.AutoSize = true;
             labelFarmacia.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             labelFarmacia.ForeColor = Color.White;
-            labelFarmacia.Location = new Point(3, 25);
+            labelFarmacia.Location = new Point(3, 33);
             labelFarmacia.Name = "labelFarmacia";
-            labelFarmacia.Size = new Size(194, 21);
+            labelFarmacia.Size = new Size(244, 28);
             labelFarmacia.TabIndex = 0;
             labelFarmacia.Text = "FARMACIA CANDELARIA";
             // 
@@ -247,9 +257,10 @@
             panelTitleBar.BackColor = Color.FromArgb(51, 51, 76);
             panelTitleBar.Controls.Add(labelTitle);
             panelTitleBar.Dock = DockStyle.Top;
-            panelTitleBar.Location = new Point(220, 0);
+            panelTitleBar.Location = new Point(251, 0);
+            panelTitleBar.Margin = new Padding(3, 4, 3, 4);
             panelTitleBar.Name = "panelTitleBar";
-            panelTitleBar.Size = new Size(805, 75);
+            panelTitleBar.Size = new Size(920, 100);
             panelTitleBar.TabIndex = 1;
             // 
             // labelTitle
@@ -258,9 +269,9 @@
             labelTitle.AutoSize = true;
             labelTitle.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
             labelTitle.ForeColor = Color.White;
-            labelTitle.Location = new Point(340, 25);
+            labelTitle.Location = new Point(389, 33);
             labelTitle.Name = "labelTitle";
-            labelTitle.Size = new Size(82, 30);
+            labelTitle.Size = new Size(102, 37);
             labelTitle.TabIndex = 0;
             labelTitle.Text = "INICIO";
             // 
@@ -269,32 +280,35 @@
             panelDesktopPane.BackColor = Color.FromArgb(39, 39, 58);
             panelDesktopPane.Controls.Add(pictureBox1);
             panelDesktopPane.Dock = DockStyle.Fill;
-            panelDesktopPane.Location = new Point(220, 75);
+            panelDesktopPane.Location = new Point(251, 100);
+            panelDesktopPane.Margin = new Padding(3, 4, 3, 4);
             panelDesktopPane.Name = "panelDesktopPane";
-            panelDesktopPane.Size = new Size(805, 519);
+            panelDesktopPane.Size = new Size(920, 692);
             panelDesktopPane.TabIndex = 2;
             // 
             // pictureBox1
             // 
             pictureBox1.Anchor = AnchorStyles.None;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(174, 188);
+            pictureBox1.Location = new Point(199, 251);
+            pictureBox1.Margin = new Padding(3, 4, 3, 4);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(463, 104);
+            pictureBox1.Size = new Size(529, 139);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             // 
             // FormInicio
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1025, 594);
+            ClientSize = new Size(1171, 792);
             Controls.Add(panelDesktopPane);
             Controls.Add(panelTitleBar);
             Controls.Add(panelMenu);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 4, 3, 4);
             Name = "FormInicio";
             StartPosition = FormStartPosition.Manual;
             Text = "Farmacia";

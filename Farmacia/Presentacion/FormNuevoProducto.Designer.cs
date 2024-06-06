@@ -61,7 +61,7 @@
             lblMarca.AutoSize = true;
             lblMarca.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             lblMarca.ForeColor = Color.White;
-            lblMarca.Location = new Point(88, 109);
+            lblMarca.Location = new Point(78, 182);
             lblMarca.Name = "lblMarca";
             lblMarca.Size = new Size(92, 32);
             lblMarca.TabIndex = 2;
@@ -69,7 +69,7 @@
             // 
             // txtNombre
             // 
-            txtNombre.Location = new Point(337, 187);
+            txtNombre.Location = new Point(327, 260);
             txtNombre.Margin = new Padding(3, 4, 3, 4);
             txtNombre.Name = "txtNombre";
             txtNombre.Size = new Size(286, 27);
@@ -80,7 +80,7 @@
             labelNombre.AutoSize = true;
             labelNombre.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             labelNombre.ForeColor = Color.White;
-            labelNombre.Location = new Point(88, 184);
+            labelNombre.Location = new Point(78, 257);
             labelNombre.Name = "labelNombre";
             labelNombre.Size = new Size(228, 32);
             labelNombre.TabIndex = 4;
@@ -88,7 +88,7 @@
             // 
             // txtPrecioCompra
             // 
-            txtPrecioCompra.Location = new Point(337, 261);
+            txtPrecioCompra.Location = new Point(327, 334);
             txtPrecioCompra.Margin = new Padding(3, 4, 3, 4);
             txtPrecioCompra.Name = "txtPrecioCompra";
             txtPrecioCompra.Size = new Size(114, 27);
@@ -99,7 +99,7 @@
             labelPrecioCompra.AutoSize = true;
             labelPrecioCompra.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             labelPrecioCompra.ForeColor = Color.White;
-            labelPrecioCompra.Location = new Point(88, 255);
+            labelPrecioCompra.Location = new Point(78, 328);
             labelPrecioCompra.Name = "labelPrecioCompra";
             labelPrecioCompra.Size = new Size(190, 32);
             labelPrecioCompra.TabIndex = 6;
@@ -107,7 +107,7 @@
             // 
             // txtPrecioVenta
             // 
-            txtPrecioVenta.Location = new Point(337, 327);
+            txtPrecioVenta.Location = new Point(327, 400);
             txtPrecioVenta.Margin = new Padding(3, 4, 3, 4);
             txtPrecioVenta.Name = "txtPrecioVenta";
             txtPrecioVenta.Size = new Size(114, 27);
@@ -118,7 +118,7 @@
             labelPrecioVenta.AutoSize = true;
             labelPrecioVenta.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             labelPrecioVenta.ForeColor = Color.White;
-            labelPrecioVenta.Location = new Point(88, 327);
+            labelPrecioVenta.Location = new Point(78, 400);
             labelPrecioVenta.Name = "labelPrecioVenta";
             labelPrecioVenta.Size = new Size(164, 32);
             labelPrecioVenta.TabIndex = 8;
@@ -126,7 +126,7 @@
             // 
             // txtStock
             // 
-            txtStock.Location = new Point(337, 401);
+            txtStock.Location = new Point(327, 474);
             txtStock.Margin = new Padding(3, 4, 3, 4);
             txtStock.Name = "txtStock";
             txtStock.Size = new Size(114, 27);
@@ -137,7 +137,7 @@
             labelStock.AutoSize = true;
             labelStock.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             labelStock.ForeColor = Color.White;
-            labelStock.Location = new Point(88, 399);
+            labelStock.Location = new Point(78, 472);
             labelStock.Name = "labelStock";
             labelStock.Size = new Size(83, 32);
             labelStock.TabIndex = 10;
@@ -148,13 +148,14 @@
             btnGuardar.BackColor = Color.LimeGreen;
             btnGuardar.FlatStyle = FlatStyle.Flat;
             btnGuardar.Font = new Font("Segoe UI", 12F);
-            btnGuardar.Image = Farmacia.Properties.Resources.ADD;
-            btnGuardar.Location = new Point(337, 488);
+            btnGuardar.Image = Farmacia.Properties.Resources._new;
+            btnGuardar.ImageAlign = ContentAlignment.MiddleLeft;
+            btnGuardar.Location = new Point(731, 23);
             btnGuardar.Margin = new Padding(3, 4, 3, 4);
             btnGuardar.Name = "btnGuardar";
-            btnGuardar.Size = new Size(220, 80);
+            btnGuardar.Size = new Size(150, 65);
             btnGuardar.TabIndex = 14;
-            btnGuardar.Text = "Guardar Producto";
+            btnGuardar.Text = "Guardar";
             btnGuardar.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnGuardar.UseVisualStyleBackColor = false;
             btnGuardar.Click += btnGuardar_Click;
@@ -165,11 +166,11 @@
             btnLimpiar.FlatAppearance.BorderSize = 0;
             btnLimpiar.FlatStyle = FlatStyle.Flat;
             btnLimpiar.Font = new Font("Segoe UI", 12F);
-            btnLimpiar.Image = Farmacia.Properties.Resources.cleaner;
-            btnLimpiar.Location = new Point(88, 488);
+            btnLimpiar.Image = Farmacia.Properties.Resources.clear;
+            btnLimpiar.Location = new Point(533, 23);
             btnLimpiar.Margin = new Padding(3, 4, 3, 4);
             btnLimpiar.Name = "btnLimpiar";
-            btnLimpiar.Size = new Size(175, 80);
+            btnLimpiar.Size = new Size(150, 65);
             btnLimpiar.TabIndex = 15;
             btnLimpiar.Text = "Limpiar";
             btnLimpiar.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -180,14 +181,14 @@
             // 
             cmbMarca.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbMarca.FormattingEnabled = true;
-            cmbMarca.Location = new Point(337, 113);
+            cmbMarca.Location = new Point(327, 186);
             cmbMarca.Name = "cmbMarca";
             cmbMarca.Size = new Size(286, 28);
             cmbMarca.TabIndex = 16;
             // 
             // txtStockMinimo
             // 
-            txtStockMinimo.Location = new Point(754, 401);
+            txtStockMinimo.Location = new Point(744, 474);
             txtStockMinimo.Margin = new Padding(3, 4, 3, 4);
             txtStockMinimo.Name = "txtStockMinimo";
             txtStockMinimo.Size = new Size(114, 27);
@@ -198,7 +199,7 @@
             lblStockMinimo.AutoSize = true;
             lblStockMinimo.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             lblStockMinimo.ForeColor = Color.White;
-            lblStockMinimo.Location = new Point(505, 399);
+            lblStockMinimo.Location = new Point(495, 472);
             lblStockMinimo.Name = "lblStockMinimo";
             lblStockMinimo.Size = new Size(178, 32);
             lblStockMinimo.TabIndex = 17;
