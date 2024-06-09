@@ -25,16 +25,16 @@ namespace VistasFarmacia.Forms
 
         private void LoadTheme()
         {
-            //foreach (Control btns in this.Controls)
-            //{
-            //    if (btns.GetType() == typeof(Button))
-            //    {
-            //        Button btn = (Button)btns;
-            //        btn.BackColor = ThemeColor.PrimaryColor;
-            //        btn.ForeColor = Color.White;
-            //        btn.FlatAppearance.BorderColor = ThemeColor.SecondaryColor;
-            //    }
-            //}
+            foreach (Control btns in this.Controls)
+            {
+                if (btns.GetType() == typeof(Button) && btns.Name != "btnEliminar")
+                {
+                    Button btn = (Button)btns;
+                    btn.BackColor = ThemeColor.PrimaryColor;
+                    btn.ForeColor = Color.White;
+                    btn.FlatAppearance.BorderColor = ThemeColor.SecondaryColor;
+                }
+            }
             labelTablaVentas.ForeColor = ThemeColor.SecondaryColor;
             panel2.BackColor = ThemeColor.SecondaryColor;
             dgvVentas.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;

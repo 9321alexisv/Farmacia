@@ -33,16 +33,16 @@ namespace VistasFarmacia.Forms
 
         private void LoadTheme()
         {
-            //foreach (Control btns in this.Controls)
-            //{
-            //    if (btns.GetType() == typeof(Button))
-            //    {
-            //        Button btn = (Button)btns;
-            //        btn.BackColor = ThemeColor.PrimaryColor;
-            //        btn.ForeColor = Color.White;
-            //        btn.FlatAppearance.BorderColor = ThemeColor.SecondaryColor;
-            //    }
-            //}
+            foreach (Control btns in this.Controls)
+            {
+                if (btns.GetType() == typeof(Button))
+                {
+                    Button btn = (Button)btns;
+                    btn.BackColor = ThemeColor.PrimaryColor;
+                    btn.ForeColor = Color.White;
+                    btn.FlatAppearance.BorderColor = ThemeColor.SecondaryColor;
+                }
+            }
             lblTitulo.ForeColor = ThemeColor.SecondaryColor;
             lblMarca.ForeColor = ThemeColor.SecondaryColor;
             labelNombre.ForeColor = ThemeColor.SecondaryColor;
